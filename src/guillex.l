@@ -20,18 +20,21 @@ tab       "\t"
 letter    [a-zA-Z]
 digit     [0-9]
 nil       "NIL"
-id        {letter}+({letter}|{digit}|_|-)*
+id        {letter}+({letter}|{digit}|_|-^)*
 integer   -?{digit}+
 decimal   -?{digit}*[.]{digit}+
 string    \"(\\.|[^"\\])*\" 
 type      "int"|"float"|"list"
 list      ("list ")?{id}
+lvalue    {id}
+rvalue    {list}
 comment   "//".*
 
 add       [+]
 sub       [-]
 mult      [*]
 div       [/]
+
 
 negate    [!]
 or        "||"
@@ -56,6 +59,7 @@ read      "read"
 write     "write"
 writeln   "writeln"
 
+append      {lvalue}" : "{rvalue}
 headlist    "?"{list}
 taillist    "!"{list}
 destroyhead "%"{list}
@@ -230,6 +234,11 @@ comma     [,]
 
 {writeln} {
             printf("Keyword [WRITELN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            word_position += yyleng;
+          }      
+
+{append}     {
+            printf("Keyword [APPEND]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
           }
 

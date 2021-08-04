@@ -1,0 +1,225 @@
+
+
+#### Beggining test ####
+
+Type: 'int' on line: 1, column: 1
+List: list IL on line: 1, column: 5
+';' at line: 1, column: 12
+Type: 'float' on line: 2, column: 1
+List: list FL on line: 2, column: 7
+';' at line: 2, column: 14
+Type: 'int' on line: 4, column: 1
+List: list read_list on line: 4, column: 5
+'(' at line: 4, column: 19
+Type: 'int' on line: 4, column: 20
+Id: 'n' at line: 4, column: 24
+')' at line: 4, column: 25
+'{' on line: 4, column: 27
+Type: 'int' on line: 5, column: 3
+Id: 'i' at line: 5, column: 7
+';' at line: 5, column: 8
+Id: 'i' at line: 6, column: 3
+'=' at line: 6, column: 5
+Decimal: '-435.7' at line: 6, column: 8
+';' at line: 6, column: 14
+Type: 'int' on line: 7, column: 3
+List: list new on line: 7, column: 7
+';' at line: 7, column: 15
+Id: 'new' at line: 8, column: 3
+'=' at line: 8, column: 7
+Constant: 'NIL' at line: 8, column: 9
+';' at line: 8, column: 12
+Keyword [FOR]: 'for' at line: 9, column: 3
+'(' at line: 9, column: 7
+Id: 'i' at line: 9, column: 8
+'=' at line: 9, column: 10
+Integer: '0' at line: 9, column: 12
+';' at line: 9, column: 13
+Id: 'i' at line: 9, column: 15
+OP [SMALLER THAN]: '<' at line: 9, column: 17
+Id: 'n' at line: 9, column: 19
+';' at line: 9, column: 21
+Id: 'i' at line: 9, column: 23
+'=' at line: 9, column: 25
+Id: 'i' at line: 9, column: 27
+'+' at line: 9, column: 29
+Integer: '1' at line: 9, column: 31
+')' at line: 9, column: 32
+'{' on line: 9, column: 34
+Type: 'int' on line: 10, column: 5
+Id: 'elem' at line: 10, column: 9
+';' at line: 10, column: 13
+Keyword [WRITELN]: 'writeln' at line: 11, column: 5
+'(' at line: 11, column: 12
+String: "Digite o elemento da lista: " on line: 11, column: 13
+')' at line: 11, column: 43
+';' at line: 11, column: 44
+Keyword [READ]: 'read' at line: 12, column: 5
+'(' at line: 12, column: 9
+Id: 'elem' at line: 12, column: 10
+')' at line: 12, column: 14
+';' at line: 12, column: 15
+Id: 'new' at line: 13, column: 5
+'=' at line: 13, column: 9
+Id: 'elem' at line: 13, column: 11
+
+ERROR!!
+: at line: 13, column: 16
+
+Id: 'new' at line: 13, column: 18
+';' at line: 13, column: 21
+'}' at line: 14, column: 3
+Keyword [RETURN]: 'return' at line: 15, column: 3
+Id: 'new' at line: 15, column: 10
+';' at line: 15, column: 13
+'}' at line: 16, column: 1
+Type: 'float' on line: 18, column: 1
+Id: 'succ' at line: 18, column: 7
+'(' at line: 18, column: 11
+Type: 'int' on line: 18, column: 12
+Id: 'i' at line: 18, column: 16
+')' at line: 18, column: 17
+'{' on line: 18, column: 19
+Keyword [RETURN]: 'return' at line: 19, column: 3
+Id: 'i' at line: 19, column: 10
+'+' at line: 19, column: 11
+Integer: '1' at line: 19, column: 12
+';' at line: 19, column: 13
+'}' at line: 20, column: 1
+Type: 'int' on line: 23, column: 1
+Id: 'leq_10' at line: 23, column: 5
+'(' at line: 23, column: 11
+Type: 'float' on line: 23, column: 12
+Id: 'x' at line: 23, column: 18
+')' at line: 23, column: 19
+'{' on line: 23, column: 21
+Keyword [RETURN]: 'return' at line: 24, column: 3
+Id: 'x' at line: 24, column: 10
+OP [SMALLER THAN OR EQUAL]: '<=' at line: 24, column: 12
+Integer: '10' at line: 24, column: 15
+';' at line: 24, column: 17
+'}' at line: 25, column: 1
+Type: 'int' on line: 28, column: 1
+Id: 'main' at line: 28, column: 5
+'(' at line: 28, column: 9
+')' at line: 28, column: 10
+'{' on line: 28, column: 12
+Keyword [WRITELN]: 'writeln' at line: 30, column: 3
+'(' at line: 30, column: 10
+String: "Digite os número de elementos da lista: " on line: 30, column: 11
+')' at line: 30, column: 54
+';' at line: 30, column: 55
+Type: 'int' on line: 32, column: 3
+Id: 'n' at line: 32, column: 7
+';' at line: 32, column: 8
+Type: 'float' on line: 33, column: 3
+List: list FL10 on line: 33, column: 9
+';' at line: 33, column: 18
+Keyword [READ]: 'read' at line: 34, column: 3
+'(' at line: 34, column: 7
+Id: 'n' at line: 34, column: 8
+')' at line: 34, column: 9
+';' at line: 34, column: 10
+Id: 'IL' at line: 36, column: 3
+'=' at line: 36, column: 7
+Id: 'read_list' at line: 36, column: 9
+'(' at line: 36, column: 18
+Id: 'n' at line: 36, column: 19
+')' at line: 36, column: 20
+';' at line: 36, column: 21
+Id: 'FL' at line: 37, column: 3
+'=' at line: 37, column: 6
+Id: 'succ' at line: 37, column: 8
+Keyword [MAP]: '>>' at line: 37, column: 13
+Id: 'IL' at line: 37, column: 16
+';' at line: 37, column: 18
+Id: 'FL10' at line: 39, column: 3
+'=' at line: 39, column: 8
+Id: 'leq_10' at line: 39, column: 10
+Keyword [FILTER]: '<<' at line: 39, column: 17
+Id: 'FL' at line: 39, column: 21
+';' at line: 39, column: 23
+Keyword [IF]: 'if' at line: 40, column: 3
+'(' at line: 40, column: 6
+Id: 'FL10' at line: 40, column: 7
+OP [IS DIFFERENT]: '!=' at line: 40, column: 12
+Constant: 'NIL' at line: 40, column: 15
+')' at line: 40, column: 18
+'{' on line: 40, column: 20
+Type: 'float' on line: 41, column: 5
+List: list AUXL on line: 41, column: 11
+';' at line: 41, column: 20
+Type: 'int' on line: 42, column: 5
+Id: 'n' at line: 42, column: 9
+';' at line: 42, column: 10
+Id: 'n' at line: 42, column: 12
+'=' at line: 42, column: 14
+Integer: '0' at line: 42, column: 16
+';' at line: 42, column: 17
+Keyword [FOR]: 'for' at line: 43, column: 5
+'(' at line: 43, column: 9
+Id: 'AUXL' at line: 43, column: 10
+'=' at line: 43, column: 14
+Id: 'FL10' at line: 43, column: 15
+';' at line: 43, column: 19
+Id: 'AUXL' at line: 43, column: 21
+OP [IS DIFFERENT]: '!=' at line: 43, column: 26
+Constant: 'NIL' at line: 43, column: 29
+';' at line: 43, column: 32
+Id: 'AUXL' at line: 43, column: 34
+'=' at line: 43, column: 39
+Keyword [TAILLIST]: '!AUXL' at line: 43, column: 41
+')' at line: 43, column: 46
+'{' on line: 43, column: 48
+Id: 'n' at line: 44, column: 7
+'=' at line: 44, column: 9
+Id: 'n' at line: 44, column: 11
+'+' at line: 44, column: 13
+Integer: '1' at line: 44, column: 15
+';' at line: 44, column: 16
+Keyword [WRITE]: 'write' at line: 45, column: 7
+'(' at line: 45, column: 12
+Keyword [HEADLIST]: '?AUXL' at line: 45, column: 13
+')' at line: 45, column: 18
+';' at line: 45, column: 19
+Keyword [WRITE]: 'write' at line: 45, column: 21
+'(' at line: 45, column: 26
+String: " " on line: 45, column: 27
+')' at line: 45, column: 30
+';' at line: 45, column: 31
+'}' at line: 46, column: 5
+Keyword [WRITELN]: 'writeln' at line: 47, column: 5
+'(' at line: 47, column: 12
+String: " " on line: 47, column: 13
+')' at line: 47, column: 16
+';' at line: 47, column: 17
+Keyword [WRITE]: 'write' at line: 48, column: 5
+'(' at line: 48, column: 10
+String: "A nova lista tem " on line: 48, column: 11
+')' at line: 48, column: 30
+';' at line: 48, column: 31
+Keyword [WRITE]: 'write' at line: 48, column: 33
+'(' at line: 48, column: 38
+Id: 'n' at line: 48, column: 39
+')' at line: 48, column: 40
+';' at line: 48, column: 41
+Keyword [WRITELN]: 'writeln' at line: 48, column: 43
+'(' at line: 48, column: 50
+String: " elementos." on line: 48, column: 51
+')' at line: 48, column: 64
+';' at line: 48, column: 65
+'}' at line: 49, column: 3
+Keyword [ELSE]: 'else' at line: 50, column: 3
+Keyword [WRITELN]: 'writeln' at line: 50, column: 8
+'(' at line: 50, column: 15
+String: "A nova lista não possui elementos." on line: 50, column: 16
+')' at line: 50, column: 53
+';' at line: 50, column: 54
+Keyword [RETURN]: 'return' at line: 52, column: 3
+Integer: '0' at line: 52, column: 10
+';' at line: 52, column: 11
+'}' at line: 53, column: 1
+
+
+#### EOF ####
+

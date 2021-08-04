@@ -292,7 +292,7 @@ comma     [,]
 %%
 
 int main(int argc, char *argv[]) {
-  printf("\n\n#### Beggining test ####\n\n");
+  printf("\n\n#### Begining test ####\n\n");
 
   yyin = fopen(argv[1], "r");
   yylex();

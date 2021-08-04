@@ -11,7 +11,7 @@ O projeto consiste na implementação da análise e síntese (independente de m�
 
 que são detalhadas nas atividades correspondentes neste ambiente de aprendizagem. As datas de entrega dos documentos e código de cada fase são também dados pelas datas das tarefas específicas constantes deste ambiente de aprendizagem.
 
-##Trabalho Prático - Descrição da Linguagem
+## Trabalho Prático - Descrição da Linguagem
 
 A linguagem C-IPL foi projetada para incluir facilidade no tratamento de listas em programas escritos em C. Para tal, foi escolhido um subconjunto da linguagem C e feita a introdução de uma nova primitiva de dados para listas e de operações sobre esta nova primitiva. As demais primitivas e comandos de C têm semântica padrão.
 
@@ -138,7 +138,9 @@ ftp://ftp.springernature.com/cs-proceeding/llncs/word/splnproc1703.zip
 
 4) Sempre verifique seu texto para erros ortográficos usando ferramentas adequadas para tal.
 
-# Laboratórios de AvaliaçãoUm laboratório de avaliação é uma atividade do ambiente de aprendizagem que permite que alunos examinem e avaliem os trabalhos de seus colegas. Este tipo de avaliação é chamada "revisão por pares".
+# Laboratórios de Avaliação
+
+Um laboratório de avaliação é uma atividade do ambiente de aprendizagem que permite que alunos examinem e avaliem os trabalhos de seus colegas. Este tipo de avaliação é chamada "revisão por pares".
 
 O uso deste tipo de atividade nesta disciplina tem vários objetivos:
 

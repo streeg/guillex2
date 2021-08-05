@@ -1,6 +1,6 @@
 
 
-#### Beggining test ####
+#### Begining test ####
 
 Type: 'int' on line: 1, column: 1
 List: list IL on line: 1, column: 5
@@ -61,12 +61,7 @@ Id: 'elem' at line: 12, column: 10
 ';' at line: 12, column: 15
 Id: 'new' at line: 13, column: 5
 '=' at line: 13, column: 9
-Id: 'elem' at line: 13, column: 11
-
-ERROR!!
-: at line: 13, column: 16
-
-Id: 'new' at line: 13, column: 18
+Keyword [APPEND]: 'elem : new' at line: 13, column: 11
 ';' at line: 13, column: 21
 '}' at line: 14, column: 3
 Keyword [RETURN]: 'return' at line: 15, column: 3

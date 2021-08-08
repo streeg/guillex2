@@ -19,8 +19,9 @@ tab       "\t"
 
 letter    [a-zA-Z]
 digit     [0-9]
-nil       "NIL"
+main      "main"
 id        {letter}+({letter}|{digit}|_|-^)*
+nil       "NIL"
 integer   -?{digit}+
 decimal   -?{digit}*[.]{digit}+
 string    \"(\\.|[^"\\])*\" 
@@ -30,35 +31,41 @@ lvalue    {id}
 rvalue    {list}
 comment   "//".*
 
+/*ArithmeticOP*/
 add       [+]
 sub       [-]
 mult      [*]
 div       [/]
 
-
-negate    [!]
+/*BinLogicalOP*/
 or        "||"
 and       "&&"
+negate    [~]
 
+/*UnlogicalOP*/
+not       "!"{id}
+
+/*RelationalOP*/
 smaller   [<]
 greater   [>]
-assign    [=]
 smalleq   "<="
 greateq   ">="
 equals    "=="
 diff      "!="
 
-main      "main"
+/*assignOP*/
+assign    [=]
 
-if        "if"
-else      "else"
-for       "for"
-return    "return"
-
+/*IO*/
 read      "read"
 write     "write"
 writeln   "writeln"
 
+/*Keywords*/
+if        "if"
+else      "else"
+for       "for"
+return    "return"
 append      {lvalue}" : "{rvalue}
 headlist    "?"{list}
 taillist    "!"{list}
@@ -106,7 +113,12 @@ comma     [,]
           }
 
 {negate}  {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("OP [NEGATE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            word_position += yyleng;
+          }
+
+{not}  {
+            printf("OP [NOT]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
           }
 

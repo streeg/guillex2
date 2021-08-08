@@ -12,3 +12,7 @@ compilefile:
 
 test:
 	./guillex < ../tests/test1.txt > ../results/test1result.txt
+	./guillex < ../tests/test2.txt > ../results/test2result.txt
+	./guillex < ../tests/test3.txt > ../results/test3result.txt
+	./guillex < ../tests/test4.txt > ../results/test4result.txt
+	

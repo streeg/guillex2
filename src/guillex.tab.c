@@ -69,9 +69,9 @@
 #line 1 "guillex.y"
 
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "tree.h"
 
 void yyerror(const char* msg) {
@@ -81,7 +81,7 @@ int yylex();
 extern int yylex_destroy(void);
 
 
-#line 85 "y.tab.c"
+#line 85 "guillex.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -112,7 +112,10 @@ extern int yylex_destroy(void);
 # define YYERROR_VERBOSE 0
 #endif
 
-
+/* Use api.header.include to #include this header
+   instead of duplicating it here.  */
+#ifndef YY_YY_GUILLEX_TAB_H_INCLUDED
+# define YY_YY_GUILLEX_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -143,66 +146,29 @@ extern int yydebug;
     OR = 272,
     AND = 273,
     NEG = 274,
-    SMALLER = 275,
-    GREATER = 276,
-    SMALLEQ = 277,
-    GREATEQ = 278,
-    EQUALS = 279,
-    DIFFERENT = 280,
-    ASSIGN = 281,
-    IF = 282,
-    ELSE = 283,
-    FOR = 284,
-    READ = 285,
-    WRITE = 286,
-    WRITELN = 287,
-    APPEND = 288,
-    HEADLIST = 289,
-    TAILLIST = 290,
-    DESTROYHEAD = 291,
-    MAP = 292,
-    FILTER = 293,
-    SEMIC = 294
+    NOT = 275,
+    SMALLER = 276,
+    GREATER = 277,
+    SMALLEQ = 278,
+    GREATEQ = 279,
+    EQUALS = 280,
+    DIFFERENT = 281,
+    ASSIGN = 282,
+    IF = 283,
+    ELSE = 284,
+    FOR = 285,
+    READ = 286,
+    WRITE = 287,
+    WRITELN = 288,
+    APPEND = 289,
+    HEADLIST = 290,
+    TAILLIST = 291,
+    DESTROYHEAD = 292,
+    MAP = 293,
+    FILTER = 294,
+    SEMIC = 295
   };
 #endif
-/* Tokens.  */
-#define ID 258
-#define TYPE 259
-#define ELEMTYPE 260
-#define INTEGER 261
-#define DECIMAL 262
-#define LIST 263
-#define STRING 264
-#define NIL 265
-#define MAIN 266
-#define RETURN 267
-#define ADD 268
-#define SUB 269
-#define MULT 270
-#define DIV 271
-#define OR 272
-#define AND 273
-#define NEG 274
-#define SMALLER 275
-#define GREATER 276
-#define SMALLEQ 277
-#define GREATEQ 278
-#define EQUALS 279
-#define DIFFERENT 280
-#define ASSIGN 281
-#define IF 282
-#define ELSE 283
-#define FOR 284
-#define READ 285
-#define WRITE 286
-#define WRITELN 287
-#define APPEND 288
-#define HEADLIST 289
-#define TAILLIST 290
-#define DESTROYHEAD 291
-#define MAP 292
-#define FILTER 293
-#define SEMIC 294
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -216,7 +182,7 @@ union YYSTYPE
   
   struct node *ast;
 
-#line 220 "y.tab.c"
+#line 186 "guillex.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -229,7 +195,7 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-
+#endif /* !YY_YY_GUILLEX_TAB_H_INCLUDED  */
 
 
 
@@ -538,7 +504,7 @@ union yyalloc
 #define YYLAST   4
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  40
+#define YYNTOKENS  41
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  5
 /* YYNRULES -- Number of rules.  */
@@ -547,7 +513,7 @@ union yyalloc
 #define YYNSTATES  10
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   294
+#define YYMAXUTOK   295
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -588,14 +554,14 @@ static const yytype_int8 yytranslate[] =
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39
+      35,    36,    37,    38,    39,    40
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    80,    80,    84,    85,    89,    93
+       0,    81,    81,    85,    86,    90,    94
 };
 #endif
 
@@ -606,11 +572,11 @@ static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "ID", "TYPE", "ELEMTYPE", "INTEGER",
   "DECIMAL", "LIST", "STRING", "NIL", "MAIN", "RETURN", "ADD", "SUB",
-  "MULT", "DIV", "OR", "AND", "NEG", "SMALLER", "GREATER", "SMALLEQ",
-  "GREATEQ", "EQUALS", "DIFFERENT", "ASSIGN", "IF", "ELSE", "FOR", "READ",
-  "WRITE", "WRITELN", "APPEND", "HEADLIST", "TAILLIST", "DESTROYHEAD",
-  "MAP", "FILTER", "SEMIC", "$accept", "prog", "declarations_list",
-  "declaration", "var_dec", YY_NULLPTR
+  "MULT", "DIV", "OR", "AND", "NEG", "NOT", "SMALLER", "GREATER",
+  "SMALLEQ", "GREATEQ", "EQUALS", "DIFFERENT", "ASSIGN", "IF", "ELSE",
+  "FOR", "READ", "WRITE", "WRITELN", "APPEND", "HEADLIST", "TAILLIST",
+  "DESTROYHEAD", "MAP", "FILTER", "SEMIC", "$accept", "prog",
+  "declarations_list", "declaration", "var_dec", YY_NULLPTR
 };
 #endif
 
@@ -622,11 +588,12 @@ static const yytype_int16 yytoknum[] =
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     285,   286,   287,   288,   289,   290,   291,   292,   293,   294
+     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
+     295
 };
 # endif
 
-#define YYPACT_NINF (-37)
+#define YYPACT_NINF (-38)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -640,7 +607,7 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -4,    -2,     2,   -37,    -4,   -37,   -36,   -37,   -37,   -37
+      -4,    -2,     2,   -38,    -4,   -38,   -37,   -38,   -38,   -38
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -654,7 +621,7 @@ static const yytype_int8 yydefact[] =
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -37,   -37,     0,   -37,   -37
+     -38,   -38,     0,   -38,   -38
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -673,20 +640,20 @@ static const yytype_int8 yytable[] =
 
 static const yytype_int8 yycheck[] =
 {
-       4,     3,     0,    39,     4
+       4,     3,     0,    40,     4
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     4,    41,    42,    43,    44,     3,     0,    42,    39
+       0,     4,    42,    43,    44,    45,     3,     0,    43,    40
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    40,    41,    42,    42,    43,    44
+       0,    41,    42,    43,    43,    44,    45
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1388,37 +1355,37 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 80 "guillex.y"
+#line 81 "guillex.y"
                           {}
-#line 1394 "y.tab.c"
+#line 1361 "guillex.tab.c"
     break;
 
   case 3:
-#line 84 "guillex.y"
+#line 85 "guillex.y"
                                       {}
-#line 1400 "y.tab.c"
+#line 1367 "guillex.tab.c"
     break;
 
   case 4:
-#line 85 "guillex.y"
+#line 86 "guillex.y"
                       {}
-#line 1406 "y.tab.c"
+#line 1373 "guillex.tab.c"
     break;
 
   case 5:
-#line 89 "guillex.y"
+#line 90 "guillex.y"
                 {}
-#line 1412 "y.tab.c"
+#line 1379 "guillex.tab.c"
     break;
 
   case 6:
-#line 93 "guillex.y"
+#line 94 "guillex.y"
                     {printf("VARIABLE DECLARATION\n");}
-#line 1418 "y.tab.c"
+#line 1385 "guillex.tab.c"
     break;
 
 
-#line 1422 "y.tab.c"
+#line 1389 "guillex.tab.c"
 
       default: break;
     }
@@ -1650,7 +1617,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 98 "guillex.y"
+#line 99 "guillex.y"
 
 int main(int argc, char *argv[]) {
   Node *tree;

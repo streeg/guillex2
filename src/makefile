@@ -11,7 +11,7 @@ runflex:
 	flex guillex.l
 
 compilefile:
-	gcc lex.yy.c y.tab.c -ll -o guillex
+	gcc lex.yy.c y.tab.c -ll -o guillex -idirafter ../libs/
 
 #test:
 #	./guillex < ../tests/test1.txt > ../results/test1result.txt

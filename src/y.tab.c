@@ -80,7 +80,7 @@ int yylex();
 extern int yylex_destroy(void);
 
 
-#line 84 "guillex"
+#line 84 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -211,7 +211,7 @@ union YYSTYPE
   int integer;
   float dec;
 
-#line 215 "guillex"
+#line 215 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -1384,11 +1384,11 @@ yyreduce:
   case 2:
 #line 74 "guillex.y"
                 {printf("OI\n");}
-#line 1388 "guillex"
+#line 1388 "y.tab.c"
     break;
 
 
-#line 1392 "guillex"
+#line 1392 "y.tab.c"
 
       default: break;
     }

@@ -354,8 +354,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 47
-#define YY_END_OF_BUFFER 48
+#define YY_NUM_RULES 48
+#define YY_END_OF_BUFFER 49
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -363,23 +363,23 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[135] =
+static const flex_int16_t yy_accept[139] =
     {   0,
-        0,    0,   48,   46,    9,   11,   10,   46,   46,   46,
-       46,   15,   16,    5,    3,    2,    4,   46,    6,   42,
-        1,   22,   18,   23,   46,   43,   43,   43,   43,   43,
-       43,   43,   43,   13,   46,   14,    7,   27,    8,    8,
-        0,   45,    0,   38,   38,   20,    0,   42,   41,   19,
-       40,   24,   26,   25,   39,   36,   36,    0,    0,   43,
-       43,   43,   43,   43,   43,   28,   43,   43,   43,   43,
-       21,    0,    8,    8,    8,    0,   38,   38,   38,   19,
-        0,   36,   36,   36,    0,   17,   43,   43,   30,   12,
-       43,   43,   43,   43,    8,   38,   36,    0,   29,   43,
+        0,    0,   49,   47,    9,   11,   10,   47,   47,   47,
+       47,   16,   17,    5,    3,    2,    4,   47,    6,   43,
+        1,   23,   19,   24,   47,   44,   44,   44,   44,   44,
+       44,   44,   44,   44,   14,   47,   15,    7,   28,    8,
+        8,    0,   46,    0,   39,   39,   21,    0,   43,   42,
+       20,   41,   25,   27,   26,   40,   37,   37,    0,    0,
+       44,   44,   44,   44,   44,   44,   29,   44,   44,   44,
+       44,   44,   22,    0,    8,    8,    8,    0,   39,   39,
+       39,   20,    0,   37,   37,   37,    0,   18,   44,   44,
+       31,   12,   44,   44,   44,   44,   44,    8,   39,   37,
 
-       12,   32,   43,   43,    8,   38,   36,   35,   35,    0,
-       43,   33,    0,    0,    0,    0,   35,   35,   35,   44,
-       31,   43,   37,   35,    0,   44,   44,   34,    0,   37,
-       37,   35,    0,    0
+        0,   30,   44,   12,   13,   33,   44,   44,    8,   39,
+       37,   36,   36,    0,   44,   34,    0,    0,    0,    0,
+       36,   36,   36,   45,   32,   44,   38,   36,    0,   45,
+       45,   35,    0,   38,   38,   36,    0,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -395,9 +395,9 @@ static const YY_CHAR yy_ec[256] =
        24,   24,   24,   24,   24,   24,   24,   24,   24,   24,
         1,   28,    1,   29,   30,    1,   31,   24,   24,   32,
 
-       33,   34,   24,   24,   35,   24,   24,   36,   24,   37,
-       38,   24,   24,   39,   40,   41,   42,   24,   43,   24,
-       24,   24,   44,   45,   46,   47,    1,    1,    1,    1,
+       33,   34,   24,   24,   35,   24,   24,   36,   37,   38,
+       39,   24,   24,   40,   41,   42,   43,   24,   44,   24,
+       24,   24,   45,   46,   47,   48,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -414,137 +414,147 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[48] =
+static const YY_CHAR yy_meta[49] =
     {   0,
         1,    1,    2,    3,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    4,    1,    1,    4,    5,    1,    1,
         6,    1,    1,    7,    7,    7,    7,    1,    1,    4,
         7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
-        7,    7,    7,    1,    1,    1,    1
+        7,    7,    7,    7,    1,    1,    1,    1
     } ;
 
-static const flex_int16_t yy_base[157] =
+static const flex_int16_t yy_base[161] =
     {   0,
-        0,    0,  287,  288,  288,  288,  288,   27,   43,  249,
-      276,  288,  288,  288,  288,  288,   35,  264,  264,   36,
-      288,   34,  256,   35,  240,   55,   56,   39,   40,   43,
-       49,   33,   54,  288,  228,  288,  288,  288,   73,   74,
-       55,  288,  269,   75,   80,  288,  252,   81,  251,    0,
-      288,  288,  288,  288,  288,   94,   99,  247,  233,   98,
-      236,   74,   42,   76,   81,  233,   82,   92,   94,   93,
-      288,  228,  240,  218,   86,  221,  235,  211,   87,    0,
-      216,  227,  205,   96,  229,  205,  105,  108,  204,  201,
-      112,  115,  116,  118,  107,  109,  110,  189,  197,  121,
+        0,    0,  318,  336,  336,  336,  336,   28,   44,  281,
+      306,  336,  336,  336,  336,  336,   36,  294,  294,   37,
+      336,   35,  286,   36,  270,   56,   57,   40,   41,   50,
+       34,   37,   56,   38,  336,  257,  336,  336,  336,   76,
+       77,   73,  336,  299,   78,   83,  336,  282,   68,  281,
+        0,  336,  336,  336,  336,  336,   85,   97,  277,  265,
+      105,  265,   78,   80,   71,   91,  264,   92,   95,   98,
+       97,  100,  336,  253,  265,  112,  123,  249,  261,  124,
+      129,    0,  245,  257,  130,  131,  266,  231,  124,   99,
+      230,  229,  125,  127,  126,  130,  137,  152,  154,  160,
 
-      145,  196,  127,  130,  150,  152,  153,  147,  151,  190,
-      135,  142,    0,    0,    0,  176,  190,  168,  134,  159,
-      177,  146,  165,  149,  172,  186,  177,  174,  169,  183,
-      179,  171,    0,  288,  204,  211,  185,  173,  216,  220,
-      224,  231,  235,  240,  244,  248,  252,   88,  256,  259,
-       55,  263,  267,  271,  275,  279
+      217,  227,  138,  172,  224,  223,  153,  150,  181,  187,
+      195,  175,  186,  225,  181,  182,    0,    0,    0,  213,
+      225,  196,  206,  210,  197,  190,  215,  216,  185,  194,
+      220,  163,  158,  172,  221,  227,    0,  336,  253,  260,
+      174,  149,  265,  269,  273,  280,  284,  289,  293,  297,
+      301,   91,  305,  308,   60,  312,  316,  320,  324,  328
     } ;
 
-static const flex_int16_t yy_def[157] =
+static const flex_int16_t yy_def[161] =
     {   0,
-      134,    1,  134,  134,  134,  134,  134,  135,  136,  137,
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
-      134,  134,  134,  134,  138,  139,  139,   27,   27,   27,
-       27,   27,   27,  134,  134,  134,  134,  134,  140,  140,
-      136,  134,  136,  141,  141,  134,  134,  134,  134,  142,
-      134,  134,  134,  134,  134,  143,  143,  134,  134,  144,
-       27,   27,   27,   27,   27,   27,   27,   27,   27,   27,
-      134,  134,  145,   40,   40,  134,  146,   45,   45,  142,
-      134,  147,   57,   57,  134,   27,   27,   27,   27,   27,
-       27,   27,   27,   27,   40,   45,   57,  148,   27,   27,
+      138,    1,  138,  138,  138,  138,  138,  139,  140,  141,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138,  142,  143,  143,   27,   27,   27,
+       27,   27,   27,   27,  138,  138,  138,  138,  138,  144,
+      144,  140,  138,  140,  145,  145,  138,  138,  138,  138,
+      146,  138,  138,  138,  138,  138,  147,  147,  138,  138,
+      148,   27,   27,   27,   27,   27,   27,   27,   27,   27,
+       27,   27,  138,  138,  149,  144,  144,  138,  150,  145,
+      145,  146,  138,  151,  147,  147,  138,   27,   27,   27,
+       27,   27,   27,   27,   27,   27,   27,  144,  145,  147,
 
-       27,   27,   27,   27,   40,   45,   57,  149,  149,  150,
-       27,   27,  151,  137,  138,  134,  152,  109,  109,  153,
-       27,   27,  154,  109,  134,  155,  153,   27,  134,  156,
-      154,  109,  148,    0,  134,  134,  134,  134,  134,  134,
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
-      134,  134,  134,  134,  134,  134
+      152,   27,   27,   27,   27,   27,   27,   27,  144,  145,
+      147,  153,  153,  154,   27,   27,  155,  141,  142,  138,
+      156,  153,  153,  157,   27,   27,  158,  153,  138,  159,
+      157,   27,  138,  160,  158,  153,  152,    0,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138
     } ;
 
-static const flex_int16_t yy_nxt[336] =
+static const flex_int16_t yy_nxt[385] =
     {   0,
         4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
        14,   15,   16,   17,   18,   19,   20,    4,   21,   22,
        23,   24,   25,   26,   26,   26,   27,    4,    4,    4,
-       26,   26,   28,   29,   30,   31,   26,   26,   32,   26,
-       26,   26,   33,   34,   35,   36,   37,   38,   42,   47,
-       47,   48,   48,   51,   52,   54,   55,   61,   58,   58,
-       42,  123,   40,   61,   61,   69,   61,   61,   59,   59,
-       43,   60,   60,   61,   63,   64,   66,   65,   61,   67,
-       62,   87,   43,   68,   60,   60,   72,   72,   76,   73,
-       73,   77,   70,   76,  108,   47,   77,   48,   61,   86,
+       26,   26,   28,   29,   30,   31,   32,   26,   26,   33,
+       26,   26,   26,   34,   35,   36,   37,   38,   39,   43,
+       48,   48,   49,   49,   52,   53,   55,   56,   62,   59,
+       59,   62,   62,   41,   62,   62,  127,   70,   69,   60,
+       60,   44,   61,   61,   62,   64,   65,   72,   43,   66,
+       62,   63,   48,   67,   49,   61,   61,   68,   71,   74,
+       74,   78,   75,   75,   79,   62,   78,  112,   83,   79,
 
-       61,   58,   73,   73,   77,   61,   61,   81,   75,   77,
-       82,   59,   81,   88,   79,   82,   61,   61,   61,   89,
-       74,   78,   90,   82,   92,   95,   96,   94,   82,   61,
-       83,   91,   61,   84,   93,   97,   61,   99,  100,   61,
-       61,   74,   61,   78,   83,   61,  102,  105,  110,  106,
-      107,   61,  101,  113,   61,  114,  115,  103,  104,   61,
-      116,   90,  112,  117,  116,  111,   61,  117,  118,   61,
-       61,  121,  125,  124,  133,  126,  117,  122,  129,   56,
-      117,  130,  128,  118,   74,  119,   78,   83,  126,  132,
-      125,   44,  129,  126,  130,  130,  129,  130,   61,  125,
+       44,   84,   62,   88,   62,   75,   75,   79,   59,   90,
+       83,   77,   79,   84,   84,   62,   62,   81,   60,   62,
+       89,   62,   62,   62,   62,   74,   84,   95,   75,  103,
+       91,   86,   94,   92,   97,   93,   74,   78,   96,   75,
+       79,   75,   78,   83,   83,   79,   84,   84,   62,   62,
+       62,   62,   75,   79,   62,   57,  102,  106,   79,   84,
+       84,   62,   62,   98,  105,   74,  104,   78,   75,   99,
+       79,  100,  107,   83,   62,  114,   84,   62,  108,   92,
+       45,   75,  116,   79,  117,  133,  134,   62,  120,   84,
+      118,  121,  115,  109,   74,  110,   62,   75,  119,  120,
 
-      126,   61,  118,  116,  117,  118,  126,   85,  130,   39,
-       39,   41,   41,   41,   41,   41,   41,   41,   61,   61,
-       61,   61,   61,   74,  109,   61,   74,   78,   61,   61,
-       78,   80,   98,   80,   80,   80,   80,   80,   83,   83,
-       81,   83,   60,   60,   82,   78,   60,   73,   76,   77,
-       73,   77,   74,   72,   77,   82,   73,   61,   82,  118,
-       61,   60,  118,  120,   85,  120,  117,   49,   49,  117,
-      127,  134,   71,  127,  131,   57,   53,  131,  126,   50,
-       49,  126,  130,   46,   45,  130,  134,    3,  134,  134,
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
+       78,  111,  121,   79,  121,   62,   62,  129,   83,  120,
+       75,   84,  121,  130,   62,  121,   79,  126,  125,  120,
+      123,   62,  121,  129,   84,  121,  130,  132,  133,  120,
+      137,  134,  121,  129,  133,  121,  130,  134,  120,  130,
+      120,  121,   87,  121,  134,  121,  128,   62,   62,  130,
+      134,   62,  113,   62,   62,   62,  121,  136,   40,   40,
+       42,   42,   42,   42,   42,   42,   42,   62,   62,  101,
+       83,   62,   76,   84,   78,   76,   80,   79,   74,   80,
+       82,   75,   82,   82,   82,   82,   82,   85,   62,   62,
+       85,   61,   61,   61,   87,   61,   75,   50,   50,   75,
 
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
-      134,  134,  134,  134,  134
+       79,  138,   73,   79,   84,   58,   54,   84,  122,   51,
+       50,  122,  124,   47,  124,  121,   46,  138,  121,  131,
+      138,  138,  131,  135,  138,  138,  135,  130,  138,  138,
+      130,  134,  138,  138,  134,    3,  138,  138,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138
     } ;
 
-static const flex_int16_t yy_chk[336] =
+static const flex_int16_t yy_chk[385] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    8,    9,   17,
-       20,   17,   20,   22,   22,   24,   24,   32,   26,   27,
-       41,  151,    8,   28,   29,   32,   63,   30,   26,   27,
-        9,   26,   27,   31,   28,   29,   30,   29,   33,   30,
-       27,   63,   41,   31,   26,   27,   39,   40,   44,   39,
-       40,   44,   33,   45,  148,   48,   45,   48,   62,   62,
+        1,    1,    1,    1,    1,    1,    1,    1,    8,    9,
+       17,   20,   17,   20,   22,   22,   24,   24,   31,   26,
+       27,   32,   34,    8,   28,   29,  155,   32,   31,   26,
+       27,    9,   26,   27,   30,   28,   29,   34,   42,   29,
+       33,   27,   49,   30,   49,   26,   27,   30,   33,   40,
+       41,   45,   40,   41,   45,   65,   46,  152,   57,   46,
 
-       64,   60,   39,   40,   44,   65,   67,   56,   40,   45,
-       56,   60,   57,   64,   45,   57,   68,   70,   69,   65,
-       75,   79,   67,   56,   69,   75,   79,   70,   57,   87,
-       84,   68,   88,   57,   69,   84,   91,   87,   88,   92,
-       93,   95,   94,   96,   97,  100,   92,   95,  101,   96,
-       97,  103,   91,  105,  104,  106,  107,   93,   94,  111,
-      108,  100,  104,  108,  109,  103,  112,  109,  119,  101,
-      122,  111,  120,  119,  132,  120,  108,  112,  123,  138,
-      109,  123,  122,  124,  105,  109,  106,  107,  120,  124,
-      127,  137,  131,  127,  123,  131,  130,  129,  128,  126,
+       42,   57,   63,   63,   64,   40,   41,   45,   61,   65,
+       58,   41,   46,   58,   57,   66,   68,   46,   61,   69,
+       64,   71,   70,   90,   72,   76,   58,   71,   76,   90,
+       66,   58,   70,   68,   72,   69,   77,   80,   71,   77,
+       80,   76,   81,   85,   86,   81,   85,   86,   89,   93,
+       95,   94,   77,   80,   96,  142,   89,   95,   81,   85,
+       86,   97,  103,   77,   94,   98,   93,   99,   98,   81,
+       99,   86,   96,  100,  108,  104,  100,  107,   97,  103,
+      141,   98,  108,   99,  109,  134,  133,  132,  112,  100,
+      110,  112,  107,   98,  109,   99,  104,  109,  111,  113,
 
-      125,  121,  118,  117,  116,  132,  127,  110,  131,  135,
-      135,  136,  136,  136,  136,  136,  136,  136,  139,  139,
-      102,   99,  139,  140,   98,   90,  140,  141,   89,   86,
-      141,  142,   85,  142,  142,  142,  142,  142,  143,   83,
-       82,  143,  144,  144,   81,   78,  144,  145,   77,   76,
-      145,  146,   74,   73,  146,  147,   72,   66,  147,  149,
-       61,   59,  149,  150,   58,  150,  152,   49,   47,  152,
-      153,   43,   35,  153,  154,   25,   23,  154,  155,   19,
-       18,  155,  156,   11,   10,  156,    3,  134,  134,  134,
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
+      110,  100,  113,  110,  112,  115,  116,  130,  111,  122,
+      109,  111,  122,  129,  126,  113,  110,  116,  115,  123,
+      113,  125,  123,  124,  111,  122,  124,  126,  127,  128,
+      136,  127,  128,  131,  135,  123,  131,  135,  121,  124,
+      136,  120,  114,  136,  127,  128,  123,  106,  105,  131,
+      135,  102,  101,   92,   91,   88,  136,  128,  139,  139,
+      140,  140,  140,  140,  140,  140,  140,  143,  143,   87,
+       84,  143,  144,   83,   79,  144,  145,   78,   75,  145,
+      146,   74,  146,  146,  146,  146,  146,  147,   67,   62,
+      147,  148,  148,   60,   59,  148,  149,   50,   48,  149,
 
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
-      134,  134,  134,  134,  134,  134,  134,  134,  134,  134,
-      134,  134,  134,  134,  134
+      150,   44,   36,  150,  151,   25,   23,  151,  153,   19,
+       18,  153,  154,   11,  154,  156,   10,    3,  156,  157,
+        0,    0,  157,  158,    0,    0,  158,  159,    0,    0,
+      159,  160,    0,    0,  160,  138,  138,  138,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138,  138,  138,  138,  138,  138,  138,
+      138,  138,  138,  138
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -570,7 +580,7 @@ char *yytext;
   int line = 1;
   int word_position = 1;
 
-#line 574 "lex.yy.c"
+#line 584 "lex.yy.c"
 #define YY_NO_INPUT 1
 /*ArithmeticOP*/
 /*BinLogicalOP*/
@@ -579,7 +589,7 @@ char *yytext;
 /*assignOP*/
 /*IO*/
 /*Keywords*/
-#line 583 "lex.yy.c"
+#line 593 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -797,7 +807,7 @@ YY_DECL
 #line 83 "guillex.l"
 
 
-#line 801 "lex.yy.c"
+#line 811 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -824,13 +834,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 135 )
+				if ( yy_current_state >= 139 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 288 );
+		while ( yy_base[yy_current_state] != 336 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -876,58 +886,70 @@ YY_RULE_SETUP
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return ADD;
           }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 100 "guillex.l"
+#line 102 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return SUB;
           }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 105 "guillex.l"
+#line 109 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return MULT;
           }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 110 "guillex.l"
+#line 116 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return DIV;
           }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 115 "guillex.l"
+#line 123 "guillex.l"
 {
             printf("OP [NEGATE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return NEG;
           }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 120 "guillex.l"
+#line 130 "guillex.l"
 {
             printf("OP [NOT]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return NOT;            
           }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 125 "guillex.l"
+#line 137 "guillex.l"
 {
             word_position += 2;
           }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 129 "guillex.l"
+#line 141 "guillex.l"
 {
             word_position += 1;
           }
@@ -935,7 +957,7 @@ YY_RULE_SETUP
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 133 "guillex.l"
+#line 145 "guillex.l"
 {
             line += 1;
             word_position = 1;
@@ -943,31 +965,35 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 138 "guillex.l"
+#line 150 "guillex.l"
 {
             printf("Type: '%s' on line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return TYPE;            
           }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 143 "guillex.l"
+#line 157 "guillex.l"
+{
+            printf("Main: '%s' on line: %d, column: %d\n", yytext, line, word_position);
+            word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return MAIN;
+          }
+	YY_BREAK
+case 14:
+YY_RULE_SETUP
+#line 164 "guillex.l"
 {
             printf("'%s' on line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
           }
 	YY_BREAK
-case 14:
-YY_RULE_SETUP
-#line 148 "guillex.l"
-{
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
-          }
-	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 153 "guillex.l"
+#line 169 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -975,7 +1001,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 158 "guillex.l"
+#line 174 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -983,251 +1009,315 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 163 "guillex.l"
-{
-            printf("Constant: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
-          }
-	YY_BREAK
-case 18:
-YY_RULE_SETUP
-#line 168 "guillex.l"
+#line 179 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
           }
 	YY_BREAK
+case 18:
+YY_RULE_SETUP
+#line 184 "guillex.l"
+{
+            printf("Constant: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return NIL;
+          }
+	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 173 "guillex.l"
+#line 191 "guillex.l"
 {
+            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return ASSIGN;            
           }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 177 "guillex.l"
+#line 198 "guillex.l"
 {
-            printf("OP [AND]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
           }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 182 "guillex.l"
+#line 202 "guillex.l"
 {
-            printf("OP [OR]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("OP [AND]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return AND;
           }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 187 "guillex.l"
+#line 209 "guillex.l"
 {
-            printf("OP [SMALLER THAN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("OP [OR]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return OR;
           }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 192 "guillex.l"
+#line 216 "guillex.l"
 {
-            printf("OP [GREATER THAN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("OP [SMALLER THAN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return SMALLER;
           }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 197 "guillex.l"
+#line 223 "guillex.l"
 {
-            printf("OP [SMALLER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("OP [GREATER THAN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return GREATER;
           }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 202 "guillex.l"
+#line 230 "guillex.l"
 {
-            printf("OP [GREATER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("OP [SMALLER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return SMALLEQ;
           }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 207 "guillex.l"
+#line 237 "guillex.l"
 {
-            printf("OP [EQUALS]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("OP [GREATER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return GREATEQ;
           }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 212 "guillex.l"
+#line 244 "guillex.l"
 {
-            printf("OP [IS DIFFERENT]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("OP [EQUALS]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return EQUALS;
           }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 217 "guillex.l"
+#line 251 "guillex.l"
 {
-            printf("Keyword [IF]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("OP [IS DIFFERENT]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return DIFFERENT;
           }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 222 "guillex.l"
+#line 258 "guillex.l"
 {
-            printf("Keyword [ELSE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [IF]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return IF;
           }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 227 "guillex.l"
+#line 265 "guillex.l"
 {
-            printf("Keyword [FOR]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [ELSE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return ELSE;
           }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 232 "guillex.l"
+#line 272 "guillex.l"
 {
-            printf("Keyword [RETURN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [FOR]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return FOR;
           }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 237 "guillex.l"
+#line 279 "guillex.l"
 {
-            printf("Keyword [READ]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [RETURN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return RETURN;
           }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 242 "guillex.l"
+#line 286 "guillex.l"
 {
-            printf("Keyword [WRITE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [READ]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return READ;
           }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 247 "guillex.l"
+#line 293 "guillex.l"
 {
-            printf("Keyword [WRITELN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [WRITE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
-          }      
+            sscanf(yytext, "%s", yylval.str);
+            return WRITE;
+          }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 252 "guillex.l"
+#line 300 "guillex.l"
 {
-            printf("Keyword [APPEND]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [WRITELN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
-          }
+            sscanf(yytext, "%s", yylval.str);
+            return WRITELN;
+          }      
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 257 "guillex.l"
+#line 307 "guillex.l"
 {
-            printf("Keyword [HEADLIST]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [APPEND]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return APPEND;
           }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 262 "guillex.l"
+#line 314 "guillex.l"
 {
-            printf("Keyword [TAILLIST]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [HEADLIST]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return HEADLIST;
           }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 267 "guillex.l"
+#line 321 "guillex.l"
 {
-            printf("Keyword [DESTROYHEAD]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [TAILLIST]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return TAILLIST;
           }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 272 "guillex.l"
+#line 328 "guillex.l"
 {
-            printf("Keyword [MAP]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [DESTROYHEAD]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return DESTROYHEAD;
           }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 277 "guillex.l"
+#line 335 "guillex.l"
 {
-            printf("Keyword [FILTER]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [MAP]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return MAP;
           }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 282 "guillex.l"
+#line 342 "guillex.l"
 {
-            printf("Decimal: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Keyword [FILTER]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return FILTER;
           }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 287 "guillex.l"
+#line 349 "guillex.l"
 {
-            printf("Integer: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Decimal: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return DECIMAL;
           }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 292 "guillex.l"
+#line 356 "guillex.l"
 {
-            printf("Id: '%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("Integer: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return INTEGER;
           }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 297 "guillex.l"
+#line 363 "guillex.l"
 {
-            printf("List: %s on line: %d, column: %d\n", yytext, line, word_position);
+            printf("Id: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return ID;
           }
 	YY_BREAK
 case 45:
-/* rule 45 can match eol */
 YY_RULE_SETUP
-#line 302 "guillex.l"
+#line 370 "guillex.l"
 {
-            printf("String: %s on line: %d, column: %d\n", yytext, line, word_position);
+            printf("List: %s on line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return LIST;
           }
 	YY_BREAK
 case 46:
+/* rule 46 can match eol */
 YY_RULE_SETUP
-#line 307 "guillex.l"
+#line 377 "guillex.l"
+{
+            printf("String: %s on line: %d, column: %d\n", yytext, line, word_position);
+            word_position += yyleng;
+            sscanf(yytext, "%s", yylval.str);
+            return STRING;
+          }
+	YY_BREAK
+case 47:
+YY_RULE_SETUP
+#line 384 "guillex.l"
 {
             printf("\nERROR!!\n");
             printf("%s at line: %d, column: %d\n\n", yytext, line, word_position);
             word_position += strlen(yytext);
           }
 	YY_BREAK
-case 47:
+case 48:
 YY_RULE_SETUP
-#line 313 "guillex.l"
+#line 390 "guillex.l"
 ECHO;
 	YY_BREAK
-#line 1231 "lex.yy.c"
+#line 1321 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1524,7 +1614,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 135 )
+			if ( yy_current_state >= 139 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1552,11 +1642,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 135 )
+		if ( yy_current_state >= 139 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 134);
+	yy_is_jam = (yy_current_state == 138);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2195,21 +2285,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 313 "guillex.l"
-
-
-int main(int argc, char *argv[]) {
-  printf("\n\n#### Begining test ####\n\n");
-
-  yyin = fopen(argv[1], "r");
-  yylex();
-
-  fclose(yyin);
-
-  yylex_destroy();
-
-  printf("\n\n#### EOF ####\n\n");
-
-  return 0;
-}
+#line 390 "guillex.l"
 

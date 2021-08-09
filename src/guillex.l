@@ -93,6 +93,8 @@ comma     [,]
 {comma}   {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            yylval.str = (char *) strdup(yytext);
+            return COMMA;
           }
 
 {add}     {
@@ -166,22 +168,30 @@ comma     [,]
 
 {stfunc}  {
             printf("'%s' on line: %d, column: %d\n", yytext, line, word_position);
+            yylval.str = (char *) strdup(yytext);
             word_position += yyleng;
+            return STFUNC;
           }
 
 {endfunc} {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            yylval.str = (char *) strdup(yytext);
             word_position += yyleng;
+            return ENDFUNC;
           }
 
 {parenl}  {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            yylval.str = (char *) strdup(yytext);
             word_position += yyleng;
+            return PARENL;
           }
 
 {parenr}  {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            yylval.str = (char *) strdup(yytext);
             word_position += yyleng;
+            return PARENR;
           }
 
 {nil}   {

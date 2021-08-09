@@ -561,7 +561,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    81,    81,    85,    86,    90,    94
+       0,    77,    77,    81,    82,    86,    90
 };
 #endif
 
@@ -576,7 +576,7 @@ static const char *const yytname[] =
   "SMALLEQ", "GREATEQ", "EQUALS", "DIFFERENT", "ASSIGN", "IF", "ELSE",
   "FOR", "READ", "WRITE", "WRITELN", "APPEND", "HEADLIST", "TAILLIST",
   "DESTROYHEAD", "MAP", "FILTER", "SEMIC", "$accept", "prog",
-  "declarations_list", "declaration", "var_dec", YY_NULLPTR
+  "declarationList", "declaration", "varDeclaration", YY_NULLPTR
 };
 #endif
 
@@ -1355,31 +1355,31 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 81 "guillex.y"
-                          {}
+#line 77 "guillex.y"
+                        {}
 #line 1361 "guillex.tab.c"
     break;
 
   case 3:
-#line 85 "guillex.y"
-                                      {}
+#line 81 "guillex.y"
+                                    {}
 #line 1367 "guillex.tab.c"
     break;
 
   case 4:
-#line 86 "guillex.y"
+#line 82 "guillex.y"
                       {}
 #line 1373 "guillex.tab.c"
     break;
 
   case 5:
-#line 90 "guillex.y"
-                {}
+#line 86 "guillex.y"
+                       {}
 #line 1379 "guillex.tab.c"
     break;
 
   case 6:
-#line 94 "guillex.y"
+#line 90 "guillex.y"
                     {printf("VARIABLE DECLARATION\n");}
 #line 1385 "guillex.tab.c"
     break;
@@ -1617,7 +1617,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 99 "guillex.y"
+#line 95 "guillex.y"
 
 int main(int argc, char *argv[]) {
   Node *tree;

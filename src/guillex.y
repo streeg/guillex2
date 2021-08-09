@@ -1,3 +1,7 @@
+%error-verbose
+%debug
+%locations
+
 %{
 
 #include <stdio.h>
@@ -67,31 +71,37 @@ extern int yylex_destroy(void);
 %token<str> FILTER
 
 %token<str> SEMIC
+%token<str> COMMA
+%token<str> STFUNC
+%token<str> ENDFUNC
+%token<str> PARENL
+%token<str> PARENR
 
 
-%start prog
-%type<ast> declarations_list declaration var_dec
-// %type declarations_list declaration var_dec function_declaration parameters_list parameter statement_list statement
-// %type assign_value basic_ops if_ops for_op forall_op expression terminal set_op log_op in_set
-// %type diff_is_type is_type math_op io_ops read write writeln ret_st
-
+%start program
+%type<ast> declarationList declaration varDeclaration funcDeclaration params param 
+%type<ast> compoundStmt localDeclarations stmtList primitiveStmt exprStmt compoundStmt
+%type<ast> condStmt iterStmt returnStmt listStmt appendOPS returnlistOPS returnlistOP
+%type<ast> destroyheadOPS destroyheadOP mapfilterOPS mapfilterOP expression simpleExp
+%type<ast> constOP inOP outOP logicalEx relationalExp sumExp sumOp mulExp mulOP factor fCall
 %%
 
-prog:
-    declarations_list     {}
+program:
+    declarationList     {}
   ;
 
-declarations_list:
-    declaration declarations_list     {}
+declarationList:
+     declarationList declaration    {}
   | declaration       {}
   ;
 
 declaration:
-    var_dec     {}
+    varDeclaration     {}
   ;
 
-var_dec:
+varDeclaration:
     TYPE ID SEMIC   {printf("VARIABLE DECLARATION\n");}
+    | funcDeclaration   {};
   ;
 
 

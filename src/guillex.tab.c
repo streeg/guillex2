@@ -66,7 +66,7 @@
 
 
 /* First part of user prologue.  */
-#line 5 "guillex.y"
+#line 7 "guillex.y"
 
 
 #include <stdio.h>
@@ -112,10 +112,7 @@ extern int yylex_destroy(void);
 # define YYERROR_VERBOSE 1
 #endif
 
-/* Use api.header.include to #include this header
-   instead of duplicating it here.  */
-#ifndef YY_YY_GUILLEX_TAB_H_INCLUDED
-# define YY_YY_GUILLEX_TAB_H_INCLUDED
+
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 1
@@ -179,7 +176,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 20 "guillex.y"
+#line 22 "guillex.y"
 
   char* str;
   int integer;
@@ -187,7 +184,7 @@ union YYSTYPE
   
   struct node *ast;
 
-#line 191 "guillex.tab.c"
+#line 188 "guillex.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -214,7 +211,7 @@ extern YYSTYPE yylval;
 extern YYLTYPE yylloc;
 int yyparse (void);
 
-#endif /* !YY_YY_GUILLEX_TAB_H_INCLUDED  */
+
 
 
 
@@ -521,18 +518,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  8
+#define YYFINAL  7
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   4
+#define YYLAST   15
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  46
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  6
+#define YYNNTS  5
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  8
+#define YYNRULES  6
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  11
+#define YYNSTATES  10
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   300
@@ -584,7 +581,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    90,    90,    94,    95,    99,   103,   104,   107
+       0,    92,    92,    96,    97,   101,   106
 };
 #endif
 
@@ -600,7 +597,7 @@ static const char *const yytname[] =
   "FOR", "READ", "WRITE", "WRITELN", "APPEND", "HEADLIST", "TAILLIST",
   "DESTROYHEAD", "MAP", "FILTER", "SEMIC", "COMMA", "STFUNC", "ENDFUNC",
   "PARENL", "PARENR", "$accept", "program", "declarationList",
-  "declaration", "varDeclaration", "funcDeclaration", YY_NULLPTR
+  "declaration", "varDeclaration", YY_NULLPTR
 };
 #endif
 
@@ -617,12 +614,12 @@ static const yytype_int16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF (-38)
+#define YYPACT_NINF (-28)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-1)
+#define YYTABLE_NINF (-7)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -631,8 +628,7 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -4,    -2,     2,    -4,   -38,   -38,   -38,   -37,   -38,   -38,
-     -38
+       5,     7,    11,     0,     1,     2,   -27,   -28,     3,     8
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -640,20 +636,19 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       8,     0,     0,     2,     4,     5,     7,     0,     1,     3,
-       6
+       0,     0,     0,     0,     0,     0,     0,     1,     0,     0
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -38,   -38,   -38,     1,   -38,   -38
+     -28,   -28,   -28,    12,   -28
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3,     4,     5,     6
+      -1,     2,     3,     4,     5
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -661,32 +656,33 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,     7,     8,    10,     9
+      -2,    -4,    -5,    -3,     1,    -4,    -5,    -3,    -6,     1,
+       6,     7,    -6,     9,     0,     8
 };
 
 static const yytype_int8 yycheck[] =
 {
-       4,     3,     0,    40,     3
+       0,     0,     0,     0,     4,     4,     4,     4,     0,     4,
+       3,     0,     4,    40,    -1,     3
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     4,    47,    48,    49,    50,    51,     3,     0,    49,
-      40
+       0,     4,    47,    48,    49,    50,     3,     0,    49,    40
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    46,    47,    48,    48,    49,    50,    50,    51
+       0,    46,    47,    48,    48,    49,    50
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     2,     1,     1,     3,     1,     0
+       0,     2,     1,     2,     1,     1,     3
 };
 
 
@@ -1477,49 +1473,37 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 90 "guillex.y"
+#line 92 "guillex.y"
                         {}
-#line 1483 "guillex.tab.c"
+#line 1479 "guillex.tab.c"
     break;
 
   case 3:
-#line 94 "guillex.y"
+#line 96 "guillex.y"
                                     {}
-#line 1489 "guillex.tab.c"
+#line 1485 "guillex.tab.c"
     break;
 
   case 4:
-#line 95 "guillex.y"
+#line 97 "guillex.y"
                       {}
-#line 1495 "guillex.tab.c"
+#line 1491 "guillex.tab.c"
     break;
 
   case 5:
-#line 99 "guillex.y"
+#line 101 "guillex.y"
                        {}
-#line 1501 "guillex.tab.c"
+#line 1497 "guillex.tab.c"
     break;
 
   case 6:
-#line 103 "guillex.y"
+#line 106 "guillex.y"
                     {printf("VARIABLE DECLARATION\n");}
+#line 1503 "guillex.tab.c"
+    break;
+
+
 #line 1507 "guillex.tab.c"
-    break;
-
-  case 7:
-#line 104 "guillex.y"
-                        {}
-#line 1513 "guillex.tab.c"
-    break;
-
-  case 8:
-#line 107 "guillex.y"
-                  {}
-#line 1519 "guillex.tab.c"
-    break;
-
-
-#line 1523 "guillex.tab.c"
 
       default: break;
     }
@@ -1757,7 +1741,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 112 "guillex.y"
+#line 295 "guillex.y"
 
 int main(int argc, char *argv[]) {
   Node *tree;

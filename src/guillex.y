@@ -1,6 +1,8 @@
+%define lr.type canonical-lr
 %define parse.error verbose
 %debug
 %locations
+
 
 %{
 
@@ -79,11 +81,11 @@ extern int yylex_destroy(void);
 
 
 %start program
-%type<ast> declarationList declaration varDeclaration funcDeclaration //params param 
-// %type<ast> compoundStmt localDeclarations stmtList primitiveStmt exprStmt compoundStmt
-// %type<ast> condStmt iterStmt returnStmt listStmt appendOPS returnlistOPS returnlistOP
-// %type<ast> destroyheadOPS destroyheadOP mapfilterOPS mapfilterOP expression simpleExp
-// %type<ast> constOP inOP outOP logicalEx relationalExp sumExp sumOp mulExp mulOP factor fCall
+%type<ast> declarationList declaration varDeclaration funcDeclaration params param 
+%type<ast> compoundStmt localDeclarations stmtList primitiveStmt exprStmt
+%type<ast> condStmt iterStmt returnStmt listStmt appendOPS returnlistOPS returnlistOP
+%type<ast> destroyheadOPS mapfilterOPS expression assignOP simpleExp
+%type<ast> constOP inOP outOPS outOP logicalExp binLogicalOP unLogicalOP relationalExp relationalOP sumExp sumOP mulExp mulOP factor fCall
 %%
 
 program:
@@ -97,15 +99,196 @@ declarationList:
 
 declaration:
     varDeclaration     {}
+    | funcDeclaration  {}
   ;
 
 varDeclaration:
     TYPE ID SEMIC   {printf("VARIABLE DECLARATION\n");}
-    | funcDeclaration   {};
   ;
 
-funcDeclaration:  {}
-;
+funcDeclaration:  
+    TYPE ID PARENL params PARENR compoundStmt {}
+  ;
+
+params:
+    params param{}
+  | param {}
+  ;
+
+param:
+    TYPE ID {}
+  ;
+
+compoundStmt:
+    STFUNC localDeclarations stmtList ENDFUNC {}
+  ;
+
+localDeclarations:
+    localDeclarations varDeclaration {}
+  ;
+
+stmtList:
+    stmtList primitiveStmt    {}
+  ;
+
+primitiveStmt:
+    exprStmt {}
+  | compoundStmt {}
+  | condStmt {}
+  | iterStmt {}
+  | returnStmt {}
+  | listStmt {}
+  ;
+
+exprStmt:
+    expression SEMIC {}
+  ;
+
+condStmt:
+    IF PARENL expression PARENR compoundStmt {}
+  | IF PARENL expression PARENR compoundStmt ELSE compoundStmt {}
+  ;
+
+iterStmt:
+    FOR PARENL expression SEMIC relationalExp SEMIC expression PARENR compoundStmt {}
+  ;
+
+returnStmt:
+    RETURN expression SEMIC {}
+  ;
+
+listStmt:
+    appendOPS {}
+  | returnlistOPS {}
+  | destroyheadOPS {}
+  | mapfilterOPS {}
+  ;
+
+appendOPS:
+    expression APPEND ID SEMIC {}
+  ;
+
+returnlistOPS:
+    returnlistOP ID {}
+  ;
+
+returnlistOP:
+    HEADLIST {}
+  | TAILLIST {}
+  ;
+
+destroyheadOPS:
+    DESTROYHEAD ID SEMIC {}
+  ;
+
+mapfilterOPS:
+    fCall MAP ID SEMIC {}
+  ;
+
+expression:
+    ID assignOP expression {}
+  | simpleExp {}
+  | constOP {}
+  | inOP {}
+  | outOP {}
+  ;
+
+assignOP:
+    ASSIGN {}
+  ;
+    
+
+simpleExp:
+    logicalExp {}
+  | relationalExp {}
+  ;
+
+constOP:
+    INTEGER {}
+  | DECIMAL {}
+  | LIST {}
+  | NIL {}
+  ;
+
+inOP:
+  READ PARENL ID PARENR {}
+  ;
+
+outOPS:
+  outOP PARENL OUTCONST PARENR SEMIC {}
+  ;
+
+outOP:
+    WRITE {}
+  | WRITELN {}
+  ;
+
+OUTCONST:
+    STRING {}
+  | expression {}
+  ;
+
+logicalExp:
+    simpleExp binLogicalOP simpleExp {}
+  | unLogicalOP simpleExp {}
+  ;
+
+binLogicalOP:
+    OR {}
+  | AND {}
+  | NEG {}
+  ;
+
+unLogicalOP:
+    NOT {}
+  ;
+
+relationalExp:
+    relationalExp relationalOP sumExp {}
+  | sumExp {}
+  ;
+
+
+relationalOP:
+    SMALLER {}
+  | GREATER {}
+  | SMALLEQ {}
+  | GREATEQ {}
+  | EQUALS {}
+  | DIFFERENT {}
+  ;
+
+sumExp:
+    sumExp sumOP mulExp {}
+  | mulExp {}
+  ;
+
+sumOP:
+    ADD {}
+  | SUB {}
+  ;
+
+mulExp:
+    mulExp mulOP factor {}
+  | factor {}
+  ;
+
+mulOP:
+    MULT {}
+  | DIV {}
+  ;
+
+factor:
+    ID {}
+  | fCall {}
+  | PARENL simpleExp PARENR {}
+  | constOP {}
+  ;
+
+fCall:
+   PARENL params PARENR  {}
+  ;
+
 
 
 

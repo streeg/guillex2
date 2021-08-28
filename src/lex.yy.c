@@ -881,11 +881,13 @@ YY_RULE_SETUP
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
+            yylval.str = (char *) strdup(yytext);
+            return COMMA;
           }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 98 "guillex.l"
+#line 100 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -895,7 +897,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 105 "guillex.l"
+#line 107 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -905,7 +907,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 112 "guillex.l"
+#line 114 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -915,7 +917,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 119 "guillex.l"
+#line 121 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -925,7 +927,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 126 "guillex.l"
+#line 128 "guillex.l"
 {
             printf("OP [NEGATE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -935,7 +937,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 133 "guillex.l"
+#line 135 "guillex.l"
 {
             printf("OP [NOT]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -945,14 +947,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 140 "guillex.l"
+#line 142 "guillex.l"
 {
             word_position += 2;
           }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 144 "guillex.l"
+#line 146 "guillex.l"
 {
             word_position += 1;
           }
@@ -960,7 +962,7 @@ YY_RULE_SETUP
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 148 "guillex.l"
+#line 150 "guillex.l"
 {
             line += 1;
             word_position = 1;
@@ -968,7 +970,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 153 "guillex.l"
+#line 155 "guillex.l"
 {
             printf("Type: '%s' on line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -978,7 +980,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 160 "guillex.l"
+#line 162 "guillex.l"
 {
             printf("Main: '%s' on line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -988,39 +990,47 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 167 "guillex.l"
+#line 169 "guillex.l"
 {
             printf("'%s' on line: %d, column: %d\n", yytext, line, word_position);
+            yylval.str = (char *) strdup(yytext);
             word_position += yyleng;
+            return STFUNC;
           }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 172 "guillex.l"
+#line 176 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            yylval.str = (char *) strdup(yytext);
             word_position += yyleng;
+            return ENDFUNC;
           }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 177 "guillex.l"
+#line 183 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            yylval.str = (char *) strdup(yytext);
             word_position += yyleng;
+            return PARENL;
           }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 182 "guillex.l"
+#line 190 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            yylval.str = (char *) strdup(yytext);
             word_position += yyleng;
+            return PARENR;
           }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 187 "guillex.l"
+#line 197 "guillex.l"
 {
             printf("Constant: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1030,7 +1040,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 194 "guillex.l"
+#line 204 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1040,14 +1050,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 201 "guillex.l"
+#line 211 "guillex.l"
 {
             word_position += yyleng;
           }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 205 "guillex.l"
+#line 215 "guillex.l"
 {
             printf("OP [AND]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1057,7 +1067,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 212 "guillex.l"
+#line 222 "guillex.l"
 {
             printf("OP [OR]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1067,7 +1077,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 219 "guillex.l"
+#line 229 "guillex.l"
 {
             printf("OP [SMALLER THAN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1077,7 +1087,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 226 "guillex.l"
+#line 236 "guillex.l"
 {
             printf("OP [GREATER THAN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1087,7 +1097,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 233 "guillex.l"
+#line 243 "guillex.l"
 {
             printf("OP [SMALLER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1097,7 +1107,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 240 "guillex.l"
+#line 250 "guillex.l"
 {
             printf("OP [GREATER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1107,7 +1117,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 247 "guillex.l"
+#line 257 "guillex.l"
 {
             printf("OP [EQUALS]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1117,7 +1127,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 254 "guillex.l"
+#line 264 "guillex.l"
 {
             printf("OP [IS DIFFERENT]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1127,7 +1137,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 261 "guillex.l"
+#line 271 "guillex.l"
 {
             printf("Keyword [IF]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1137,7 +1147,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 268 "guillex.l"
+#line 278 "guillex.l"
 {
             printf("Keyword [ELSE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1147,7 +1157,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 275 "guillex.l"
+#line 285 "guillex.l"
 {
             printf("Keyword [FOR]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1157,7 +1167,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 282 "guillex.l"
+#line 292 "guillex.l"
 {
             printf("Keyword [RETURN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1167,7 +1177,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 289 "guillex.l"
+#line 299 "guillex.l"
 {
             printf("Keyword [READ]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1177,7 +1187,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 296 "guillex.l"
+#line 306 "guillex.l"
 {
             printf("Keyword [WRITE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1187,7 +1197,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 303 "guillex.l"
+#line 313 "guillex.l"
 {
             printf("Keyword [WRITELN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1197,7 +1207,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 310 "guillex.l"
+#line 320 "guillex.l"
 {
             printf("Keyword [APPEND]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1207,7 +1217,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 317 "guillex.l"
+#line 327 "guillex.l"
 {
             printf("Keyword [HEADLIST]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1217,7 +1227,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 324 "guillex.l"
+#line 334 "guillex.l"
 {
             printf("Keyword [TAILLIST]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1227,7 +1237,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 331 "guillex.l"
+#line 341 "guillex.l"
 {
             printf("Keyword [DESTROYHEAD]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1237,7 +1247,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 338 "guillex.l"
+#line 348 "guillex.l"
 {
             printf("Keyword [MAP]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1247,7 +1257,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 345 "guillex.l"
+#line 355 "guillex.l"
 {
             printf("Keyword [FILTER]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1257,7 +1267,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 352 "guillex.l"
+#line 362 "guillex.l"
 {
             printf("Decimal: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1267,7 +1277,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 359 "guillex.l"
+#line 369 "guillex.l"
 {
             printf("Integer: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1277,7 +1287,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 366 "guillex.l"
+#line 376 "guillex.l"
 {
             printf("Id: '%s' at line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1287,7 +1297,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 373 "guillex.l"
+#line 383 "guillex.l"
 {
             printf("List: %s on line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1298,7 +1308,7 @@ YY_RULE_SETUP
 case 46:
 /* rule 46 can match eol */
 YY_RULE_SETUP
-#line 380 "guillex.l"
+#line 390 "guillex.l"
 {
             printf("String: %s on line: %d, column: %d\n", yytext, line, word_position);
             word_position += yyleng;
@@ -1308,7 +1318,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 387 "guillex.l"
+#line 397 "guillex.l"
 {
             printf("\nERROR!!\n");
             printf("%s at line: %d, column: %d\n\n", yytext, line, word_position);
@@ -1317,10 +1327,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 393 "guillex.l"
+#line 403 "guillex.l"
 ECHO;
 	YY_BREAK
-#line 1324 "lex.yy.c"
+#line 1334 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2288,5 +2298,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 393 "guillex.l"
+#line 403 "guillex.l"
 

@@ -38,7 +38,7 @@
 # define YY_YY_GUILLEX_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 0
+# define YYDEBUG 1
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -86,7 +86,12 @@ extern int yydebug;
     DESTROYHEAD = 292,
     MAP = 293,
     FILTER = 294,
-    SEMIC = 295
+    SEMIC = 295,
+    COMMA = 296,
+    STFUNC = 297,
+    ENDFUNC = 298,
+    PARENL = 299,
+    PARENR = 300
   };
 #endif
 
@@ -94,7 +99,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 16 "guillex.y"
+#line 20 "guillex.y"
 
   char* str;
   int integer;
@@ -102,7 +107,7 @@ union YYSTYPE
   
   struct node *ast;
 
-#line 106 "guillex.tab.h"
+#line 111 "guillex.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -110,9 +115,23 @@ typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+/* Location type.  */
+#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
+typedef struct YYLTYPE YYLTYPE;
+struct YYLTYPE
+{
+  int first_line;
+  int first_column;
+  int last_line;
+  int last_column;
+};
+# define YYLTYPE_IS_DECLARED 1
+# define YYLTYPE_IS_TRIVIAL 1
+#endif
+
 
 extern YYSTYPE yylval;
-
+extern YYLTYPE yylloc;
 int yyparse (void);
 
 #endif /* !YY_YY_GUILLEX_TAB_H_INCLUDED  */

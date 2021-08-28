@@ -1,0 +1,229 @@
+Terminais sem uso na gramática
+
+    ELEMTYPE
+    INTEGER
+    DECIMAL
+    LIST
+    STRING
+    NIL
+    MAIN
+    RETURN
+    ADD
+    SUB
+    MULT
+    DIV
+    OR
+    AND
+    NEG
+    NOT
+    SMALLER
+    GREATER
+    SMALLEQ
+    GREATEQ
+    EQUALS
+    DIFFERENT
+    ASSIGN
+    IF
+    ELSE
+    FOR
+    READ
+    WRITE
+    WRITELN
+    APPEND
+    HEADLIST
+    TAILLIST
+    DESTROYHEAD
+    MAP
+    FILTER
+    COMMA
+    STFUNC
+    ENDFUNC
+    PARENL
+    PARENR
+
+
+Estado 0 conflitos: 1 de deslocamento/redução
+Estado 3 conflitos: 1 de deslocamento/redução, 1 de redução/redução
+
+
+Gramática
+
+    0 $accept: program $end
+
+    1 program: declarationList
+
+    2 declarationList: declarationList declaration
+    3                | declaration
+
+    4 declaration: varDeclaration
+
+    5 varDeclaration: TYPE ID SEMIC
+    6               | funcDeclaration
+
+    7 funcDeclaration: %empty
+
+
+Terminais, com as regras onde eles aparecem
+
+    $end (0) 0
+    error (256)
+    ID <str> (258) 5
+    TYPE <str> (259) 5
+    ELEMTYPE <str> (260)
+    INTEGER <integer> (261)
+    DECIMAL <dec> (262)
+    LIST <str> (263)
+    STRING <str> (264)
+    NIL <str> (265)
+    MAIN <str> (266)
+    RETURN <str> (267)
+    ADD <str> (268)
+    SUB <str> (269)
+    MULT <str> (270)
+    DIV <str> (271)
+    OR <str> (272)
+    AND <str> (273)
+    NEG <str> (274)
+    NOT <str> (275)
+    SMALLER <str> (276)
+    GREATER <str> (277)
+    SMALLEQ <str> (278)
+    GREATEQ <str> (279)
+    EQUALS <str> (280)
+    DIFFERENT <str> (281)
+    ASSIGN <str> (282)
+    IF <str> (283)
+    ELSE <str> (284)
+    FOR <str> (285)
+    READ <str> (286)
+    WRITE <str> (287)
+    WRITELN <str> (288)
+    APPEND <str> (289)
+    HEADLIST <str> (290)
+    TAILLIST <str> (291)
+    DESTROYHEAD <str> (292)
+    MAP <str> (293)
+    FILTER <str> (294)
+    SEMIC <str> (295) 5
+    COMMA <str> (296)
+    STFUNC <str> (297)
+    ENDFUNC <str> (298)
+    PARENL <str> (299)
+    PARENR <str> (300)
+
+
+Não terminais com as regras onde eles aparecem
+
+    $accept (46)
+        à esquerda: 0
+    program (47)
+        à esquerda: 1
+        à direita: 0
+    declarationList <ast> (48)
+        à esquerda: 2 3
+        à direita: 1 2
+    declaration <ast> (49)
+        à esquerda: 4
+        à direita: 2 3
+    varDeclaration <ast> (50)
+        à esquerda: 5 6
+        à direita: 4
+    funcDeclaration <ast> (51)
+        à esquerda: 7
+        à direita: 6
+
+
+Estado 0
+
+    0 $accept: . program $end
+
+    TYPE  deslocar, e ir ao estado 1
+
+    TYPE      [reduzir usando a regra 7 (funcDeclaration)]
+    $padrão  reduzir usando a regra 7 (funcDeclaration)
+
+    program          ir ao estado 2
+    declarationList  ir ao estado 3
+    declaration      ir ao estado 4
+    varDeclaration   ir ao estado 5
+    funcDeclaration  ir ao estado 6
+
+
+Estado 1
+
+    5 varDeclaration: TYPE . ID SEMIC
+
+    ID  deslocar, e ir ao estado 7
+
+
+Estado 2
+
+    0 $accept: program . $end
+
+    $end  deslocar, e ir ao estado 8
+
+
+Estado 3
+
+    1 program: declarationList .
+    2 declarationList: declarationList . declaration
+
+    TYPE  deslocar, e ir ao estado 1
+
+    $end      reduzir usando a regra 1 (program)
+    $end      [reduzir usando a regra 7 (funcDeclaration)]
+    TYPE      [reduzir usando a regra 7 (funcDeclaration)]
+    $padrão  reduzir usando a regra 1 (program)
+
+    declaration      ir ao estado 9
+    varDeclaration   ir ao estado 5
+    funcDeclaration  ir ao estado 6
+
+
+Estado 4
+
+    3 declarationList: declaration .
+
+    $padrão  reduzir usando a regra 3 (declarationList)
+
+
+Estado 5
+
+    4 declaration: varDeclaration .
+
+    $padrão  reduzir usando a regra 4 (declaration)
+
+
+Estado 6
+
+    6 varDeclaration: funcDeclaration .
+
+    $padrão  reduzir usando a regra 6 (varDeclaration)
+
+
+Estado 7
+
+    5 varDeclaration: TYPE ID . SEMIC
+
+    SEMIC  deslocar, e ir ao estado 10
+
+
+Estado 8
+
+    0 $accept: program $end .
+
+    $padrão  aceitar
+
+
+Estado 9
+
+    2 declarationList: declarationList declaration .
+
+    $padrão  reduzir usando a regra 2 (declarationList)
+
+
+Estado 10
+
+    5 varDeclaration: TYPE ID SEMIC .
+
+    $padrão  reduzir usando a regra 5 (varDeclaration)

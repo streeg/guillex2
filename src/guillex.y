@@ -1,4 +1,4 @@
-%error-verbose
+%define parse.error verbose
 %debug
 %locations
 
@@ -79,11 +79,11 @@ extern int yylex_destroy(void);
 
 
 %start program
-%type<ast> declarationList declaration varDeclaration funcDeclaration params param 
-%type<ast> compoundStmt localDeclarations stmtList primitiveStmt exprStmt compoundStmt
-%type<ast> condStmt iterStmt returnStmt listStmt appendOPS returnlistOPS returnlistOP
-%type<ast> destroyheadOPS destroyheadOP mapfilterOPS mapfilterOP expression simpleExp
-%type<ast> constOP inOP outOP logicalEx relationalExp sumExp sumOp mulExp mulOP factor fCall
+%type<ast> declarationList declaration varDeclaration funcDeclaration //params param 
+// %type<ast> compoundStmt localDeclarations stmtList primitiveStmt exprStmt compoundStmt
+// %type<ast> condStmt iterStmt returnStmt listStmt appendOPS returnlistOPS returnlistOP
+// %type<ast> destroyheadOPS destroyheadOP mapfilterOPS mapfilterOP expression simpleExp
+// %type<ast> constOP inOP outOP logicalEx relationalExp sumExp sumOp mulExp mulOP factor fCall
 %%
 
 program:
@@ -103,6 +103,9 @@ varDeclaration:
     TYPE ID SEMIC   {printf("VARIABLE DECLARATION\n");}
     | funcDeclaration   {};
   ;
+
+funcDeclaration:  {}
+;
 
 
 

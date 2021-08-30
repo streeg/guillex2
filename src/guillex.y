@@ -11,11 +11,16 @@
 #include <string.h>
 #include "tree.h"
 
+int errors = 0; 
+
 void yyerror(const char* msg) {
   printf("%s\n", msg);
+  errors++;
 }
 int yylex();
 extern int yylex_destroy(void);
+
+Node *ast_tree = NULL;
 
 %}
 
@@ -29,7 +34,6 @@ extern int yylex_destroy(void);
 
 %token<str> ID
 %token<str> TYPE
-%token<str> ELEMTYPE
 
 %token<integer> INTEGER
 %token<dec> DECIMAL
@@ -37,50 +41,21 @@ extern int yylex_destroy(void);
 %token<str> STRING
 
 %token<str> NIL
-%token<str> MAIN
-%token<str> RETURN
 
-%token<str> ADD
-%token<str> SUB
-%token<str> MULT
-%token<str> DIV
 
-%token<str> OR
-%token<str> AND
-%token<str> NEG
-%token<str> NOT
-%token<str> SMALLER
-%token<str> GREATER
-%token<str> SMALLEQ
-%token<str> GREATEQ
-%token<str> EQUALS
-%token<str> DIFFERENT
-%token<str> ASSIGN
+%left ADD SUB MULT DIV
+%left OR AND SMALLER GREATER 
+%left SMALLEQ GREATEQ EQUALS DIFFERENT
+%left APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
+%right ASSIGN NEG NOT MAP ELSE THEN
 
-%token<str> IF
-%token<str> ELSE
-%token<str> FOR
 
-%token<str> READ
-%token<str> WRITE
-%token<str> WRITELN
-
-%token<str> APPEND
-%token<str> HEADLIST
-%token<str> TAILLIST
-%token<str> DESTROYHEAD
-%token<str> MAP
-%token<str> FILTER
-
-%token<str> SEMIC
-%token<str> COMMA
-%token<str> STFUNC
-%token<str> ENDFUNC
-%token<str> PARENL
-%token<str> PARENR
+%token IF FOR READ WRITE WRITELN MAIN RETURN
+%token SEMIC COMMA STFUNC ENDFUNC PARENL PARENR
 
 
 %start program
+
 %type<ast> declarationList declaration varDeclaration funcDeclaration simpleVDeclaration simpleFDeclaration 
 %type<ast> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listStmt 
 %type<ast> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
@@ -89,7 +64,7 @@ extern int yylex_destroy(void);
 %%
 
 program:
-    declarationList     {}
+    declarationList     {ast_tree = $1;}
   ;
 
 declarationList:
@@ -154,7 +129,7 @@ exprStmt:
   ;
 
 condStmt:
-    IF PARENL simpleExp PARENR primitiveStmt {}
+    IF PARENL simpleExp PARENR primitiveStmt %prec THEN {}
   | IF PARENL simpleExp PARENR primitiveStmt ELSE primitiveStmt {}
   ;
 
@@ -307,16 +282,13 @@ callParams:
 %%
 int main(int argc, char *argv[]) {
   Node *tree;
-
   tree = create_node("value", 'I');
   tree = add_node_left("value", 'S', tree);
   tree -> left = add_node_left("value", 'I', tree -> left);
   tree -> left = add_node_middle("value", 'T', tree -> left);
   tree -> left = add_node_right("value", 'C', tree -> left);
   print_tree(tree);
-
-  printf("\n\n#### Beginning test ####\n\n");
-
+  printf("\n\n#### beginning ####\n\n");
   FILE *file;
   file = fopen(argv[1], "r");
   yyparse();

@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.5.1.  */
+/* A Bison parser, made by GNU Bison 3.7.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -31,8 +31,9 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Undocumented macros, especially those whose name start with YY_,
-   are private implementation details.  Do not rely on them.  */
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
 
 #ifndef YY_YY_GUILLEX_TAB_H_INCLUDED
 # define YY_YY_GUILLEX_TAB_H_INCLUDED
@@ -44,62 +45,67 @@
 extern int yydebug;
 #endif
 
-/* Token type.  */
+/* Token kinds.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
-    ID = 258,
-    TYPE = 259,
-    ELEMTYPE = 260,
-    INTEGER = 261,
-    DECIMAL = 262,
-    LIST = 263,
-    STRING = 264,
-    NIL = 265,
-    MAIN = 266,
-    RETURN = 267,
-    ADD = 268,
-    SUB = 269,
-    MULT = 270,
-    DIV = 271,
-    OR = 272,
-    AND = 273,
-    NEG = 274,
-    NOT = 275,
-    SMALLER = 276,
-    GREATER = 277,
-    SMALLEQ = 278,
-    GREATEQ = 279,
-    EQUALS = 280,
-    DIFFERENT = 281,
-    ASSIGN = 282,
-    IF = 283,
-    ELSE = 284,
-    FOR = 285,
-    READ = 286,
-    WRITE = 287,
-    WRITELN = 288,
-    APPEND = 289,
-    HEADLIST = 290,
-    TAILLIST = 291,
-    DESTROYHEAD = 292,
-    MAP = 293,
-    FILTER = 294,
-    SEMIC = 295,
-    COMMA = 296,
-    STFUNC = 297,
-    ENDFUNC = 298,
-    PARENL = 299,
-    PARENR = 300
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    ID = 258,                      /* ID  */
+    TYPE = 259,                    /* TYPE  */
+    INTEGER = 260,                 /* INTEGER  */
+    DECIMAL = 261,                 /* DECIMAL  */
+    LIST = 262,                    /* LIST  */
+    STRING = 263,                  /* STRING  */
+    NIL = 264,                     /* NIL  */
+    ADD = 265,                     /* ADD  */
+    SUB = 266,                     /* SUB  */
+    MULT = 267,                    /* MULT  */
+    DIV = 268,                     /* DIV  */
+    OR = 269,                      /* OR  */
+    AND = 270,                     /* AND  */
+    SMALLER = 271,                 /* SMALLER  */
+    GREATER = 272,                 /* GREATER  */
+    SMALLEQ = 273,                 /* SMALLEQ  */
+    GREATEQ = 274,                 /* GREATEQ  */
+    EQUALS = 275,                  /* EQUALS  */
+    DIFFERENT = 276,               /* DIFFERENT  */
+    APPEND = 277,                  /* APPEND  */
+    HEADLIST = 278,                /* HEADLIST  */
+    TAILLIST = 279,                /* TAILLIST  */
+    DESTROYHEAD = 280,             /* DESTROYHEAD  */
+    FILTER = 281,                  /* FILTER  */
+    ASSIGN = 282,                  /* ASSIGN  */
+    NEG = 283,                     /* NEG  */
+    NOT = 284,                     /* NOT  */
+    MAP = 285,                     /* MAP  */
+    ELSE = 286,                    /* ELSE  */
+    THEN = 287,                    /* THEN  */
+    IF = 288,                      /* IF  */
+    FOR = 289,                     /* FOR  */
+    READ = 290,                    /* READ  */
+    WRITE = 291,                   /* WRITE  */
+    WRITELN = 292,                 /* WRITELN  */
+    MAIN = 293,                    /* MAIN  */
+    RETURN = 294,                  /* RETURN  */
+    SEMIC = 295,                   /* SEMIC  */
+    COMMA = 296,                   /* COMMA  */
+    STFUNC = 297,                  /* STFUNC  */
+    ENDFUNC = 298,                 /* ENDFUNC  */
+    PARENL = 299,                  /* PARENL  */
+    PARENR = 300                   /* PARENR  */
   };
+  typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 20 "guillex.y"
+#line 27 "guillex.y"
 
   char* str;
   int integer;
@@ -107,7 +113,7 @@ union YYSTYPE
   
   struct node *ast;
 
-#line 111 "guillex.tab.h"
+#line 117 "guillex.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

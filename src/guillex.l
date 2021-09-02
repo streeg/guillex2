@@ -27,9 +27,6 @@ integer   -?{digit}+
 decimal   -?{digit}*[.]{digit}+
 string    \"(\\.|[^"\\])*\" 
 type      "int"|"float"|"list"
-list      ("list ")?{id}
-lvalue    {id}
-rvalue    {list}
 comment   "//".*
 
 /*ArithmeticOP*/
@@ -43,8 +40,6 @@ or        "||"
 and       "&&"
 negate    [~]
 
-/*UnlogicalOP*/
-not       "!"{id}
 
 /*RelationalOP*/
 smaller   [<]
@@ -67,10 +62,10 @@ if        "if"
 else      "else"
 for       "for"
 return    "return"
-append      {lvalue}" : "{rvalue}
-headlist    "?"{list}
-taillist    "!"{list}
-destroyhead "%"{list}
+append      ":"
+headlist    "?"
+taillist    "!"
+destroyhead "%"
 map         ">>"
 filter      "<<"
 
@@ -130,13 +125,6 @@ comma     [,]
             word_position += yyleng;
             yylval.str = (char *) strdup(yytext);
             return NEG;
-          }
-
-{not}  {
-            printf("OP [NOT]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
-            yylval.str = (char *) strdup(yytext);
-            return NOT;            
           }
 
 {tab}     {
@@ -380,12 +368,6 @@ comma     [,]
             return ID;
           }
 
-{list}    {
-            printf("List: %s on line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
-            yylval.str = (char *) strdup(yytext);
-            return LIST;
-          }
 
 {string}  {
             printf("String: %s on line: %d, column: %d\n", yytext, line, word_position);

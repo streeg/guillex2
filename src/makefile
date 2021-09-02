@@ -1,7 +1,7 @@
 
-all: compile
-
 runtests: all test
+
+all: compile
 
 compile: runflex runbison compilefile
 
@@ -12,11 +12,11 @@ runflex:
 	flex guillex.l
 
 compilefile:
-	gcc lex.yy.c y.tab.c -ll -o guillex
+	gcc lex.yy.c guillex.tab.c -ll -o tradutor
 
 test:
-	./guillex < ../tests/test1.txt > ../results/test1result.txt
-	./guillex < ../tests/test2.txt > ../results/test2result.txt
-	./guillex < ../tests/test3.txt > ../results/test3result.txt
-	./guillex < ../tests/test4.txt > ../results/test4result.txt
+	./tradutor < ../tests/test1.c > ../results/test1result.txt
+	./tradutor < ../tests/test2.c > ../results/test2result.txt
+	./tradutor < ../tests/test3.c > ../results/test3result.txt
+	./tradutor < ../tests/test4.c > ../results/test4result.txt
 	

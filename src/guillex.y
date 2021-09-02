@@ -9,7 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tree.h"
 
 int errors = 0; 
 
@@ -20,9 +19,8 @@ void yyerror(const char* msg) {
 int yylex();
 extern int yylex_destroy(void);
 
-Node *ast_tree = NULL;
 
-%}
+%}  
 
 %union{
   char* str;
@@ -56,15 +54,15 @@ Node *ast_tree = NULL;
 
 %start program
 
-%type<ast> declarationList declaration varDeclaration funcDeclaration simpleVDeclaration simpleFDeclaration 
-%type<ast> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listStmt 
-%type<ast> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
-%type<ast> constOp inOp outOp outConst binLogicalExp binLogicalOp unLogicalExp unLogicalOp relationalExp relationalOp
-%type<ast> sumExp sumOp mulExp mulOp factor fCall callParams
+%type<str> declarationList declaration varDeclaration funcDeclaration simpleVDeclaration simpleFDeclaration 
+%type<str> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listStmt 
+%type<str> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
+%type<str> constOp inOp outOp outConst binLogicalExp binLogicalOp unLogicalExp unLogicalOp relationalExp relationalOp
+%type<str> sumExp sumOp mulExp mulOp factor fCall callParams
 %%
 
 program:
-    declarationList     {ast_tree = $1;}
+    declarationList     {}
   ;
 
 declarationList:
@@ -245,7 +243,7 @@ sumExp:
   ;
 
 sumOp:
-    ADD {}
+    ADD {printf("oi");}
   | SUB {}
   ;
 
@@ -261,7 +259,7 @@ mulOp:
   ;
 
 factor:
-    ID {}
+    ID {printf("oi");}
   | fCall {}
   | PARENL simpleExp PARENR {}
   | constOp {}
@@ -281,19 +279,11 @@ callParams:
 
 %%
 int main(int argc, char *argv[]) {
-  Node *tree;
-  tree = create_node("value", 'I');
-  tree = add_node_left("value", 'S', tree);
-  tree -> left = add_node_left("value", 'I', tree -> left);
-  tree -> left = add_node_middle("value", 'T', tree -> left);
-  tree -> left = add_node_right("value", 'C', tree -> left);
-  print_tree(tree);
   printf("\n\n#### beginning ####\n\n");
   FILE *file;
   file = fopen(argv[1], "r");
   yyparse();
   yylex_destroy();
-  fclose(file);
   printf("\n\n#### EOF ####\n\n");
   return 0;
 }

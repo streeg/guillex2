@@ -73,7 +73,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tree.h"
 
 int errors = 0; 
 
@@ -84,10 +83,9 @@ void yyerror(const char* msg) {
 int yylex();
 extern int yylex_destroy(void);
 
-Node *ast_tree = NULL;
 
 
-#line 91 "guillex.tab.c"
+#line 89 "guillex.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -579,15 +577,15 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    67,    67,    71,    72,    76,    77,    81,    85,    86,
-      90,    94,    98,    99,   103,   107,   111,   112,   116,   117,
-     118,   119,   120,   121,   122,   123,   124,   128,   132,   133,
-     137,   141,   145,   146,   147,   148,   152,   156,   160,   161,
-     165,   169,   173,   174,   178,   183,   187,   188,   189,   190,
-     194,   198,   199,   203,   204,   208,   209,   213,   214,   215,
-     219,   220,   224,   228,   229,   234,   235,   236,   237,   238,
-     239,   243,   244,   248,   249,   253,   254,   255,   259,   260,
-     264,   265,   266,   267,   271,   272,   276,   277
+       0,    65,    65,    69,    70,    74,    75,    79,    83,    84,
+      88,    92,    96,    97,   101,   105,   109,   110,   114,   115,
+     116,   117,   118,   119,   120,   121,   122,   126,   130,   131,
+     135,   139,   143,   144,   145,   146,   150,   154,   158,   159,
+     163,   167,   171,   172,   176,   181,   185,   186,   187,   188,
+     192,   196,   197,   201,   202,   206,   207,   211,   212,   213,
+     217,   218,   222,   226,   227,   232,   233,   234,   235,   236,
+     237,   241,   242,   246,   247,   251,   252,   253,   257,   258,
+     262,   263,   264,   265,   269,   270,   274,   275
 };
 #endif
 
@@ -2793,517 +2791,517 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: declarationList  */
-#line 67 "guillex.y"
-                        {ast_tree = (yyvsp[0].ast);}
-#line 2799 "guillex.tab.c"
+#line 65 "guillex.y"
+                        {}
+#line 2797 "guillex.tab.c"
     break;
 
   case 3: /* declarationList: declarationList declaration  */
-#line 71 "guillex.y"
+#line 69 "guillex.y"
                                     {}
-#line 2805 "guillex.tab.c"
+#line 2803 "guillex.tab.c"
     break;
 
   case 4: /* declarationList: declaration  */
-#line 72 "guillex.y"
+#line 70 "guillex.y"
                       {}
-#line 2811 "guillex.tab.c"
+#line 2809 "guillex.tab.c"
     break;
 
   case 5: /* declaration: varDeclaration  */
-#line 76 "guillex.y"
+#line 74 "guillex.y"
                        {}
-#line 2817 "guillex.tab.c"
+#line 2815 "guillex.tab.c"
     break;
 
   case 6: /* declaration: funcDeclaration  */
-#line 77 "guillex.y"
+#line 75 "guillex.y"
                        {}
-#line 2823 "guillex.tab.c"
+#line 2821 "guillex.tab.c"
     break;
 
   case 7: /* varDeclaration: simpleVDeclaration  */
-#line 81 "guillex.y"
+#line 79 "guillex.y"
                        {}
-#line 2829 "guillex.tab.c"
+#line 2827 "guillex.tab.c"
     break;
 
   case 8: /* funcDeclaration: simpleFDeclaration PARENL params PARENR compoundStmt  */
-#line 85 "guillex.y"
+#line 83 "guillex.y"
                                                          {}
-#line 2835 "guillex.tab.c"
+#line 2833 "guillex.tab.c"
     break;
 
   case 9: /* funcDeclaration: simpleFDeclaration PARENL PARENR compoundStmt  */
-#line 86 "guillex.y"
+#line 84 "guillex.y"
                                                   {}
-#line 2841 "guillex.tab.c"
+#line 2839 "guillex.tab.c"
     break;
 
   case 10: /* simpleVDeclaration: TYPE ID  */
-#line 90 "guillex.y"
+#line 88 "guillex.y"
             {}
-#line 2847 "guillex.tab.c"
+#line 2845 "guillex.tab.c"
     break;
 
   case 11: /* simpleFDeclaration: TYPE ID  */
-#line 94 "guillex.y"
+#line 92 "guillex.y"
             {}
-#line 2853 "guillex.tab.c"
+#line 2851 "guillex.tab.c"
     break;
 
   case 12: /* params: params param  */
-#line 98 "guillex.y"
+#line 96 "guillex.y"
                  {}
-#line 2859 "guillex.tab.c"
+#line 2857 "guillex.tab.c"
     break;
 
   case 13: /* params: param  */
-#line 99 "guillex.y"
+#line 97 "guillex.y"
           {}
-#line 2865 "guillex.tab.c"
+#line 2863 "guillex.tab.c"
     break;
 
   case 14: /* param: simpleVDeclaration  */
-#line 103 "guillex.y"
+#line 101 "guillex.y"
                        {}
-#line 2871 "guillex.tab.c"
+#line 2869 "guillex.tab.c"
     break;
 
   case 15: /* compoundStmt: STFUNC stmtList ENDFUNC  */
-#line 107 "guillex.y"
+#line 105 "guillex.y"
                             {}
-#line 2877 "guillex.tab.c"
+#line 2875 "guillex.tab.c"
     break;
 
   case 16: /* stmtList: stmtList primitiveStmt  */
-#line 111 "guillex.y"
+#line 109 "guillex.y"
                               {}
-#line 2883 "guillex.tab.c"
+#line 2881 "guillex.tab.c"
     break;
 
   case 17: /* stmtList: primitiveStmt  */
-#line 112 "guillex.y"
+#line 110 "guillex.y"
                   {}
-#line 2889 "guillex.tab.c"
+#line 2887 "guillex.tab.c"
     break;
 
   case 18: /* primitiveStmt: exprStmt  */
-#line 116 "guillex.y"
+#line 114 "guillex.y"
              {}
-#line 2895 "guillex.tab.c"
+#line 2893 "guillex.tab.c"
     break;
 
   case 19: /* primitiveStmt: compoundStmt  */
-#line 117 "guillex.y"
+#line 115 "guillex.y"
                  {}
-#line 2901 "guillex.tab.c"
+#line 2899 "guillex.tab.c"
     break;
 
   case 20: /* primitiveStmt: condStmt  */
-#line 118 "guillex.y"
+#line 116 "guillex.y"
              {}
-#line 2907 "guillex.tab.c"
+#line 2905 "guillex.tab.c"
     break;
 
   case 21: /* primitiveStmt: iterStmt  */
-#line 119 "guillex.y"
+#line 117 "guillex.y"
              {}
-#line 2913 "guillex.tab.c"
+#line 2911 "guillex.tab.c"
     break;
 
   case 22: /* primitiveStmt: returnStmt  */
-#line 120 "guillex.y"
+#line 118 "guillex.y"
                {}
-#line 2919 "guillex.tab.c"
+#line 2917 "guillex.tab.c"
     break;
 
   case 23: /* primitiveStmt: listStmt  */
-#line 121 "guillex.y"
+#line 119 "guillex.y"
              {}
-#line 2925 "guillex.tab.c"
+#line 2923 "guillex.tab.c"
     break;
 
   case 24: /* primitiveStmt: inOp  */
-#line 122 "guillex.y"
+#line 120 "guillex.y"
          {}
-#line 2931 "guillex.tab.c"
+#line 2929 "guillex.tab.c"
     break;
 
   case 25: /* primitiveStmt: outOp  */
-#line 123 "guillex.y"
+#line 121 "guillex.y"
           {}
-#line 2937 "guillex.tab.c"
+#line 2935 "guillex.tab.c"
     break;
 
   case 26: /* primitiveStmt: varDeclaration  */
-#line 124 "guillex.y"
+#line 122 "guillex.y"
                    {}
-#line 2943 "guillex.tab.c"
+#line 2941 "guillex.tab.c"
     break;
 
   case 27: /* exprStmt: expression SEMIC  */
-#line 128 "guillex.y"
+#line 126 "guillex.y"
                      {}
-#line 2949 "guillex.tab.c"
+#line 2947 "guillex.tab.c"
     break;
 
   case 28: /* condStmt: IF PARENL simpleExp PARENR primitiveStmt  */
-#line 132 "guillex.y"
+#line 130 "guillex.y"
                                                         {}
-#line 2955 "guillex.tab.c"
+#line 2953 "guillex.tab.c"
     break;
 
   case 29: /* condStmt: IF PARENL simpleExp PARENR primitiveStmt ELSE primitiveStmt  */
-#line 133 "guillex.y"
+#line 131 "guillex.y"
                                                                 {}
-#line 2961 "guillex.tab.c"
+#line 2959 "guillex.tab.c"
     break;
 
   case 30: /* iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt  */
-#line 137 "guillex.y"
+#line 135 "guillex.y"
                                                                               {}
-#line 2967 "guillex.tab.c"
+#line 2965 "guillex.tab.c"
     break;
 
   case 31: /* returnStmt: RETURN expression SEMIC  */
-#line 141 "guillex.y"
+#line 139 "guillex.y"
                             {}
-#line 2973 "guillex.tab.c"
+#line 2971 "guillex.tab.c"
     break;
 
   case 32: /* listStmt: appendOps  */
-#line 145 "guillex.y"
+#line 143 "guillex.y"
               {}
-#line 2979 "guillex.tab.c"
+#line 2977 "guillex.tab.c"
     break;
 
   case 33: /* listStmt: returnListOps  */
-#line 146 "guillex.y"
+#line 144 "guillex.y"
                   {}
-#line 2985 "guillex.tab.c"
+#line 2983 "guillex.tab.c"
     break;
 
   case 34: /* listStmt: destroyHeadOps  */
-#line 147 "guillex.y"
+#line 145 "guillex.y"
                    {}
-#line 2991 "guillex.tab.c"
+#line 2989 "guillex.tab.c"
     break;
 
   case 35: /* listStmt: mapFilterOps  */
-#line 148 "guillex.y"
+#line 146 "guillex.y"
                  {}
-#line 2997 "guillex.tab.c"
+#line 2995 "guillex.tab.c"
     break;
 
   case 36: /* appendOps: simpleExp APPEND ID SEMIC  */
-#line 152 "guillex.y"
+#line 150 "guillex.y"
                               {}
-#line 3003 "guillex.tab.c"
+#line 3001 "guillex.tab.c"
     break;
 
   case 37: /* returnListOps: returnListOp ID  */
-#line 156 "guillex.y"
+#line 154 "guillex.y"
                     {}
-#line 3009 "guillex.tab.c"
+#line 3007 "guillex.tab.c"
     break;
 
   case 38: /* returnListOp: HEADLIST  */
-#line 160 "guillex.y"
+#line 158 "guillex.y"
              {}
-#line 3015 "guillex.tab.c"
+#line 3013 "guillex.tab.c"
     break;
 
   case 39: /* returnListOp: TAILLIST  */
-#line 161 "guillex.y"
+#line 159 "guillex.y"
              {}
-#line 3021 "guillex.tab.c"
+#line 3019 "guillex.tab.c"
     break;
 
   case 40: /* destroyHeadOps: DESTROYHEAD ID SEMIC  */
-#line 165 "guillex.y"
+#line 163 "guillex.y"
                          {}
-#line 3027 "guillex.tab.c"
+#line 3025 "guillex.tab.c"
     break;
 
   case 41: /* mapFilterOps: fCall MAP ID SEMIC  */
-#line 169 "guillex.y"
+#line 167 "guillex.y"
                        {}
-#line 3033 "guillex.tab.c"
+#line 3031 "guillex.tab.c"
     break;
 
   case 42: /* expression: assignExp  */
-#line 173 "guillex.y"
+#line 171 "guillex.y"
               {}
-#line 3039 "guillex.tab.c"
+#line 3037 "guillex.tab.c"
     break;
 
   case 43: /* expression: simpleExp  */
-#line 174 "guillex.y"
+#line 172 "guillex.y"
               {}
-#line 3045 "guillex.tab.c"
+#line 3043 "guillex.tab.c"
     break;
 
   case 44: /* assignExp: ID ASSIGN expression  */
-#line 178 "guillex.y"
+#line 176 "guillex.y"
                          {}
-#line 3051 "guillex.tab.c"
+#line 3049 "guillex.tab.c"
     break;
 
   case 45: /* simpleExp: binLogicalExp  */
-#line 183 "guillex.y"
+#line 181 "guillex.y"
                   {}
-#line 3057 "guillex.tab.c"
+#line 3055 "guillex.tab.c"
     break;
 
   case 46: /* constOp: INTEGER  */
-#line 187 "guillex.y"
+#line 185 "guillex.y"
             {}
-#line 3063 "guillex.tab.c"
+#line 3061 "guillex.tab.c"
     break;
 
   case 47: /* constOp: DECIMAL  */
-#line 188 "guillex.y"
+#line 186 "guillex.y"
             {}
-#line 3069 "guillex.tab.c"
+#line 3067 "guillex.tab.c"
     break;
 
   case 48: /* constOp: LIST  */
-#line 189 "guillex.y"
+#line 187 "guillex.y"
          {}
-#line 3075 "guillex.tab.c"
+#line 3073 "guillex.tab.c"
     break;
 
   case 49: /* constOp: NIL  */
-#line 190 "guillex.y"
+#line 188 "guillex.y"
         {}
-#line 3081 "guillex.tab.c"
+#line 3079 "guillex.tab.c"
     break;
 
   case 50: /* inOp: READ PARENL ID PARENR  */
-#line 194 "guillex.y"
+#line 192 "guillex.y"
                         {}
-#line 3087 "guillex.tab.c"
+#line 3085 "guillex.tab.c"
     break;
 
   case 51: /* outOp: WRITE PARENL outConst PARENR SEMIC  */
-#line 198 "guillex.y"
+#line 196 "guillex.y"
                                       {}
-#line 3093 "guillex.tab.c"
+#line 3091 "guillex.tab.c"
     break;
 
   case 52: /* outOp: WRITELN PARENL outConst PARENR SEMIC  */
-#line 199 "guillex.y"
+#line 197 "guillex.y"
                                          {}
-#line 3099 "guillex.tab.c"
+#line 3097 "guillex.tab.c"
     break;
 
   case 53: /* outConst: STRING  */
-#line 203 "guillex.y"
+#line 201 "guillex.y"
            {}
-#line 3105 "guillex.tab.c"
+#line 3103 "guillex.tab.c"
     break;
 
   case 54: /* outConst: simpleExp  */
-#line 204 "guillex.y"
+#line 202 "guillex.y"
               {}
-#line 3111 "guillex.tab.c"
+#line 3109 "guillex.tab.c"
     break;
 
   case 55: /* binLogicalExp: binLogicalExp binLogicalOp unLogicalOp  */
-#line 208 "guillex.y"
+#line 206 "guillex.y"
                                           {}
-#line 3117 "guillex.tab.c"
+#line 3115 "guillex.tab.c"
     break;
 
   case 56: /* binLogicalExp: unLogicalExp  */
-#line 209 "guillex.y"
+#line 207 "guillex.y"
                  {}
-#line 3123 "guillex.tab.c"
+#line 3121 "guillex.tab.c"
     break;
 
   case 57: /* binLogicalOp: OR  */
-#line 213 "guillex.y"
+#line 211 "guillex.y"
        {}
-#line 3129 "guillex.tab.c"
+#line 3127 "guillex.tab.c"
     break;
 
   case 58: /* binLogicalOp: AND  */
-#line 214 "guillex.y"
+#line 212 "guillex.y"
         {}
-#line 3135 "guillex.tab.c"
+#line 3133 "guillex.tab.c"
     break;
 
   case 59: /* binLogicalOp: NEG  */
-#line 215 "guillex.y"
+#line 213 "guillex.y"
         {}
-#line 3141 "guillex.tab.c"
+#line 3139 "guillex.tab.c"
     break;
 
   case 60: /* unLogicalExp: unLogicalOp unLogicalExp  */
-#line 219 "guillex.y"
+#line 217 "guillex.y"
                              {}
-#line 3147 "guillex.tab.c"
+#line 3145 "guillex.tab.c"
     break;
 
   case 62: /* unLogicalOp: NOT  */
-#line 224 "guillex.y"
+#line 222 "guillex.y"
         {}
-#line 3153 "guillex.tab.c"
+#line 3151 "guillex.tab.c"
     break;
 
   case 63: /* relationalExp: relationalExp relationalOp sumExp  */
-#line 228 "guillex.y"
+#line 226 "guillex.y"
                                       {}
-#line 3159 "guillex.tab.c"
+#line 3157 "guillex.tab.c"
     break;
 
   case 64: /* relationalExp: sumExp  */
-#line 229 "guillex.y"
+#line 227 "guillex.y"
            {}
-#line 3165 "guillex.tab.c"
+#line 3163 "guillex.tab.c"
     break;
 
   case 65: /* relationalOp: SMALLER  */
-#line 234 "guillex.y"
+#line 232 "guillex.y"
             {}
-#line 3171 "guillex.tab.c"
+#line 3169 "guillex.tab.c"
     break;
 
   case 66: /* relationalOp: GREATER  */
-#line 235 "guillex.y"
+#line 233 "guillex.y"
             {}
-#line 3177 "guillex.tab.c"
+#line 3175 "guillex.tab.c"
     break;
 
   case 67: /* relationalOp: SMALLEQ  */
-#line 236 "guillex.y"
+#line 234 "guillex.y"
             {}
-#line 3183 "guillex.tab.c"
+#line 3181 "guillex.tab.c"
     break;
 
   case 68: /* relationalOp: GREATEQ  */
-#line 237 "guillex.y"
+#line 235 "guillex.y"
             {}
-#line 3189 "guillex.tab.c"
+#line 3187 "guillex.tab.c"
     break;
 
   case 69: /* relationalOp: EQUALS  */
-#line 238 "guillex.y"
+#line 236 "guillex.y"
            {}
-#line 3195 "guillex.tab.c"
+#line 3193 "guillex.tab.c"
     break;
 
   case 70: /* relationalOp: DIFFERENT  */
-#line 239 "guillex.y"
+#line 237 "guillex.y"
               {}
-#line 3201 "guillex.tab.c"
+#line 3199 "guillex.tab.c"
     break;
 
   case 71: /* sumExp: sumExp sumOp mulExp  */
-#line 243 "guillex.y"
+#line 241 "guillex.y"
                         {}
-#line 3207 "guillex.tab.c"
+#line 3205 "guillex.tab.c"
     break;
 
   case 72: /* sumExp: mulExp  */
-#line 244 "guillex.y"
+#line 242 "guillex.y"
            {}
-#line 3213 "guillex.tab.c"
+#line 3211 "guillex.tab.c"
     break;
 
   case 73: /* sumOp: ADD  */
-#line 248 "guillex.y"
-        {}
-#line 3219 "guillex.tab.c"
+#line 246 "guillex.y"
+        {printf("oi");}
+#line 3217 "guillex.tab.c"
     break;
 
   case 74: /* sumOp: SUB  */
-#line 249 "guillex.y"
+#line 247 "guillex.y"
         {}
-#line 3225 "guillex.tab.c"
+#line 3223 "guillex.tab.c"
     break;
 
   case 75: /* mulExp: mulExp mulOp factor  */
-#line 253 "guillex.y"
+#line 251 "guillex.y"
                         {}
-#line 3231 "guillex.tab.c"
+#line 3229 "guillex.tab.c"
     break;
 
   case 76: /* mulExp: factor  */
-#line 254 "guillex.y"
+#line 252 "guillex.y"
            {}
-#line 3237 "guillex.tab.c"
+#line 3235 "guillex.tab.c"
     break;
 
   case 77: /* mulExp: sumOp factor  */
-#line 255 "guillex.y"
+#line 253 "guillex.y"
                  {}
-#line 3243 "guillex.tab.c"
+#line 3241 "guillex.tab.c"
     break;
 
   case 78: /* mulOp: MULT  */
-#line 259 "guillex.y"
+#line 257 "guillex.y"
          {}
-#line 3249 "guillex.tab.c"
+#line 3247 "guillex.tab.c"
     break;
 
   case 79: /* mulOp: DIV  */
-#line 260 "guillex.y"
+#line 258 "guillex.y"
         {}
-#line 3255 "guillex.tab.c"
+#line 3253 "guillex.tab.c"
     break;
 
   case 80: /* factor: ID  */
-#line 264 "guillex.y"
-       {}
-#line 3261 "guillex.tab.c"
+#line 262 "guillex.y"
+       {printf("oi");}
+#line 3259 "guillex.tab.c"
     break;
 
   case 81: /* factor: fCall  */
-#line 265 "guillex.y"
+#line 263 "guillex.y"
           {}
-#line 3267 "guillex.tab.c"
+#line 3265 "guillex.tab.c"
     break;
 
   case 82: /* factor: PARENL simpleExp PARENR  */
-#line 266 "guillex.y"
+#line 264 "guillex.y"
                             {}
-#line 3273 "guillex.tab.c"
+#line 3271 "guillex.tab.c"
     break;
 
   case 83: /* factor: constOp  */
-#line 267 "guillex.y"
+#line 265 "guillex.y"
             {}
-#line 3279 "guillex.tab.c"
+#line 3277 "guillex.tab.c"
     break;
 
   case 84: /* fCall: ID PARENL callParams PARENR  */
-#line 271 "guillex.y"
+#line 269 "guillex.y"
                                  {}
-#line 3285 "guillex.tab.c"
+#line 3283 "guillex.tab.c"
     break;
 
   case 85: /* fCall: ID PARENL PARENR  */
-#line 272 "guillex.y"
+#line 270 "guillex.y"
                      {}
-#line 3291 "guillex.tab.c"
+#line 3289 "guillex.tab.c"
     break;
 
   case 86: /* callParams: callParams COMMA simpleExp  */
-#line 276 "guillex.y"
+#line 274 "guillex.y"
                                {}
-#line 3297 "guillex.tab.c"
+#line 3295 "guillex.tab.c"
     break;
 
   case 87: /* callParams: simpleExp  */
-#line 277 "guillex.y"
+#line 275 "guillex.y"
               {}
-#line 3303 "guillex.tab.c"
+#line 3301 "guillex.tab.c"
     break;
 
 
-#line 3307 "guillex.tab.c"
+#line 3305 "guillex.tab.c"
 
       default: break;
     }
@@ -3533,22 +3531,14 @@ yyreturn:
   return yyresult;
 }
 
-#line 282 "guillex.y"
+#line 280 "guillex.y"
 
 int main(int argc, char *argv[]) {
-  Node *tree;
-  tree = create_node("value", 'I');
-  tree = add_node_left("value", 'S', tree);
-  tree -> left = add_node_left("value", 'I', tree -> left);
-  tree -> left = add_node_middle("value", 'T', tree -> left);
-  tree -> left = add_node_right("value", 'C', tree -> left);
-  print_tree(tree);
   printf("\n\n#### beginning ####\n\n");
   FILE *file;
   file = fopen(argv[1], "r");
   yyparse();
   yylex_destroy();
-  fclose(file);
   printf("\n\n#### EOF ####\n\n");
   return 0;
 }

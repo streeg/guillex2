@@ -9,15 +9,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../lib/tree.h"
+#include "../lib/table.h"
 
 int errors = 0; 
 
-void yyerror(const char* msg) {
-  printf("%s\n", msg);
-  errors++;
-}
-int yylex();
-extern int yylex_destroy(void);
+
+extern int yylex();
+extern int yylex_destroy();
+extern int yyparse();
+void yyerror(const char* a);
+extern int line;
+extern int word_position;
+extern FILE* yyin;
 
 
 %}  
@@ -27,7 +31,7 @@ extern int yylex_destroy(void);
   int integer;
   float dec;
   
-  struct node *ast;
+  struct node *node;
 }
 
 %token<str> ID
@@ -48,17 +52,17 @@ extern int yylex_destroy(void);
 %right ASSIGN NEG NOT MAP ELSE THEN
 
 
-%token IF FOR READ WRITE WRITELN MAIN RETURN
+%token IF FOR READ WRITE WRITELN RETURN
 %token SEMIC COMMA STFUNC ENDFUNC PARENL PARENR
 
 
 %start program
 
-%type<str> declarationList declaration varDeclaration funcDeclaration simpleVDeclaration simpleFDeclaration 
-%type<str> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listStmt 
-%type<str> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
-%type<str> constOp inOp outOp outConst binLogicalExp binLogicalOp unLogicalExp unLogicalOp relationalExp relationalOp
-%type<str> sumExp sumOp mulExp mulOp factor fCall callParams
+%type<node> declarationList declaration varDeclaration funcDeclaration simpleVarDeclaration simpleFuncDeclaration 
+%type<node> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listStmt 
+%type<node> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
+%type<node> constOp inOp outOp outConst binLogicalExp binLogicalOp unLogicalExp unLogicalOp relationalExp relationalOp
+%type<node> sumExp sumOp mulExp mulOp factor fCall callParams
 %%
 
 program:
@@ -76,19 +80,19 @@ declaration:
   ;
 
 varDeclaration:
-    simpleVDeclaration {}
+    simpleVarDeclaration SEMIC {}
   ;
 
 funcDeclaration:  
-    simpleFDeclaration PARENL params PARENR compoundStmt {}
-  | simpleFDeclaration PARENL PARENR compoundStmt {} 
+    simpleFuncDeclaration PARENL params PARENR compoundStmt {}
+  | simpleFuncDeclaration PARENL PARENR compoundStmt {} 
   ;
 
-simpleVDeclaration:
+simpleVarDeclaration:
     TYPE ID {}
   ;
 
-simpleFDeclaration:
+simpleFuncDeclaration:
     TYPE ID {}
   ;
 
@@ -98,7 +102,7 @@ params:
   ;
 
 param:
-    simpleVDeclaration {}
+    simpleVarDeclaration {}
   ;
 
 compoundStmt:
@@ -133,6 +137,7 @@ condStmt:
 
 iterStmt:
     FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt {}
+  | FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt {}
   ;
 
 returnStmt:
@@ -243,7 +248,7 @@ sumExp:
   ;
 
 sumOp:
-    ADD {printf("oi");}
+    ADD {}
   | SUB {}
   ;
 
@@ -259,7 +264,7 @@ mulOp:
   ;
 
 factor:
-    ID {printf("oi");}
+    ID {}
   | fCall {}
   | PARENL simpleExp PARENR {}
   | constOp {}
@@ -278,11 +283,39 @@ callParams:
 
 
 %%
+
+void yyerror(const char* msg) {
+  printf("%s\n", msg);
+  errors++;
+}
+
 int main(int argc, char *argv[]) {
+  printf("testing tree\n");
+  Node *tree;
+
+  tree = create_node("value", 'I');
+  tree = add_node_left("value", 'S', tree);
+  tree -> left = add_node_left("value", 'I', tree -> left);
+  tree -> left = add_node_middle("value", 'T', tree -> left);
+  tree -> left = add_node_right("value", 'C', tree -> left);
+  print_tree(tree);
+
+
   printf("\n\n#### beginning ####\n\n");
   FILE *file;
   file = fopen(argv[1], "r");
-  yyparse();
+  if(argc > 1){
+    if(file){
+      yyin = file;
+      yyparse();
+    }else{
+      printf("File not found\n");
+    }
+  }
+  else{
+    printf("No file specified\n");
+  }
+  fclose(yyin);
   yylex_destroy();
   printf("\n\n#### EOF ####\n\n");
   return 0;

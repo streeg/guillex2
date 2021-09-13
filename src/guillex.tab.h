@@ -89,14 +89,13 @@ extern int yydebug;
     READ = 290,                    /* READ  */
     WRITE = 291,                   /* WRITE  */
     WRITELN = 292,                 /* WRITELN  */
-    MAIN = 293,                    /* MAIN  */
-    RETURN = 294,                  /* RETURN  */
-    SEMIC = 295,                   /* SEMIC  */
-    COMMA = 296,                   /* COMMA  */
-    STFUNC = 297,                  /* STFUNC  */
-    ENDFUNC = 298,                 /* ENDFUNC  */
-    PARENL = 299,                  /* PARENL  */
-    PARENR = 300                   /* PARENR  */
+    RETURN = 293,                  /* RETURN  */
+    SEMIC = 294,                   /* SEMIC  */
+    COMMA = 295,                   /* COMMA  */
+    STFUNC = 296,                  /* STFUNC  */
+    ENDFUNC = 297,                 /* ENDFUNC  */
+    PARENL = 298,                  /* PARENL  */
+    PARENR = 299                   /* PARENR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -105,15 +104,15 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 25 "guillex.y"
+#line 29 "guillex.y"
 
   char* str;
   int integer;
   float dec;
   
-  struct node *ast;
+  struct node *node;
 
-#line 117 "guillex.tab.h"
+#line 116 "guillex.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

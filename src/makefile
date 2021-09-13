@@ -15,8 +15,8 @@ compilefile:
 	gcc lex.yy.c guillex.tab.c -ll -o tradutor
 
 test:
-	./tradutor < ../tests/test1.c > ../results/test1result.txt
-	./tradutor < ../tests/test2.c > ../results/test2result.txt
-	./tradutor < ../tests/test3.c > ../results/test3result.txt
-	./tradutor < ../tests/test4.c > ../results/test4result.txt
+	./tradutor ../tests/test1correto.c > ../results/test1resultcorreto.txt
+	./tradutor ../tests/test2correto.c > ../results/test2resultcorreto.txt
+	./tradutor ../tests/test3incorreto.c > ../results/test3resultincorreto.txt
+	./tradutor ../tests/test4incorreto.c > ../results/test4resultincorreto.txt
 	

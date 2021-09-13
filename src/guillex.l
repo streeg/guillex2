@@ -2,7 +2,7 @@
   #include <stdio.h>
   #include <string.h>
   #include <math.h>
-  #include "guillex.tab.h"
+  #include "../lib/guillex.tab.h"
 
   int line = 1;
   int word_position = 1;
@@ -147,12 +147,6 @@ comma     [,]
             return TYPE;            
           }
 
-{main}    {
-            printf("Main: '%s' on line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
-            yylval.str = (char *) strdup(yytext);
-            return MAIN;
-          }
 
 {stfunc}  {
             printf("'%s' on line: %d, column: %d\n", yytext, line, word_position);

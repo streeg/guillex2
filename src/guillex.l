@@ -26,7 +26,8 @@ nil       "NIL"
 integer   -?{digit}+
 decimal   -?{digit}*[.]{digit}+
 string    \"(\\.|[^"\\])*\" 
-type      "int"|"float"|"list"
+type      "int"|"float"
+listtype  "list"
 comment   "//".*
 
 /*ArithmeticOP*/
@@ -147,6 +148,12 @@ comma     [,]
             return TYPE;            
           }
 
+{listtype}    {
+            printf("ListType: '%s' on line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
+            yylval.str = (char *) strdup(yytext);
+            return LISTTYPE;            
+          }
 
 {stfunc}  {
             printf("'%s' on line: %d, column: %d\n", yytext, line, wordPosition);

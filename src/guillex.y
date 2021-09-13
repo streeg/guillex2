@@ -37,25 +37,25 @@ Node *abstractSyntaxTree = NULL;
   struct node *treeNode;
 }
 
-%token<str> ID TYPE LIST STRING NIL
+%token<str> ID TYPE LISTTYPE LIST STRING NIL
 %token<integer> INTEGER
 %token<dec> DECIMAL
 
 
 %left ADD SUB MULT DIV OR AND SMALLER GREATER SMALLEQ GREATEQ EQUALS DIFFERENT APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
-%right ASSIGN NEG MAP ELSE THEN
+%right ASSIGN NEG NOT MAP ELSE THEN
 
 %token <str> ADD SUB MULT DIV OR AND SMALLER GREATER SMALLEQ GREATEQ EQUALS DIFFERENT APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
-%token <str> ASSIGN NEG MAP ELSE THEN
+%token <str> ASSIGN NEG NOT MAP ELSE THEN
 %token <str> IF FOR READ WRITE WRITELN RETURN SEMIC COMMA STFUNC ENDFUNC PARENL PARENR
 
 
 %start program
 
-%type<treeNode> program declarationList declaration varDeclaration funcDeclaration simpleVarDeclaration simpleFuncDeclaration 
+%type<treeNode> program declarationList declaration varDeclaration funcDeclaration simpleVarDeclaration 
 %type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listStmt 
 %type<treeNode> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
-%type<treeNode> constOp inOp outOp outConst binLogicalExp binLogicalOp relationalExp relationalOp
+%type<treeNode> constOp inOp outOp outConst binLogicalExp binLogicalOp unLogicalExp unLogicalOp relationalExp relationalOp
 %type<treeNode> sumExp sumOp mulExp mulOp factor fCall callParams
 %%
 
@@ -89,12 +89,14 @@ varDeclaration:
   ;
 
 funcDeclaration:  
-     simpleFuncDeclaration PARENL params PARENR compoundStmt {
-      $$ = createNode3("simpleFuncDeclaration PARENL params PARENR compoundStmt", $1, $3, $5);
+    TYPE ID PARENL params PARENR compoundStmt {
+      addSymbol(symbolIdCounter, $2, "func", $1);
+      symbolIdCounter++;
+      $$ = createNode4("TYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0($2), $4, $6);
   }
-  | simpleFuncDeclaration PARENL PARENR compoundStmt {
+  | TYPE ID PARENL PARENR compoundStmt {
     symbolIdCounter++;
-    $$ = createNode2("simpleFuncDeclaration PARENL PARENR compoundStmt", $1, $4);                                                                       
+    $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $5);                                                                       
   } 
   ;
 
@@ -104,14 +106,10 @@ simpleVarDeclaration:
       symbolIdCounter++;
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
       }
-  ;
-
-  simpleFuncDeclaration:
-    TYPE ID {
-      addSymbol(symbolIdCounter, $2, "func", $1);
+    | TYPE LISTTYPE ID {
       symbolIdCounter++;
-      $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
-      }
+      $$ = createNode3("TYPE ID", createNode0($1), createNode0($2), createNode0($3));
+    }
   ;
 
 params:
@@ -276,16 +274,16 @@ simpleExp:
 
 constOp:
     INTEGER {
-      $$ = createNode1("INTEGER", createNode0Int($1, 'i'));
+      $$ = createNode0Int($1, 'i');
     }
   | DECIMAL {
-    $$ = createNode1("DECIMAL", createNode0Dec($1, 'd'));
+    $$ = createNode0Dec($1, 'd');
   }
   | LIST {
-    $$ = createNode1("LIST", createNode0List($1, 'l'));
+    $$ = createNode0List($1, 'l');
   }
   | NIL {
-    $$ = createNode1("NIL", createNode0Nil($1, 'n'));
+    $$ = createNode0Nil($1, 'n');
   }
   ;
 
@@ -314,13 +312,14 @@ outConst:
   ;
 
 binLogicalExp:
-    binLogicalExp binLogicalOp{
-      $$ = createNode2("binLogicalExp binLogicalOp", $1, $2);
+    binLogicalExp binLogicalOp unLogicalOp{
+      $$ = createNode3("binLogicalExp binLogicalOp unLogicalOp", $1, $2, $3);
     }
-  | relationalExp {
-      $$ = createNode1("relationalExp", $1);
+  | unLogicalExp {
+    $$ = createNode1("unLogicalExp", $1);
   }
   ;
+
 
 binLogicalOp:
     OR {
@@ -334,6 +333,21 @@ binLogicalOp:
   }
   ;
 
+
+unLogicalExp:
+    unLogicalOp unLogicalExp {
+      $$ = createNode2("unLogicalOp unLogicalExp", $1, $2);
+    }
+  | relationalExp{
+      $$ = createNode1("relationalExp", $1);
+  }
+  ;
+
+unLogicalOp:
+    NOT {
+      $$ = createNode1("NOT", createNode0($1));
+    }
+  ;
 
 relationalExp:
     relationalExp relationalOp sumExp {
@@ -449,6 +463,9 @@ void yyerror(const char* msg) {
 }
 
 int main(int argc, char *argv[]) {
+  // #ifdef YYDEBUG
+  // yydebug = 1;
+  // #endif
 
   printf("\n\n#### beginning ####\n\n");
   abstractSyntaxTree = NULL;
@@ -460,8 +477,8 @@ int main(int argc, char *argv[]) {
       yyparse();
       printf("------------------------symbols---------------------\n");
       printSymbols();
-      // printf("-------------------------tree-----------------------\n");
-      // printTree(abstractSyntaxTree);
+      printf("-------------------------tree-----------------------\n");
+      printTree(abstractSyntaxTree);
       freeSymbols();
     }else{
       printf("File not found\n");

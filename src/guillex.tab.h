@@ -110,7 +110,7 @@ union YYSTYPE
   char *str;
   float dec;
 
-  struct node *node;
+  struct node *treeNode;
 
 #line 116 "guillex.tab.h"
 

@@ -13,47 +13,41 @@
 #include "../lib/table.h"
 
 int errors = 0; 
-
+int symbolIdCounter;
 
 extern int yylex();
 extern int yylex_destroy();
 extern int yyparse();
 void yyerror(const char* a);
 extern int line;
-extern int word_position;
+extern int wordPosition;
 extern FILE* yyin;
+extern Symbol *symbol;
+
+Node *abstractSyntaxTree = NULL;
 
 
 %}  
 
 %union{
-  char* str;
   int integer;
+  char *str;
   float dec;
-  
+
   struct node *node;
 }
 
-%token<str> ID
-%token<str> TYPE
-
+%token<str> ID TYPE LIST STRING NIL
 %token<integer> INTEGER
 %token<dec> DECIMAL
-%token<str> LIST
-%token<str> STRING
-
-%token<str> NIL
 
 
-%left ADD SUB MULT DIV
-%left OR AND SMALLER GREATER 
-%left SMALLEQ GREATEQ EQUALS DIFFERENT
-%left APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
+%left ADD SUB MULT DIV OR AND SMALLER GREATER SMALLEQ GREATEQ EQUALS DIFFERENT APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
 %right ASSIGN NEG NOT MAP ELSE THEN
 
-
-%token IF FOR READ WRITE WRITELN RETURN
-%token SEMIC COMMA STFUNC ENDFUNC PARENL PARENR
+%token <str> ADD SUB MULT DIV OR AND SMALLER GREATER SMALLEQ GREATEQ EQUALS DIFFERENT APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
+%token <str> ASSIGN NEG NOT MAP ELSE THEN
+%token <str> IF FOR READ WRITE WRITELN RETURN SEMIC COMMA STFUNC ENDFUNC PARENL PARENR
 
 
 %start program
@@ -66,7 +60,9 @@ extern FILE* yyin;
 %%
 
 program:
-    declarationList     {}
+    declarationList     {
+        abstractSyntaxTree = $1;
+    }
   ;
 
 declarationList:
@@ -89,11 +85,17 @@ funcDeclaration:
   ;
 
 simpleVarDeclaration:
-    TYPE ID {}
+    TYPE ID {
+      addSymbol(symbolIdCounter, $2, "var", $1);
+      symbolIdCounter++;
+      }
   ;
 
 simpleFuncDeclaration:
-    TYPE ID {}
+    TYPE ID {
+      addSymbol(symbolIdCounter, $2, "func", $1);
+      symbolIdCounter++;
+      }
   ;
 
 params:
@@ -152,7 +154,7 @@ listStmt:
   ;
 
 appendOps:
-    simpleExp APPEND ID SEMIC {}
+    ID APPEND ID SEMIC {}
   ;
 
 returnListOps:
@@ -194,7 +196,7 @@ constOp:
   ;
 
 inOp:
-  READ PARENL ID PARENR {}
+  READ PARENL ID PARENR SEMIC{}
   ;
 
 outOp:
@@ -293,12 +295,12 @@ int main(int argc, char *argv[]) {
   printf("testing tree\n");
   Node *tree;
 
-  tree = create_node("value", 'I');
-  tree = add_node_left("value", 'S', tree);
-  tree -> left = add_node_left("value", 'I', tree -> left);
-  tree -> left = add_node_middle("value", 'T', tree -> left);
-  tree -> left = add_node_right("value", 'C', tree -> left);
-  print_tree(tree);
+  tree = createNode("value", 'I');
+  tree = addNodeLeft("value", 'S', tree);
+  tree -> left = addNodeLeft("value", 'I', tree -> left);
+  tree -> left = addNodeMiddle("value", 'T', tree -> left);
+  tree -> left = addNodeRight("value", 'C', tree -> left);
+  printTree(tree);
 
 
   printf("\n\n#### beginning ####\n\n");
@@ -308,6 +310,9 @@ int main(int argc, char *argv[]) {
     if(file){
       yyin = file;
       yyparse();
+      printf("----------------------symbols--------------------\n");
+      printSymbols();
+      freeSymbols();
     }else{
       printf("File not found\n");
     }

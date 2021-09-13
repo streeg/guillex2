@@ -56,11 +56,11 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     ID = 258,                      /* ID  */
     TYPE = 259,                    /* TYPE  */
-    INTEGER = 260,                 /* INTEGER  */
-    DECIMAL = 261,                 /* DECIMAL  */
-    LIST = 262,                    /* LIST  */
-    STRING = 263,                  /* STRING  */
-    NIL = 264,                     /* NIL  */
+    LIST = 260,                    /* LIST  */
+    STRING = 261,                  /* STRING  */
+    NIL = 262,                     /* NIL  */
+    INTEGER = 263,                 /* INTEGER  */
+    DECIMAL = 264,                 /* DECIMAL  */
     ADD = 265,                     /* ADD  */
     SUB = 266,                     /* SUB  */
     MULT = 267,                    /* MULT  */
@@ -104,12 +104,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 29 "guillex.y"
+#line 32 "guillex.y"
 
-  char* str;
   int integer;
+  char *str;
   float dec;
-  
+
   struct node *node;
 
 #line 116 "guillex.tab.h"

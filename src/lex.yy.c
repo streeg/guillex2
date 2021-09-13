@@ -517,7 +517,7 @@ char *yytext;
   #include "../lib/guillex.tab.h"
 
   int line = 1;
-  int word_position = 1;
+  int wordPosition = 1;
 
 #line 523 "lex.yy.c"
 #define YY_NO_INPUT 1
@@ -806,8 +806,8 @@ case 1:
 YY_RULE_SETUP
 #line 81 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return SEMIC;
           }
@@ -816,8 +816,8 @@ case 2:
 YY_RULE_SETUP
 #line 88 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return COMMA;
           }
@@ -826,8 +826,8 @@ case 3:
 YY_RULE_SETUP
 #line 95 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return ADD;
           }
@@ -836,8 +836,8 @@ case 4:
 YY_RULE_SETUP
 #line 102 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return SUB;
           }
@@ -846,8 +846,8 @@ case 5:
 YY_RULE_SETUP
 #line 109 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return MULT;
           }
@@ -856,8 +856,8 @@ case 6:
 YY_RULE_SETUP
 #line 116 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return DIV;
           }
@@ -866,8 +866,8 @@ case 7:
 YY_RULE_SETUP
 #line 123 "guillex.l"
 {
-            printf("OP [NEGATE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("OP [NEGATE]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return NEG;
           }
@@ -876,14 +876,14 @@ case 8:
 YY_RULE_SETUP
 #line 130 "guillex.l"
 {
-            word_position += 2;
+            wordPosition += 2;
           }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 134 "guillex.l"
 {
-            word_position += 1;
+            wordPosition += 1;
           }
 	YY_BREAK
 case 10:
@@ -892,15 +892,15 @@ YY_RULE_SETUP
 #line 138 "guillex.l"
 {
             line += 1;
-            word_position = 1;
+            wordPosition = 1;
           }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 143 "guillex.l"
 {
-            printf("Type: '%s' on line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Type: '%s' on line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return TYPE;            
           }
@@ -909,9 +909,9 @@ case 12:
 YY_RULE_SETUP
 #line 151 "guillex.l"
 {
-            printf("'%s' on line: %d, column: %d\n", yytext, line, word_position);
+            printf("'%s' on line: %d, column: %d\n", yytext, line, wordPosition);
             yylval.str = (char *) strdup(yytext);
-            word_position += yyleng;
+            wordPosition += yyleng;
             return STFUNC;
           }
 	YY_BREAK
@@ -919,9 +919,9 @@ case 13:
 YY_RULE_SETUP
 #line 158 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             yylval.str = (char *) strdup(yytext);
-            word_position += yyleng;
+            wordPosition += yyleng;
             return ENDFUNC;
           }
 	YY_BREAK
@@ -929,9 +929,9 @@ case 14:
 YY_RULE_SETUP
 #line 165 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             yylval.str = (char *) strdup(yytext);
-            word_position += yyleng;
+            wordPosition += yyleng;
             return PARENL;
           }
 	YY_BREAK
@@ -939,9 +939,9 @@ case 15:
 YY_RULE_SETUP
 #line 172 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             yylval.str = (char *) strdup(yytext);
-            word_position += yyleng;
+            wordPosition += yyleng;
             return PARENR;
           }
 	YY_BREAK
@@ -949,8 +949,8 @@ case 16:
 YY_RULE_SETUP
 #line 179 "guillex.l"
 {
-            printf("Constant: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Constant: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return NIL;
           }
@@ -959,8 +959,8 @@ case 17:
 YY_RULE_SETUP
 #line 186 "guillex.l"
 {
-            printf("'%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return ASSIGN;            
           }
@@ -969,15 +969,15 @@ case 18:
 YY_RULE_SETUP
 #line 193 "guillex.l"
 {
-            word_position += yyleng;
+            wordPosition += yyleng;
           }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 197 "guillex.l"
 {
-            printf("OP [AND]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("OP [AND]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return AND;
           }
@@ -986,8 +986,8 @@ case 20:
 YY_RULE_SETUP
 #line 204 "guillex.l"
 {
-            printf("OP [OR]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("OP [OR]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return OR;
           }
@@ -996,8 +996,8 @@ case 21:
 YY_RULE_SETUP
 #line 211 "guillex.l"
 {
-            printf("OP [SMALLER THAN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("OP [SMALLER THAN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return SMALLER;
           }
@@ -1006,8 +1006,8 @@ case 22:
 YY_RULE_SETUP
 #line 218 "guillex.l"
 {
-            printf("OP [GREATER THAN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("OP [GREATER THAN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return GREATER;
           }
@@ -1016,8 +1016,8 @@ case 23:
 YY_RULE_SETUP
 #line 225 "guillex.l"
 {
-            printf("OP [SMALLER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("OP [SMALLER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return SMALLEQ;
           }
@@ -1026,8 +1026,8 @@ case 24:
 YY_RULE_SETUP
 #line 232 "guillex.l"
 {
-            printf("OP [GREATER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("OP [GREATER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return GREATEQ;
           }
@@ -1036,8 +1036,8 @@ case 25:
 YY_RULE_SETUP
 #line 239 "guillex.l"
 {
-            printf("OP [EQUALS]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("OP [EQUALS]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return EQUALS;
           }
@@ -1046,8 +1046,8 @@ case 26:
 YY_RULE_SETUP
 #line 246 "guillex.l"
 {
-            printf("OP [IS DIFFERENT]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("OP [IS DIFFERENT]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return DIFFERENT;
           }
@@ -1056,8 +1056,8 @@ case 27:
 YY_RULE_SETUP
 #line 253 "guillex.l"
 {
-            printf("Keyword [IF]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [IF]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return IF;
           }
@@ -1066,8 +1066,8 @@ case 28:
 YY_RULE_SETUP
 #line 260 "guillex.l"
 {
-            printf("Keyword [ELSE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [ELSE]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return ELSE;
           }
@@ -1076,8 +1076,8 @@ case 29:
 YY_RULE_SETUP
 #line 267 "guillex.l"
 {
-            printf("Keyword [FOR]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [FOR]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return FOR;
           }
@@ -1086,8 +1086,8 @@ case 30:
 YY_RULE_SETUP
 #line 274 "guillex.l"
 {
-            printf("Keyword [RETURN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [RETURN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return RETURN;
           }
@@ -1096,8 +1096,8 @@ case 31:
 YY_RULE_SETUP
 #line 281 "guillex.l"
 {
-            printf("Keyword [READ]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [READ]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return READ;
           }
@@ -1106,8 +1106,8 @@ case 32:
 YY_RULE_SETUP
 #line 288 "guillex.l"
 {
-            printf("Keyword [WRITE]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [WRITE]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return WRITE;
           }
@@ -1116,8 +1116,8 @@ case 33:
 YY_RULE_SETUP
 #line 295 "guillex.l"
 {
-            printf("Keyword [WRITELN]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [WRITELN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return WRITELN;
           }      
@@ -1126,8 +1126,8 @@ case 34:
 YY_RULE_SETUP
 #line 302 "guillex.l"
 {
-            printf("Keyword [APPEND]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [APPEND]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return APPEND;
           }
@@ -1136,8 +1136,8 @@ case 35:
 YY_RULE_SETUP
 #line 309 "guillex.l"
 {
-            printf("Keyword [HEADLIST]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [HEADLIST]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return HEADLIST;
           }
@@ -1146,8 +1146,8 @@ case 36:
 YY_RULE_SETUP
 #line 316 "guillex.l"
 {
-            printf("Keyword [TAILLIST]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [TAILLIST]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return TAILLIST;
           }
@@ -1156,8 +1156,8 @@ case 37:
 YY_RULE_SETUP
 #line 323 "guillex.l"
 {
-            printf("Keyword [DESTROYHEAD]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [DESTROYHEAD]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return DESTROYHEAD;
           }
@@ -1166,8 +1166,8 @@ case 38:
 YY_RULE_SETUP
 #line 330 "guillex.l"
 {
-            printf("Keyword [MAP]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [MAP]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return MAP;
           }
@@ -1176,8 +1176,8 @@ case 39:
 YY_RULE_SETUP
 #line 337 "guillex.l"
 {
-            printf("Keyword [FILTER]: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Keyword [FILTER]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return FILTER;
           }
@@ -1186,8 +1186,8 @@ case 40:
 YY_RULE_SETUP
 #line 344 "guillex.l"
 {
-            printf("Decimal: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Decimal: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return DECIMAL;
           }
@@ -1196,8 +1196,8 @@ case 41:
 YY_RULE_SETUP
 #line 351 "guillex.l"
 {
-            printf("Integer: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Integer: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return INTEGER;
           }
@@ -1206,8 +1206,8 @@ case 42:
 YY_RULE_SETUP
 #line 358 "guillex.l"
 {
-            printf("Id: '%s' at line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("Id: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return ID;
           }
@@ -1217,8 +1217,8 @@ case 43:
 YY_RULE_SETUP
 #line 366 "guillex.l"
 {
-            printf("String: %s on line: %d, column: %d\n", yytext, line, word_position);
-            word_position += yyleng;
+            printf("String: %s on line: %d, column: %d\n", yytext, line, wordPosition);
+            wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return STRING;
           }
@@ -1228,8 +1228,8 @@ YY_RULE_SETUP
 #line 373 "guillex.l"
 {
             printf("\nERROR!!\n");
-            printf("%s at line: %d, column: %d\n\n", yytext, line, word_position);
-            word_position += strlen(yytext);
+            printf("%s at line: %d, column: %d\n\n", yytext, line, wordPosition);
+            wordPosition += strlen(yytext);
           }
 	YY_BREAK
 case 45:

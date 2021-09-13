@@ -17,6 +17,8 @@ compilefile:
 test:
 	./tradutor ../tests/test1correto.c > ../results/test1resultcorreto.txt
 	./tradutor ../tests/test2correto.c > ../results/test2resultcorreto.txt
-	./tradutor ../tests/test3incorreto.c > ../results/test3resultincorreto.txt
-	./tradutor ../tests/test4incorreto.c > ../results/test4resultincorreto.txt
+	./tradutor ../tests/test3correto.c > ../results/test3resultcorreto.txt
+	./tradutor ../tests/test4correto.c > ../results/test4resultcorreto.txt
+	./tradutor ../tests/test1incorreto.c > ../results/test1resultincorreto.txt
+	./tradutor ../tests/test2incorreto.c > ../results/test2resultincorreto.txt
 	

@@ -351,14 +351,14 @@ comma     [,]
 {decimal} {
             printf("Decimal: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
+            yylval.dec = atof(yytext);
             return DECIMAL;
           }
 
 {integer}  {
             printf("Integer: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
+            yylval.integer = atoi(yytext);
             return INTEGER;
           }
 

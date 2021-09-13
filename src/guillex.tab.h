@@ -80,22 +80,21 @@ extern int yydebug;
     FILTER = 281,                  /* FILTER  */
     ASSIGN = 282,                  /* ASSIGN  */
     NEG = 283,                     /* NEG  */
-    NOT = 284,                     /* NOT  */
-    MAP = 285,                     /* MAP  */
-    ELSE = 286,                    /* ELSE  */
-    THEN = 287,                    /* THEN  */
-    IF = 288,                      /* IF  */
-    FOR = 289,                     /* FOR  */
-    READ = 290,                    /* READ  */
-    WRITE = 291,                   /* WRITE  */
-    WRITELN = 292,                 /* WRITELN  */
-    RETURN = 293,                  /* RETURN  */
-    SEMIC = 294,                   /* SEMIC  */
-    COMMA = 295,                   /* COMMA  */
-    STFUNC = 296,                  /* STFUNC  */
-    ENDFUNC = 297,                 /* ENDFUNC  */
-    PARENL = 298,                  /* PARENL  */
-    PARENR = 299                   /* PARENR  */
+    MAP = 284,                     /* MAP  */
+    ELSE = 285,                    /* ELSE  */
+    THEN = 286,                    /* THEN  */
+    IF = 287,                      /* IF  */
+    FOR = 288,                     /* FOR  */
+    READ = 289,                    /* READ  */
+    WRITE = 290,                   /* WRITE  */
+    WRITELN = 291,                 /* WRITELN  */
+    RETURN = 292,                  /* RETURN  */
+    SEMIC = 293,                   /* SEMIC  */
+    COMMA = 294,                   /* COMMA  */
+    STFUNC = 295,                  /* STFUNC  */
+    ENDFUNC = 296,                 /* ENDFUNC  */
+    PARENL = 297,                  /* PARENL  */
+    PARENR = 298                   /* PARENR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -112,7 +111,7 @@ union YYSTYPE
 
   struct node *treeNode;
 
-#line 116 "guillex.tab.h"
+#line 115 "guillex.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -518,7 +518,7 @@ char *yytext;
   #include <stdio.h>
   #include <string.h>
   #include <math.h>
-  #include "../lib/guillex.tab.h"
+  #include "guillex.tab.h"
 
   int line = 1;
   int wordPosition = 1;

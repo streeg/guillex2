@@ -3,16 +3,21 @@ runtests: all test
 
 all: compile
 
-compile: runflex runbison compilefile
-
-runbison:
-	bison -vdt -Wconflicts-sr -Wcounterexamples --graph guillex.y
+compile: runflex runbison compilefile moveheader
 
 runflex:
 	flex guillex.l
 
+
+runbison:
+	bison -vdt -Wconflicts-sr -Wcounterexamples --graph guillex.y
+
 compilefile:
 	gcc lex.yy.c guillex.tab.c -ll -o tradutor
+
+
+moveheader:
+	mv guillex.tab.h ../lib/
 
 test:
 	./tradutor ../tests/test1correto.c > ../results/test1resultcorreto.txt

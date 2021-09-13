@@ -292,17 +292,7 @@ void yyerror(const char* msg) {
 }
 
 int main(int argc, char *argv[]) {
-  printf("testing tree\n");
-  Node *tree;
-
-  tree = createNode("value", 'I');
-  tree = addNodeLeft("value", 'S', tree);
-  tree -> left = addNodeLeft("value", 'I', tree -> left);
-  tree -> left = addNodeMiddle("value", 'T', tree -> left);
-  tree -> left = addNodeRight("value", 'C', tree -> left);
-  printTree(tree);
-
-
+  
   printf("\n\n#### beginning ####\n\n");
   FILE *file;
   file = fopen(argv[1], "r");

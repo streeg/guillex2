@@ -1,0 +1,298 @@
+
+
+#### beginning ####
+
+Type: 'int' on line: 1, column: 1
+Id: 'c' at line: 1, column: 5
+';' at line: 1, column: 6
+Type: 'float' on line: 2, column: 1
+Id: 'd' at line: 2, column: 7
+';' at line: 2, column: 8
+Type: 'int' on line: 4, column: 1
+Id: 'main' at line: 4, column: 5
+'(' at line: 4, column: 9
+')' at line: 4, column: 10
+'{' on line: 4, column: 11
+Type: 'int' on line: 5, column: 5
+Id: 'a' at line: 5, column: 9
+';' at line: 5, column: 10
+Type: 'int' on line: 6, column: 5
+Id: 'b' at line: 6, column: 9
+';' at line: 6, column: 10
+Id: 'a' at line: 8, column: 5
+'=' at line: 8, column: 7
+Integer: '20' at line: 8, column: 9
+';' at line: 8, column: 11
+Id: 'b' at line: 9, column: 5
+'=' at line: 9, column: 7
+Integer: '30' at line: 9, column: 9
+';' at line: 9, column: 11
+Keyword [WRITE]: 'write' at line: 10, column: 5
+'(' at line: 10, column: 10
+Id: 'somadois' at line: 10, column: 11
+'(' at line: 10, column: 19
+Id: 'a' at line: 10, column: 20
+')' at line: 10, column: 21
+')' at line: 10, column: 22
+';' at line: 10, column: 23
+Id: 'c' at line: 12, column: 5
+'=' at line: 12, column: 7
+Id: 'a' at line: 12, column: 9
+'+' at line: 12, column: 11
+Id: 'b' at line: 12, column: 13
+';' at line: 12, column: 14
+Id: 'd' at line: 13, column: 5
+'=' at line: 13, column: 7
+Id: 'a' at line: 13, column: 9
+'/' at line: 13, column: 11
+Id: 'b' at line: 13, column: 13
+';' at line: 13, column: 14
+Keyword [WRITELN]: 'writeln' at line: 14, column: 5
+'(' at line: 14, column: 12
+Id: 'c' at line: 14, column: 13
+')' at line: 14, column: 14
+';' at line: 14, column: 15
+Keyword [WRITELN]: 'writeln' at line: 15, column: 5
+'(' at line: 15, column: 12
+Id: 'd' at line: 15, column: 13
+')' at line: 15, column: 14
+';' at line: 15, column: 15
+'}' at line: 17, column: 1
+Type: 'int' on line: 19, column: 1
+Id: 'somadois' at line: 19, column: 5
+'(' at line: 19, column: 13
+Type: 'int' on line: 19, column: 14
+Id: 'a' at line: 19, column: 18
+')' at line: 19, column: 19
+'{' on line: 19, column: 20
+Id: 'a' at line: 20, column: 5
+'=' at line: 20, column: 7
+Id: 'a' at line: 20, column: 9
+'+' at line: 20, column: 11
+Integer: '2' at line: 20, column: 13
+';' at line: 20, column: 14
+Keyword [RETURN]: 'return' at line: 21, column: 5
+'(' at line: 21, column: 11
+Id: 'c' at line: 21, column: 12
+')' at line: 21, column: 13
+';' at line: 21, column: 14
+'}' at line: 22, column: 1
+------------------------symbols---------------------
+|   0    |    c     |      var    |    int    |
+|   1    |    d     |      var    |    float    |
+|   2    |    a     |      var    |    int    |
+|   3    |    b     |      var    |    int    |
+|   5    |    a     |      var    |    int    |
+|   6    |    somadois     |      func    |    int    |
+-------------------------tree-----------------------
+declarationsList declaration
+declarationsList declaration
+declarationsList declaration
+declaration
+varDeclaration
+simpleVarDeclaration
+TYPE ID
+int
+c
+varDeclaration
+simpleVarDeclaration
+TYPE ID
+float
+d
+funcDeclaration
+TYPE ID PARENL PARENR compoundStmt
+int
+main
+compoundStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+primitiveStmt
+varDeclaration
+simpleVarDeclaration
+TYPE ID
+int
+a
+varDeclaration
+simpleVarDeclaration
+TYPE ID
+int
+b
+exprStmt
+expression SEMIC
+assignExp
+ID ASSIGN expression
+a
+=
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+constOp
+20
+exprStmt
+expression SEMIC
+assignExp
+ID ASSIGN expression
+b
+=
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+constOp
+30
+outOp
+WRITE PARENL outConst PARENR SEMIC
+write
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+fCall
+ID PARENL callParams PARENR
+somadois
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+ID
+a
+exprStmt
+expression SEMIC
+assignExp
+ID ASSIGN expression
+c
+=
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+sumExp sumOp mulExp
+mulExp
+factor
+ID
+a
+ADD
++
+factor
+ID
+b
+exprStmt
+expression SEMIC
+assignExp
+ID ASSIGN expression
+d
+=
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+mulExp
+mulExp mulOp factor
+factor
+ID
+a
+DIV
+/
+ID
+b
+outOp
+WRITELN PARENL outConst PARENR SEMIC
+writeln
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+ID
+c
+outOp
+WRITELN PARENL outConst PARENR SEMIC
+writeln
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+ID
+d
+funcDeclaration
+TYPE ID PARENL params PARENR compoundStmt
+int
+somadois
+param
+simpleVarDeclaration
+TYPE ID
+int
+a
+compoundStmt
+stmtList primitiveStmt
+primitiveStmt
+exprStmt
+expression SEMIC
+assignExp
+ID ASSIGN expression
+a
+=
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+sumExp sumOp mulExp
+mulExp
+factor
+ID
+a
+ADD
++
+factor
+constOp
+2
+returnStmt
+RETURN expression SEMIC
+return
+simpleExp
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+PARENL simpleExp PARENR
+binLogicalExp
+unLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+ID
+c
+
+
+#### EOF ####
+

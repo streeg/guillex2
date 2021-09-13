@@ -12,9 +12,6 @@
 #include "../lib/tree.h"
 #include "../lib/table.h"
 
-int errors = 0; 
-int symbolIdCounter;
-
 extern int yylex();
 extern int yylex_destroy();
 extern int yyparse();
@@ -23,6 +20,9 @@ extern int line;
 extern int wordPosition;
 extern FILE* yyin;
 extern Symbol *symbol;
+int errors = 0; 
+int symbolIdCounter = 0;
+
 
 Node *abstractSyntaxTree = NULL;
 

@@ -1,0 +1,18 @@
+
+
+#### beginning ####
+
+Type: 'int' on line: 1, column: 1
+Id: 'main' at line: 1, column: 5
+'(' at line: 1, column: 9
+Type: 'int' on line: 1, column: 10
+Id: 'a' at line: 1, column: 14
+',' at line: 1, column: 15
+syntax error, unexpected COMMA, expecting TYPE or PARENR
+syntax error, unexpected COMMA, expecting TYPE or PARENR, linha: 1, coluna: 16
+------------------------symbols---------------------
+-------------------------tree-----------------------
+
+
+#### EOF ####
+

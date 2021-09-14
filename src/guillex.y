@@ -248,6 +248,10 @@ mapFilterOps:
     fCall MAP ID SEMIC {
       $$ = createNode3("fCall MAP ID SEMIC", $1, createNode0($2), createNode0($3));
     }
+    |
+    fCall ID FILTER SEMIC {
+      $$ = createNode3("fCall ID FILTER SEMIC", $1, createNode0($2), createNode0($3));
+    }
   ;
 
 expression:

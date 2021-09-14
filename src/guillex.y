@@ -27,13 +27,12 @@ int symbolIdCounter = 0;
 typedef struct node {
   int integer;
   float decimal;
-  char character;
   char *value;
   char type;
   struct node *left;
-  struct node *middle0;
-  struct node *middle1;
-  struct node *middle2;
+  struct node *leftMiddle;
+  struct node *middle;
+  struct node *rightMiddle;
   struct node *right;
 }Node;
 
@@ -44,9 +43,9 @@ Node* createNode0(char *value) {
   node -> value = value;
   node -> type = 's';
   node -> left = NULL;
-  node -> middle0 = NULL;
-  node -> middle1 = NULL;
-  node -> middle2 = NULL;
+  node -> leftMiddle = NULL;
+  node -> middle = NULL;
+  node -> rightMiddle = NULL;
   node -> right = NULL;
 
   return node;
@@ -58,9 +57,9 @@ Node* createNode0Int(int value, char type) {
   node -> integer = value;
   node -> type = 'i';
   node -> left = NULL;
-  node -> middle0 = NULL;
-  node -> middle1 = NULL;
-  node -> middle2 = NULL;
+  node -> leftMiddle = NULL;
+  node -> middle = NULL;
+  node -> rightMiddle = NULL;
   node -> right = NULL;
 
   return node;
@@ -72,9 +71,9 @@ Node* createNode0Dec(float value, char type) {
   node -> decimal = value;
   node -> type = 'd';
   node -> left = NULL;
-  node -> middle0 = NULL;
-  node -> middle1 = NULL;
-  node -> middle2 = NULL;
+  node -> leftMiddle = NULL;
+  node -> middle = NULL;
+  node -> rightMiddle = NULL;
   node -> right = NULL;
 
   return node;
@@ -86,9 +85,9 @@ Node* createNode0List(char *value, char type) {
   node -> value = value;
   node -> type = 'l';
   node -> left = NULL;
-  node -> middle0 = NULL;
-  node -> middle1 = NULL;
-  node -> middle2 = NULL;
+  node -> leftMiddle = NULL;
+  node -> middle = NULL;
+  node -> rightMiddle = NULL;
   node -> right = NULL;
 
   return node;
@@ -100,9 +99,9 @@ Node* createNode0Nil(char *value, char type) {
   node -> value = value;
   node -> type = 'n';
   node -> left = NULL;
-  node -> middle0 = NULL;
-  node -> middle1 = NULL;
-  node -> middle2 = NULL;
+  node -> leftMiddle = NULL;
+  node -> middle = NULL;
+  node -> rightMiddle = NULL;
   node -> right = NULL;
 
   return node;
@@ -115,65 +114,65 @@ Node* createNode1(char *value, Node* left) {
   node -> value = value;
   node -> type = 's';
   node -> left = left;
-  node -> middle0 = NULL;
-  node -> middle1 = NULL;
-  node -> middle2 = NULL;
+  node -> leftMiddle = NULL;
+  node -> middle = NULL;
+  node -> rightMiddle = NULL;
   node -> right = NULL;
 
   return node;
 }
 
-Node* createNode2(char *value, Node* left, Node* middle0) {
+Node* createNode2(char *value, Node* left, Node* leftMiddle) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> value = value;
   node -> type = 's';
   node -> left = left;
-  node -> middle0 = middle0;
-  node -> middle1 = NULL;
-  node -> middle2 = NULL;
+  node -> leftMiddle = leftMiddle;
+  node -> middle = NULL;
+  node -> rightMiddle = NULL;
   node -> right = NULL;
 
   return node;
 }
 
-Node* createNode3(char *value, Node* left, Node* middle0, Node* middle1) {
+Node* createNode3(char *value, Node* left, Node* leftMiddle, Node* middle) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> value = value;
   node -> type = 's';
   node -> left = left;
-  node -> middle0 = middle0;
-  node -> middle1 = middle1;
-  node -> middle2 = NULL;
+  node -> leftMiddle = leftMiddle;
+  node -> middle = middle;
+  node -> rightMiddle = NULL;
   node -> right = NULL;
 
   return node;
 }
 
-Node* createNode4(char *value, Node* left, Node* middle0, Node* middle1, Node* middle2) {
+Node* createNode4(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> value = value;
   node -> type = 's';
   node -> left = left;
-  node -> middle0 = middle0;
-  node -> middle1 = middle1;
-  node -> middle2 = middle2;
+  node -> leftMiddle = leftMiddle;
+  node -> middle = middle;
+  node -> rightMiddle = rightMiddle;
   node -> right = NULL;
 
   return node;
 }
 
-Node* createNode5(char *value, Node* left, Node* middle0, Node* middle1, Node* middle2, Node* right) {
+Node* createNode5(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle, Node* right) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> value = value;
   node -> type = 's';
   node -> left = left;
-  node -> middle0 = middle0;
-  node -> middle1 = middle1;
-  node -> middle2 = middle2;
+  node -> leftMiddle = leftMiddle;
+  node -> middle = middle;
+  node -> rightMiddle = rightMiddle;
   node -> right = right;
 
   return node;
@@ -197,9 +196,9 @@ void printAndFreeTree(Node *node) {
     printf("%s\n", node -> value);
   
   printAndFreeTree(node -> left);
-  printAndFreeTree(node -> middle0);
-  printAndFreeTree(node -> middle1);
-  printAndFreeTree(node -> middle2);
+  printAndFreeTree(node -> leftMiddle);
+  printAndFreeTree(node -> middle);
+  printAndFreeTree(node -> rightMiddle);
   printAndFreeTree(node -> right);
   free(node);
 }
@@ -209,10 +208,10 @@ Node* createNode0Dec(float value, char type);
 Node* createNode0List(char *value, char type);
 Node* createNode0Nil(char *value, char type);
 Node* createNode1(char *value, Node* left);
-Node* createNode2(char *value, Node* left, Node* middle0);
-Node* createNode3(char *value, Node* left, Node* middle0, Node* middle1);
-Node* createNode4(char *value, Node* left, Node* middle0, Node* middle1, Node* middle2);
-Node* createNode5(char *value, Node* left, Node* middle0, Node* middle1, Node* middle2, Node* right);
+Node* createNode2(char *value, Node* left, Node* leftMiddle);
+Node* createNode3(char *value, Node* left, Node* leftMiddle, Node* middle);
+Node* createNode4(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle);
+Node* createNode5(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle, Node* right);
 void printAndFreeTree(Node *node);
 Node *abstractSyntaxTree = NULL;
 
@@ -221,7 +220,7 @@ typedef struct symbol {
   char *name;
   char *symbolType;
   char *isFuncOrVar;
-  UT_hash_handle hashHandle;
+  UT_hash_handle hh;
 }Symbol;
 
 Symbol *symbolTable = NULL;
@@ -246,7 +245,7 @@ void addSymbol(int id, char *name, char *symbolType, char *isFuncOrVar) {
 void freeSymbols() {
   Symbol *currentSymbol, *tmp;
 
-  HASH_ITER(hashHandle, symbolTable, currentSymbol, tmp) {
+  HASH_ITER(hh, symbolTable, currentSymbol, tmp) {
     HASH_DEL(symbolTable, currentSymbol); 
     free(currentSymbol);
   }
@@ -255,7 +254,7 @@ void freeSymbols() {
 void printSymbols() {
     Symbol *s;
 
-    for (s = symbolTable; s != NULL; s = s -> hashHandle.next) {
+    for (s = symbolTable; s != NULL; s = s -> hh.next) {
         printf("|   %d    |    %s     |      %s    |    %s    |\n", s -> id, s -> name, s -> symbolType, s -> isFuncOrVar);
     }
 }

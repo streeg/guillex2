@@ -221,7 +221,7 @@ typedef struct symbol {
   char *name;
   char *symbolType;
   char *isFuncOrVar;
-  UT_hash_handle hh;
+  UT_hash_handle hashHandle;
 }Symbol;
 
 Symbol *symbolTable = NULL;
@@ -246,7 +246,7 @@ void addSymbol(int id, char *name, char *symbolType, char *isFuncOrVar) {
 void freeSymbols() {
   Symbol *currentSymbol, *tmp;
 
-  HASH_ITER(hh, symbolTable, currentSymbol, tmp) {
+  HASH_ITER(hashHandle, symbolTable, currentSymbol, tmp) {
     HASH_DEL(symbolTable, currentSymbol); 
     free(currentSymbol);
   }
@@ -255,7 +255,7 @@ void freeSymbols() {
 void printSymbols() {
     Symbol *s;
 
-    for (s = symbolTable; s != NULL; s = s -> hh.next) {
+    for (s = symbolTable; s != NULL; s = s -> hashHandle.next) {
         printf("|   %d    |    %s     |      %s    |    %s    |\n", s -> id, s -> name, s -> symbolType, s -> isFuncOrVar);
     }
 }

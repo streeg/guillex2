@@ -156,7 +156,7 @@ Node* createNode5(char *value, Node* left, Node* middle0, Node* middle1, Node* m
   return node;
 }
 
-void printTree(Node *node) {
+void printAndFreeTree(Node *node) {
 
 
   if(node == NULL)
@@ -173,10 +173,10 @@ void printTree(Node *node) {
   if(node -> type == 'n')
     printf("%s\n", node -> value);
   
-  printTree(node -> left);
-  printTree(node -> middle0);
-  printTree(node -> middle1);
-  printTree(node -> middle2);
-  printTree(node -> right);
+  printAndFreeTree(node -> left);
+  printAndFreeTree(node -> middle0);
+  printAndFreeTree(node -> middle1);
+  printAndFreeTree(node -> middle2);
+  printAndFreeTree(node -> right);
   free(node);
 }

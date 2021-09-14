@@ -1,0 +1,31 @@
+
+
+#### beginning ####
+
+------------------------Syntax analysis---------------------
+Type: 'int' on line: 1, column: 1
+Id: 'main' at line: 1, column: 5
+'(' at line: 1, column: 9
+Type: 'int' on line: 1, column: 10
+Id: 'a' at line: 1, column: 14
+')' at line: 1, column: 15
+'{' on line: 1, column: 16
+Type: 'float' on line: 2, column: 5
+Id: 'i' at line: 2, column: 11
+';' at line: 2, column: 12
+Id: 'i' at line: 3, column: 5
+'=' at line: 3, column: 7
+Id: 'a' at line: 3, column: 9
+';' at line: 3, column: 10
+
+ERROR!!
+@ at line: 4, column: 5
+
+Type: 'float' on line: 5, column: 5
+'*' at line: 5, column: 10
+syntax error, unexpected MULT, expecting ID or LISTTYPE
+syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 5, coluna: 11
+
+
+#### EOF ####
+

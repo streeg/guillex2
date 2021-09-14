@@ -1,5 +1,6 @@
-int main(int a, int b){
+int main(int a){
     float i;
     i = a;
+    @
     float* b;
 }

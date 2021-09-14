@@ -1,0 +1,211 @@
+
+
+#### beginning ####
+
+------------------------Syntax analysis---------------------
+Type: 'int' on line: 1, column: 1
+Id: 'x' at line: 1, column: 5
+';' at line: 1, column: 6
+Type: 'int' on line: 3, column: 1
+Id: 'main' at line: 3, column: 5
+'(' at line: 3, column: 9
+')' at line: 3, column: 10
+'{' on line: 3, column: 11
+Type: 'int' on line: 5, column: 5
+ListType: 'list' on line: 5, column: 9
+Id: 'x' at line: 5, column: 14
+';' at line: 5, column: 15
+Id: 'new' at line: 6, column: 3
+'=' at line: 6, column: 7
+Constant: 'NIL' at line: 6, column: 9
+';' at line: 6, column: 12
+Keyword [FOR]: 'for' at line: 7, column: 5
+'(' at line: 7, column: 9
+Id: 'i' at line: 7, column: 10
+'=' at line: 7, column: 12
+Integer: '0' at line: 7, column: 14
+';' at line: 7, column: 15
+Id: 'i' at line: 7, column: 17
+OP [SMALLER THAN]: '<' at line: 7, column: 19
+Id: 'n' at line: 7, column: 21
+';' at line: 7, column: 23
+Id: 'i' at line: 7, column: 25
+'=' at line: 7, column: 27
+Id: 'i' at line: 7, column: 29
+'+' at line: 7, column: 31
+Integer: '1' at line: 7, column: 33
+')' at line: 7, column: 34
+'{' on line: 7, column: 36
+Type: 'int' on line: 8, column: 5
+Id: 'elem' at line: 8, column: 9
+';' at line: 8, column: 13
+Keyword [WRITELN]: 'writeln' at line: 9, column: 5
+'(' at line: 9, column: 12
+String: "Digite o elemento da lista: " on line: 9, column: 13
+')' at line: 9, column: 43
+';' at line: 9, column: 44
+Keyword [READ]: 'read' at line: 10, column: 5
+'(' at line: 10, column: 9
+Id: 'elem' at line: 10, column: 10
+')' at line: 10, column: 14
+';' at line: 10, column: 15
+Id: 'elem' at line: 11, column: 5
+Keyword [APPEND]: ':' at line: 11, column: 9
+Id: 'new' at line: 11, column: 10
+';' at line: 11, column: 13
+Id: 'new' at line: 12, column: 5
+'=' at line: 12, column: 9
+Id: 'elem' at line: 12, column: 11
+';' at line: 12, column: 15
+'}' at line: 13, column: 3
+Keyword [RETURN]: 'return' at line: 14, column: 5
+Integer: '0' at line: 14, column: 12
+';' at line: 14, column: 13
+'}' at line: 15, column: 1
+
+
+#### EOF ####
+
+
+
+--------------------------------symbols--------------------------------
+
+|   0    |    x     |      var    |    int    |
+|   2    |    elem     |      var    |    int    |
+
+
+--------------------------------tree--------------------------------
+
+declarationsList declaration
+declaration
+varDeclaration
+simpleVarDeclaration
+TYPE ID
+int
+x
+funcDeclaration
+TYPE ID PARENL PARENR compoundStmt
+int
+main
+compoundStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+primitiveStmt
+varDeclaration
+simpleVarDeclaration
+TYPE ID
+int
+list
+x
+exprStmt
+expression SEMIC
+assignExp
+ID ASSIGN expression
+new
+=
+simpleExp
+binLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+constOp
+NIL
+iterStmt
+FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
+for
+ID ASSIGN expression
+i
+=
+simpleExp
+binLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+constOp
+0
+binLogicalExp
+relationalExp
+relationalExp relationalOp sumExp
+sumExp
+mulExp
+factor
+ID
+i
+SMALLER
+<
+mulExp
+factor
+ID
+n
+ID ASSIGN expression
+i
+=
+simpleExp
+binLogicalExp
+relationalExp
+sumExp
+sumExp sumOp mulExp
+mulExp
+factor
+ID
+i
+ADD
++
+factor
+constOp
+1
+compoundStmt
+compoundStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+stmtList primitiveStmt
+primitiveStmt
+varDeclaration
+simpleVarDeclaration
+TYPE ID
+int
+elem
+outOp
+WRITELN PARENL outConst PARENR SEMIC
+writeln
+STRING
+"Digite o elemento da lista: "
+inOp
+READ PARENL ID PARENR SEMIC
+read
+elem
+listStmt
+appendOps
+ID APPEND ID SEMIC
+elem
+:
+new
+exprStmt
+expression SEMIC
+assignExp
+ID ASSIGN expression
+new
+=
+simpleExp
+binLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+ID
+elem
+returnStmt
+RETURN expression SEMIC
+return
+simpleExp
+binLogicalExp
+relationalExp
+sumExp
+mulExp
+factor
+constOp
+0

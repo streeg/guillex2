@@ -39,8 +39,6 @@ div       [/]
 /*BinLogicalOP*/
 or        "||"
 and       "&&"
-negate    [~]
-
 
 /*RelationalOP*/
 smaller   [<]
@@ -119,13 +117,6 @@ comma     [,]
             wordPosition += yyleng;
             yylval.str = (char *) strdup(yytext);
             return DIV;
-          }
-
-{negate}  {
-            printf("OP [NEGATE]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
-            wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
-            return NEG;
           }
 
 {tab}     {

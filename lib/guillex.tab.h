@@ -57,46 +57,43 @@ extern int yydebug;
     ID = 258,                      /* ID  */
     TYPE = 259,                    /* TYPE  */
     LISTTYPE = 260,                /* LISTTYPE  */
-    LIST = 261,                    /* LIST  */
-    STRING = 262,                  /* STRING  */
-    NIL = 263,                     /* NIL  */
-    INTEGER = 264,                 /* INTEGER  */
-    DECIMAL = 265,                 /* DECIMAL  */
-    ADD = 266,                     /* ADD  */
-    SUB = 267,                     /* SUB  */
-    MULT = 268,                    /* MULT  */
-    DIV = 269,                     /* DIV  */
-    OR = 270,                      /* OR  */
-    AND = 271,                     /* AND  */
-    SMALLER = 272,                 /* SMALLER  */
-    GREATER = 273,                 /* GREATER  */
-    SMALLEQ = 274,                 /* SMALLEQ  */
-    GREATEQ = 275,                 /* GREATEQ  */
-    EQUALS = 276,                  /* EQUALS  */
-    DIFFERENT = 277,               /* DIFFERENT  */
-    APPEND = 278,                  /* APPEND  */
-    HEADLIST = 279,                /* HEADLIST  */
-    TAILLIST = 280,                /* TAILLIST  */
-    DESTROYHEAD = 281,             /* DESTROYHEAD  */
-    FILTER = 282,                  /* FILTER  */
-    ASSIGN = 283,                  /* ASSIGN  */
-    NEG = 284,                     /* NEG  */
-    NOT = 285,                     /* NOT  */
-    MAP = 286,                     /* MAP  */
-    ELSE = 287,                    /* ELSE  */
-    THEN = 288,                    /* THEN  */
-    IF = 289,                      /* IF  */
-    FOR = 290,                     /* FOR  */
-    READ = 291,                    /* READ  */
-    WRITE = 292,                   /* WRITE  */
-    WRITELN = 293,                 /* WRITELN  */
-    RETURN = 294,                  /* RETURN  */
-    SEMIC = 295,                   /* SEMIC  */
-    COMMA = 296,                   /* COMMA  */
-    STFUNC = 297,                  /* STFUNC  */
-    ENDFUNC = 298,                 /* ENDFUNC  */
-    PARENL = 299,                  /* PARENL  */
-    PARENR = 300                   /* PARENR  */
+    STRING = 261,                  /* STRING  */
+    NIL = 262,                     /* NIL  */
+    INTEGER = 263,                 /* INTEGER  */
+    DECIMAL = 264,                 /* DECIMAL  */
+    ADD = 265,                     /* ADD  */
+    SUB = 266,                     /* SUB  */
+    MULT = 267,                    /* MULT  */
+    DIV = 268,                     /* DIV  */
+    OR = 269,                      /* OR  */
+    AND = 270,                     /* AND  */
+    SMALLER = 271,                 /* SMALLER  */
+    GREATER = 272,                 /* GREATER  */
+    SMALLEQ = 273,                 /* SMALLEQ  */
+    GREATEQ = 274,                 /* GREATEQ  */
+    EQUALS = 275,                  /* EQUALS  */
+    DIFFERENT = 276,               /* DIFFERENT  */
+    APPEND = 277,                  /* APPEND  */
+    HEADLIST = 278,                /* HEADLIST  */
+    TAILLIST = 279,                /* TAILLIST  */
+    DESTROYHEAD = 280,             /* DESTROYHEAD  */
+    FILTER = 281,                  /* FILTER  */
+    ASSIGN = 282,                  /* ASSIGN  */
+    MAP = 283,                     /* MAP  */
+    ELSE = 284,                    /* ELSE  */
+    THEN = 285,                    /* THEN  */
+    IF = 286,                      /* IF  */
+    FOR = 287,                     /* FOR  */
+    READ = 288,                    /* READ  */
+    WRITE = 289,                   /* WRITE  */
+    WRITELN = 290,                 /* WRITELN  */
+    RETURN = 291,                  /* RETURN  */
+    SEMIC = 292,                   /* SEMIC  */
+    COMMA = 293,                   /* COMMA  */
+    STFUNC = 294,                  /* STFUNC  */
+    ENDFUNC = 295,                 /* ENDFUNC  */
+    PARENL = 296,                  /* PARENL  */
+    PARENR = 297                   /* PARENR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -105,7 +102,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 32 "guillex.y"
+#line 33 "guillex.y"
 
   int integer;
   char *str;
@@ -113,7 +110,7 @@ union YYSTYPE
 
   struct node *treeNode;
 
-#line 117 "guillex.tab.h"
+#line 114 "guillex.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

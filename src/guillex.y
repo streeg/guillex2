@@ -9,8 +9,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../lib/tree.h"
-#include "../lib/table.h"
+#include "../lib/abstractsyntaxtree.h"
+#include "../lib/symboltable.h"
+
 
 extern int yylex();
 extern int yylex_destroy();
@@ -37,16 +38,16 @@ Node *abstractSyntaxTree = NULL;
   struct node *treeNode;
 }
 
-%token<str> ID TYPE LISTTYPE LIST STRING NIL
+%token<str> ID TYPE LISTTYPE STRING NIL
 %token<integer> INTEGER
 %token<dec> DECIMAL
 
 
 %left ADD SUB MULT DIV OR AND SMALLER GREATER SMALLEQ GREATEQ EQUALS DIFFERENT APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
-%right ASSIGN NEG NOT MAP ELSE THEN
+%right ASSIGN MAP ELSE THEN
 
 %token <str> ADD SUB MULT DIV OR AND SMALLER GREATER SMALLEQ GREATEQ EQUALS DIFFERENT APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
-%token <str> ASSIGN NEG NOT MAP ELSE THEN
+%token <str> ASSIGN MAP ELSE THEN
 %token <str> IF FOR READ WRITE WRITELN RETURN SEMIC COMMA STFUNC ENDFUNC PARENL PARENR
 
 
@@ -55,7 +56,7 @@ Node *abstractSyntaxTree = NULL;
 %type<treeNode> program declarationList declaration varDeclaration funcDeclaration simpleVarDeclaration 
 %type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listStmt 
 %type<treeNode> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
-%type<treeNode> constOp inOp outOp outConst binLogicalExp binLogicalOp unLogicalExp unLogicalOp relationalExp relationalOp
+%type<treeNode> constOp inOp outOp outConst binLogicalExp binLogicalOp relationalExp relationalOp
 %type<treeNode> sumExp sumOp mulExp mulOp factor fCall callParams
 %%
 
@@ -108,7 +109,7 @@ simpleVarDeclaration:
       }
     | TYPE LISTTYPE ID {
       symbolIdCounter++;
-      $$ = createNode3("TYPE ID", createNode0($1), createNode0($2), createNode0($3));
+      $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
     }
   ;
 
@@ -249,8 +250,8 @@ mapFilterOps:
       $$ = createNode3("fCall MAP ID SEMIC", $1, createNode0($2), createNode0($3));
     }
     |
-    fCall ID FILTER SEMIC {
-      $$ = createNode3("fCall ID FILTER SEMIC", $1, createNode0($2), createNode0($3));
+    fCall FILTER ID SEMIC {
+      $$ = createNode3("fCall FILTER ID SEMIC", $1, createNode0($2), createNode0($3));
     }
   ;
 
@@ -283,9 +284,6 @@ constOp:
   | DECIMAL {
     $$ = createNode0Dec($1, 'd');
   }
-  | LIST {
-    $$ = createNode0List($1, 'l');
-  }
   | NIL {
     $$ = createNode0Nil($1, 'n');
   }
@@ -316,11 +314,11 @@ outConst:
   ;
 
 binLogicalExp:
-    binLogicalExp binLogicalOp unLogicalOp{
-      $$ = createNode3("binLogicalExp binLogicalOp unLogicalOp", $1, $2, $3);
+    binLogicalExp binLogicalOp relationalOp{
+      $$ = createNode3("binLogicalExp binLogicalOp relationalOp", $1, $2, $3);
     }
-  | unLogicalExp {
-    $$ = createNode1("unLogicalExp", $1);
+  | relationalExp {
+    $$ = createNode1("relationalExp", $1);
   }
   ;
 
@@ -332,25 +330,6 @@ binLogicalOp:
   | AND {
       $$ = createNode1("AND", createNode0($1));
   }
-  | NEG {
-      $$ = createNode1("NEG", createNode0($1));
-  }
-  ;
-
-
-unLogicalExp:
-    unLogicalOp unLogicalExp {
-      $$ = createNode2("unLogicalOp unLogicalExp", $1, $2);
-    }
-  | relationalExp{
-      $$ = createNode1("relationalExp", $1);
-  }
-  ;
-
-unLogicalOp:
-    NOT {
-      $$ = createNode1("NOT", createNode0($1));
-    }
   ;
 
 relationalExp:
@@ -472,6 +451,7 @@ int main(int argc, char *argv[]) {
   // #endif
 
   printf("\n\n#### beginning ####\n\n");
+  printf("------------------------Syntax analysis---------------------\n");
   abstractSyntaxTree = NULL;
   FILE *file;
   file = fopen(argv[1], "r");
@@ -479,11 +459,14 @@ int main(int argc, char *argv[]) {
     if(file){
       yyin = file;
       yyparse();
-      printf("------------------------symbols---------------------\n");
-      printSymbols();
-      printf("-------------------------tree-----------------------\n");
-      printTree(abstractSyntaxTree);
-      freeSymbols();
+      printf("\n\n#### EOF ####\n\n");
+      if(errors == 0){
+        printf("\n\n--------------------------------symbols--------------------------------\n\n");
+        printSymbols();
+        printf("\n\n--------------------------------tree--------------------------------\n\n");
+        printAndFreeTree(abstractSyntaxTree);
+        freeSymbols();
+      }
     }else{
       printf("File not found\n");
     }
@@ -493,6 +476,5 @@ int main(int argc, char *argv[]) {
   }
   fclose(yyin);
   yylex_destroy();
-  printf("\n\n#### EOF ####\n\n");
   return 0;
 }

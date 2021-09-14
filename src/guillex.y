@@ -27,8 +27,8 @@ int symbolIdCounter = 0;
 typedef struct node {
   int integer;
   float decimal;
-  char *value;
-  char type;
+  char *nodeValue;
+  char nodeType;
   struct node *left;
   struct node *leftMiddle;
   struct node *middle;
@@ -37,11 +37,11 @@ typedef struct node {
 }Node;
 
 
-Node* createNode0(char *value) {
+Node* createNode0(char *nodeValue) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> value = value;
-  node -> type = 's';
+  node -> nodeValue = nodeValue;
+  node -> nodeType = 's';
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -51,11 +51,11 @@ Node* createNode0(char *value) {
   return node;
 }
 
-Node* createNode0Int(int value, char type) {
+Node* createNode0Int(int nodeValue, char nodeType) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> integer = value;
-  node -> type = 'i';
+  node -> integer = nodeValue;
+  node -> nodeType = 'i';
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -65,11 +65,11 @@ Node* createNode0Int(int value, char type) {
   return node;
 }
 
-Node* createNode0Dec(float value, char type) {
+Node* createNode0Dec(float nodeValue, char nodeType) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> decimal = value;
-  node -> type = 'd';
+  node -> decimal = nodeValue;
+  node -> nodeType = 'd';
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -79,11 +79,11 @@ Node* createNode0Dec(float value, char type) {
   return node;
 }
 
-Node* createNode0List(char *value, char type) {
+Node* createNode0List(char *nodeValue, char nodeType) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> value = value;
-  node -> type = 'l';
+  node -> nodeValue = nodeValue;
+  node -> nodeType = 'l';
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -93,11 +93,11 @@ Node* createNode0List(char *value, char type) {
   return node;
 }
 
-Node* createNode0Nil(char *value, char type) {
+Node* createNode0Nil(char *nodeValue, char nodeType) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> value = value;
-  node -> type = 'n';
+  node -> nodeValue = nodeValue;
+  node -> nodeType = 'n';
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -108,11 +108,11 @@ Node* createNode0Nil(char *value, char type) {
 }
 
 
-Node* createNode1(char *value, Node* left) {
+Node* createNode1(char *nodeValue, Node* left) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> value = value;
-  node -> type = 's';
+  node -> nodeValue = nodeValue;
+  node -> nodeType = 's';
   node -> left = left;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -122,11 +122,11 @@ Node* createNode1(char *value, Node* left) {
   return node;
 }
 
-Node* createNode2(char *value, Node* left, Node* leftMiddle) {
+Node* createNode2(char *nodeValue, Node* left, Node* leftMiddle) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> value = value;
-  node -> type = 's';
+  node -> nodeValue = nodeValue;
+  node -> nodeType = 's';
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = NULL;
@@ -136,11 +136,11 @@ Node* createNode2(char *value, Node* left, Node* leftMiddle) {
   return node;
 }
 
-Node* createNode3(char *value, Node* left, Node* leftMiddle, Node* middle) {
+Node* createNode3(char *nodeValue, Node* left, Node* leftMiddle, Node* middle) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> value = value;
-  node -> type = 's';
+  node -> nodeValue = nodeValue;
+  node -> nodeType = 's';
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = middle;
@@ -150,11 +150,11 @@ Node* createNode3(char *value, Node* left, Node* leftMiddle, Node* middle) {
   return node;
 }
 
-Node* createNode4(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle) {
+Node* createNode4(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> value = value;
-  node -> type = 's';
+  node -> nodeValue = nodeValue;
+  node -> nodeType = 's';
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = middle;
@@ -164,11 +164,11 @@ Node* createNode4(char *value, Node* left, Node* leftMiddle, Node* middle, Node*
   return node;
 }
 
-Node* createNode5(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle, Node* right) {
+Node* createNode5(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle, Node* right) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
-  node -> value = value;
-  node -> type = 's';
+  node -> nodeValue = nodeValue;
+  node -> nodeType = 's';
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = middle;
@@ -186,22 +186,22 @@ void printAndFreeTree(int indentCount, Node *node) {
     return;
 
   if (indentCount == 0) {
-    printf("\n%s",node-> value);
+    printf("\n%s",node-> nodeValue);
   }else{
     printf("\n");
     for(i=0;i<indentCount+1;i++){
             printf("-");
         }
-        if(node -> type == 's')
-          printf(">   %s\n", node -> value); 
-        if(node -> type == 'i')
+        if(node -> nodeType == 's')
+          printf(">   %s\n", node -> nodeValue); 
+        if(node -> nodeType == 'i')
           printf(">   %d\n", node -> integer);
-        if(node -> type == 'd')
+        if(node -> nodeType == 'd')
           printf(">   %f\n", node -> decimal);
-        if(node -> type == 'l')
-          printf(">   %s\n", node -> value);
-        if(node -> type == 'n')
-          printf(">   %s\n", node -> value);
+        if(node -> nodeType == 'l')
+          printf(">   %s\n", node -> nodeValue);
+        if(node -> nodeType == 'n')
+          printf(">   %s\n", node -> nodeValue);
     }
   if(node -> left != NULL){
     indentCount += 1;
@@ -227,16 +227,16 @@ void printAndFreeTree(int indentCount, Node *node) {
 }
 
 
-Node* createNode0(char *value);
-Node* createNode0Int(int value, char type); 
-Node* createNode0Dec(float value, char type);
-Node* createNode0List(char *value, char type);
-Node* createNode0Nil(char *value, char type);
-Node* createNode1(char *value, Node* left);
-Node* createNode2(char *value, Node* left, Node* leftMiddle);
-Node* createNode3(char *value, Node* left, Node* leftMiddle, Node* middle);
-Node* createNode4(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle);
-Node* createNode5(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle, Node* right);
+Node* createNode0(char *nodeValue);
+Node* createNode0Int(int nodeValue, char nodeType); 
+Node* createNode0Dec(float nodeValue, char nodeType);
+Node* createNode0List(char *nodeValue, char nodeType);
+Node* createNode0Nil(char *nodeValue, char nodeType);
+Node* createNode1(char *nodeValue, Node* left);
+Node* createNode2(char *nodeValue, Node* left, Node* leftMiddle);
+Node* createNode3(char *nodeValue, Node* left, Node* leftMiddle, Node* middle);
+Node* createNode4(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle);
+Node* createNode5(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle, Node* right);
 void printAndFreeTree(int indentCount, Node *node);
 Node *abstractSyntaxTree = NULL;
 

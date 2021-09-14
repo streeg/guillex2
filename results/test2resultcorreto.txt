@@ -40,64 +40,124 @@ Integer: '1' at line: 6, column: 12
 
 --------------------------------tree--------------------------------
 
+
 declaration
-funcDeclaration
-TYPE ID PARENL params PARENR compoundStmt
-int
-main
-param
-simpleVarDeclaration
-TYPE ID
-int
-a
-compoundStmt
-stmtList primitiveStmt
-stmtList primitiveStmt
-stmtList primitiveStmt
-primitiveStmt
-varDeclaration
-simpleVarDeclaration
-TYPE ID
-int
-i
-exprStmt
-expression SEMIC
-assignExp
-ID ASSIGN expression
-i
-=
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-mulExp
-factor
-constOp
-2
-exprStmt
-expression SEMIC
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-sumExp sumOp mulExp
-mulExp
-factor
-constOp
-1
-ADD
-+
-factor
-constOp
-1
-returnStmt
-RETURN expression SEMIC
-return
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-mulExp
-factor
-constOp
-1
+-->   funcDeclaration
+
+--->   TYPE ID PARENL params PARENR compoundStmt
+
+---->   int
+
+----->   main
+
+------>   param
+
+------->   simpleVarDeclaration
+
+-------->   TYPE ID
+
+--------->   int
+
+---------->   a
+
+------->   compoundStmt
+
+-------->   stmtList primitiveStmt
+
+--------->   stmtList primitiveStmt
+
+---------->   stmtList primitiveStmt
+
+----------->   primitiveStmt
+
+------------>   varDeclaration
+
+------------->   simpleVarDeclaration
+
+-------------->   TYPE ID
+
+--------------->   int
+
+---------------->   i
+
+------------>   exprStmt
+
+------------->   expression SEMIC
+
+-------------->   assignExp
+
+--------------->   ID ASSIGN expression
+
+---------------->   i
+
+----------------->   =
+
+------------------>   simpleExp
+
+------------------->   binLogicalExp
+
+-------------------->   relationalExp
+
+--------------------->   sumExp
+
+---------------------->   mulExp
+
+----------------------->   factor
+
+------------------------>   constOp
+
+------------------------->   2
+
+----------->   exprStmt
+
+------------>   expression SEMIC
+
+------------->   simpleExp
+
+-------------->   binLogicalExp
+
+--------------->   relationalExp
+
+---------------->   sumExp
+
+----------------->   sumExp sumOp mulExp
+
+------------------>   mulExp
+
+------------------->   factor
+
+-------------------->   constOp
+
+--------------------->   1
+
+------------------->   ADD
+
+-------------------->   +
+
+-------------------->   factor
+
+--------------------->   constOp
+
+---------------------->   1
+
+---------->   returnStmt
+
+----------->   RETURN expression SEMIC
+
+------------>   return
+
+------------->   simpleExp
+
+-------------->   binLogicalExp
+
+--------------->   relationalExp
+
+---------------->   sumExp
+
+----------------->   mulExp
+
+------------------>   factor
+
+------------------->   constOp
+
+-------------------->   1

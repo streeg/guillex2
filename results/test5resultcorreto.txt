@@ -37,52 +37,100 @@ Constant: 'NIL' at line: 6, column: 15
 
 --------------------------------tree--------------------------------
 
+
 declarationsList declaration
-declaration
-varDeclaration
-simpleVarDeclaration
-TYPE ID
-int
-x
-funcDeclaration
-TYPE ID PARENL PARENR compoundStmt
-int
-main
-compoundStmt
-stmtList primitiveStmt
-stmtList primitiveStmt
-primitiveStmt
-exprStmt
-expression SEMIC
-assignExp
-ID ASSIGN expression
-x
-=
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-mulExp
-factor
-constOp
-10
-varDeclaration
-simpleVarDeclaration
-TYPE ID
-int
-list
-newList
-exprStmt
-expression SEMIC
-assignExp
-ID ASSIGN expression
-newList
-=
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-mulExp
-factor
-constOp
-NIL
+-->   declaration
+
+--->   varDeclaration
+
+---->   simpleVarDeclaration
+
+----->   TYPE ID
+
+------>   int
+
+------->   x
+
+--->   funcDeclaration
+
+---->   TYPE ID PARENL PARENR compoundStmt
+
+----->   int
+
+------>   main
+
+------->   compoundStmt
+
+-------->   stmtList primitiveStmt
+
+--------->   stmtList primitiveStmt
+
+---------->   primitiveStmt
+
+----------->   exprStmt
+
+------------>   expression SEMIC
+
+------------->   assignExp
+
+-------------->   ID ASSIGN expression
+
+--------------->   x
+
+---------------->   =
+
+----------------->   simpleExp
+
+------------------>   binLogicalExp
+
+------------------->   relationalExp
+
+-------------------->   sumExp
+
+--------------------->   mulExp
+
+---------------------->   factor
+
+----------------------->   constOp
+
+------------------------>   10
+
+----------->   varDeclaration
+
+------------>   simpleVarDeclaration
+
+------------->   TYPE ID
+
+-------------->   int
+
+--------------->   list
+
+---------------->   newList
+
+---------->   exprStmt
+
+----------->   expression SEMIC
+
+------------>   assignExp
+
+------------->   ID ASSIGN expression
+
+-------------->   newList
+
+--------------->   =
+
+---------------->   simpleExp
+
+----------------->   binLogicalExp
+
+------------------>   relationalExp
+
+------------------->   sumExp
+
+-------------------->   mulExp
+
+--------------------->   factor
+
+---------------------->   constOp
+
+----------------------->   NIL

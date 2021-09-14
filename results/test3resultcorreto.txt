@@ -76,136 +76,268 @@ Integer: '0' at line: 14, column: 12
 
 --------------------------------tree--------------------------------
 
+
 declarationsList declaration
-declaration
-varDeclaration
-simpleVarDeclaration
-TYPE ID
-int
-x
-funcDeclaration
-TYPE ID PARENL PARENR compoundStmt
-int
-main
-compoundStmt
-stmtList primitiveStmt
-stmtList primitiveStmt
-stmtList primitiveStmt
-primitiveStmt
-varDeclaration
-simpleVarDeclaration
-TYPE ID
-int
-list
-x
-exprStmt
-expression SEMIC
-assignExp
-ID ASSIGN expression
-new
-=
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-mulExp
-factor
-constOp
-NIL
-iterStmt
-FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
-for
-ID ASSIGN expression
-i
-=
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-mulExp
-factor
-constOp
-0
-binLogicalExp
-relationalExp
-relationalExp relationalOp sumExp
-sumExp
-mulExp
-factor
-ID
-i
-SMALLER
-<
-mulExp
-factor
-ID
-n
-ID ASSIGN expression
-i
-=
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-sumExp sumOp mulExp
-mulExp
-factor
-ID
-i
-ADD
-+
-factor
-constOp
-1
-compoundStmt
-compoundStmt
-stmtList primitiveStmt
-stmtList primitiveStmt
-stmtList primitiveStmt
-stmtList primitiveStmt
-primitiveStmt
-varDeclaration
-simpleVarDeclaration
-TYPE ID
-int
-elem
-outOp
-WRITELN PARENL outConst PARENR SEMIC
-writeln
-STRING
-"Digite o elemento da lista: "
-inOp
-READ PARENL ID PARENR SEMIC
-read
-elem
-listStmt
-appendOps
-ID APPEND ID SEMIC
-elem
-:
-new
-exprStmt
-expression SEMIC
-assignExp
-ID ASSIGN expression
-new
-=
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-mulExp
-factor
-ID
-elem
-returnStmt
-RETURN expression SEMIC
-return
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-mulExp
-factor
-constOp
-0
+-->   declaration
+
+--->   varDeclaration
+
+---->   simpleVarDeclaration
+
+----->   TYPE ID
+
+------>   int
+
+------->   x
+
+--->   funcDeclaration
+
+---->   TYPE ID PARENL PARENR compoundStmt
+
+----->   int
+
+------>   main
+
+------->   compoundStmt
+
+-------->   stmtList primitiveStmt
+
+--------->   stmtList primitiveStmt
+
+---------->   stmtList primitiveStmt
+
+----------->   primitiveStmt
+
+------------>   varDeclaration
+
+------------->   simpleVarDeclaration
+
+-------------->   TYPE ID
+
+--------------->   int
+
+---------------->   list
+
+----------------->   x
+
+------------>   exprStmt
+
+------------->   expression SEMIC
+
+-------------->   assignExp
+
+--------------->   ID ASSIGN expression
+
+---------------->   new
+
+----------------->   =
+
+------------------>   simpleExp
+
+------------------->   binLogicalExp
+
+-------------------->   relationalExp
+
+--------------------->   sumExp
+
+---------------------->   mulExp
+
+----------------------->   factor
+
+------------------------>   constOp
+
+------------------------->   NIL
+
+----------->   iterStmt
+
+------------>   FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
+
+------------->   for
+
+-------------->   ID ASSIGN expression
+
+--------------->   i
+
+---------------->   =
+
+----------------->   simpleExp
+
+------------------>   binLogicalExp
+
+------------------->   relationalExp
+
+-------------------->   sumExp
+
+--------------------->   mulExp
+
+---------------------->   factor
+
+----------------------->   constOp
+
+------------------------>   0
+
+--------------->   binLogicalExp
+
+---------------->   relationalExp
+
+----------------->   relationalExp relationalOp sumExp
+
+------------------>   sumExp
+
+------------------->   mulExp
+
+-------------------->   factor
+
+--------------------->   ID
+
+---------------------->   i
+
+------------------->   SMALLER
+
+-------------------->   <
+
+-------------------->   mulExp
+
+--------------------->   factor
+
+---------------------->   ID
+
+----------------------->   n
+
+---------------->   ID ASSIGN expression
+
+----------------->   i
+
+------------------>   =
+
+------------------->   simpleExp
+
+-------------------->   binLogicalExp
+
+--------------------->   relationalExp
+
+---------------------->   sumExp
+
+----------------------->   sumExp sumOp mulExp
+
+------------------------>   mulExp
+
+------------------------->   factor
+
+-------------------------->   ID
+
+--------------------------->   i
+
+------------------------->   ADD
+
+-------------------------->   +
+
+-------------------------->   factor
+
+--------------------------->   constOp
+
+---------------------------->   1
+
+----------------->   compoundStmt
+
+------------------>   compoundStmt
+
+------------------->   stmtList primitiveStmt
+
+-------------------->   stmtList primitiveStmt
+
+--------------------->   stmtList primitiveStmt
+
+---------------------->   stmtList primitiveStmt
+
+----------------------->   primitiveStmt
+
+------------------------>   varDeclaration
+
+------------------------->   simpleVarDeclaration
+
+-------------------------->   TYPE ID
+
+--------------------------->   int
+
+---------------------------->   elem
+
+------------------------>   outOp
+
+------------------------->   WRITELN PARENL outConst PARENR SEMIC
+
+-------------------------->   writeln
+
+--------------------------->   STRING
+
+---------------------------->   "Digite o elemento da lista: "
+
+----------------------->   inOp
+
+------------------------>   READ PARENL ID PARENR SEMIC
+
+------------------------->   read
+
+-------------------------->   elem
+
+---------------------->   listStmt
+
+----------------------->   appendOps
+
+------------------------>   ID APPEND ID SEMIC
+
+------------------------->   elem
+
+-------------------------->   :
+
+--------------------------->   new
+
+--------------------->   exprStmt
+
+---------------------->   expression SEMIC
+
+----------------------->   assignExp
+
+------------------------>   ID ASSIGN expression
+
+------------------------->   new
+
+-------------------------->   =
+
+--------------------------->   simpleExp
+
+---------------------------->   binLogicalExp
+
+----------------------------->   relationalExp
+
+------------------------------>   sumExp
+
+------------------------------->   mulExp
+
+-------------------------------->   factor
+
+--------------------------------->   ID
+
+---------------------------------->   elem
+
+---------->   returnStmt
+
+----------->   RETURN expression SEMIC
+
+------------>   return
+
+------------->   simpleExp
+
+-------------->   binLogicalExp
+
+--------------->   relationalExp
+
+---------------->   sumExp
+
+----------------->   mulExp
+
+------------------>   factor
+
+------------------->   constOp
+
+-------------------->   0

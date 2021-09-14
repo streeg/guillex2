@@ -178,30 +178,55 @@ Node* createNode5(char *value, Node* left, Node* leftMiddle, Node* middle, Node*
   return node;
 }
 
-void printAndFreeTree(Node *node) {
+void printAndFreeTree(int indentCount, Node *node) {
 
+  int i;
 
   if(node == NULL)
     return;
-  
-  if(node -> type == 's')
-    printf("%s\n", node -> value);
-  if(node -> type == 'i')
-    printf("%d\n", node -> integer);
-  if(node -> type == 'd')
-    printf("%f\n", node -> decimal);
-  if(node -> type == 'l')
-    printf("%s\n", node -> value);
-  if(node -> type == 'n')
-    printf("%s\n", node -> value);
-  
-  printAndFreeTree(node -> left);
-  printAndFreeTree(node -> leftMiddle);
-  printAndFreeTree(node -> middle);
-  printAndFreeTree(node -> rightMiddle);
-  printAndFreeTree(node -> right);
+
+  if (indentCount == 0) {
+    printf("\n%s",node-> value);
+  }else{
+    printf("\n");
+    for(i=0;i<indentCount+1;i++){
+            printf("-");
+        }
+        if(node -> type == 's')
+          printf(">   %s\n", node -> value); 
+        if(node -> type == 'i')
+          printf(">   %d\n", node -> integer);
+        if(node -> type == 'd')
+          printf(">   %f\n", node -> decimal);
+        if(node -> type == 'l')
+          printf(">   %s\n", node -> value);
+        if(node -> type == 'n')
+          printf(">   %s\n", node -> value);
+    }
+  if(node -> left != NULL){
+    indentCount += 1;
+    printAndFreeTree(indentCount, node -> left);
+  }
+  if(node -> leftMiddle != NULL){
+    indentCount += 1;
+    printAndFreeTree(indentCount, node -> leftMiddle);
+  }
+  if(node -> middle != NULL){
+    indentCount += 1;
+    printAndFreeTree(indentCount, node -> middle);
+  }
+  if(node -> rightMiddle != NULL){
+    indentCount += 1;
+    printAndFreeTree(indentCount, node -> rightMiddle);
+  }
+  if(node -> right != NULL){
+    indentCount += 1;
+    printAndFreeTree(indentCount, node -> right);
+  }
   free(node);
 }
+
+
 Node* createNode0(char *value);
 Node* createNode0Int(int value, char type); 
 Node* createNode0Dec(float value, char type);
@@ -212,29 +237,30 @@ Node* createNode2(char *value, Node* left, Node* leftMiddle);
 Node* createNode3(char *value, Node* left, Node* leftMiddle, Node* middle);
 Node* createNode4(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle);
 Node* createNode5(char *value, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle, Node* right);
-void printAndFreeTree(Node *node);
+void printAndFreeTree(int indentCount, Node *node);
 Node *abstractSyntaxTree = NULL;
 
 typedef struct symbol {
   int id;
-  char *name;
-  char *symbolType;
-  char *isFuncOrVar;
+  char *symbolType; // var or func
+  char *varFuncName; // var or func name
+  char *nameId; // var or func id
+  int scope;
   UT_hash_handle hh;
 }Symbol;
 
 Symbol *symbolTable = NULL;
 
-void addSymbol(int id, char *name, char *symbolType, char *isFuncOrVar) {
+void addSymbol(int id, char *nameId, char *symbolType, char *varFuncName) {
   struct symbol *s;
 
   HASH_FIND_INT(symbolTable, &id, s);
   if (s == NULL){
     s = (Symbol*)malloc(sizeof(Symbol));
     s -> id = id;
-    s -> name = name;
+    s -> nameId = nameId;
     s -> symbolType = symbolType;
-    s -> isFuncOrVar = isFuncOrVar;
+    s -> varFuncName = varFuncName;
     HASH_ADD_INT(symbolTable, id, s);
   } else {
     printf("cannot add symbol to table\n");
@@ -255,12 +281,12 @@ void printSymbols() {
     Symbol *s;
 
     for (s = symbolTable; s != NULL; s = s -> hh.next) {
-        printf("|   %d    |    %s     |      %s    |    %s    |\n", s -> id, s -> name, s -> symbolType, s -> isFuncOrVar);
+        printf("|   %d    |    %s     |      %s    |    %s    |\n", s -> id, s -> nameId, s -> symbolType, s -> varFuncName);
     }
 }
 
 
-void addSymbol(int id, char *name, char *symbolType, char *isFuncOrVar);
+void addSymbol(int id, char *name, char *symbolType, char *varFuncName);
 void freeSymbols();
 void printSymbols();
 extern Symbol *symbol;
@@ -700,7 +726,7 @@ int main(int argc, char *argv[]) {
         printf("\n\n--------------------------------symbols--------------------------------\n\n");
         printSymbols();
         printf("\n\n--------------------------------tree--------------------------------\n\n");
-        printAndFreeTree(abstractSyntaxTree);
+        printAndFreeTree(0, abstractSyntaxTree);
         freeSymbols();
       }
     }else{

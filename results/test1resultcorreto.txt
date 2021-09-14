@@ -51,86 +51,168 @@ Integer: '1' at line: 6, column: 17
 
 --------------------------------tree--------------------------------
 
+
 declarationsList declaration
-declaration
-varDeclaration
-simpleVarDeclaration
-TYPE ID
-int
-x
-funcDeclaration
-TYPE ID PARENL PARENR compoundStmt
-int
-main
-compoundStmt
-stmtList primitiveStmt
-primitiveStmt
-varDeclaration
-simpleVarDeclaration
-TYPE ID
-int
-x
-iterStmt
-FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
-for
-binLogicalExp
-relationalExp
-sumExp
-mulExp
-factor
-ID
-x
-binLogicalExp
-relationalExp
-relationalExp relationalOp sumExp
-sumExp
-mulExp
-factor
-ID
-x
-SMALLER
-<
-mulExp
-factor
-constOp
-5
-ID ASSIGN expression
-x
-=
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-sumExp sumOp mulExp
-mulExp
-factor
-ID
-x
-ADD
-+
-factor
-constOp
-1
-compoundStmt
-compoundStmt
-primitiveStmt
-exprStmt
-expression SEMIC
-assignExp
-ID ASSIGN expression
-x
-=
-simpleExp
-binLogicalExp
-relationalExp
-sumExp
-sumExp sumOp mulExp
-mulExp
-factor
-ID
-x
-ADD
-+
-factor
-constOp
-1
+-->   declaration
+
+--->   varDeclaration
+
+---->   simpleVarDeclaration
+
+----->   TYPE ID
+
+------>   int
+
+------->   x
+
+--->   funcDeclaration
+
+---->   TYPE ID PARENL PARENR compoundStmt
+
+----->   int
+
+------>   main
+
+------->   compoundStmt
+
+-------->   stmtList primitiveStmt
+
+--------->   primitiveStmt
+
+---------->   varDeclaration
+
+----------->   simpleVarDeclaration
+
+------------>   TYPE ID
+
+------------->   int
+
+-------------->   x
+
+---------->   iterStmt
+
+----------->   FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
+
+------------>   for
+
+------------->   binLogicalExp
+
+-------------->   relationalExp
+
+--------------->   sumExp
+
+---------------->   mulExp
+
+----------------->   factor
+
+------------------>   ID
+
+------------------->   x
+
+-------------->   binLogicalExp
+
+--------------->   relationalExp
+
+---------------->   relationalExp relationalOp sumExp
+
+----------------->   sumExp
+
+------------------>   mulExp
+
+------------------->   factor
+
+-------------------->   ID
+
+--------------------->   x
+
+------------------>   SMALLER
+
+------------------->   <
+
+------------------->   mulExp
+
+-------------------->   factor
+
+--------------------->   constOp
+
+---------------------->   5
+
+--------------->   ID ASSIGN expression
+
+---------------->   x
+
+----------------->   =
+
+------------------>   simpleExp
+
+------------------->   binLogicalExp
+
+-------------------->   relationalExp
+
+--------------------->   sumExp
+
+---------------------->   sumExp sumOp mulExp
+
+----------------------->   mulExp
+
+------------------------>   factor
+
+------------------------->   ID
+
+-------------------------->   x
+
+------------------------>   ADD
+
+------------------------->   +
+
+------------------------->   factor
+
+-------------------------->   constOp
+
+--------------------------->   1
+
+---------------->   compoundStmt
+
+----------------->   compoundStmt
+
+------------------>   primitiveStmt
+
+------------------->   exprStmt
+
+-------------------->   expression SEMIC
+
+--------------------->   assignExp
+
+---------------------->   ID ASSIGN expression
+
+----------------------->   x
+
+------------------------>   =
+
+------------------------->   simpleExp
+
+-------------------------->   binLogicalExp
+
+--------------------------->   relationalExp
+
+---------------------------->   sumExp
+
+----------------------------->   sumExp sumOp mulExp
+
+------------------------------>   mulExp
+
+------------------------------->   factor
+
+-------------------------------->   ID
+
+--------------------------------->   x
+
+------------------------------->   ADD
+
+-------------------------------->   +
+
+-------------------------------->   factor
+
+--------------------------------->   constOp
+
+---------------------------------->   1

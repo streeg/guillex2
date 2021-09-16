@@ -90,6 +90,7 @@ Id: 'c' at line: 21, column: 12
 |   1    |    d     |      var    |    float    |
 |   2    |    a     |      var    |    int    |
 |   3    |    b     |      var    |    int    |
+|   4    |    main     |      func    |    int    |
 |   5    |    a     |      var    |    int    |
 |   6    |    somadois     |      func    |    int    |
 

@@ -358,14 +358,17 @@ funcDeclaration:
       $$ = createNode4("TYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0($2), $4, $6);
   }
   | TYPE ID PARENL PARENR compoundStmt {
+    addSymbol(symbolIdCounter, $2, "func", $1);
     symbolIdCounter++;
     $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $5);                                                                       
   }
   | TYPE LISTTYPE ID PARENL params PARENR compoundStmt{
+      addSymbol(symbolIdCounter, $3, "func", $2);
       symbolIdCounter++;
       $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $5, $7);
   }   
   | TYPE LISTTYPE ID PARENL PARENR compoundStmt{
+      addSymbol(symbolIdCounter, $3, "func", $2);
       symbolIdCounter++;
       $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $6);
     }
@@ -378,6 +381,7 @@ simpleVarDeclaration:
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
       }
     | TYPE LISTTYPE ID {
+      addSymbol(symbolIdCounter, $3, "var", $2);
       symbolIdCounter++;
       $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
     }

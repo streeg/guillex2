@@ -233,15 +233,22 @@ Integer: '0' at line: 52, column: 10
 
 --------------------------------symbols--------------------------------
 
+|   0    |    IL     |      var    |    list    |
+|   1    |    FL     |      var    |    list    |
 |   2    |    n     |      var    |    int    |
 |   3    |    i     |      var    |    int    |
+|   4    |    new     |      var    |    list    |
 |   5    |    elem     |      var    |    int    |
+|   6    |    read_list     |      func    |    list    |
 |   7    |    i     |      var    |    int    |
 |   8    |    succ     |      func    |    float    |
 |   9    |    x     |      var    |    float    |
 |   10    |    leq_10     |      func    |    int    |
 |   11    |    n     |      var    |    int    |
+|   12    |    FL10     |      var    |    list    |
+|   13    |    AUXL     |      var    |    list    |
 |   14    |    n     |      var    |    int    |
+|   15    |    main     |      func    |    int    |
 
 
 --------------------------------tree--------------------------------

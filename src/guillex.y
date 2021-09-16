@@ -316,7 +316,7 @@ extern Symbol *symbol;
 %start program
 
 %type<treeNode> program declarationList declaration varDeclaration funcDeclaration simpleVarDeclaration 
-%type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listStmt 
+%type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listExp 
 %type<treeNode> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
 %type<treeNode> constOp inOp outOp outConst binLogicalExp binLogicalOp relationalExp relationalOp
 %type<treeNode> sumExp sumOp mulExp mulOp factor fCall callParams
@@ -360,7 +360,15 @@ funcDeclaration:
   | TYPE ID PARENL PARENR compoundStmt {
     symbolIdCounter++;
     $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $5);                                                                       
-  } 
+  }
+  | TYPE LISTTYPE ID PARENL params PARENR compoundStmt{
+      symbolIdCounter++;
+      $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $5, $7);
+  }   
+  | TYPE LISTTYPE ID PARENL PARENR compoundStmt{
+      symbolIdCounter++;
+      $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $6);
+    }
   ;
 
 simpleVarDeclaration:
@@ -373,6 +381,7 @@ simpleVarDeclaration:
       symbolIdCounter++;
       $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
     }
+    
   ;
 
 params:
@@ -421,9 +430,6 @@ primitiveStmt:
   | returnStmt {
     $$ = createNode1("returnStmt", $1);
   }
-  | listStmt {
-    $$ = createNode1("listStmt", $1);
-  }
   | inOp {
     $$ = createNode1("inOp", $1);
   }
@@ -465,7 +471,7 @@ returnStmt:
     }
   ;
 
-listStmt:
+listExp:
     appendOps {
       $$ = createNode1("appendOps", $1);
     }
@@ -481,13 +487,13 @@ listStmt:
   ;
 
 appendOps:
-    ID APPEND ID SEMIC {
+    ID APPEND ID {
       $$ = createNode3("ID APPEND ID SEMIC", createNode0($1), createNode0($2), createNode0($3));
     }
   ;
 
 returnListOps:
-    returnListOp ID {
+    returnListOp ID{
       $$ = createNode2("returnListOp ID", $1, createNode0($2));
     }
   ;
@@ -502,18 +508,18 @@ returnListOp:
   ;
 
 destroyHeadOps:
-    DESTROYHEAD ID SEMIC {
+    DESTROYHEAD ID {
       $$ = createNode2("DESTROYHEAD ID", createNode0($1), createNode0($2));
     }
   ;
 
 mapFilterOps:
-    fCall MAP ID SEMIC {
-      $$ = createNode3("fCall MAP ID SEMIC", $1, createNode0($2), createNode0($3));
+    ID MAP ID {
+      $$ = createNode3("ID MAP ID SEMIC", createNode0($1), createNode0($2), createNode0($3));
     }
     |
-    fCall FILTER ID SEMIC {
-      $$ = createNode3("fCall FILTER ID SEMIC", $1, createNode0($2), createNode0($3));
+    ID FILTER ID {
+      $$ = createNode3("ID FILTER ID SEMIC", createNode0($1), createNode0($2), createNode0($3));
     }
   ;
 
@@ -523,6 +529,9 @@ expression:
     }
   | simpleExp {
       $$ = createNode1("simpleExp", $1);
+  }
+  | listExp {
+    $$ = createNode1("listExp", $1);
   }
   ;
 
@@ -572,6 +581,9 @@ outConst:
     }
   | simpleExp {
       $$ = createNode1("simpleExp", $1);
+  }
+  | listExp {
+    $$ = createNode1("listExp", $1);
   }
   ;
 

@@ -12,7 +12,19 @@ Id: 'a' at line: 2, column: 5
 ',' at line: 2, column: 6
 syntax error, unexpected COMMA, expecting SEMIC or PARENL
 syntax error, unexpected COMMA, expecting SEMIC or PARENL, linha: 2, coluna: 7
-
+Type: 'int' on line: 2, column: 8
+Semantic errorListType: 'list' on line: 2, column: 12
+Id: 'b' at line: 2, column: 17
+';' at line: 2, column: 18
+Type: 'int' on line: 4, column: 1
+Id: 'main' at line: 4, column: 5
+'(' at line: 4, column: 9
+')' at line: 4, column: 10
+'{' on line: 4, column: 11
+'}' at line: 5, column: 1
+syntax error, unexpected ENDFUNC
+syntax error, unexpected ENDFUNC, linha: 5, coluna: 2
+Semantic error
 
 #### EOF ####
 

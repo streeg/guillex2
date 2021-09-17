@@ -25,7 +25,10 @@ Type: 'float' on line: 5, column: 5
 '*' at line: 5, column: 10
 syntax error, unexpected MULT, expecting ID or LISTTYPE
 syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 5, coluna: 11
-
+Id: 'b' at line: 5, column: 12
+';' at line: 5, column: 13
+'}' at line: 6, column: 1
+Semantic error
 
 #### EOF ####
 

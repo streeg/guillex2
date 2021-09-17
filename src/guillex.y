@@ -253,7 +253,7 @@ Symbol *symbolTable = NULL;
 
 void addSymbol(int id, char *nameId, char *symbolType, char *varFuncName) {
   struct symbol *s;
-
+  
   HASH_FIND_INT(symbolTable, &id, s);
   if (s == NULL){
     s = (Symbol*)malloc(sizeof(Symbol));
@@ -319,7 +319,7 @@ extern Symbol *symbol;
 %type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt iterStmt returnStmt listExp 
 %type<treeNode> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
 %type<treeNode> constOp inOp outOp outConst binLogicalExp binLogicalOp relationalExp relationalOp
-%type<treeNode> sumExp sumOp mulExp mulOp factor fCall callParams
+%type<treeNode> sumExp sumOp mulExp mulOp factor fCall callParams error
 %%
 
 program:
@@ -334,6 +334,9 @@ declarationList:
      }
   | declaration       {
     $$ = createNode1("declaration", $1);
+  }
+  | error {
+    printf("Semantic error");
   }
   ;
 
@@ -368,7 +371,7 @@ funcDeclaration:
       $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $5, $7);
   }   
   | TYPE LISTTYPE ID PARENL PARENR compoundStmt{
-      addSymbol(symbolIdCounter, $3, "func", $2);
+    addSymbol(symbolIdCounter, $3, "func", $2);
       symbolIdCounter++;
       $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $6);
     }

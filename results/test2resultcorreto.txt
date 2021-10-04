@@ -33,9 +33,9 @@ Integer: '1' at line: 6, column: 12
 
 --------------------------------symbols--------------------------------
 
-|   a                   |    var                          |      int                     |    1    |
-|   main                |    func                         |      int                     |    1    |
-|   i                   |    var                          |      int                     |    1    |
+|   a                   |    param                        |      int                     |    1      |    1    |
+|   main                |    func                         |      int                     |    1      |    1    |
+|   i                   |    var                          |      int                     |    1      |    1    |
 
 
 --------------------------------tree--------------------------------
@@ -52,13 +52,11 @@ declaration
 
 ------>   param
 
-------->   simpleVarDeclaration
+------->   TYPE ID
 
--------->   TYPE ID
+-------->   int
 
---------->   int
-
----------->   a
+--------->   a
 
 ------->   stmtList primitiveStmt
 

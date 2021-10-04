@@ -17,9 +17,11 @@ Id: 'i' at line: 3, column: 5
 '=' at line: 3, column: 7
 Id: 'a' at line: 3, column: 9
 ';' at line: 3, column: 10
-
-ERROR!!
-@ at line: 4, column: 5
+Id: 'aa' at line: 4, column: 5
+'=' at line: 4, column: 8
+Id: 'a' at line: 4, column: 10
+';' at line: 4, column: 11
+Semantic errorVar: <aa> Not Declared, line 4, column 12
 
 Type: 'float' on line: 5, column: 5
 '*' at line: 5, column: 10
@@ -28,6 +30,10 @@ syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 5, coluna: 11
 Id: 'b' at line: 5, column: 12
 ';' at line: 5, column: 13
 '}' at line: 6, column: 1
+
+ERROR!!
+@ at line: 8, column: 5
+
 Semantic error
 
 #### EOF ####

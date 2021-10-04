@@ -20,12 +20,16 @@ Id: 'new' at line: 6, column: 3
 '=' at line: 6, column: 7
 Constant: 'NIL' at line: 6, column: 9
 ';' at line: 6, column: 12
+Semantic errorVar: <new> Not Declared, line 6, column 13
+
 Keyword [FOR]: 'for' at line: 7, column: 5
 '(' at line: 7, column: 9
 Id: 'i' at line: 7, column: 10
 '=' at line: 7, column: 12
 Integer: '0' at line: 7, column: 14
 ';' at line: 7, column: 15
+Semantic errorVar: <i> Not Declared, line 7, column 16
+
 Id: 'i' at line: 7, column: 17
 OP [SMALLER THAN]: '<' at line: 7, column: 19
 Id: 'n' at line: 7, column: 21
@@ -36,6 +40,8 @@ Id: 'i' at line: 7, column: 29
 '+' at line: 7, column: 31
 Integer: '1' at line: 7, column: 33
 ')' at line: 7, column: 34
+Semantic errorVar: <i> Not Declared, line 7, column 35
+
 '{' on line: 7, column: 36
 Type: 'int' on line: 8, column: 5
 Id: 'elem' at line: 8, column: 9
@@ -58,6 +64,8 @@ Id: 'new' at line: 12, column: 5
 '=' at line: 12, column: 9
 Id: 'elem' at line: 12, column: 11
 ';' at line: 12, column: 15
+Semantic errorVar: <new> Not Declared, line 12, column 16
+
 '}' at line: 13, column: 3
 Keyword [RETURN]: 'return' at line: 14, column: 5
 Integer: '0' at line: 14, column: 12
@@ -71,9 +79,9 @@ Integer: '0' at line: 14, column: 12
 
 --------------------------------symbols--------------------------------
 
-|   x                   |    var                          |      int                     |    0    |
-|   main                |    func                         |      int                     |    0    |
-|   elem                |    var                          |      int                     |    0    |
+|   x                   |    var                          |      int                     |    0      |    0    |
+|   main                |    func                         |      int                     |    0      |    0    |
+|   elem                |    var                          |      int                     |    0      |    0    |
 
 
 --------------------------------tree--------------------------------
@@ -126,56 +134,14 @@ declarationsList declaration
 
 ------------->   assignExp
 
--------------->   ID ASSIGN expression
-
---------------->   new
-
----------------->   =
-
------------------>   simpleExp
-
------------------->   binLogicalExp
-
-------------------->   relationalExp
-
--------------------->   sumExp
-
---------------------->   mulExp
-
----------------------->   factor
-
------------------------>   constOp
-
------------------------->   NIL
-
+--------------
 ---------->   iterStmt
 
 ----------->   FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
 
 ------------>   for
 
-------------->   ID ASSIGN expression
-
--------------->   i
-
---------------->   =
-
----------------->   simpleExp
-
------------------>   binLogicalExp
-
------------------->   relationalExp
-
-------------------->   sumExp
-
--------------------->   mulExp
-
---------------------->   factor
-
----------------------->   constOp
-
------------------------>   0
-
+-------------
 -------------->   binLogicalExp
 
 --------------->   relationalExp
@@ -204,40 +170,7 @@ declarationsList declaration
 
 ---------------------->   n
 
---------------->   ID ASSIGN expression
-
----------------->   i
-
------------------>   =
-
------------------->   simpleExp
-
-------------------->   binLogicalExp
-
--------------------->   relationalExp
-
---------------------->   sumExp
-
----------------------->   sumExp sumOp mulExp
-
------------------------>   mulExp
-
------------------------->   factor
-
-------------------------->   ID
-
--------------------------->   i
-
------------------------->   ADD
-
-------------------------->   +
-
-------------------------->   factor
-
--------------------------->   constOp
-
---------------------------->   1
-
+---------------
 ---------------->   compoundStmt
 
 ----------------->   compoundStmt
@@ -302,28 +235,7 @@ declarationsList declaration
 
 ---------------------->   assignExp
 
------------------------>   ID ASSIGN expression
-
------------------------->   new
-
-------------------------->   =
-
--------------------------->   simpleExp
-
---------------------------->   binLogicalExp
-
----------------------------->   relationalExp
-
------------------------------>   sumExp
-
------------------------------->   mulExp
-
-------------------------------->   factor
-
--------------------------------->   ID
-
---------------------------------->   elem
-
+-----------------------
 --------->   returnStmt
 
 ---------->   RETURN expression SEMIC

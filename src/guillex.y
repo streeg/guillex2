@@ -22,6 +22,7 @@ extern int wordPosition;
 extern FILE* yyin;
 int errors = 0; 
 int scope = 0;
+int parentScope = 0;
 
 
 
@@ -37,6 +38,19 @@ typedef struct node {
   struct node *right;
 }Node;
 
+Node* createNodeE() {
+  Node *node = (Node *)calloc(1, sizeof(Node));
+
+  node -> nodeValue = NULL;
+  node -> nodeType = 'e';
+  node -> left = NULL;
+  node -> leftMiddle = NULL;
+  node -> middle = NULL;
+  node -> rightMiddle = NULL;
+  node -> right = NULL;
+
+  return node;
+}
 
 Node* createNode0(char *nodeValue) {
   Node *node = (Node *)calloc(1, sizeof(Node));
@@ -242,16 +256,17 @@ void printAndFreeTree(int indentCount, Node *node);
 Node *abstractSyntaxTree = NULL;
 
 typedef struct symbol {
+  char *name; // var or func id
   char *symbolType; // var or func
   char *varFuncName; // var or func name
-  char *name; // var or func id
   int scope;
+  int originScope;
   UT_hash_handle hh;
 }Symbol;
 
 Symbol *symbolTable = NULL;
 
-void addSymbol(char *name, char *symbolType, char *varFuncName, int scope) {
+void addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int originScope) {
   struct symbol *s;
   
   HASH_FIND_STR(symbolTable, name, s);
@@ -261,6 +276,7 @@ void addSymbol(char *name, char *symbolType, char *varFuncName, int scope) {
     s -> symbolType = symbolType;
     s -> varFuncName = varFuncName;
     s -> scope = scope;
+    s -> originScope = originScope;
     HASH_ADD_STR(symbolTable, name, s);
   } else {
      if (s -> scope != scope) {
@@ -269,6 +285,7 @@ void addSymbol(char *name, char *symbolType, char *varFuncName, int scope) {
       s -> symbolType = symbolType;
       s -> varFuncName = varFuncName;
       s -> scope = scope;
+      s -> originScope = originScope;
       HASH_ADD_STR(symbolTable, name, s);
     } else {
       printf("cannot add symbol to table\n");
@@ -276,11 +293,19 @@ void addSymbol(char *name, char *symbolType, char *varFuncName, int scope) {
   }
 }
 
-struct symbol *findSymbol(char *name) {
+struct symbol *findSymbol(char *name, int scope, int originScope) {
     struct symbol *s;
 
-    HASH_FIND_STR(symbolTable, name, s); 
-    return s;
+    for (s = symbolTable; s != NULL; s = s -> hh.next){
+    if ((strcmp(s -> name, name) == 0 && s -> scope == scope) && (strcmp(s -> symbolType, "var") == 0 || strcmp(s -> symbolType, "param") == 0)){
+      return s;
+    } else {
+      if ((strcmp(s -> name, name) == 0 && s -> scope == originScope) && strcmp(s -> symbolType, "var") == 0){
+        return s;
+      }
+    }
+  }
+  return NULL;
 }
 
 
@@ -297,12 +322,12 @@ void printSymbols() {
     Symbol *s;
 
     for (s = symbolTable; s != NULL; s = s -> hh.next) {
-        printf("|   %-16s    |    %-24s     |      %-20s    |    %d    |\n", s -> name, s -> symbolType, s -> varFuncName, s -> scope);
+        printf("|   %-16s    |    %-24s     |      %-20s    |    %-3d    |    %d    |\n", s -> name, s -> symbolType, s -> varFuncName, s -> scope, s -> originScope);
     }
 }
 
 
-void addSymbol(char *name, char *symbolType, char *varFuncName, int scope);
+void addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int originScope);
 void freeSymbols();
 void printSymbols();
 extern Symbol *symbol;
@@ -331,6 +356,11 @@ void freeStack() {
   while(!STACK_EMPTY(stackScope))
     popStack();
 }
+
+void pushStack(int value);
+void popStack();
+void freeStack();
+extern Scope *stackScope;
 
 %}  
 
@@ -397,20 +427,20 @@ varDeclaration:
   ;
 
 funcDeclaration:  
-    TYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value);} stmtList ENDFUNC {
+    TYPE ID PARENL {parentScope = STACK_TOP(stackScope) -> value; scope++; pushStack(scope);} params PARENR STFUNC {addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parentScope);} stmtList ENDFUNC {
       $$ = createNode4("TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC", createNode0($1), createNode0($2), $5, $9);
       popStack();
   }
-  | TYPE ID PARENL {scope; pushStack(scope);} PARENR STFUNC {addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value);} stmtList ENDFUNC {
+  | TYPE ID PARENL {parentScope = STACK_TOP(stackScope) -> value; scope; pushStack(scope);} PARENR STFUNC {addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parentScope);} stmtList ENDFUNC {
     
       $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $8); 
       popStack();                                                                      
   }
-  | TYPE LISTTYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value);} stmtList ENDFUNC{
+  | TYPE LISTTYPE ID PARENL {parentScope = STACK_TOP(stackScope) -> value; scope++; pushStack(scope);} params PARENR STFUNC {addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parentScope);} stmtList ENDFUNC{
       $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $6, $10);
       popStack();
   }   
-  | TYPE LISTTYPE ID PARENL {scope; pushStack(scope);} PARENR STFUNC {addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value);} stmtList ENDFUNC{
+  | TYPE LISTTYPE ID PARENL {parentScope = STACK_TOP(stackScope) -> value; scope; pushStack(scope);} PARENR STFUNC {addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parentScope);} stmtList ENDFUNC{
       $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $9);
       popStack();
     }
@@ -418,14 +448,18 @@ funcDeclaration:
 
 simpleVarDeclaration:
     TYPE ID {
+
+      parentScope = STACK_TOP(stackScope) -> value;
       pushStack(scope);
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
-      addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value);
+      addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value, parentScope);
       popStack();
       }
     | TYPE LISTTYPE ID {
+
+      parentScope = STACK_TOP(stackScope) -> value;
       pushStack(scope);
-      addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value);
+      addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value, parentScope);
       $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
       popStack();
     }
@@ -442,8 +476,21 @@ params:
   ;
 
 param:
-    simpleVarDeclaration {
-      $$ = createNode1("simpleVarDeclaration", $1);
+    TYPE ID {
+
+      parentScope = STACK_TOP(stackScope) -> value;
+      pushStack(scope);
+      $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
+      addSymbol($2, "param", $1, STACK_TOP(stackScope) -> value, parentScope);
+      popStack();
+      }
+    | TYPE LISTTYPE ID {
+
+      parentScope = STACK_TOP(stackScope) -> value;
+      pushStack(scope);
+      addSymbol($3, "param", $2, STACK_TOP(stackScope) -> value, parentScope);
+      $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
+      popStack();
     }
   ;
 
@@ -585,7 +632,13 @@ expression:
 
 assignExp:
     ID ASSIGN expression {
-      $$ = createNode3("ID ASSIGN expression", createNode0($1), createNode0($2), $3);
+      if (findSymbol($1, scope, parentScope) != NULL)
+        $$ = createNode3("ID ASSIGN expression", createNode0($1), createNode0($2), $3);
+      else{
+        printf("Semantic error");
+        printf("Var: <%s> Not Declared, line %d, column %d\n\n", $1, line, wordPosition);
+        $$ = createNodeE();
+      }
     }
   ; 
     
@@ -771,7 +824,7 @@ int main(int argc, char *argv[]) {
   // #ifdef YYDEBUG
   // yydebug = 1;
   // #endif
-
+  pushStack(0);
   printf("\n\n#### beginning ####\n\n");
   printf("------------------------Syntax analysis---------------------\n");
   abstractSyntaxTree = NULL;

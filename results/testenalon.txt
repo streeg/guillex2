@@ -130,12 +130,16 @@ Id: 'read_list' at line: 36, column: 9
 Id: 'n' at line: 36, column: 19
 ')' at line: 36, column: 20
 ';' at line: 36, column: 21
+Semantic errorVar: <IL> Not Declared, line 36, column 22
+
 Id: 'FL' at line: 37, column: 3
 '=' at line: 37, column: 6
 Id: 'succ' at line: 37, column: 8
 Keyword [MAP]: '>>' at line: 37, column: 13
 Id: 'IL' at line: 37, column: 16
 ';' at line: 37, column: 18
+Semantic errorVar: <FL> Not Declared, line 37, column 19
+
 Id: 'FL10' at line: 39, column: 3
 '=' at line: 39, column: 8
 Id: 'leq_10' at line: 39, column: 10
@@ -234,21 +238,21 @@ Integer: '0' at line: 52, column: 10
 
 --------------------------------symbols--------------------------------
 
-|   IL                  |    var                          |      list                    |    0    |
-|   FL                  |    var                          |      list                    |    0    |
-|   n                   |    var                          |      int                     |    1    |
-|   read_list           |    func                         |      list                    |    1    |
-|   i                   |    var                          |      int                     |    1    |
-|   new                 |    var                          |      list                    |    1    |
-|   elem                |    var                          |      int                     |    1    |
-|   i                   |    var                          |      int                     |    2    |
-|   succ                |    func                         |      float                   |    2    |
-|   x                   |    var                          |      float                   |    3    |
-|   leq_10              |    func                         |      int                     |    3    |
-|   main                |    func                         |      int                     |    3    |
-|   n                   |    var                          |      int                     |    3    |
-|   FL10                |    var                          |      list                    |    3    |
-|   AUXL                |    var                          |      list                    |    3    |
+|   IL                  |    var                          |      list                    |    0      |    0    |
+|   FL                  |    var                          |      list                    |    0      |    0    |
+|   n                   |    param                        |      int                     |    1      |    1    |
+|   read_list           |    func                         |      list                    |    1      |    1    |
+|   i                   |    var                          |      int                     |    1      |    1    |
+|   new                 |    var                          |      list                    |    1      |    1    |
+|   elem                |    var                          |      int                     |    1      |    1    |
+|   i                   |    param                        |      int                     |    2      |    2    |
+|   succ                |    func                         |      float                   |    2      |    2    |
+|   x                   |    param                        |      float                   |    3      |    3    |
+|   leq_10              |    func                         |      int                     |    3      |    3    |
+|   main                |    func                         |      int                     |    3      |    0    |
+|   n                   |    var                          |      int                     |    3      |    3    |
+|   FL10                |    var                          |      list                    |    3      |    3    |
+|   AUXL                |    var                          |      list                    |    3      |    3    |
 
 
 --------------------------------tree--------------------------------
@@ -301,13 +305,11 @@ declarationsList declaration
 
 ----------->   param
 
------------->   simpleVarDeclaration
+------------>   TYPE ID
 
-------------->   TYPE ID
+------------->   int
 
--------------->   int
-
---------------->   n
+-------------->   n
 
 ------------>   stmtList primitiveStmt
 
@@ -585,13 +587,11 @@ declarationsList declaration
 
 --------->   param
 
----------->   simpleVarDeclaration
+---------->   TYPE ID
 
------------>   TYPE ID
+----------->   int
 
------------->   int
-
-------------->   i
+------------>   i
 
 ---------->   primitiveStmt
 
@@ -639,13 +639,11 @@ declarationsList declaration
 
 -------->   param
 
---------->   simpleVarDeclaration
+--------->   TYPE ID
 
----------->   TYPE ID
+---------->   float
 
------------>   float
-
------------->   x
+----------->   x
 
 --------->   primitiveStmt
 
@@ -757,70 +755,14 @@ declarationsList declaration
 
 --------------->   assignExp
 
----------------->   ID ASSIGN expression
-
------------------>   IL
-
------------------->   =
-
-------------------->   simpleExp
-
--------------------->   binLogicalExp
-
---------------------->   relationalExp
-
----------------------->   sumExp
-
------------------------>   mulExp
-
------------------------->   factor
-
-------------------------->   fCall
-
--------------------------->   ID PARENL callParams PARENR
-
---------------------------->   read_list
-
----------------------------->   simpleExp
-
------------------------------>   binLogicalExp
-
------------------------------->   relationalExp
-
-------------------------------->   sumExp
-
--------------------------------->   mulExp
-
---------------------------------->   factor
-
----------------------------------->   ID
-
------------------------------------>   n
-
+----------------
 ------------>   exprStmt
 
 ------------->   expression SEMIC
 
 -------------->   assignExp
 
---------------->   ID ASSIGN expression
-
----------------->   FL
-
------------------>   =
-
------------------->   listExp
-
-------------------->   mapFilterOps
-
--------------------->   ID MAP ID SEMIC
-
---------------------->   succ
-
----------------------->   >>
-
------------------------>   IL
-
+---------------
 ----------->   exprStmt
 
 ------------>   expression SEMIC

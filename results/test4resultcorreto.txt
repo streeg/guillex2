@@ -86,13 +86,13 @@ Id: 'c' at line: 21, column: 12
 
 --------------------------------symbols--------------------------------
 
-|   c                   |    var                          |      int                     |    0    |
-|   d                   |    var                          |      float                   |    0    |
-|   main                |    func                         |      int                     |    0    |
-|   a                   |    var                          |      int                     |    0    |
-|   b                   |    var                          |      int                     |    0    |
-|   a                   |    var                          |      int                     |    1    |
-|   somadois            |    func                         |      int                     |    1    |
+|   c                   |    var                          |      int                     |    0      |    0    |
+|   d                   |    var                          |      float                   |    0      |    0    |
+|   main                |    func                         |      int                     |    0      |    0    |
+|   a                   |    var                          |      int                     |    0      |    0    |
+|   b                   |    var                          |      int                     |    0      |    0    |
+|   a                   |    param                        |      int                     |    1      |    1    |
+|   somadois            |    func                         |      int                     |    1      |    1    |
 
 
 --------------------------------tree--------------------------------
@@ -399,13 +399,11 @@ declarationsList declaration
 
 ------->   param
 
--------->   simpleVarDeclaration
+-------->   TYPE ID
 
---------->   TYPE ID
+--------->   int
 
----------->   int
-
------------>   a
+---------->   a
 
 -------->   stmtList primitiveStmt
 

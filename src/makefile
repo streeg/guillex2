@@ -28,4 +28,5 @@ test:
 	./tradutor ../tests/testnalon.c > ../results/testenalon.txt
 	./tradutor ../tests/test1incorreto.c > ../results/test1resultincorreto.txt
 	./tradutor ../tests/test2incorreto.c > ../results/test2resultincorreto.txt
+	./tradutor ../tests/test3incorreto.c > ../results/test3resultincorreto.txt
 	

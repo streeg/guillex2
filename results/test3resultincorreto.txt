@@ -1,0 +1,46 @@
+
+
+#### beginning ####
+
+------------------------Syntax analysis---------------------
+Type: 'int' on line: 1, column: 1
+Id: 'main' at line: 1, column: 5
+'(' at line: 1, column: 9
+')' at line: 1, column: 10
+'{' on line: 1, column: 11
+Type: 'float' on line: 2, column: 5
+Id: 'i' at line: 2, column: 11
+';' at line: 2, column: 12
+Id: 'i' at line: 3, column: 5
+'=' at line: 3, column: 7
+Id: 'a' at line: 3, column: 9
+';' at line: 3, column: 10
+Id: 'aa' at line: 4, column: 5
+'=' at line: 4, column: 8
+Id: 'a' at line: 4, column: 10
+';' at line: 4, column: 11
+Semantic errorVar: <aa> Not Declared, line 4, column 12
+
+Id: 'fff' at line: 5, column: 7
+'=' at line: 5, column: 11
+Integer: '2' at line: 5, column: 13
+';' at line: 5, column: 14
+Semantic errorVar: <fff> Not Declared, line 5, column 15
+
+Id: 'listF' at line: 6, column: 7
+'=' at line: 6, column: 13
+Id: 'listD' at line: 6, column: 15
+';' at line: 6, column: 20
+Semantic errorVar: <listF> Not Declared, line 6, column 21
+
+'}' at line: 7, column: 5
+Type: 'float' on line: 8, column: 5
+'*' at line: 8, column: 10
+syntax error, unexpected MULT, expecting ID or LISTTYPE
+syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 8, coluna: 11
+Id: 'b' at line: 8, column: 12
+';' at line: 8, column: 13
+Semantic error
+
+#### EOF ####
+

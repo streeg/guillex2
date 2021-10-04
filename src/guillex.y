@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../lib/uthash.h"
+#include "../lib/utstack.h"
 
 
 extern int yylex();
@@ -20,7 +21,7 @@ extern int line;
 extern int wordPosition;
 extern FILE* yyin;
 int errors = 0; 
-int symbolIdCounter = 0;
+int scope = 0;
 
 
 
@@ -241,30 +242,45 @@ void printAndFreeTree(int indentCount, Node *node);
 Node *abstractSyntaxTree = NULL;
 
 typedef struct symbol {
-  int id;
   char *symbolType; // var or func
   char *varFuncName; // var or func name
-  char *nameId; // var or func id
+  char *name; // var or func id
   int scope;
   UT_hash_handle hh;
 }Symbol;
 
 Symbol *symbolTable = NULL;
 
-void addSymbol(int id, char *nameId, char *symbolType, char *varFuncName) {
+void addSymbol(char *name, char *symbolType, char *varFuncName, int scope) {
   struct symbol *s;
   
-  HASH_FIND_INT(symbolTable, &id, s);
+  HASH_FIND_STR(symbolTable, name, s);
   if (s == NULL){
     s = (Symbol*)malloc(sizeof(Symbol));
-    s -> id = id;
-    s -> nameId = nameId;
+    s -> name = name;
     s -> symbolType = symbolType;
     s -> varFuncName = varFuncName;
-    HASH_ADD_INT(symbolTable, id, s);
+    s -> scope = scope;
+    HASH_ADD_STR(symbolTable, name, s);
   } else {
-    printf("cannot add symbol to table\n");
+     if (s -> scope != scope) {
+      s = (Symbol*)malloc(sizeof(Symbol));
+      s -> name = name;
+      s -> symbolType = symbolType;
+      s -> varFuncName = varFuncName;
+      s -> scope = scope;
+      HASH_ADD_STR(symbolTable, name, s);
+    } else {
+      printf("cannot add symbol to table\n");
+    }
   }
+}
+
+struct symbol *findSymbol(char *name) {
+    struct symbol *s;
+
+    HASH_FIND_STR(symbolTable, name, s); 
+    return s;
 }
 
 
@@ -281,15 +297,41 @@ void printSymbols() {
     Symbol *s;
 
     for (s = symbolTable; s != NULL; s = s -> hh.next) {
-        printf("|   %d    |    %s     |      %s    |    %s    |\n", s -> id, s -> nameId, s -> symbolType, s -> varFuncName);
+        printf("|   %-16s    |    %-24s     |      %-20s    |    %d    |\n", s -> name, s -> symbolType, s -> varFuncName, s -> scope);
     }
 }
 
 
-void addSymbol(int id, char *name, char *symbolType, char *varFuncName);
+void addSymbol(char *name, char *symbolType, char *varFuncName, int scope);
 void freeSymbols();
 void printSymbols();
 extern Symbol *symbol;
+
+
+typedef struct scope {
+    int value;
+    struct scope *next;
+} Scope;
+
+Scope *stackScope = NULL;
+
+void pushStack(int value) {
+  Scope *scope = (Scope*)malloc(sizeof(Scope));
+  scope -> value = value;
+  STACK_PUSH(stackScope, scope);
+}
+
+void popStack() {
+  Scope *scope;
+  STACK_POP(stackScope, scope);
+  free(scope);
+}
+
+void freeStack() {
+  while(!STACK_EMPTY(stackScope))
+    popStack();
+}
+
 %}  
 
 %union{
@@ -355,37 +397,32 @@ varDeclaration:
   ;
 
 funcDeclaration:  
-    TYPE ID PARENL params PARENR compoundStmt {
-      addSymbol(symbolIdCounter, $2, "func", $1);
-      symbolIdCounter++;
-      $$ = createNode4("TYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0($2), $4, $6);
+    TYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value);} stmtList ENDFUNC {
+      $$ = createNode4("TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC", createNode0($1), createNode0($2), $5, $9);
+      popStack();
   }
-  | TYPE ID PARENL PARENR compoundStmt {
-    addSymbol(symbolIdCounter, $2, "func", $1);
-    symbolIdCounter++;
-    $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $5);                                                                       
+  | TYPE ID PARENL {scope; pushStack(scope);} PARENR STFUNC {addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value);} stmtList ENDFUNC {
+    
+      $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $8); 
+      popStack();                                                                      
   }
-  | TYPE LISTTYPE ID PARENL params PARENR compoundStmt{
-      addSymbol(symbolIdCounter, $3, "func", $2);
-      symbolIdCounter++;
-      $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $5, $7);
+  | TYPE LISTTYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value);} stmtList ENDFUNC{
+      $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $6, $10);
+      popStack();
   }   
-  | TYPE LISTTYPE ID PARENL PARENR compoundStmt{
-    addSymbol(symbolIdCounter, $3, "func", $2);
-      symbolIdCounter++;
-      $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $6);
+  | TYPE LISTTYPE ID PARENL {scope; pushStack(scope);} PARENR STFUNC {addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value);} stmtList ENDFUNC{
+      $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $9);
+      popStack();
     }
   ;
 
 simpleVarDeclaration:
     TYPE ID {
-      addSymbol(symbolIdCounter, $2, "var", $1);
-      symbolIdCounter++;
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
+      // addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value);
       }
     | TYPE LISTTYPE ID {
-      addSymbol(symbolIdCounter, $3, "var", $2);
-      symbolIdCounter++;
+      //addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value);
       $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
     }
     

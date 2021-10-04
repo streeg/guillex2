@@ -32,9 +32,7 @@ Constant: 'NIL' at line: 6, column: 15
 
 --------------------------------symbols--------------------------------
 
-|   0    |    x     |      var    |    int    |
-|   1    |    newList     |      var    |    list    |
-|   2    |    main     |      func    |    int    |
+|   main                |    func                         |      int                     |    0    |
 
 
 --------------------------------tree--------------------------------
@@ -61,53 +59,11 @@ declarationsList declaration
 
 ------>   main
 
-------->   compoundStmt
+------->   stmtList primitiveStmt
 
 -------->   stmtList primitiveStmt
 
---------->   stmtList primitiveStmt
-
----------->   primitiveStmt
-
------------>   exprStmt
-
------------->   expression SEMIC
-
-------------->   assignExp
-
--------------->   ID ASSIGN expression
-
---------------->   x
-
----------------->   =
-
------------------>   simpleExp
-
------------------->   binLogicalExp
-
-------------------->   relationalExp
-
--------------------->   sumExp
-
---------------------->   mulExp
-
----------------------->   factor
-
------------------------>   constOp
-
------------------------->   10
-
------------>   varDeclaration
-
------------->   simpleVarDeclaration
-
-------------->   TYPE ID
-
--------------->   int
-
---------------->   list
-
----------------->   newList
+--------->   primitiveStmt
 
 ---------->   exprStmt
 
@@ -117,7 +73,7 @@ declarationsList declaration
 
 ------------->   ID ASSIGN expression
 
--------------->   newList
+-------------->   x
 
 --------------->   =
 
@@ -135,4 +91,44 @@ declarationsList declaration
 
 ---------------------->   constOp
 
------------------------>   NIL
+----------------------->   10
+
+---------->   varDeclaration
+
+----------->   simpleVarDeclaration
+
+------------>   TYPE ID
+
+------------->   int
+
+-------------->   list
+
+--------------->   newList
+
+--------->   exprStmt
+
+---------->   expression SEMIC
+
+----------->   assignExp
+
+------------>   ID ASSIGN expression
+
+------------->   newList
+
+-------------->   =
+
+--------------->   simpleExp
+
+---------------->   binLogicalExp
+
+----------------->   relationalExp
+
+------------------>   sumExp
+
+------------------->   mulExp
+
+-------------------->   factor
+
+--------------------->   constOp
+
+---------------------->   NIL

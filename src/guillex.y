@@ -308,6 +308,22 @@ struct symbol *findSymbol(char *name, int scope, int originScope) {
   return NULL;
 }
 
+extern int findSymbolMain(char *name) {
+    struct symbol *s;
+    int hasMain = 0;
+
+    for (s = symbolTable; s != NULL; s = s -> hh.next){
+      if ((strcmp(s -> name, "main") == 0 && (strcmp(s -> symbolType, "func") == 0 ))){
+        hasMain = 1;
+      }
+    }
+    if(!hasMain){
+      printf("Semantic Error --> Undefined reference to 'main'\n");
+        return 1;
+    }
+  return 0;
+}
+
 
 void freeSymbols() {
   Symbol *currentSymbol, *tmp;
@@ -835,6 +851,7 @@ int main(int argc, char *argv[]) {
       yyin = file;
       yyparse();
       printf("\n\n#### EOF ####\n\n");
+      errors += findSymbolMain("main");
       if(errors == 0){
         printf("\n\n--------------------------------symbols--------------------------------\n\n");
         printSymbols();

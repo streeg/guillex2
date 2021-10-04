@@ -28,3 +28,4 @@ Semantic error
 
 #### EOF ####
 
+Semantic Error --> Undefined reference to 'main'

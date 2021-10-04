@@ -156,6 +156,7 @@ Id: 'AUXL' at line: 41, column: 16
 Type: 'int' on line: 42, column: 5
 Id: 'n' at line: 42, column: 9
 ';' at line: 42, column: 10
+cannot add symbol to table
 Id: 'n' at line: 42, column: 12
 '=' at line: 42, column: 14
 Integer: '0' at line: 42, column: 16
@@ -233,10 +234,21 @@ Integer: '0' at line: 52, column: 10
 
 --------------------------------symbols--------------------------------
 
+|   IL                  |    var                          |      list                    |    0    |
+|   FL                  |    var                          |      list                    |    0    |
+|   n                   |    var                          |      int                     |    1    |
 |   read_list           |    func                         |      list                    |    1    |
+|   i                   |    var                          |      int                     |    1    |
+|   new                 |    var                          |      list                    |    1    |
+|   elem                |    var                          |      int                     |    1    |
+|   i                   |    var                          |      int                     |    2    |
 |   succ                |    func                         |      float                   |    2    |
+|   x                   |    var                          |      float                   |    3    |
 |   leq_10              |    func                         |      int                     |    3    |
 |   main                |    func                         |      int                     |    3    |
+|   n                   |    var                          |      int                     |    3    |
+|   FL10                |    var                          |      list                    |    3    |
+|   AUXL                |    var                          |      list                    |    3    |
 
 
 --------------------------------tree--------------------------------

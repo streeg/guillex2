@@ -418,12 +418,16 @@ funcDeclaration:
 
 simpleVarDeclaration:
     TYPE ID {
+      pushStack(scope);
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
-      // addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value);
+      addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value);
+      popStack();
       }
     | TYPE LISTTYPE ID {
-      //addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value);
+      pushStack(scope);
+      addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value);
       $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
+      popStack();
     }
     
   ;

@@ -15,6 +15,7 @@ Type: 'int' on line: 5, column: 5
 ListType: 'list' on line: 5, column: 9
 Id: 'x' at line: 5, column: 14
 ';' at line: 5, column: 15
+cannot add symbol to table
 Id: 'new' at line: 6, column: 3
 '=' at line: 6, column: 7
 Constant: 'NIL' at line: 6, column: 9
@@ -70,7 +71,9 @@ Integer: '0' at line: 14, column: 12
 
 --------------------------------symbols--------------------------------
 
+|   x                   |    var                          |      int                     |    0    |
 |   main                |    func                         |      int                     |    0    |
+|   elem                |    var                          |      int                     |    0    |
 
 
 --------------------------------tree--------------------------------

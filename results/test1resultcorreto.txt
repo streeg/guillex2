@@ -14,6 +14,7 @@ Id: 'main' at line: 3, column: 5
 Type: 'int' on line: 4, column: 5
 Id: 'x' at line: 4, column: 9
 ';' at line: 4, column: 10
+cannot add symbol to table
 Keyword [FOR]: 'for' at line: 5, column: 5
 '(' at line: 5, column: 9
 Id: 'x' at line: 5, column: 10
@@ -45,6 +46,7 @@ Integer: '1' at line: 6, column: 17
 
 --------------------------------symbols--------------------------------
 
+|   x                   |    var                          |      int                     |    0    |
 |   main                |    func                         |      int                     |    0    |
 
 

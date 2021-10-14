@@ -2,30 +2,44 @@
 
 #### beginning ####
 
-------------------------Syntax analysis---------------------
+------------------------Semantic analysis---------------------
 
 ERROR!!
 # at line: 1, column: 1
 
+syntax error, unexpected ERRORTOKEN, expecting TYPE
+syntax error, unexpected ERRORTOKEN, expecting TYPE, linha: 1, coluna: 2
 Type: 'int' on line: 2, column: 1
+syntax error, unexpected ERRORTOKEN, expecting TYPE
+syntax error, unexpected ERRORTOKEN, expecting TYPE, linha: 2, coluna: 4
 Id: 'a' at line: 2, column: 5
 ',' at line: 2, column: 6
-syntax error, unexpected COMMA, expecting SEMIC or PARENL
-syntax error, unexpected COMMA, expecting SEMIC or PARENL, linha: 2, coluna: 7
 Type: 'int' on line: 2, column: 8
-Semantic errorListType: 'list' on line: 2, column: 12
+syntax error, unexpected ERRORTOKEN, expecting TYPE
+syntax error, unexpected ERRORTOKEN, expecting TYPE, linha: 2, coluna: 11
+ListType: 'list' on line: 2, column: 12
 Id: 'b' at line: 2, column: 17
 ';' at line: 2, column: 18
 Type: 'int' on line: 4, column: 1
 Id: 'main' at line: 4, column: 5
 '(' at line: 4, column: 9
 ')' at line: 4, column: 10
-'{' on line: 4, column: 11
-'}' at line: 5, column: 1
-syntax error, unexpected ENDFUNC
-syntax error, unexpected ENDFUNC, linha: 5, coluna: 2
-Semantic error
+'{' on line: 5, column: 1
+Id: 'soma2' at line: 7, column: 5
+'(' at line: 7, column: 10
+')' at line: 7, column: 11
+';' at line: 7, column: 12
+Semantic Error
+Function soma2 not declared, line 7, column 13
+
+'}' at line: 8, column: 1
+Semantic Error
+function main with wrong return, line 8, column 2
+
+
 
 #### EOF ####
 
-Semantic Error --> Undefined reference to 'main'
+
+
+There were 6 errors in the file

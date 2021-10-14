@@ -2,7 +2,7 @@
 
 #### beginning ####
 
-------------------------Syntax analysis---------------------
+------------------------Semantic analysis---------------------
 Type: 'int' on line: 1, column: 1
 Id: 'min' at line: 1, column: 5
 '(' at line: 1, column: 8
@@ -17,6 +17,9 @@ Id: 'i' at line: 3, column: 5
 '=' at line: 3, column: 7
 Id: 'a' at line: 3, column: 9
 ';' at line: 3, column: 10
+Semantic Error
+Var i from type float receiving invalid type, line 3, column 11
+
 Id: 'aa' at line: 4, column: 5
 '=' at line: 4, column: 8
 Id: 'a' at line: 4, column: 10
@@ -31,20 +34,25 @@ Id: 'b' at line: 5, column: 12
 ';' at line: 5, column: 13
 '}' at line: 6, column: 1
 Type: 'int' on line: 8, column: 1
-Semantic errorId: 'maini' at line: 8, column: 5
+syntax error, unexpected MULT, expecting ID or LISTTYPE
+syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 8, coluna: 4
+Id: 'maini' at line: 8, column: 5
 '(' at line: 8, column: 10
 Keyword [HEADLIST]: '?' at line: 8, column: 11
-syntax error, unexpected HEADLIST, expecting TYPE or PARENR
-syntax error, unexpected HEADLIST, expecting TYPE or PARENR, linha: 8, coluna: 12
 ')' at line: 8, column: 12
+syntax error, unexpected MULT, expecting ID or LISTTYPE
+syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 8, coluna: 13
 '{' on line: 8, column: 13
 '}' at line: 10, column: 1
 
 ERROR!!
 @ at line: 11, column: 5
 
-Semantic error
+
 
 #### EOF ####
 
 Semantic Error --> Undefined reference to 'main'
+
+
+There were 5 errors in the file

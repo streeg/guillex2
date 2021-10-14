@@ -1,15 +1,15 @@
-int x;
+int main()
+{
 
-int main(){
-
-    int list x;
-	new = NIL;
-    for (i = 0; i < n ; i = i + 1) {
-		int elem;
-		writeln("Digite o elemento da lista: ");
+	int list x;
+	int i;
+	int n;
+	int elem;
+	for (i = 0; i < n; i = i + 1)
+	{
+		writeln(n);
 		read(elem);
-		elem:new;
-		new = elem;
+		write("oi");
 	}
-    return 0;
+	return 0;
 }

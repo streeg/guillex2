@@ -2,7 +2,7 @@
 
 #### beginning ####
 
-------------------------Syntax analysis---------------------
+------------------------Semantic analysis---------------------
 Type: 'int' on line: 1, column: 1
 Id: 'x' at line: 1, column: 5
 ';' at line: 1, column: 6
@@ -15,6 +15,9 @@ Id: 'x' at line: 4, column: 5
 '=' at line: 4, column: 7
 Integer: '10' at line: 4, column: 9
 ';' at line: 4, column: 11
+Semantic Error
+Var x from type int receiving invalid type, line 4, column 12
+
 Type: 'int' on line: 5, column: 5
 ListType: 'list' on line: 5, column: 9
 Id: 'newList' at line: 5, column: 14
@@ -23,18 +26,28 @@ Id: 'newList' at line: 6, column: 5
 '=' at line: 6, column: 13
 Constant: 'NIL' at line: 6, column: 15
 ';' at line: 6, column: 18
+Semantic Error
+Var newList from type list receiving invalid type, line 6, column 19
+
 '}' at line: 7, column: 1
+Semantic Error
+function main with wrong return, line 7, column 2
+
 
 
 #### EOF ####
 
 
 
---------------------------------symbols--------------------------------
+------------------------------------------------------symbols------------------------------------------------
 
-|   x                   |    var                          |      int                     |    0      |    0    |
-|   main                |    func                         |      int                     |    0      |    0    |
-|   newList             |    var                          |      list                    |    0      |    0    |
+
+
+|         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |
+
+|   x                   |    var                          |      int                     |         0            |         0          |
+|   main                |    func                         |      int                     |         0            |         0          |
+|   newList             |    var                          |      list                    |         0            |         0          |
 
 
 --------------------------------tree--------------------------------
@@ -72,8 +85,10 @@ declarationsList declaration
 ----------->   expression SEMIC
 
 ------------>   assignExp
+>   0
 
 ------------->   ID ASSIGN expression
+>   0
 
 -------------->   x
 
@@ -112,8 +127,10 @@ declarationsList declaration
 ---------->   expression SEMIC
 
 ----------->   assignExp
+>   assignExp
 
 ------------>   ID ASSIGN expression
+>   ID ASSIGN expression
 
 ------------->   newList
 
@@ -134,3 +151,7 @@ declarationsList declaration
 --------------------->   constOp
 
 ---------------------->   NIL
+
+
+ There is 3 warnings in the file
+

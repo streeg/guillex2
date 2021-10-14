@@ -2,40 +2,50 @@
 
 #### beginning ####
 
-------------------------Syntax analysis---------------------
+------------------------Semantic analysis---------------------
 Type: 'int' on line: 1, column: 1
 Id: 'main' at line: 1, column: 5
 '(' at line: 1, column: 9
 Type: 'int' on line: 1, column: 10
 Id: 'a' at line: 1, column: 14
 ')' at line: 1, column: 15
-'{' on line: 1, column: 16
-Type: 'int' on line: 2, column: 5
-Id: 'i' at line: 2, column: 9
-';' at line: 2, column: 10
-Id: 'i' at line: 3, column: 5
-'=' at line: 3, column: 7
-Integer: '2' at line: 3, column: 9
+'{' on line: 2, column: 1
+Type: 'int' on line: 3, column: 5
+Id: 'i' at line: 3, column: 9
 ';' at line: 3, column: 10
-Integer: '1' at line: 4, column: 5
-'+' at line: 4, column: 6
-Integer: '1' at line: 4, column: 7
-';' at line: 4, column: 8
-Keyword [RETURN]: 'return' at line: 6, column: 5
-Integer: '1' at line: 6, column: 12
-';' at line: 6, column: 13
-'}' at line: 7, column: 1
+Id: 'i' at line: 4, column: 5
+'=' at line: 4, column: 7
+Integer: '2' at line: 4, column: 9
+';' at line: 4, column: 10
+Semantic Error
+Var i from type int receiving invalid type, line 4, column 11
+
+Integer: '1' at line: 5, column: 5
+'+' at line: 5, column: 7
+Integer: '1' at line: 5, column: 9
+';' at line: 5, column: 10
+Keyword [RETURN]: 'return' at line: 7, column: 5
+Integer: '1' at line: 7, column: 12
+';' at line: 7, column: 13
+'}' at line: 8, column: 1
+Semantic Error
+function main with wrong return, line 8, column 2
+
 
 
 #### EOF ####
 
 
 
---------------------------------symbols--------------------------------
+------------------------------------------------------symbols------------------------------------------------
 
-|   a                   |    param                        |      int                     |    1      |    1    |
-|   main                |    func                         |      int                     |    1      |    1    |
-|   i                   |    var                          |      int                     |    1      |    1    |
+
+
+|         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |
+
+|   a                   |    param                        |      int                     |         1            |         0          |
+|   main                |    func                         |      int                     |         1            |         1          |
+|   i                   |    var                          |      int                     |         1            |         0          |
 
 
 --------------------------------tree--------------------------------
@@ -81,8 +91,10 @@ declaration
 ------------>   expression SEMIC
 
 ------------->   assignExp
+>   0
 
 -------------->   ID ASSIGN expression
+>   0
 
 --------------->   i
 
@@ -157,3 +169,7 @@ declaration
 ------------------>   constOp
 
 ------------------->   1
+
+
+ There is 2 warnings in the file
+

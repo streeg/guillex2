@@ -17,6 +17,7 @@
 newline   "\n"
 space     " "
 tab       "\t"
+carriage  "\r"
 
 letter    [a-zA-Z]
 digit     [0-9]
@@ -26,7 +27,7 @@ nil       "NIL"
 integer   -?{digit}+
 decimal   -?{digit}*[.]{digit}+
 string    \"(\\.|[^"\\])*\" 
-type      "int"|"float"
+type      "int"|"float"|"void"
 listtype  "list"
 comment   "//".*
 
@@ -94,28 +95,24 @@ comma     [,]
 {add}     {
             printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return ADD;
           }
 
 {sub}     {
             printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return SUB;
           }
 
 {mult}    {
             printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return MULT;
           }
 
 {div}     {
             printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return DIV;
           }
 
@@ -184,7 +181,6 @@ comma     [,]
 {assign}  {
             printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return ASSIGN;            
           }
 
@@ -195,56 +191,48 @@ comma     [,]
 {and}     {
             printf("OP [AND]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return AND;
           }
 
 {or}      {
             printf("OP [OR]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return OR;
           }
 
 {smaller} {
             printf("OP [SMALLER THAN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return SMALLER;
           }
 
 {greater} {
             printf("OP [GREATER THAN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return GREATER;
           }
 
 {smalleq} {
             printf("OP [SMALLER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return SMALLEQ;
           }
 
 {greateq} {
             printf("OP [GREATER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return GREATEQ;
           }
 
 {equals}  {
             printf("OP [EQUALS]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return EQUALS;
           }
 
 {diff}    {
             printf("OP [IS DIFFERENT]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
             return DIFFERENT;
           }
 
@@ -372,6 +360,7 @@ comma     [,]
             printf("\nERROR!!\n");
             printf("%s at line: %d, column: %d\n\n", yytext, line, wordPosition);
             wordPosition += strlen(yytext);
+            return ERRORTOKEN;
           }
 
 %%

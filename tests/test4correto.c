@@ -1,25 +1,26 @@
+int a;
+int b;
 int c;
 float d;
 
-int main(){
-    int a;
-    int b;
+int resp;
+
+int somadois(int a)
+{
+    a = a + 2;
+    return a;
+}
+
+int main()
+{
 
     a = 20;
     b = 30;
-    write(somadois(a));
-    
+    write("oi");
+    resp = somadois(a);
     c = a + b;
     d = a / b;
     writeln(c);
     writeln(d);
-
+    return 0;
 }
-
-int somadois(int a){
-    a = a + 2;
-    return(c);
-}
-
-
-

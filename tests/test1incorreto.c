@@ -1,5 +1,8 @@
 #
 int a, int list b;
 
-int main(){
+int main()
+{
+
+    soma2();
 }

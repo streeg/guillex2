@@ -31,17 +31,11 @@ Id: 'a' at line: 10, column: 9
 '+' at line: 10, column: 11
 Integer: '2' at line: 10, column: 13
 ';' at line: 10, column: 14
-Semantic Error
-Var a from type int receiving invalid type, line 10, column 15
-
 Keyword [RETURN]: 'return' at line: 11, column: 5
 Id: 'a' at line: 11, column: 12
 ';' at line: 11, column: 13
 '}' at line: 12, column: 1
 Type: 'int' on line: 14, column: 1
-Semantic Error
-function somadois with wrong return, line 14, column 4
-
 Id: 'main' at line: 14, column: 5
 '(' at line: 14, column: 9
 ')' at line: 14, column: 10
@@ -50,16 +44,10 @@ Id: 'a' at line: 17, column: 5
 '=' at line: 17, column: 7
 Integer: '20' at line: 17, column: 9
 ';' at line: 17, column: 11
-Semantic Error
-Var a from type int receiving invalid type, line 17, column 12
-
 Id: 'b' at line: 18, column: 5
 '=' at line: 18, column: 7
 Integer: '30' at line: 18, column: 9
 ';' at line: 18, column: 11
-Semantic Error
-Var b from type int receiving invalid type, line 18, column 12
-
 Keyword [WRITE]: 'write' at line: 19, column: 5
 '(' at line: 19, column: 10
 String: "oi" on line: 19, column: 11
@@ -74,27 +62,18 @@ Id: 'a' at line: 20, column: 21
 ';' at line: 20, column: 23
 Semantic errorFunction: <somadois> has wrong number of parameters, line 20, column 24
 
-Semantic Error
-Var resp from type int receiving invalid type, line 20, column 24
-
 Id: 'c' at line: 21, column: 5
 '=' at line: 21, column: 7
 Id: 'a' at line: 21, column: 9
 '+' at line: 21, column: 11
 Id: 'b' at line: 21, column: 13
 ';' at line: 21, column: 14
-Semantic Error
-Var c from type int receiving invalid type, line 21, column 15
-
 Id: 'd' at line: 22, column: 5
 '=' at line: 22, column: 7
 Id: 'a' at line: 22, column: 9
 '/' at line: 22, column: 11
 Id: 'b' at line: 22, column: 13
 ';' at line: 22, column: 14
-Semantic Error
-Var d from type float receiving invalid type, line 22, column 15
-
 Keyword [WRITELN]: 'writeln' at line: 23, column: 5
 '(' at line: 23, column: 12
 Id: 'c' at line: 23, column: 13
@@ -109,9 +88,6 @@ Keyword [RETURN]: 'return' at line: 25, column: 5
 Integer: '0' at line: 25, column: 12
 ';' at line: 25, column: 13
 '}' at line: 26, column: 1
-Semantic Error
-function main with wrong return, line 27, column 1
-
 
 
 #### EOF ####
@@ -225,10 +201,8 @@ declarationsList declaration
 ------------>   expression SEMIC
 
 ------------->   assignExp
->   0
 
 -------------->   ID ASSIGN expression
->   0
 
 --------------->   a
 
@@ -239,24 +213,19 @@ declarationsList declaration
 ------------------>   binLogicalExp
 
 ------------------->   relationalExp
->   relationalExp
 
 -------------------->   sumExp
->   sumExp
 
 --------------------->   sumExp sumOp mulExp
->   sumExp sumOp mulExp
 
 ---------------------->   mulExp
->   0
 
 ----------------------->   factor
->   0
 
 ------------------------>   ID
->   0
 
--------------------------
+------------------------->   a
+
 ----------------------->   ADD
 
 ------------------------>   +
@@ -278,21 +247,17 @@ declarationsList declaration
 --------------->   binLogicalExp
 
 ---------------->   relationalExp
->   0
 
 ----------------->   sumExp
->   0
 
 ------------------>   mulExp
->   0
 
 ------------------->   factor
->   0
 
 -------------------->   ID
->   0
 
----------------------
+--------------------->   a
+
 --->   funcDeclaration
 
 ---->   TYPE ID PARENL PARENR compoundStmt
@@ -324,10 +289,8 @@ declarationsList declaration
 ----------------->   expression SEMIC
 
 ------------------>   assignExp
->   0
 
 ------------------->   ID ASSIGN expression
->   0
 
 -------------------->   a
 
@@ -354,10 +317,8 @@ declarationsList declaration
 ----------------->   expression SEMIC
 
 ------------------>   assignExp
->   0
 
 ------------------->   ID ASSIGN expression
->   0
 
 -------------------->   b
 
@@ -394,10 +355,8 @@ declarationsList declaration
 --------------->   expression SEMIC
 
 ---------------->   assignExp
->   0
 
 ----------------->   ID ASSIGN expression
->   0
 
 ------------------>   resp
 
@@ -417,17 +376,14 @@ declarationsList declaration
 
 -------------------------->   fCall
 
---------------------------->   (null)
-
+---------------------------
 ------------->   exprStmt
 
 -------------->   expression SEMIC
 
 --------------->   assignExp
->   0
 
 ---------------->   ID ASSIGN expression
->   0
 
 ----------------->   c
 
@@ -438,35 +394,29 @@ declarationsList declaration
 -------------------->   binLogicalExp
 
 --------------------->   relationalExp
->   0
 
 ---------------------->   sumExp
->   0
 
 ----------------------->   sumExp sumOp mulExp
->   0
 
 ------------------------>   mulExp
->   0
 
 ------------------------->   factor
->   0
 
 -------------------------->   ID
->   0
 
----------------------------
+--------------------------->   a
+
 ------------------------->   ADD
 
 -------------------------->   +
 
 -------------------------->   factor
->   0
 
 --------------------------->   ID
->   0
 
-----------------------------
+---------------------------->   b
+
 ------------>   exprStmt
 
 ------------->   expression SEMIC
@@ -484,32 +434,27 @@ declarationsList declaration
 ------------------->   binLogicalExp
 
 -------------------->   relationalExp
->   0
 
 --------------------->   sumExp
->   0
 
 ---------------------->   mulExp
->   0
 
 ----------------------->   mulExp mulOp factor
->   0
 
 ------------------------>   factor
->   0
 
 ------------------------->   ID
->   0
 
---------------------------
+-------------------------->   a
+
 ------------------------->   DIV
 
 -------------------------->   /
 
 -------------------------->   ID
->   0
 
----------------------------
+--------------------------->   b
+
 ----------->   outOp
 
 ------------>   WRITELN PARENL outConst PARENR SEMIC
@@ -521,21 +466,17 @@ declarationsList declaration
 --------------->   binLogicalExp
 
 ---------------->   relationalExp
->   0
 
 ----------------->   sumExp
->   0
 
 ------------------>   mulExp
->   0
 
 ------------------->   factor
->   0
 
 -------------------->   ID
->   0
 
----------------------
+--------------------->   c
+
 ---------->   outOp
 
 ----------->   WRITELN PARENL outConst PARENR SEMIC
@@ -556,7 +497,8 @@ declarationsList declaration
 
 ------------------->   ID
 
---------------------
+-------------------->   d
+
 --------->   returnStmt
 
 ---------->   RETURN expression SEMIC
@@ -580,5 +522,5 @@ declarationsList declaration
 ------------------->   0
 
 
- There is 9 warnings in the file
+ There is 1 warnings in the file
 

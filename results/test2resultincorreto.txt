@@ -17,9 +17,6 @@ Id: 'i' at line: 3, column: 5
 '=' at line: 3, column: 7
 Id: 'a' at line: 3, column: 9
 ';' at line: 3, column: 10
-Semantic Error
-Var i from type float receiving invalid type, line 3, column 11
-
 Id: 'aa' at line: 4, column: 5
 '=' at line: 4, column: 8
 Id: 'a' at line: 4, column: 10

@@ -17,9 +17,6 @@ Id: 'i' at line: 4, column: 5
 '=' at line: 4, column: 7
 Integer: '2' at line: 4, column: 9
 ';' at line: 4, column: 10
-Semantic Error
-Var i from type int receiving invalid type, line 4, column 11
-
 Integer: '1' at line: 5, column: 5
 '+' at line: 5, column: 7
 Integer: '1' at line: 5, column: 9
@@ -28,9 +25,6 @@ Keyword [RETURN]: 'return' at line: 7, column: 5
 Integer: '1' at line: 7, column: 12
 ';' at line: 7, column: 13
 '}' at line: 8, column: 1
-Semantic Error
-function main with wrong return, line 8, column 2
-
 
 
 #### EOF ####
@@ -91,10 +85,8 @@ declaration
 ------------>   expression SEMIC
 
 ------------->   assignExp
->   0
 
 -------------->   ID ASSIGN expression
->   0
 
 --------------->   i
 
@@ -171,5 +163,5 @@ declaration
 ------------------->   1
 
 
- There is 2 warnings in the file
+ There is 0 errors and 0 warnings in the file
 

@@ -15,9 +15,6 @@ Id: 'i' at line: 4, column: 5
 '=' at line: 4, column: 7
 Id: 'a' at line: 4, column: 9
 ';' at line: 4, column: 10
-Semantic Error
-Var i from type float receiving invalid type, line 4, column 11
-
 Id: 'aa' at line: 5, column: 5
 '=' at line: 5, column: 8
 Id: 'a' at line: 5, column: 10
@@ -40,14 +37,8 @@ Id: 'i' at line: 8, column: 5
 '=' at line: 8, column: 7
 Decimal: '0.99' at line: 8, column: 9
 ';' at line: 8, column: 13
-Semantic Error
-Var i from type float receiving invalid type, line 8, column 14
-
 '}' at line: 9, column: 1
 Type: 'float' on line: 10, column: 1
-Semantic Error
-function main with wrong return, line 10, column 6
-
 '*' at line: 10, column: 7
 syntax error, unexpected MULT, expecting ID or LISTTYPE
 syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 10, coluna: 8

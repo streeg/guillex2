@@ -33,9 +33,6 @@ Semantic Error
 Function soma2 not declared, line 7, column 13
 
 '}' at line: 8, column: 1
-Semantic Error
-function main with wrong return, line 8, column 2
-
 
 
 #### EOF ####

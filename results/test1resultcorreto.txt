@@ -25,9 +25,6 @@ Id: 'x' at line: 5, column: 24
 '+' at line: 5, column: 26
 Integer: '1' at line: 5, column: 28
 ')' at line: 5, column: 29
-Semantic Error
-Var x from type int receiving invalid type, line 5, column 30
-
 '{' on line: 6, column: 5
 Id: 'x' at line: 7, column: 9
 '=' at line: 7, column: 11
@@ -35,9 +32,6 @@ Id: 'x' at line: 7, column: 13
 '+' at line: 7, column: 15
 Integer: '1' at line: 7, column: 17
 ';' at line: 7, column: 18
-Semantic Error
-Var x from type int receiving invalid type, line 7, column 19
-
 Keyword [WRITELN]: 'writeln' at line: 8, column: 9
 '(' at line: 8, column: 16
 Id: 'x' at line: 8, column: 17
@@ -81,9 +75,6 @@ Keyword [RETURN]: 'return' at line: 20, column: 5
 Integer: '0' at line: 20, column: 12
 ';' at line: 20, column: 13
 '}' at line: 21, column: 1
-Semantic Error
-function main with wrong return, line 21, column 2
-
 
 
 #### EOF ####
@@ -139,21 +130,17 @@ declarationsList declaration
 ------------->   binLogicalExp
 
 -------------->   relationalExp
->   0
 
 --------------->   sumExp
->   0
 
 ---------------->   mulExp
->   0
 
 ----------------->   factor
->   0
 
 ------------------>   ID
->   0
 
--------------------
+------------------->   x
+
 -------------->   binLogicalExp
 
 --------------->   relationalExp
@@ -161,18 +148,15 @@ declarationsList declaration
 ---------------->   relationalExp relationalOp sumExp
 
 ----------------->   sumExp
->   0
 
 ------------------>   mulExp
->   0
 
 ------------------->   factor
->   0
 
 -------------------->   ID
->   0
 
----------------------
+--------------------->   x
+
 ------------------>   SMALLER
 
 ------------------->   <
@@ -186,7 +170,6 @@ declarationsList declaration
 ---------------------->   5
 
 --------------->   ID ASSIGN expression
->   0
 
 ---------------->   x
 
@@ -197,24 +180,19 @@ declarationsList declaration
 ------------------->   binLogicalExp
 
 -------------------->   relationalExp
->   relationalExp
 
 --------------------->   sumExp
->   sumExp
 
 ---------------------->   sumExp sumOp mulExp
->   sumExp sumOp mulExp
 
 ----------------------->   mulExp
->   0
 
 ------------------------>   factor
->   0
 
 ------------------------->   ID
->   0
 
---------------------------
+-------------------------->   x
+
 ------------------------>   ADD
 
 ------------------------->   +
@@ -240,10 +218,8 @@ declarationsList declaration
 ---------------------->   expression SEMIC
 
 ----------------------->   assignExp
->   0
 
 ------------------------>   ID ASSIGN expression
->   0
 
 ------------------------->   x
 
@@ -254,24 +230,19 @@ declarationsList declaration
 ---------------------------->   binLogicalExp
 
 ----------------------------->   relationalExp
->   relationalExp
 
 ------------------------------>   sumExp
->   sumExp
 
 ------------------------------->   sumExp sumOp mulExp
->   sumExp sumOp mulExp
 
 -------------------------------->   mulExp
->   0
 
 --------------------------------->   factor
->   0
 
 ---------------------------------->   ID
->   0
 
------------------------------------
+----------------------------------->   x
+
 --------------------------------->   ADD
 
 ---------------------------------->   +
@@ -293,21 +264,17 @@ declarationsList declaration
 ------------------------->   binLogicalExp
 
 -------------------------->   relationalExp
->   0
 
 --------------------------->   sumExp
->   0
 
 ---------------------------->   mulExp
->   0
 
 ----------------------------->   factor
->   0
 
 ------------------------------>   ID
->   0
 
--------------------------------
+------------------------------->   x
+
 -------------------->   exprStmt
 
 --------------------->   expression SEMIC
@@ -403,21 +370,17 @@ declarationsList declaration
 -------------------->   binLogicalExp
 
 --------------------->   relationalExp
->   0
 
 ---------------------->   sumExp
->   0
 
 ----------------------->   mulExp
->   0
 
 ------------------------>   factor
->   0
 
 ------------------------->   ID
->   0
 
---------------------------
+-------------------------->   x
+
 -------------->   ELSE primitiveStmt
 
 --------------->   else
@@ -475,21 +438,17 @@ declarationsList declaration
 -------------------------->   binLogicalExp
 
 --------------------------->   relationalExp
->   0
 
 ---------------------------->   sumExp
->   0
 
 ----------------------------->   mulExp
->   0
 
 ------------------------------>   factor
->   0
 
 ------------------------------->   ID
->   0
 
---------------------------------
+-------------------------------->   x
+
 --------->   returnStmt
 
 ---------->   RETURN expression SEMIC
@@ -513,5 +472,5 @@ declarationsList declaration
 ------------------->   0
 
 
- There is 3 warnings in the file
+ There is 0 errors and 0 warnings in the file
 

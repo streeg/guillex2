@@ -849,6 +849,8 @@ assignExp:
     ID ASSIGN expression {
       if (checkIsInScope($1, STACK_TOP(stackScope) -> value)){
         $$ = createNode3("ID ASSIGN expression", createNode0($1), createNode0("="), $3);
+        UT_string *s = create_new_reg(varReg);
+        varDecAssign(utstring_body(s), $3 -> saved);
         $$ -> saved = $1;
     }
       else{

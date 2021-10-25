@@ -1,0 +1,279 @@
+
+
+#### beginning ####
+
+------------------------Semantic analysis---------------------
+Type: 'int' on line: 3, column: 1
+Id: 'main' at line: 3, column: 5
+'(' at line: 3, column: 9
+')' at line: 3, column: 10
+'{' on line: 4, column: 1
+Type: 'int' on line: 5, column: 5
+Id: 'x' at line: 5, column: 9
+';' at line: 5, column: 10
+Type: 'int' on line: 6, column: 5
+Id: 'y' at line: 6, column: 9
+';' at line: 6, column: 10
+Id: 'x' at line: 7, column: 5
+'=' at line: 7, column: 7
+Integer: '1' at line: 7, column: 9
+';' at line: 7, column: 10
+Id: 'x' at line: 8, column: 5
+'=' at line: 8, column: 7
+Id: 'x' at line: 8, column: 9
+'+' at line: 8, column: 11
+Integer: '1' at line: 8, column: 13
+';' at line: 8, column: 14
+Id: 'x' at line: 9, column: 5
+'=' at line: 9, column: 7
+Id: 'x' at line: 9, column: 9
+'+' at line: 9, column: 11
+Integer: '2' at line: 9, column: 13
+';' at line: 9, column: 14
+Id: 'x' at line: 10, column: 5
+'=' at line: 10, column: 7
+Id: 'x' at line: 10, column: 9
+'+' at line: 10, column: 11
+Decimal: '3.3' at line: 10, column: 13
+';' at line: 10, column: 16
+Id: 'x' at line: 12, column: 5
+'=' at line: 12, column: 7
+Id: 'y' at line: 12, column: 9
+';' at line: 12, column: 10
+'}' at line: 13, column: 1
+
+
+#### EOF ####
+
+
+
+------------------------------------------------------symbols------------------------------------------------
+
+
+
+|         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |
+
+|   main                |    func                         |      int                     |         0            |         0          |
+|   x                   |    var                          |      int                     |         0            |         0          |
+|   y                   |    var                          |      int                     |         0            |         0          |
+
+
+--------------------------------tree--------------------------------
+
+
+declaration
+-->   funcDeclaration
+
+--->   TYPE ID PARENL PARENR compoundStmt
+
+---->   int
+
+----->   main
+
+------>   stmtList primitiveStmt
+
+------->   stmtList primitiveStmt
+
+-------->   stmtList primitiveStmt
+
+--------->   stmtList primitiveStmt
+
+---------->   stmtList primitiveStmt
+
+----------->   stmtList primitiveStmt
+
+------------>   primitiveStmt
+
+------------->   varDeclaration
+
+-------------->   simpleVarDeclaration
+
+--------------->   TYPE ID
+
+---------------->   int
+
+----------------->   x
+
+------------->   varDeclaration
+
+-------------->   simpleVarDeclaration
+
+--------------->   TYPE ID
+
+---------------->   int
+
+----------------->   y
+
+------------>   exprStmt
+
+------------->   expression SEMIC
+
+-------------->   assignExp
+
+--------------->   ID ASSIGN expression
+
+---------------->   x
+
+----------------->   =
+
+------------------>   simpleExp
+
+------------------->   binLogicalExp
+
+-------------------->   relationalExp
+
+--------------------->   sumExp
+
+---------------------->   mulExp
+
+----------------------->   factor
+
+------------------------>   constOp
+
+------------------------->   1
+
+----------->   exprStmt
+
+------------>   expression SEMIC
+
+------------->   assignExp
+
+-------------->   ID ASSIGN expression
+
+--------------->   x
+
+---------------->   =
+
+----------------->   simpleExp
+
+------------------>   binLogicalExp
+
+------------------->   relationalExp
+
+-------------------->   sumExp
+
+--------------------->   sumExp add mulExp
+
+---------------------->   mulExp
+
+----------------------->   factor
+
+------------------------>   ID
+
+------------------------->   x
+
+----------------------->   +
+
+------------------------>   factor
+
+------------------------->   constOp
+
+-------------------------->   1
+
+---------->   exprStmt
+
+----------->   expression SEMIC
+
+------------>   assignExp
+
+------------->   ID ASSIGN expression
+
+-------------->   x
+
+--------------->   =
+
+---------------->   simpleExp
+
+----------------->   binLogicalExp
+
+------------------>   relationalExp
+
+------------------->   sumExp
+
+-------------------->   sumExp add mulExp
+
+--------------------->   mulExp
+
+---------------------->   factor
+
+----------------------->   ID
+
+------------------------>   x
+
+---------------------->   +
+
+----------------------->   factor
+
+------------------------>   constOp
+
+------------------------->   2
+
+--------->   exprStmt
+
+---------->   expression SEMIC
+
+----------->   assignExp
+
+------------>   ID ASSIGN expression
+
+------------->   x
+
+-------------->   =
+
+--------------->   simpleExp
+
+---------------->   binLogicalExp
+
+----------------->   relationalExp
+
+------------------>   sumExp
+
+------------------->   sumExp add mulExp
+
+-------------------->   mulExp
+
+--------------------->   factor
+
+---------------------->   ID
+
+----------------------->   x
+
+--------------------->   +
+
+---------------------->   factor
+
+----------------------->   constOp
+
+------------------------>   3.300000
+
+-------->   exprStmt
+
+--------->   expression SEMIC
+
+---------->   assignExp
+
+----------->   ID ASSIGN expression
+
+------------>   x
+
+------------->   =
+
+-------------->   simpleExp
+
+--------------->   binLogicalExp
+
+---------------->   relationalExp
+
+----------------->   sumExp
+
+------------------>   mulExp
+
+------------------->   factor
+
+-------------------->   ID
+
+--------------------->   y
+
+
+ There is 0 errors and 0 warnings in the file
+

@@ -1,11 +1,13 @@
 .table
 .code
-mov $1, 0
 main:
-add $2, x, 1
-add $2, x, 1
-println x
-mul $2, -2, 3
-add $2, 2, $2
-println x
-println x
+mov $1, 0
+mov $2, 0
+mov $3, 1
+add $3, x, 1
+mov $3, $3
+add $3, x, 2
+mov $3, $3
+add $3, x, 3.300000
+mov $3, $3
+mov $3, y

@@ -1138,8 +1138,8 @@ int main(int argc, char *argv[]) {
           printf("\n\n There is %d errors and %d warnings in the file\n\n", errors, semanticErrors);
         }
         freeSymbols();
-        freeStack();      
-        free(yylval.str);
+        freeStack();    
+        free(yylval.str);  
         }else{
           printf("\n\nThere were %d errors in the file", errors);
         }

@@ -10,4 +10,6 @@ int main()
     x = x + 3.3;
 
     x = y;
+    x = 2 + 2 - 2 * 2 / 2;
+    writeln(x);
 }

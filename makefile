@@ -15,4 +15,4 @@ valgrind:
 	cd src && valgrind -v --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file="logfile.out" ./tradutor $(VAL)
 
 clean: 
-	rm -f *.out && cd src && rm -f *.out *.tab.c lex.yy.c tradutor *.output  *.dot && cd ../results && rm -f *.txt && cd ../lib && rm -f guillex.tab.h
+	rm -f *.out && cd src && rm -f *.out *.tab.c lex.yy.c tradutor *.output  *.dot *.tac && cd ../results && rm -f *.txt && cd ../lib && rm -f guillex.tab.h

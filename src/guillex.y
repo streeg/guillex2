@@ -11,6 +11,8 @@
 #include <string.h>
 #include "../lib/uthash.h"
 #include "../lib/utstack.h"
+#include "../lib/utstring.h"
+#include "../lib/utlist.h"
 #include <stdbool.h>
 
 
@@ -26,6 +28,7 @@ int semanticErrors = 0;
 int parameters = 0;
 int argsParams = 0;
 int scope = 0;
+int varReg = 1;
 
 
 
@@ -295,12 +298,13 @@ typedef struct symbol {
   char *varFuncName; // var or func name
   int scope;
   int parameters;
+  int varReg;
   UT_hash_handle hh;
 }Symbol;
 
 Symbol *symbolTable = NULL;
 
-int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int parameters) {
+int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int parameters, int varReg) {
   struct symbol *s;
   
   HASH_FIND_STR(symbolTable, name, s);
@@ -311,6 +315,7 @@ int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int pa
     s -> varFuncName = varFuncName;
     s -> scope = scope;
     s -> parameters = parameters;
+    s -> varReg = varReg;
     HASH_ADD_STR(symbolTable, name, s);
     return 0;
   } else {
@@ -321,6 +326,7 @@ int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int pa
       s -> varFuncName = varFuncName;
       s -> scope = scope;
       s -> parameters = parameters;
+      s -> varReg = varReg;
       HASH_ADD_STR(symbolTable, name, s);
       return 0;
     } else {
@@ -408,11 +414,43 @@ bool checkIsInScope(char *name, int num) {
 
 
 
-int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int parameters);
+int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int parameters, int varReg);
 void freeSymbols();
 void printSymbols();
 extern Symbol *symbol;
 
+typedef struct codegen{
+  UT_string *line;
+  struct codegen *next;
+  struct codegen *prev;
+} Codegen;
+
+FILE *tacfile;
+Codegen *codegen = NULL;
+Codegen *currentLine = NULL;
+
+void addFunc(char *name) {
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "%s:\n", name);
+  DL_PREPEND(currentLine, code);
+}
+
+void varDec(char *name, char *value){
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "mov %s, %s\n", name, value);
+  DL_PREPEND(currentLine, code);
+}
+
+void writeTacFile(Codegen *originalNode) {
+  if(originalNode == NULL)
+    return;
+
+  fprintf(tacfile, "%s", utstring_body(originalNode -> line));
+  writeTacFile(originalNode -> next);
+}
 
 %}  
 
@@ -482,21 +520,25 @@ varDeclaration:
   ;
 
 funcDeclaration:  
-    TYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters); parameters = 0;} stmtList ENDFUNC {
+    TYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters, 0); parameters = 0;} stmtList ENDFUNC {
       $$ = createNode4("TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC", createNode0($1), createNode0($2), $5, $9);
+      addFunc($2);
       popStack();
   }
-  | TYPE ID PARENL {pushStack(scope);} PARENR STFUNC {errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters);  parameters = 0;} stmtList ENDFUNC {
+  | TYPE ID PARENL {pushStack(scope);} PARENR STFUNC {errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters, 0);  parameters = 0;} stmtList ENDFUNC {
     
       $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $8); 
+      addFunc($2);
       popStack();                                                                      
   }
-  | TYPE LISTTYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters);  parameters = 0;} stmtList ENDFUNC{
+  | TYPE LISTTYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters, 0);  parameters = 0;} stmtList ENDFUNC{
       $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $6, $10);
+      addFunc($3);
       popStack();
   }   
-  | TYPE LISTTYPE ID PARENL {pushStack(scope);} PARENR STFUNC {errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters);  parameters = 0;} stmtList ENDFUNC{
+  | TYPE LISTTYPE ID PARENL {pushStack(scope);} PARENR STFUNC {errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters, 0);  parameters = 0;} stmtList ENDFUNC{
       $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $9);
+      addFunc($3);
       popStack();
     }
   ;
@@ -505,14 +547,33 @@ simpleVarDeclaration:
     TYPE ID {
 
       pushStack(scope);
+      semanticErrors += addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value, 0, varReg);
+       UT_string *s;
+      if($1[0] == 'i' || $1[0] == 'e') {
+        utstring_new(s);
+        utstring_printf(s, "$%d", varReg);
+
+        varDec(utstring_body(s), "0");
+      } else if($1[0] == 'f') {
+        utstring_new(s);
+        utstring_printf(s, "$%d", varReg);
+
+        varDec(utstring_body(s), "0.0");
+      } else if($1[0] == 's') {
+        utstring_new(s);
+        utstring_printf(s, "$%d", varReg);
+
+        varDec(utstring_body(s), "0");
+      }
+      varReg++;
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
-      semanticErrors += addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value, 0);
       popStack();
       }
     | TYPE LISTTYPE ID {
 
       pushStack(scope);
-      semanticErrors += addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value, 0);
+      semanticErrors += addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value, 0, varReg);
+      varReg++;
       $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
       popStack();
     }
@@ -538,14 +599,16 @@ param:
       parameters++;
       pushStack(scope);
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
-      semanticErrors += addSymbol($2, "param", $1, STACK_TOP(stackScope) -> value, 0);
+      semanticErrors += addSymbol($2, "param", $1, STACK_TOP(stackScope) -> value, 0, varReg);
+      varReg++;
       popStack();
       }
     | TYPE LISTTYPE ID {
       parameters++;
       pushStack(scope);
-      semanticErrors += addSymbol($3, "param", $2, STACK_TOP(stackScope) -> value, 0);
+      semanticErrors += addSymbol($3, "param", $2, STACK_TOP(stackScope) -> value, 0, varReg);
       $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
+      varReg++;
       popStack();
     }
   ;
@@ -944,6 +1007,9 @@ int main(int argc, char *argv[]) {
   // yydebug = 1;
   // #endif
   pushStack(0);
+  tacfile = fopen("file.tac", "w");
+  fprintf (tacfile, ".table\n");
+  fprintf (tacfile, ".code\n");
   printf("\n\n#### beginning ####\n\n");
   printf("------------------------Semantic analysis---------------------\n");
   abstractSyntaxTree = NULL;
@@ -955,6 +1021,7 @@ int main(int argc, char *argv[]) {
       yyparse();
       printf("\n\n#### EOF ####\n\n");
       semanticErrors += findSymbolMain("main");
+      writeTacFile(currentLine);
       if(errors == 0){
         printf("\n\n------------------------------------------------------symbols------------------------------------------------\n\n");
         printf("\n\n|         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |\n\n");

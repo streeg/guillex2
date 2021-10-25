@@ -131,48 +131,45 @@ Grammar
    82             | EQUALS
    83             | DIFFERENT
 
-   84 sumExp: sumExp sumOp mulExp
-   85       | mulExp
+   84 sumExp: sumExp ADD mulExp
+   85       | sumExp SUB mulExp
+   86       | mulExp
 
-   86 sumOp: ADD
-   87      | SUB
-
-   88 mulExp: mulExp mulOp factor
+   87 mulExp: mulExp MULT factor
+   88       | mulExp DIV factor
    89       | factor
-   90       | sumOp factor
+   90       | ADD factor
+   91       | SUB factor
 
-   91 mulOp: MULT
-   92      | DIV
+   92 factor: ID
+   93       | fCall
+   94       | PARENL simpleExp PARENR
+   95       | constOp
+   96       | ERRORTOKEN
 
-   93 factor: ID
-   94       | fCall
-   95       | PARENL simpleExp PARENR
-   96       | constOp
-   97       | ERRORTOKEN
+   97 fCall: ID PARENL callParams PARENR
+   98      | ID PARENL PARENR
 
-   98 fCall: ID PARENL callParams PARENR
-   99      | ID PARENL PARENR
-
-  100 callParams: callParams COMMA simpleExp
-  101           | simpleExp
+   99 callParams: callParams COMMA simpleExp
+  100           | simpleExp
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error <treeNode> (256) 4 24
-    ID <str> (258) 10 13 16 19 20 21 25 26 51 52 55 56 57 61 66 93 98 99
+    ID <str> (258) 10 13 16 19 20 21 25 26 51 52 55 56 57 61 66 92 97 98
     TYPE <str> (259) 10 13 16 19 20 21 25 26
     LISTTYPE <str> (260) 16 19 21 26
     STRING <str> (261) 69
     NIL <str> (262) 65
     INTEGER <integer> (263) 63
     DECIMAL <dec> (264) 64
-    ERRORTOKEN <str> (265) 97
-    ADD <str> (266) 86
-    SUB <str> (267) 87
-    MULT <str> (268) 91
-    DIV <str> (269) 92
+    ERRORTOKEN <str> (265) 96
+    ADD <str> (266) 84 90
+    SUB <str> (267) 85 91
+    MULT <str> (268) 87
+    DIV <str> (269) 88
     OR <str> (270) 74
     AND <str> (271) 75
     SMALLER <str> (272) 78
@@ -197,11 +194,11 @@ Terminals, with rules where they appear
     WRITELN <str> (291) 68
     RETURN <str> (292) 46
     SEMIC <str> (293) 7 38 44 45 46 66 67 68
-    COMMA <str> (294) 100
+    COMMA <str> (294) 99
     STFUNC <str> (295) 10 13 16 19 27
     ENDFUNC <str> (296) 10 13 16 19 27
-    PARENL <str> (297) 10 13 16 19 41 44 45 66 67 68 95 98 99
-    PARENR <str> (298) 10 13 16 19 41 44 45 66 67 68 95 98 99
+    PARENL <str> (297) 10 13 16 19 41 44 45 66 67 68 94 97 98
+    PARENR <str> (298) 10 13 16 19 41 44 45 66 67 68 94 97 98
 
 
 Nonterminals, with rules where they appear
@@ -312,10 +309,10 @@ Nonterminals, with rules where they appear
         on right: 44 45 58
     simpleExp <treeNode> (79)
         on left: 62
-        on right: 41 44 45 59 70 95 100 101
+        on right: 41 44 45 59 70 94 99 100
     constOp <treeNode> (80)
         on left: 63 64 65
-        on right: 96
+        on right: 95
     inOp <treeNode> (81)
         on left: 66
         on right: 35
@@ -338,26 +335,20 @@ Nonterminals, with rules where they appear
         on left: 78 79 80 81 82 83
         on right: 72 76
     sumExp <treeNode> (88)
-        on left: 84 85
-        on right: 76 77 84
-    sumOp <treeNode> (89)
-        on left: 86 87
-        on right: 84 90
-    mulExp <treeNode> (90)
-        on left: 88 89 90
-        on right: 84 85 88
-    mulOp <treeNode> (91)
-        on left: 91 92
-        on right: 88
-    factor <treeNode> (92)
-        on left: 93 94 95 96 97
-        on right: 88 89 90
-    fCall <treeNode> (93)
-        on left: 98 99
-        on right: 94
-    callParams <treeNode> (94)
-        on left: 100 101
-        on right: 98 100
+        on left: 84 85 86
+        on right: 76 77 84 85
+    mulExp <treeNode> (89)
+        on left: 87 88 89 90 91
+        on right: 84 85 86 87 88
+    factor <treeNode> (90)
+        on left: 92 93 94 95 96
+        on right: 87 88 89 90 91
+    fCall <treeNode> (91)
+        on left: 97 98
+        on right: 93
+    callParams <treeNode> (92)
+        on left: 99 100
+        on right: 97 99
 
 
 State 0
@@ -743,7 +734,7 @@ State 35
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
     stmtList              go to state 60
     primitiveStmt         go to state 61
@@ -767,17 +758,16 @@ State 35
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
 State 36
 
    16 funcDeclaration: TYPE LISTTYPE ID PARENL $@5 params PARENR • STFUNC $@6 stmtList ENDFUNC
 
-    STFUNC  shift, and go to state 86
+    STFUNC  shift, and go to state 85
 
 
 State 37
@@ -804,7 +794,7 @@ State 37
     STFUNC       reduce using rule 18 ($@8)
     PARENL       reduce using rule 18 ($@8)
 
-    $@8  go to state 87
+    $@8  go to state 86
 
 
 State 38
@@ -832,9 +822,9 @@ State 38
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    stmtList              go to state 88
+    stmtList              go to state 87
     primitiveStmt         go to state 61
     exprStmt              go to state 62
     condStmt              go to state 63
@@ -856,10 +846,9 @@ State 38
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
 State 39
@@ -868,29 +857,29 @@ State 39
    56 mapFilterOps: ID • MAP ID
    57             | ID • FILTER ID
    61 assignExp: ID • ASSIGN expression
-   93 factor: ID •
-   98 fCall: ID • PARENL callParams PARENR
-   99      | ID • PARENL PARENR
+   92 factor: ID •
+   97 fCall: ID • PARENL callParams PARENR
+   98      | ID • PARENL PARENR
 
-    APPEND  shift, and go to state 89
-    FILTER  shift, and go to state 90
-    ASSIGN  shift, and go to state 91
-    MAP     shift, and go to state 92
-    PARENL  shift, and go to state 93
+    APPEND  shift, and go to state 88
+    FILTER  shift, and go to state 89
+    ASSIGN  shift, and go to state 90
+    MAP     shift, and go to state 91
+    PARENL  shift, and go to state 92
 
-    ADD        reduce using rule 93 (factor)
-    SUB        reduce using rule 93 (factor)
-    MULT       reduce using rule 93 (factor)
-    DIV        reduce using rule 93 (factor)
-    OR         reduce using rule 93 (factor)
-    AND        reduce using rule 93 (factor)
-    SMALLER    reduce using rule 93 (factor)
-    GREATER    reduce using rule 93 (factor)
-    SMALLEQ    reduce using rule 93 (factor)
-    GREATEQ    reduce using rule 93 (factor)
-    EQUALS     reduce using rule 93 (factor)
-    DIFFERENT  reduce using rule 93 (factor)
-    SEMIC      reduce using rule 93 (factor)
+    ADD        reduce using rule 92 (factor)
+    SUB        reduce using rule 92 (factor)
+    MULT       reduce using rule 92 (factor)
+    DIV        reduce using rule 92 (factor)
+    OR         reduce using rule 92 (factor)
+    AND        reduce using rule 92 (factor)
+    SMALLER    reduce using rule 92 (factor)
+    GREATER    reduce using rule 92 (factor)
+    SMALLEQ    reduce using rule 92 (factor)
+    GREATEQ    reduce using rule 92 (factor)
+    EQUALS     reduce using rule 92 (factor)
+    DIFFERENT  reduce using rule 92 (factor)
+    SEMIC      reduce using rule 92 (factor)
 
 
 State 40
@@ -898,8 +887,8 @@ State 40
    20 simpleVarDeclaration: TYPE • ID
    21                     | TYPE • LISTTYPE ID
 
-    ID        shift, and go to state 94
-    LISTTYPE  shift, and go to state 95
+    ID        shift, and go to state 93
+    LISTTYPE  shift, and go to state 94
 
 
 State 41
@@ -961,45 +950,53 @@ State 43
 
 State 44
 
-   97 factor: ERRORTOKEN •
+   96 factor: ERRORTOKEN •
 
-    ADD        reduce using rule 97 (factor)
-    SUB        reduce using rule 97 (factor)
-    MULT       reduce using rule 97 (factor)
-    DIV        reduce using rule 97 (factor)
-    OR         reduce using rule 97 (factor)
-    AND        reduce using rule 97 (factor)
-    SMALLER    reduce using rule 97 (factor)
-    GREATER    reduce using rule 97 (factor)
-    SMALLEQ    reduce using rule 97 (factor)
-    GREATEQ    reduce using rule 97 (factor)
-    EQUALS     reduce using rule 97 (factor)
-    DIFFERENT  reduce using rule 97 (factor)
-    SEMIC      reduce using rule 97 (factor)
+    ADD        reduce using rule 96 (factor)
+    SUB        reduce using rule 96 (factor)
+    MULT       reduce using rule 96 (factor)
+    DIV        reduce using rule 96 (factor)
+    OR         reduce using rule 96 (factor)
+    AND        reduce using rule 96 (factor)
+    SMALLER    reduce using rule 96 (factor)
+    GREATER    reduce using rule 96 (factor)
+    SMALLEQ    reduce using rule 96 (factor)
+    GREATEQ    reduce using rule 96 (factor)
+    EQUALS     reduce using rule 96 (factor)
+    DIFFERENT  reduce using rule 96 (factor)
+    SEMIC      reduce using rule 96 (factor)
 
 
 State 45
 
-   86 sumOp: ADD •
+   90 mulExp: ADD • factor
 
-    ID          reduce using rule 86 (sumOp)
-    NIL         reduce using rule 86 (sumOp)
-    INTEGER     reduce using rule 86 (sumOp)
-    DECIMAL     reduce using rule 86 (sumOp)
-    ERRORTOKEN  reduce using rule 86 (sumOp)
-    PARENL      reduce using rule 86 (sumOp)
+    ID          shift, and go to state 95
+    NIL         shift, and go to state 41
+    INTEGER     shift, and go to state 42
+    DECIMAL     shift, and go to state 43
+    ERRORTOKEN  shift, and go to state 44
+    PARENL      shift, and go to state 57
+
+    constOp  go to state 76
+    factor   go to state 96
+    fCall    go to state 84
 
 
 State 46
 
-   87 sumOp: SUB •
+   91 mulExp: SUB • factor
 
-    ID          reduce using rule 87 (sumOp)
-    NIL         reduce using rule 87 (sumOp)
-    INTEGER     reduce using rule 87 (sumOp)
-    DECIMAL     reduce using rule 87 (sumOp)
-    ERRORTOKEN  reduce using rule 87 (sumOp)
-    PARENL      reduce using rule 87 (sumOp)
+    ID          shift, and go to state 95
+    NIL         shift, and go to state 41
+    INTEGER     shift, and go to state 42
+    DECIMAL     shift, and go to state 43
+    ERRORTOKEN  shift, and go to state 44
+    PARENL      shift, and go to state 57
+
+    constOp  go to state 76
+    factor   go to state 97
+    fCall    go to state 84
 
 
 State 47
@@ -1020,14 +1017,14 @@ State 49
 
    55 destroyHeadOps: DESTROYHEAD • ID
 
-    ID  shift, and go to state 96
+    ID  shift, and go to state 98
 
 
 State 50
 
    41 ifStmt: IF • PARENL simpleExp PARENR
 
-    PARENL  shift, and go to state 97
+    PARENL  shift, and go to state 99
 
 
 State 51
@@ -1035,28 +1032,28 @@ State 51
    44 iterStmt: FOR • PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
    45         | FOR • PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
 
-    PARENL  shift, and go to state 98
+    PARENL  shift, and go to state 100
 
 
 State 52
 
    66 inOp: READ • PARENL ID PARENR SEMIC
 
-    PARENL  shift, and go to state 99
+    PARENL  shift, and go to state 101
 
 
 State 53
 
    67 outOp: WRITE • PARENL outConst PARENR SEMIC
 
-    PARENL  shift, and go to state 100
+    PARENL  shift, and go to state 102
 
 
 State 54
 
    68 outOp: WRITELN • PARENL outConst PARENR SEMIC
 
-    PARENL  shift, and go to state 101
+    PARENL  shift, and go to state 103
 
 
 State 55
@@ -1081,17 +1078,16 @@ State 55
     returnListOp    go to state 70
     destroyHeadOps  go to state 71
     mapFilterOps    go to state 72
-    expression      go to state 102
+    expression      go to state 104
     assignExp       go to state 74
     simpleExp       go to state 75
     constOp         go to state 76
     binLogicalExp   go to state 79
     relationalExp   go to state 80
     sumExp          go to state 81
-    sumOp           go to state 82
-    mulExp          go to state 83
-    factor          go to state 84
-    fCall           go to state 85
+    mulExp          go to state 82
+    factor          go to state 83
+    fCall           go to state 84
 
 
 State 56
@@ -1119,9 +1115,9 @@ State 56
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    stmtList              go to state 103
+    stmtList              go to state 105
     primitiveStmt         go to state 61
     exprStmt              go to state 62
     condStmt              go to state 63
@@ -1143,34 +1139,32 @@ State 56
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
 State 57
 
-   95 factor: PARENL • simpleExp PARENR
+   94 factor: PARENL • simpleExp PARENR
 
-    ID          shift, and go to state 104
-    NIL         shift, and go to state 186
-    INTEGER     shift, and go to state 187
-    DECIMAL     shift, and go to state 188
-    ERRORTOKEN  shift, and go to state 189
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 190
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    ADD         shift, and go to state 193
+    SUB         shift, and go to state 194
+    PARENL      shift, and go to state 195
 
-    simpleExp      go to state 105
-    constOp        go to state 191
-    binLogicalExp  go to state 192
-    relationalExp  go to state 193
-    sumExp         go to state 194
-    sumOp          go to state 195
-    mulExp         go to state 196
-    factor         go to state 197
-    fCall          go to state 198
+    simpleExp      go to state 106
+    constOp        go to state 196
+    binLogicalExp  go to state 197
+    relationalExp  go to state 198
+    sumExp         go to state 199
+    mulExp         go to state 200
+    factor         go to state 201
+    fCall          go to state 202
 
 
 State 58
@@ -1248,13 +1242,13 @@ State 60
     WRITELN      shift, and go to state 54
     RETURN       shift, and go to state 55
     STFUNC       shift, and go to state 56
-    ENDFUNC      shift, and go to state 106
+    ENDFUNC      shift, and go to state 107
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    primitiveStmt         go to state 107
+    primitiveStmt         go to state 108
     exprStmt              go to state 62
     condStmt              go to state 63
     ifStmt                go to state 64
@@ -1275,10 +1269,9 @@ State 60
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
 State 61
@@ -1376,42 +1369,41 @@ State 64
     TAILLIST     shift, and go to state 48
     DESTROYHEAD  shift, and go to state 49
     IF           shift, and go to state 50
-    FOR          shift, and go to state 199
-    READ         shift, and go to state 200
-    WRITE        shift, and go to state 201
-    WRITELN      shift, and go to state 202
-    RETURN       shift, and go to state 203
-    STFUNC       shift, and go to state 204
+    FOR          shift, and go to state 203
+    READ         shift, and go to state 204
+    WRITE        shift, and go to state 205
+    WRITELN      shift, and go to state 206
+    RETURN       shift, and go to state 207
+    STFUNC       shift, and go to state 208
     PARENL       shift, and go to state 57
 
-    varDeclaration        go to state 205
-    simpleVarDeclaration  go to state 206
-    compoundStmt          go to state 207
-    primitiveStmt         go to state 108
-    exprStmt              go to state 208
-    condStmt              go to state 209
-    ifStmt                go to state 210
-    iterStmt              go to state 211
-    returnStmt            go to state 212
+    varDeclaration        go to state 209
+    simpleVarDeclaration  go to state 210
+    compoundStmt          go to state 211
+    primitiveStmt         go to state 109
+    exprStmt              go to state 212
+    condStmt              go to state 213
+    ifStmt                go to state 214
+    iterStmt              go to state 215
+    returnStmt            go to state 216
     listExp               go to state 67
     appendOps             go to state 68
     returnListOps         go to state 69
     returnListOp          go to state 70
     destroyHeadOps        go to state 71
     mapFilterOps          go to state 72
-    expression            go to state 213
+    expression            go to state 217
     assignExp             go to state 74
     simpleExp             go to state 75
     constOp               go to state 76
-    inOp                  go to state 214
-    outOp                 go to state 215
+    inOp                  go to state 218
+    outOp                 go to state 219
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
 State 65
@@ -1491,7 +1483,7 @@ State 70
 
    52 returnListOps: returnListOp • ID
 
-    ID  shift, and go to state 109
+    ID  shift, and go to state 110
 
 
 State 71
@@ -1512,7 +1504,7 @@ State 73
 
    38 exprStmt: expression • SEMIC
 
-    SEMIC  shift, and go to state 110
+    SEMIC  shift, and go to state 111
 
 
 State 74
@@ -1531,21 +1523,21 @@ State 75
 
 State 76
 
-   96 factor: constOp •
+   95 factor: constOp •
 
-    ADD        reduce using rule 96 (factor)
-    SUB        reduce using rule 96 (factor)
-    MULT       reduce using rule 96 (factor)
-    DIV        reduce using rule 96 (factor)
-    OR         reduce using rule 96 (factor)
-    AND        reduce using rule 96 (factor)
-    SMALLER    reduce using rule 96 (factor)
-    GREATER    reduce using rule 96 (factor)
-    SMALLEQ    reduce using rule 96 (factor)
-    GREATEQ    reduce using rule 96 (factor)
-    EQUALS     reduce using rule 96 (factor)
-    DIFFERENT  reduce using rule 96 (factor)
-    SEMIC      reduce using rule 96 (factor)
+    ADD        reduce using rule 95 (factor)
+    SUB        reduce using rule 95 (factor)
+    MULT       reduce using rule 95 (factor)
+    DIV        reduce using rule 95 (factor)
+    OR         reduce using rule 95 (factor)
+    AND        reduce using rule 95 (factor)
+    SMALLER    reduce using rule 95 (factor)
+    GREATER    reduce using rule 95 (factor)
+    SMALLEQ    reduce using rule 95 (factor)
+    GREATEQ    reduce using rule 95 (factor)
+    EQUALS     reduce using rule 95 (factor)
+    DIFFERENT  reduce using rule 95 (factor)
+    SEMIC      reduce using rule 95 (factor)
 
 
 State 77
@@ -1605,12 +1597,12 @@ State 79
    62 simpleExp: binLogicalExp •
    72 binLogicalExp: binLogicalExp • binLogicalOp relationalOp
 
-    OR   shift, and go to state 111
-    AND  shift, and go to state 112
+    OR   shift, and go to state 112
+    AND  shift, and go to state 113
 
     SEMIC  reduce using rule 62 (simpleExp)
 
-    binLogicalOp  go to state 113
+    binLogicalOp  go to state 114
 
 
 State 80
@@ -1618,27 +1610,28 @@ State 80
    73 binLogicalExp: relationalExp •
    76 relationalExp: relationalExp • relationalOp sumExp
 
-    SMALLER    shift, and go to state 114
-    GREATER    shift, and go to state 115
-    SMALLEQ    shift, and go to state 116
-    GREATEQ    shift, and go to state 117
-    EQUALS     shift, and go to state 118
-    DIFFERENT  shift, and go to state 119
+    SMALLER    shift, and go to state 115
+    GREATER    shift, and go to state 116
+    SMALLEQ    shift, and go to state 117
+    GREATEQ    shift, and go to state 118
+    EQUALS     shift, and go to state 119
+    DIFFERENT  shift, and go to state 120
 
     OR     reduce using rule 73 (binLogicalExp)
     AND    reduce using rule 73 (binLogicalExp)
     SEMIC  reduce using rule 73 (binLogicalExp)
 
-    relationalOp  go to state 120
+    relationalOp  go to state 121
 
 
 State 81
 
    77 relationalExp: sumExp •
-   84 sumExp: sumExp • sumOp mulExp
+   84 sumExp: sumExp • ADD mulExp
+   85       | sumExp • SUB mulExp
 
-    ADD  shift, and go to state 216
-    SUB  shift, and go to state 217
+    ADD  shift, and go to state 122
+    SUB  shift, and go to state 123
 
     OR         reduce using rule 77 (relationalExp)
     AND        reduce using rule 77 (relationalExp)
@@ -1650,49 +1643,30 @@ State 81
     DIFFERENT  reduce using rule 77 (relationalExp)
     SEMIC      reduce using rule 77 (relationalExp)
 
-    sumOp  go to state 121
-
 
 State 82
 
-   90 mulExp: sumOp • factor
+   86 sumExp: mulExp •
+   87 mulExp: mulExp • MULT factor
+   88       | mulExp • DIV factor
 
-    ID          shift, and go to state 218
-    NIL         shift, and go to state 41
-    INTEGER     shift, and go to state 42
-    DECIMAL     shift, and go to state 43
-    ERRORTOKEN  shift, and go to state 44
-    PARENL      shift, and go to state 57
+    MULT  shift, and go to state 124
+    DIV   shift, and go to state 125
 
-    constOp  go to state 76
-    factor   go to state 122
-    fCall    go to state 85
+    ADD        reduce using rule 86 (sumExp)
+    SUB        reduce using rule 86 (sumExp)
+    OR         reduce using rule 86 (sumExp)
+    AND        reduce using rule 86 (sumExp)
+    SMALLER    reduce using rule 86 (sumExp)
+    GREATER    reduce using rule 86 (sumExp)
+    SMALLEQ    reduce using rule 86 (sumExp)
+    GREATEQ    reduce using rule 86 (sumExp)
+    EQUALS     reduce using rule 86 (sumExp)
+    DIFFERENT  reduce using rule 86 (sumExp)
+    SEMIC      reduce using rule 86 (sumExp)
 
 
 State 83
-
-   85 sumExp: mulExp •
-   88 mulExp: mulExp • mulOp factor
-
-    MULT  shift, and go to state 123
-    DIV   shift, and go to state 124
-
-    ADD        reduce using rule 85 (sumExp)
-    SUB        reduce using rule 85 (sumExp)
-    OR         reduce using rule 85 (sumExp)
-    AND        reduce using rule 85 (sumExp)
-    SMALLER    reduce using rule 85 (sumExp)
-    GREATER    reduce using rule 85 (sumExp)
-    SMALLEQ    reduce using rule 85 (sumExp)
-    GREATEQ    reduce using rule 85 (sumExp)
-    EQUALS     reduce using rule 85 (sumExp)
-    DIFFERENT  reduce using rule 85 (sumExp)
-    SEMIC      reduce using rule 85 (sumExp)
-
-    mulOp  go to state 125
-
-
-State 84
 
    89 mulExp: factor •
 
@@ -1711,26 +1685,26 @@ State 84
     SEMIC      reduce using rule 89 (mulExp)
 
 
+State 84
+
+   93 factor: fCall •
+
+    ADD        reduce using rule 93 (factor)
+    SUB        reduce using rule 93 (factor)
+    MULT       reduce using rule 93 (factor)
+    DIV        reduce using rule 93 (factor)
+    OR         reduce using rule 93 (factor)
+    AND        reduce using rule 93 (factor)
+    SMALLER    reduce using rule 93 (factor)
+    GREATER    reduce using rule 93 (factor)
+    SMALLEQ    reduce using rule 93 (factor)
+    GREATEQ    reduce using rule 93 (factor)
+    EQUALS     reduce using rule 93 (factor)
+    DIFFERENT  reduce using rule 93 (factor)
+    SEMIC      reduce using rule 93 (factor)
+
+
 State 85
-
-   94 factor: fCall •
-
-    ADD        reduce using rule 94 (factor)
-    SUB        reduce using rule 94 (factor)
-    MULT       reduce using rule 94 (factor)
-    DIV        reduce using rule 94 (factor)
-    OR         reduce using rule 94 (factor)
-    AND        reduce using rule 94 (factor)
-    SMALLER    reduce using rule 94 (factor)
-    GREATER    reduce using rule 94 (factor)
-    SMALLEQ    reduce using rule 94 (factor)
-    GREATEQ    reduce using rule 94 (factor)
-    EQUALS     reduce using rule 94 (factor)
-    DIFFERENT  reduce using rule 94 (factor)
-    SEMIC      reduce using rule 94 (factor)
-
-
-State 86
 
    16 funcDeclaration: TYPE LISTTYPE ID PARENL $@5 params PARENR STFUNC • $@6 stmtList ENDFUNC
 
@@ -1757,7 +1731,7 @@ State 86
     $@6  go to state 126
 
 
-State 87
+State 86
 
    19 funcDeclaration: TYPE LISTTYPE ID PARENL $@7 PARENR STFUNC $@8 • stmtList ENDFUNC
 
@@ -1782,7 +1756,7 @@ State 87
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
     stmtList              go to state 127
     primitiveStmt         go to state 61
@@ -1806,13 +1780,12 @@ State 87
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 88
+State 87
 
    10 funcDeclaration: TYPE ID PARENL $@1 params PARENR STFUNC $@2 stmtList • ENDFUNC
    28 stmtList: stmtList • primitiveStmt
@@ -1839,9 +1812,9 @@ State 88
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    primitiveStmt         go to state 107
+    primitiveStmt         go to state 108
     exprStmt              go to state 62
     condStmt              go to state 63
     ifStmt                go to state 64
@@ -1862,27 +1835,26 @@ State 88
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 89
+State 88
 
    51 appendOps: ID APPEND • ID
 
     ID  shift, and go to state 129
 
 
-State 90
+State 89
 
    57 mapFilterOps: ID FILTER • ID
 
     ID  shift, and go to state 130
 
 
-State 91
+State 90
 
    61 assignExp: ID ASSIGN • expression
 
@@ -1911,92 +1883,150 @@ State 91
     binLogicalExp   go to state 79
     relationalExp   go to state 80
     sumExp          go to state 81
-    sumOp           go to state 82
-    mulExp          go to state 83
-    factor          go to state 84
-    fCall           go to state 85
+    mulExp          go to state 82
+    factor          go to state 83
+    fCall           go to state 84
 
 
-State 92
+State 91
 
    56 mapFilterOps: ID MAP • ID
 
     ID  shift, and go to state 132
 
 
-State 93
+State 92
 
-   98 fCall: ID PARENL • callParams PARENR
-   99      | ID PARENL • PARENR
+   97 fCall: ID PARENL • callParams PARENR
+   98      | ID PARENL • PARENR
 
-    ID          shift, and go to state 219
-    NIL         shift, and go to state 220
-    INTEGER     shift, and go to state 221
-    DECIMAL     shift, and go to state 222
-    ERRORTOKEN  shift, and go to state 223
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 224
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    ADD         shift, and go to state 225
+    SUB         shift, and go to state 226
+    PARENL      shift, and go to state 227
     PARENR      shift, and go to state 133
 
     simpleExp      go to state 134
-    constOp        go to state 225
-    binLogicalExp  go to state 226
-    relationalExp  go to state 227
-    sumExp         go to state 228
-    sumOp          go to state 229
-    mulExp         go to state 230
-    factor         go to state 231
-    fCall          go to state 232
+    constOp        go to state 228
+    binLogicalExp  go to state 229
+    relationalExp  go to state 230
+    sumExp         go to state 231
+    mulExp         go to state 232
+    factor         go to state 233
+    fCall          go to state 234
     callParams     go to state 135
 
 
-State 94
+State 93
 
    20 simpleVarDeclaration: TYPE ID •
 
     SEMIC  reduce using rule 20 (simpleVarDeclaration)
 
 
-State 95
+State 94
 
    21 simpleVarDeclaration: TYPE LISTTYPE • ID
 
     ID  shift, and go to state 136
 
 
+State 95
+
+   92 factor: ID •
+   97 fCall: ID • PARENL callParams PARENR
+   98      | ID • PARENL PARENR
+
+    PARENL  shift, and go to state 92
+
+    ADD        reduce using rule 92 (factor)
+    SUB        reduce using rule 92 (factor)
+    MULT       reduce using rule 92 (factor)
+    DIV        reduce using rule 92 (factor)
+    OR         reduce using rule 92 (factor)
+    AND        reduce using rule 92 (factor)
+    SMALLER    reduce using rule 92 (factor)
+    GREATER    reduce using rule 92 (factor)
+    SMALLEQ    reduce using rule 92 (factor)
+    GREATEQ    reduce using rule 92 (factor)
+    EQUALS     reduce using rule 92 (factor)
+    DIFFERENT  reduce using rule 92 (factor)
+    SEMIC      reduce using rule 92 (factor)
+
+
 State 96
+
+   90 mulExp: ADD factor •
+
+    ADD        reduce using rule 90 (mulExp)
+    SUB        reduce using rule 90 (mulExp)
+    MULT       reduce using rule 90 (mulExp)
+    DIV        reduce using rule 90 (mulExp)
+    OR         reduce using rule 90 (mulExp)
+    AND        reduce using rule 90 (mulExp)
+    SMALLER    reduce using rule 90 (mulExp)
+    GREATER    reduce using rule 90 (mulExp)
+    SMALLEQ    reduce using rule 90 (mulExp)
+    GREATEQ    reduce using rule 90 (mulExp)
+    EQUALS     reduce using rule 90 (mulExp)
+    DIFFERENT  reduce using rule 90 (mulExp)
+    SEMIC      reduce using rule 90 (mulExp)
+
+
+State 97
+
+   91 mulExp: SUB factor •
+
+    ADD        reduce using rule 91 (mulExp)
+    SUB        reduce using rule 91 (mulExp)
+    MULT       reduce using rule 91 (mulExp)
+    DIV        reduce using rule 91 (mulExp)
+    OR         reduce using rule 91 (mulExp)
+    AND        reduce using rule 91 (mulExp)
+    SMALLER    reduce using rule 91 (mulExp)
+    GREATER    reduce using rule 91 (mulExp)
+    SMALLEQ    reduce using rule 91 (mulExp)
+    GREATEQ    reduce using rule 91 (mulExp)
+    EQUALS     reduce using rule 91 (mulExp)
+    DIFFERENT  reduce using rule 91 (mulExp)
+    SEMIC      reduce using rule 91 (mulExp)
+
+
+State 98
 
    55 destroyHeadOps: DESTROYHEAD ID •
 
     SEMIC  reduce using rule 55 (destroyHeadOps)
 
 
-State 97
+State 99
 
    41 ifStmt: IF PARENL • simpleExp PARENR
 
-    ID          shift, and go to state 104
-    NIL         shift, and go to state 186
-    INTEGER     shift, and go to state 187
-    DECIMAL     shift, and go to state 188
-    ERRORTOKEN  shift, and go to state 189
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 190
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    ADD         shift, and go to state 193
+    SUB         shift, and go to state 194
+    PARENL      shift, and go to state 195
 
     simpleExp      go to state 137
-    constOp        go to state 191
-    binLogicalExp  go to state 192
-    relationalExp  go to state 193
-    sumExp         go to state 194
-    sumOp          go to state 195
-    mulExp         go to state 196
-    factor         go to state 197
-    fCall          go to state 198
+    constOp        go to state 196
+    binLogicalExp  go to state 197
+    relationalExp  go to state 198
+    sumExp         go to state 199
+    mulExp         go to state 200
+    factor         go to state 201
+    fCall          go to state 202
 
 
-State 98
+State 100
 
    44 iterStmt: FOR PARENL • assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
    45         | FOR PARENL • simpleExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
@@ -2016,97 +2046,94 @@ State 98
     binLogicalExp  go to state 79
     relationalExp  go to state 80
     sumExp         go to state 81
-    sumOp          go to state 82
-    mulExp         go to state 83
-    factor         go to state 84
-    fCall          go to state 85
+    mulExp         go to state 82
+    factor         go to state 83
+    fCall          go to state 84
 
 
-State 99
+State 101
 
    66 inOp: READ PARENL • ID PARENR SEMIC
 
     ID  shift, and go to state 141
 
 
-State 100
+State 102
 
    67 outOp: WRITE PARENL • outConst PARENR SEMIC
 
     ID           shift, and go to state 142
     STRING       shift, and go to state 143
-    NIL          shift, and go to state 186
-    INTEGER      shift, and go to state 187
-    DECIMAL      shift, and go to state 188
-    ERRORTOKEN   shift, and go to state 189
-    ADD          shift, and go to state 45
-    SUB          shift, and go to state 46
+    NIL          shift, and go to state 189
+    INTEGER      shift, and go to state 190
+    DECIMAL      shift, and go to state 191
+    ERRORTOKEN   shift, and go to state 192
+    ADD          shift, and go to state 193
+    SUB          shift, and go to state 194
     HEADLIST     shift, and go to state 47
     TAILLIST     shift, and go to state 48
-    DESTROYHEAD  shift, and go to state 233
-    PARENL       shift, and go to state 190
+    DESTROYHEAD  shift, and go to state 235
+    PARENL       shift, and go to state 195
 
     listExp         go to state 144
-    appendOps       go to state 234
-    returnListOps   go to state 235
-    returnListOp    go to state 236
-    destroyHeadOps  go to state 237
-    mapFilterOps    go to state 238
+    appendOps       go to state 236
+    returnListOps   go to state 237
+    returnListOp    go to state 238
+    destroyHeadOps  go to state 239
+    mapFilterOps    go to state 240
     simpleExp       go to state 145
-    constOp         go to state 191
+    constOp         go to state 196
     outConst        go to state 146
-    binLogicalExp   go to state 192
-    relationalExp   go to state 193
-    sumExp          go to state 194
-    sumOp           go to state 195
-    mulExp          go to state 196
-    factor          go to state 197
-    fCall           go to state 198
+    binLogicalExp   go to state 197
+    relationalExp   go to state 198
+    sumExp          go to state 199
+    mulExp          go to state 200
+    factor          go to state 201
+    fCall           go to state 202
 
 
-State 101
+State 103
 
    68 outOp: WRITELN PARENL • outConst PARENR SEMIC
 
     ID           shift, and go to state 142
     STRING       shift, and go to state 143
-    NIL          shift, and go to state 186
-    INTEGER      shift, and go to state 187
-    DECIMAL      shift, and go to state 188
-    ERRORTOKEN   shift, and go to state 189
-    ADD          shift, and go to state 45
-    SUB          shift, and go to state 46
+    NIL          shift, and go to state 189
+    INTEGER      shift, and go to state 190
+    DECIMAL      shift, and go to state 191
+    ERRORTOKEN   shift, and go to state 192
+    ADD          shift, and go to state 193
+    SUB          shift, and go to state 194
     HEADLIST     shift, and go to state 47
     TAILLIST     shift, and go to state 48
-    DESTROYHEAD  shift, and go to state 233
-    PARENL       shift, and go to state 190
+    DESTROYHEAD  shift, and go to state 235
+    PARENL       shift, and go to state 195
 
     listExp         go to state 144
-    appendOps       go to state 234
-    returnListOps   go to state 235
-    returnListOp    go to state 236
-    destroyHeadOps  go to state 237
-    mapFilterOps    go to state 238
+    appendOps       go to state 236
+    returnListOps   go to state 237
+    returnListOp    go to state 238
+    destroyHeadOps  go to state 239
+    mapFilterOps    go to state 240
     simpleExp       go to state 145
-    constOp         go to state 191
+    constOp         go to state 196
     outConst        go to state 147
-    binLogicalExp   go to state 192
-    relationalExp   go to state 193
-    sumExp          go to state 194
-    sumOp           go to state 195
-    mulExp          go to state 196
-    factor          go to state 197
-    fCall           go to state 198
+    binLogicalExp   go to state 197
+    relationalExp   go to state 198
+    sumExp          go to state 199
+    mulExp          go to state 200
+    factor          go to state 201
+    fCall           go to state 202
 
 
-State 102
+State 104
 
    46 returnStmt: RETURN expression • SEMIC
 
     SEMIC  shift, and go to state 148
 
 
-State 103
+State 105
 
    27 compoundStmt: STFUNC stmtList • ENDFUNC
    28 stmtList: stmtList • primitiveStmt
@@ -2133,9 +2160,9 @@ State 103
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    primitiveStmt         go to state 107
+    primitiveStmt         go to state 108
     exprStmt              go to state 62
     condStmt              go to state 63
     ifStmt                go to state 64
@@ -2156,43 +2183,19 @@ State 103
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 104
+State 106
 
-   93 factor: ID •
-   98 fCall: ID • PARENL callParams PARENR
-   99      | ID • PARENL PARENR
-
-    PARENL  shift, and go to state 239
-
-    ADD        reduce using rule 93 (factor)
-    SUB        reduce using rule 93 (factor)
-    MULT       reduce using rule 93 (factor)
-    DIV        reduce using rule 93 (factor)
-    OR         reduce using rule 93 (factor)
-    AND        reduce using rule 93 (factor)
-    SMALLER    reduce using rule 93 (factor)
-    GREATER    reduce using rule 93 (factor)
-    SMALLEQ    reduce using rule 93 (factor)
-    GREATEQ    reduce using rule 93 (factor)
-    EQUALS     reduce using rule 93 (factor)
-    DIFFERENT  reduce using rule 93 (factor)
-    PARENR     reduce using rule 93 (factor)
-
-
-State 105
-
-   95 factor: PARENL simpleExp • PARENR
+   94 factor: PARENL simpleExp • PARENR
 
     PARENR  shift, and go to state 150
 
 
-State 106
+State 107
 
    13 funcDeclaration: TYPE ID PARENL $@3 PARENR STFUNC $@4 stmtList ENDFUNC •
 
@@ -2200,7 +2203,7 @@ State 106
     TYPE  reduce using rule 13 (funcDeclaration)
 
 
-State 107
+State 108
 
    28 stmtList: stmtList primitiveStmt •
 
@@ -2226,7 +2229,7 @@ State 107
     PARENL       reduce using rule 28 (stmtList)
 
 
-State 108
+State 109
 
    39 condStmt: ifStmt primitiveStmt •
    40         | ifStmt primitiveStmt • elseStmt
@@ -2257,14 +2260,14 @@ State 108
     elseStmt  go to state 152
 
 
-State 109
+State 110
 
    52 returnListOps: returnListOp ID •
 
     SEMIC  reduce using rule 52 (returnListOps)
 
 
-State 110
+State 111
 
    38 exprStmt: expression SEMIC •
 
@@ -2290,7 +2293,7 @@ State 110
     PARENL       reduce using rule 38 (exprStmt)
 
 
-State 111
+State 112
 
    74 binLogicalOp: OR •
 
@@ -2302,7 +2305,7 @@ State 111
     DIFFERENT  reduce using rule 74 (binLogicalOp)
 
 
-State 112
+State 113
 
    75 binLogicalOp: AND •
 
@@ -2314,21 +2317,21 @@ State 112
     DIFFERENT  reduce using rule 75 (binLogicalOp)
 
 
-State 113
+State 114
 
    72 binLogicalExp: binLogicalExp binLogicalOp • relationalOp
 
-    SMALLER    shift, and go to state 240
-    GREATER    shift, and go to state 241
-    SMALLEQ    shift, and go to state 242
-    GREATEQ    shift, and go to state 243
-    EQUALS     shift, and go to state 244
-    DIFFERENT  shift, and go to state 245
+    SMALLER    shift, and go to state 241
+    GREATER    shift, and go to state 242
+    SMALLEQ    shift, and go to state 243
+    GREATEQ    shift, and go to state 244
+    EQUALS     shift, and go to state 245
+    DIFFERENT  shift, and go to state 246
 
     relationalOp  go to state 153
 
 
-State 114
+State 115
 
    78 relationalOp: SMALLER •
 
@@ -2342,7 +2345,7 @@ State 114
     PARENL      reduce using rule 78 (relationalOp)
 
 
-State 115
+State 116
 
    79 relationalOp: GREATER •
 
@@ -2356,7 +2359,7 @@ State 115
     PARENL      reduce using rule 79 (relationalOp)
 
 
-State 116
+State 117
 
    80 relationalOp: SMALLEQ •
 
@@ -2370,7 +2373,7 @@ State 116
     PARENL      reduce using rule 80 (relationalOp)
 
 
-State 117
+State 118
 
    81 relationalOp: GREATEQ •
 
@@ -2384,7 +2387,7 @@ State 117
     PARENL      reduce using rule 81 (relationalOp)
 
 
-State 118
+State 119
 
    82 relationalOp: EQUALS •
 
@@ -2398,7 +2401,7 @@ State 118
     PARENL      reduce using rule 82 (relationalOp)
 
 
-State 119
+State 120
 
    83 relationalOp: DIFFERENT •
 
@@ -2412,11 +2415,11 @@ State 119
     PARENL      reduce using rule 83 (relationalOp)
 
 
-State 120
+State 121
 
    76 relationalExp: relationalExp relationalOp • sumExp
 
-    ID          shift, and go to state 218
+    ID          shift, and go to state 95
     NIL         shift, and go to state 41
     INTEGER     shift, and go to state 42
     DECIMAL     shift, and go to state 43
@@ -2427,17 +2430,16 @@ State 120
 
     constOp  go to state 76
     sumExp   go to state 154
-    sumOp    go to state 82
-    mulExp   go to state 83
-    factor   go to state 84
-    fCall    go to state 85
+    mulExp   go to state 82
+    factor   go to state 83
+    fCall    go to state 84
 
 
-State 121
+State 122
 
-   84 sumExp: sumExp sumOp • mulExp
+   84 sumExp: sumExp ADD • mulExp
 
-    ID          shift, and go to state 218
+    ID          shift, and go to state 95
     NIL         shift, and go to state 41
     INTEGER     shift, and go to state 42
     DECIMAL     shift, and go to state 43
@@ -2447,60 +2449,35 @@ State 121
     PARENL      shift, and go to state 57
 
     constOp  go to state 76
-    sumOp    go to state 82
     mulExp   go to state 155
-    factor   go to state 84
-    fCall    go to state 85
-
-
-State 122
-
-   90 mulExp: sumOp factor •
-
-    ADD        reduce using rule 90 (mulExp)
-    SUB        reduce using rule 90 (mulExp)
-    MULT       reduce using rule 90 (mulExp)
-    DIV        reduce using rule 90 (mulExp)
-    OR         reduce using rule 90 (mulExp)
-    AND        reduce using rule 90 (mulExp)
-    SMALLER    reduce using rule 90 (mulExp)
-    GREATER    reduce using rule 90 (mulExp)
-    SMALLEQ    reduce using rule 90 (mulExp)
-    GREATEQ    reduce using rule 90 (mulExp)
-    EQUALS     reduce using rule 90 (mulExp)
-    DIFFERENT  reduce using rule 90 (mulExp)
-    SEMIC      reduce using rule 90 (mulExp)
+    factor   go to state 83
+    fCall    go to state 84
 
 
 State 123
 
-   91 mulOp: MULT •
+   85 sumExp: sumExp SUB • mulExp
 
-    ID          reduce using rule 91 (mulOp)
-    NIL         reduce using rule 91 (mulOp)
-    INTEGER     reduce using rule 91 (mulOp)
-    DECIMAL     reduce using rule 91 (mulOp)
-    ERRORTOKEN  reduce using rule 91 (mulOp)
-    PARENL      reduce using rule 91 (mulOp)
+    ID          shift, and go to state 95
+    NIL         shift, and go to state 41
+    INTEGER     shift, and go to state 42
+    DECIMAL     shift, and go to state 43
+    ERRORTOKEN  shift, and go to state 44
+    ADD         shift, and go to state 45
+    SUB         shift, and go to state 46
+    PARENL      shift, and go to state 57
+
+    constOp  go to state 76
+    mulExp   go to state 156
+    factor   go to state 83
+    fCall    go to state 84
 
 
 State 124
 
-   92 mulOp: DIV •
+   87 mulExp: mulExp MULT • factor
 
-    ID          reduce using rule 92 (mulOp)
-    NIL         reduce using rule 92 (mulOp)
-    INTEGER     reduce using rule 92 (mulOp)
-    DECIMAL     reduce using rule 92 (mulOp)
-    ERRORTOKEN  reduce using rule 92 (mulOp)
-    PARENL      reduce using rule 92 (mulOp)
-
-
-State 125
-
-   88 mulExp: mulExp mulOp • factor
-
-    ID          shift, and go to state 218
+    ID          shift, and go to state 95
     NIL         shift, and go to state 41
     INTEGER     shift, and go to state 42
     DECIMAL     shift, and go to state 43
@@ -2508,8 +2485,24 @@ State 125
     PARENL      shift, and go to state 57
 
     constOp  go to state 76
-    factor   go to state 156
-    fCall    go to state 85
+    factor   go to state 157
+    fCall    go to state 84
+
+
+State 125
+
+   88 mulExp: mulExp DIV • factor
+
+    ID          shift, and go to state 95
+    NIL         shift, and go to state 41
+    INTEGER     shift, and go to state 42
+    DECIMAL     shift, and go to state 43
+    ERRORTOKEN  shift, and go to state 44
+    PARENL      shift, and go to state 57
+
+    constOp  go to state 76
+    factor   go to state 158
+    fCall    go to state 84
 
 
 State 126
@@ -2537,9 +2530,9 @@ State 126
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    stmtList              go to state 157
+    stmtList              go to state 159
     primitiveStmt         go to state 61
     exprStmt              go to state 62
     condStmt              go to state 63
@@ -2561,10 +2554,9 @@ State 126
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
 State 127
@@ -2590,13 +2582,13 @@ State 127
     WRITELN      shift, and go to state 54
     RETURN       shift, and go to state 55
     STFUNC       shift, and go to state 56
-    ENDFUNC      shift, and go to state 158
+    ENDFUNC      shift, and go to state 160
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    primitiveStmt         go to state 107
+    primitiveStmt         go to state 108
     exprStmt              go to state 62
     condStmt              go to state 63
     ifStmt                go to state 64
@@ -2617,10 +2609,9 @@ State 127
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
 State 128
@@ -2661,38 +2652,38 @@ State 132
 
 State 133
 
-   99 fCall: ID PARENL PARENR •
+   98 fCall: ID PARENL PARENR •
 
-    ADD        reduce using rule 99 (fCall)
-    SUB        reduce using rule 99 (fCall)
-    MULT       reduce using rule 99 (fCall)
-    DIV        reduce using rule 99 (fCall)
-    OR         reduce using rule 99 (fCall)
-    AND        reduce using rule 99 (fCall)
-    SMALLER    reduce using rule 99 (fCall)
-    GREATER    reduce using rule 99 (fCall)
-    SMALLEQ    reduce using rule 99 (fCall)
-    GREATEQ    reduce using rule 99 (fCall)
-    EQUALS     reduce using rule 99 (fCall)
-    DIFFERENT  reduce using rule 99 (fCall)
-    SEMIC      reduce using rule 99 (fCall)
+    ADD        reduce using rule 98 (fCall)
+    SUB        reduce using rule 98 (fCall)
+    MULT       reduce using rule 98 (fCall)
+    DIV        reduce using rule 98 (fCall)
+    OR         reduce using rule 98 (fCall)
+    AND        reduce using rule 98 (fCall)
+    SMALLER    reduce using rule 98 (fCall)
+    GREATER    reduce using rule 98 (fCall)
+    SMALLEQ    reduce using rule 98 (fCall)
+    GREATEQ    reduce using rule 98 (fCall)
+    EQUALS     reduce using rule 98 (fCall)
+    DIFFERENT  reduce using rule 98 (fCall)
+    SEMIC      reduce using rule 98 (fCall)
 
 
 State 134
 
-  101 callParams: simpleExp •
+  100 callParams: simpleExp •
 
-    COMMA   reduce using rule 101 (callParams)
-    PARENR  reduce using rule 101 (callParams)
+    COMMA   reduce using rule 100 (callParams)
+    PARENR  reduce using rule 100 (callParams)
 
 
 State 135
 
-   98 fCall: ID PARENL callParams • PARENR
-  100 callParams: callParams • COMMA simpleExp
+   97 fCall: ID PARENL callParams • PARENR
+   99 callParams: callParams • COMMA simpleExp
 
-    COMMA   shift, and go to state 159
-    PARENR  shift, and go to state 160
+    COMMA   shift, and go to state 161
+    PARENR  shift, and go to state 162
 
 
 State 136
@@ -2706,53 +2697,53 @@ State 137
 
    41 ifStmt: IF PARENL simpleExp • PARENR
 
-    PARENR  shift, and go to state 161
+    PARENR  shift, and go to state 163
 
 
 State 138
 
    61 assignExp: ID • ASSIGN expression
-   93 factor: ID •
-   98 fCall: ID • PARENL callParams PARENR
-   99      | ID • PARENL PARENR
+   92 factor: ID •
+   97 fCall: ID • PARENL callParams PARENR
+   98      | ID • PARENL PARENR
 
-    ASSIGN  shift, and go to state 91
-    PARENL  shift, and go to state 93
+    ASSIGN  shift, and go to state 90
+    PARENL  shift, and go to state 92
 
-    ADD        reduce using rule 93 (factor)
-    SUB        reduce using rule 93 (factor)
-    MULT       reduce using rule 93 (factor)
-    DIV        reduce using rule 93 (factor)
-    OR         reduce using rule 93 (factor)
-    AND        reduce using rule 93 (factor)
-    SMALLER    reduce using rule 93 (factor)
-    GREATER    reduce using rule 93 (factor)
-    SMALLEQ    reduce using rule 93 (factor)
-    GREATEQ    reduce using rule 93 (factor)
-    EQUALS     reduce using rule 93 (factor)
-    DIFFERENT  reduce using rule 93 (factor)
-    SEMIC      reduce using rule 93 (factor)
+    ADD        reduce using rule 92 (factor)
+    SUB        reduce using rule 92 (factor)
+    MULT       reduce using rule 92 (factor)
+    DIV        reduce using rule 92 (factor)
+    OR         reduce using rule 92 (factor)
+    AND        reduce using rule 92 (factor)
+    SMALLER    reduce using rule 92 (factor)
+    GREATER    reduce using rule 92 (factor)
+    SMALLEQ    reduce using rule 92 (factor)
+    GREATEQ    reduce using rule 92 (factor)
+    EQUALS     reduce using rule 92 (factor)
+    DIFFERENT  reduce using rule 92 (factor)
+    SEMIC      reduce using rule 92 (factor)
 
 
 State 139
 
    44 iterStmt: FOR PARENL assignExp • SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
 
-    SEMIC  shift, and go to state 162
+    SEMIC  shift, and go to state 164
 
 
 State 140
 
    45 iterStmt: FOR PARENL simpleExp • SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
 
-    SEMIC  shift, and go to state 163
+    SEMIC  shift, and go to state 165
 
 
 State 141
 
    66 inOp: READ PARENL ID • PARENR SEMIC
 
-    PARENR  shift, and go to state 164
+    PARENR  shift, and go to state 166
 
 
 State 142
@@ -2760,28 +2751,28 @@ State 142
    51 appendOps: ID • APPEND ID
    56 mapFilterOps: ID • MAP ID
    57             | ID • FILTER ID
-   93 factor: ID •
-   98 fCall: ID • PARENL callParams PARENR
-   99      | ID • PARENL PARENR
+   92 factor: ID •
+   97 fCall: ID • PARENL callParams PARENR
+   98      | ID • PARENL PARENR
 
-    APPEND  shift, and go to state 246
-    FILTER  shift, and go to state 247
-    MAP     shift, and go to state 248
-    PARENL  shift, and go to state 239
+    APPEND  shift, and go to state 247
+    FILTER  shift, and go to state 248
+    MAP     shift, and go to state 249
+    PARENL  shift, and go to state 250
 
-    ADD        reduce using rule 93 (factor)
-    SUB        reduce using rule 93 (factor)
-    MULT       reduce using rule 93 (factor)
-    DIV        reduce using rule 93 (factor)
-    OR         reduce using rule 93 (factor)
-    AND        reduce using rule 93 (factor)
-    SMALLER    reduce using rule 93 (factor)
-    GREATER    reduce using rule 93 (factor)
-    SMALLEQ    reduce using rule 93 (factor)
-    GREATEQ    reduce using rule 93 (factor)
-    EQUALS     reduce using rule 93 (factor)
-    DIFFERENT  reduce using rule 93 (factor)
-    PARENR     reduce using rule 93 (factor)
+    ADD        reduce using rule 92 (factor)
+    SUB        reduce using rule 92 (factor)
+    MULT       reduce using rule 92 (factor)
+    DIV        reduce using rule 92 (factor)
+    OR         reduce using rule 92 (factor)
+    AND        reduce using rule 92 (factor)
+    SMALLER    reduce using rule 92 (factor)
+    GREATER    reduce using rule 92 (factor)
+    SMALLEQ    reduce using rule 92 (factor)
+    GREATEQ    reduce using rule 92 (factor)
+    EQUALS     reduce using rule 92 (factor)
+    DIFFERENT  reduce using rule 92 (factor)
+    PARENR     reduce using rule 92 (factor)
 
 
 State 143
@@ -2809,14 +2800,14 @@ State 146
 
    67 outOp: WRITE PARENL outConst • PARENR SEMIC
 
-    PARENR  shift, and go to state 165
+    PARENR  shift, and go to state 167
 
 
 State 147
 
    68 outOp: WRITELN PARENL outConst • PARENR SEMIC
 
-    PARENR  shift, and go to state 166
+    PARENR  shift, and go to state 168
 
 
 State 148
@@ -2873,21 +2864,21 @@ State 149
 
 State 150
 
-   95 factor: PARENL simpleExp PARENR •
+   94 factor: PARENL simpleExp PARENR •
 
-    ADD        reduce using rule 95 (factor)
-    SUB        reduce using rule 95 (factor)
-    MULT       reduce using rule 95 (factor)
-    DIV        reduce using rule 95 (factor)
-    OR         reduce using rule 95 (factor)
-    AND        reduce using rule 95 (factor)
-    SMALLER    reduce using rule 95 (factor)
-    GREATER    reduce using rule 95 (factor)
-    SMALLEQ    reduce using rule 95 (factor)
-    GREATEQ    reduce using rule 95 (factor)
-    EQUALS     reduce using rule 95 (factor)
-    DIFFERENT  reduce using rule 95 (factor)
-    SEMIC      reduce using rule 95 (factor)
+    ADD        reduce using rule 94 (factor)
+    SUB        reduce using rule 94 (factor)
+    MULT       reduce using rule 94 (factor)
+    DIV        reduce using rule 94 (factor)
+    OR         reduce using rule 94 (factor)
+    AND        reduce using rule 94 (factor)
+    SMALLER    reduce using rule 94 (factor)
+    GREATER    reduce using rule 94 (factor)
+    SMALLEQ    reduce using rule 94 (factor)
+    GREATEQ    reduce using rule 94 (factor)
+    EQUALS     reduce using rule 94 (factor)
+    DIFFERENT  reduce using rule 94 (factor)
+    SEMIC      reduce using rule 94 (factor)
 
 
 State 151
@@ -2914,7 +2905,7 @@ State 151
     STFUNC       reduce using rule 42 ($@9)
     PARENL       reduce using rule 42 ($@9)
 
-    $@9  go to state 167
+    $@9  go to state 169
 
 
 State 152
@@ -2955,10 +2946,11 @@ State 153
 State 154
 
    76 relationalExp: relationalExp relationalOp sumExp •
-   84 sumExp: sumExp • sumOp mulExp
+   84 sumExp: sumExp • ADD mulExp
+   85       | sumExp • SUB mulExp
 
-    ADD  shift, and go to state 216
-    SUB  shift, and go to state 217
+    ADD  shift, and go to state 122
+    SUB  shift, and go to state 123
 
     OR         reduce using rule 76 (relationalExp)
     AND        reduce using rule 76 (relationalExp)
@@ -2970,16 +2962,15 @@ State 154
     DIFFERENT  reduce using rule 76 (relationalExp)
     SEMIC      reduce using rule 76 (relationalExp)
 
-    sumOp  go to state 121
-
 
 State 155
 
-   84 sumExp: sumExp sumOp mulExp •
-   88 mulExp: mulExp • mulOp factor
+   84 sumExp: sumExp ADD mulExp •
+   87 mulExp: mulExp • MULT factor
+   88       | mulExp • DIV factor
 
-    MULT  shift, and go to state 123
-    DIV   shift, and go to state 124
+    MULT  shift, and go to state 124
+    DIV   shift, and go to state 125
 
     ADD        reduce using rule 84 (sumExp)
     SUB        reduce using rule 84 (sumExp)
@@ -2993,12 +2984,51 @@ State 155
     DIFFERENT  reduce using rule 84 (sumExp)
     SEMIC      reduce using rule 84 (sumExp)
 
-    mulOp  go to state 125
-
 
 State 156
 
-   88 mulExp: mulExp mulOp factor •
+   85 sumExp: sumExp SUB mulExp •
+   87 mulExp: mulExp • MULT factor
+   88       | mulExp • DIV factor
+
+    MULT  shift, and go to state 124
+    DIV   shift, and go to state 125
+
+    ADD        reduce using rule 85 (sumExp)
+    SUB        reduce using rule 85 (sumExp)
+    OR         reduce using rule 85 (sumExp)
+    AND        reduce using rule 85 (sumExp)
+    SMALLER    reduce using rule 85 (sumExp)
+    GREATER    reduce using rule 85 (sumExp)
+    SMALLEQ    reduce using rule 85 (sumExp)
+    GREATEQ    reduce using rule 85 (sumExp)
+    EQUALS     reduce using rule 85 (sumExp)
+    DIFFERENT  reduce using rule 85 (sumExp)
+    SEMIC      reduce using rule 85 (sumExp)
+
+
+State 157
+
+   87 mulExp: mulExp MULT factor •
+
+    ADD        reduce using rule 87 (mulExp)
+    SUB        reduce using rule 87 (mulExp)
+    MULT       reduce using rule 87 (mulExp)
+    DIV        reduce using rule 87 (mulExp)
+    OR         reduce using rule 87 (mulExp)
+    AND        reduce using rule 87 (mulExp)
+    SMALLER    reduce using rule 87 (mulExp)
+    GREATER    reduce using rule 87 (mulExp)
+    SMALLEQ    reduce using rule 87 (mulExp)
+    GREATEQ    reduce using rule 87 (mulExp)
+    EQUALS     reduce using rule 87 (mulExp)
+    DIFFERENT  reduce using rule 87 (mulExp)
+    SEMIC      reduce using rule 87 (mulExp)
+
+
+State 158
+
+   88 mulExp: mulExp DIV factor •
 
     ADD        reduce using rule 88 (mulExp)
     SUB        reduce using rule 88 (mulExp)
@@ -3015,7 +3045,7 @@ State 156
     SEMIC      reduce using rule 88 (mulExp)
 
 
-State 157
+State 159
 
    16 funcDeclaration: TYPE LISTTYPE ID PARENL $@5 params PARENR STFUNC $@6 stmtList • ENDFUNC
    28 stmtList: stmtList • primitiveStmt
@@ -3038,13 +3068,13 @@ State 157
     WRITELN      shift, and go to state 54
     RETURN       shift, and go to state 55
     STFUNC       shift, and go to state 56
-    ENDFUNC      shift, and go to state 168
+    ENDFUNC      shift, and go to state 170
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    primitiveStmt         go to state 107
+    primitiveStmt         go to state 108
     exprStmt              go to state 62
     condStmt              go to state 63
     ifStmt                go to state 64
@@ -3065,13 +3095,12 @@ State 157
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 158
+State 160
 
    19 funcDeclaration: TYPE LISTTYPE ID PARENL $@7 PARENR STFUNC $@8 stmtList ENDFUNC •
 
@@ -3079,50 +3108,49 @@ State 158
     TYPE  reduce using rule 19 (funcDeclaration)
 
 
-State 159
-
-  100 callParams: callParams COMMA • simpleExp
-
-    ID          shift, and go to state 219
-    NIL         shift, and go to state 220
-    INTEGER     shift, and go to state 221
-    DECIMAL     shift, and go to state 222
-    ERRORTOKEN  shift, and go to state 223
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 224
-
-    simpleExp      go to state 169
-    constOp        go to state 225
-    binLogicalExp  go to state 226
-    relationalExp  go to state 227
-    sumExp         go to state 228
-    sumOp          go to state 229
-    mulExp         go to state 230
-    factor         go to state 231
-    fCall          go to state 232
-
-
-State 160
-
-   98 fCall: ID PARENL callParams PARENR •
-
-    ADD        reduce using rule 98 (fCall)
-    SUB        reduce using rule 98 (fCall)
-    MULT       reduce using rule 98 (fCall)
-    DIV        reduce using rule 98 (fCall)
-    OR         reduce using rule 98 (fCall)
-    AND        reduce using rule 98 (fCall)
-    SMALLER    reduce using rule 98 (fCall)
-    GREATER    reduce using rule 98 (fCall)
-    SMALLEQ    reduce using rule 98 (fCall)
-    GREATEQ    reduce using rule 98 (fCall)
-    EQUALS     reduce using rule 98 (fCall)
-    DIFFERENT  reduce using rule 98 (fCall)
-    SEMIC      reduce using rule 98 (fCall)
-
-
 State 161
+
+   99 callParams: callParams COMMA • simpleExp
+
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    ADD         shift, and go to state 225
+    SUB         shift, and go to state 226
+    PARENL      shift, and go to state 227
+
+    simpleExp      go to state 171
+    constOp        go to state 228
+    binLogicalExp  go to state 229
+    relationalExp  go to state 230
+    sumExp         go to state 231
+    mulExp         go to state 232
+    factor         go to state 233
+    fCall          go to state 234
+
+
+State 162
+
+   97 fCall: ID PARENL callParams PARENR •
+
+    ADD        reduce using rule 97 (fCall)
+    SUB        reduce using rule 97 (fCall)
+    MULT       reduce using rule 97 (fCall)
+    DIV        reduce using rule 97 (fCall)
+    OR         reduce using rule 97 (fCall)
+    AND        reduce using rule 97 (fCall)
+    SMALLER    reduce using rule 97 (fCall)
+    GREATER    reduce using rule 97 (fCall)
+    SMALLEQ    reduce using rule 97 (fCall)
+    GREATEQ    reduce using rule 97 (fCall)
+    EQUALS     reduce using rule 97 (fCall)
+    DIFFERENT  reduce using rule 97 (fCall)
+    SEMIC      reduce using rule 97 (fCall)
+
+
+State 163
 
    41 ifStmt: IF PARENL simpleExp PARENR •
 
@@ -3147,11 +3175,11 @@ State 161
     PARENL       reduce using rule 41 (ifStmt)
 
 
-State 162
+State 164
 
    44 iterStmt: FOR PARENL assignExp SEMIC • simpleExp SEMIC assignExp PARENR primitiveStmt
 
-    ID          shift, and go to state 218
+    ID          shift, and go to state 95
     NIL         shift, and go to state 41
     INTEGER     shift, and go to state 42
     DECIMAL     shift, and go to state 43
@@ -3160,63 +3188,61 @@ State 162
     SUB         shift, and go to state 46
     PARENL      shift, and go to state 57
 
-    simpleExp      go to state 170
+    simpleExp      go to state 172
     constOp        go to state 76
     binLogicalExp  go to state 79
     relationalExp  go to state 80
     sumExp         go to state 81
-    sumOp          go to state 82
-    mulExp         go to state 83
-    factor         go to state 84
-    fCall          go to state 85
-
-
-State 163
-
-   45 iterStmt: FOR PARENL simpleExp SEMIC • simpleExp SEMIC assignExp PARENR primitiveStmt
-
-    ID          shift, and go to state 218
-    NIL         shift, and go to state 41
-    INTEGER     shift, and go to state 42
-    DECIMAL     shift, and go to state 43
-    ERRORTOKEN  shift, and go to state 44
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 57
-
-    simpleExp      go to state 171
-    constOp        go to state 76
-    binLogicalExp  go to state 79
-    relationalExp  go to state 80
-    sumExp         go to state 81
-    sumOp          go to state 82
-    mulExp         go to state 83
-    factor         go to state 84
-    fCall          go to state 85
-
-
-State 164
-
-   66 inOp: READ PARENL ID PARENR • SEMIC
-
-    SEMIC  shift, and go to state 172
+    mulExp         go to state 82
+    factor         go to state 83
+    fCall          go to state 84
 
 
 State 165
 
-   67 outOp: WRITE PARENL outConst PARENR • SEMIC
+   45 iterStmt: FOR PARENL simpleExp SEMIC • simpleExp SEMIC assignExp PARENR primitiveStmt
 
-    SEMIC  shift, and go to state 173
+    ID          shift, and go to state 95
+    NIL         shift, and go to state 41
+    INTEGER     shift, and go to state 42
+    DECIMAL     shift, and go to state 43
+    ERRORTOKEN  shift, and go to state 44
+    ADD         shift, and go to state 45
+    SUB         shift, and go to state 46
+    PARENL      shift, and go to state 57
+
+    simpleExp      go to state 173
+    constOp        go to state 76
+    binLogicalExp  go to state 79
+    relationalExp  go to state 80
+    sumExp         go to state 81
+    mulExp         go to state 82
+    factor         go to state 83
+    fCall          go to state 84
 
 
 State 166
 
-   68 outOp: WRITELN PARENL outConst PARENR • SEMIC
+   66 inOp: READ PARENL ID PARENR • SEMIC
 
     SEMIC  shift, and go to state 174
 
 
 State 167
+
+   67 outOp: WRITE PARENL outConst PARENR • SEMIC
+
+    SEMIC  shift, and go to state 175
+
+
+State 168
+
+   68 outOp: WRITELN PARENL outConst PARENR • SEMIC
+
+    SEMIC  shift, and go to state 176
+
+
+State 169
 
    43 elseStmt: ELSE $@9 • primitiveStmt
 
@@ -3241,9 +3267,9 @@ State 167
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    primitiveStmt         go to state 175
+    primitiveStmt         go to state 177
     exprStmt              go to state 62
     condStmt              go to state 63
     ifStmt                go to state 64
@@ -3264,13 +3290,12 @@ State 167
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 168
+State 170
 
    16 funcDeclaration: TYPE LISTTYPE ID PARENL $@5 params PARENR STFUNC $@6 stmtList ENDFUNC •
 
@@ -3278,29 +3303,29 @@ State 168
     TYPE  reduce using rule 16 (funcDeclaration)
 
 
-State 169
-
-  100 callParams: callParams COMMA simpleExp •
-
-    COMMA   reduce using rule 100 (callParams)
-    PARENR  reduce using rule 100 (callParams)
-
-
-State 170
-
-   44 iterStmt: FOR PARENL assignExp SEMIC simpleExp • SEMIC assignExp PARENR primitiveStmt
-
-    SEMIC  shift, and go to state 176
-
-
 State 171
 
-   45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp • SEMIC assignExp PARENR primitiveStmt
+   99 callParams: callParams COMMA simpleExp •
 
-    SEMIC  shift, and go to state 177
+    COMMA   reduce using rule 99 (callParams)
+    PARENR  reduce using rule 99 (callParams)
 
 
 State 172
+
+   44 iterStmt: FOR PARENL assignExp SEMIC simpleExp • SEMIC assignExp PARENR primitiveStmt
+
+    SEMIC  shift, and go to state 178
+
+
+State 173
+
+   45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp • SEMIC assignExp PARENR primitiveStmt
+
+    SEMIC  shift, and go to state 179
+
+
+State 174
 
    66 inOp: READ PARENL ID PARENR SEMIC •
 
@@ -3326,7 +3351,7 @@ State 172
     PARENL       reduce using rule 66 (inOp)
 
 
-State 173
+State 175
 
    67 outOp: WRITE PARENL outConst PARENR SEMIC •
 
@@ -3352,7 +3377,7 @@ State 173
     PARENL       reduce using rule 67 (outOp)
 
 
-State 174
+State 176
 
    68 outOp: WRITELN PARENL outConst PARENR SEMIC •
 
@@ -3378,7 +3403,7 @@ State 174
     PARENL       reduce using rule 68 (outOp)
 
 
-State 175
+State 177
 
    43 elseStmt: ELSE $@9 primitiveStmt •
 
@@ -3404,46 +3429,46 @@ State 175
     PARENL       reduce using rule 43 (elseStmt)
 
 
-State 176
+State 178
 
    44 iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC • assignExp PARENR primitiveStmt
 
-    ID  shift, and go to state 178
+    ID  shift, and go to state 180
 
-    assignExp  go to state 179
-
-
-State 177
-
-   45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC • assignExp PARENR primitiveStmt
-
-    ID  shift, and go to state 178
-
-    assignExp  go to state 180
-
-
-State 178
-
-   61 assignExp: ID • ASSIGN expression
-
-    ASSIGN  shift, and go to state 249
+    assignExp  go to state 181
 
 
 State 179
 
-   44 iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp • PARENR primitiveStmt
+   45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC • assignExp PARENR primitiveStmt
 
-    PARENR  shift, and go to state 181
+    ID  shift, and go to state 180
+
+    assignExp  go to state 182
 
 
 State 180
 
-   45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp • PARENR primitiveStmt
+   61 assignExp: ID • ASSIGN expression
 
-    PARENR  shift, and go to state 182
+    ASSIGN  shift, and go to state 251
 
 
 State 181
+
+   44 iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp • PARENR primitiveStmt
+
+    PARENR  shift, and go to state 183
+
+
+State 182
+
+   45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp • PARENR primitiveStmt
+
+    PARENR  shift, and go to state 184
+
+
+State 183
 
    44 iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR • primitiveStmt
 
@@ -3468,9 +3493,9 @@ State 181
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    primitiveStmt         go to state 183
+    primitiveStmt         go to state 185
     exprStmt              go to state 62
     condStmt              go to state 63
     ifStmt                go to state 64
@@ -3491,13 +3516,12 @@ State 181
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 182
+State 184
 
    45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR • primitiveStmt
 
@@ -3522,9 +3546,9 @@ State 182
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    primitiveStmt         go to state 184
+    primitiveStmt         go to state 186
     exprStmt              go to state 62
     condStmt              go to state 63
     ifStmt                go to state 64
@@ -3545,13 +3569,12 @@ State 182
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 183
+State 185
 
    44 iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt •
 
@@ -3577,7 +3600,7 @@ State 183
     PARENL       reduce using rule 44 (iterStmt)
 
 
-State 184
+State 186
 
    45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt •
 
@@ -3603,14 +3626,37 @@ State 184
     PARENL       reduce using rule 45 (iterStmt)
 
 
-State 185
+State 187
 
     7 varDeclaration: simpleVarDeclaration • SEMIC
 
-    SEMIC  shift, and go to state 250
+    SEMIC  shift, and go to state 252
 
 
-State 186
+State 188
+
+   92 factor: ID •
+   97 fCall: ID • PARENL callParams PARENR
+   98      | ID • PARENL PARENR
+
+    PARENL  shift, and go to state 250
+
+    ADD        reduce using rule 92 (factor)
+    SUB        reduce using rule 92 (factor)
+    MULT       reduce using rule 92 (factor)
+    DIV        reduce using rule 92 (factor)
+    OR         reduce using rule 92 (factor)
+    AND        reduce using rule 92 (factor)
+    SMALLER    reduce using rule 92 (factor)
+    GREATER    reduce using rule 92 (factor)
+    SMALLEQ    reduce using rule 92 (factor)
+    GREATEQ    reduce using rule 92 (factor)
+    EQUALS     reduce using rule 92 (factor)
+    DIFFERENT  reduce using rule 92 (factor)
+    PARENR     reduce using rule 92 (factor)
+
+
+State 189
 
    65 constOp: NIL •
 
@@ -3629,7 +3675,7 @@ State 186
     PARENR     reduce using rule 65 (constOp)
 
 
-State 187
+State 190
 
    63 constOp: INTEGER •
 
@@ -3648,7 +3694,7 @@ State 187
     PARENR     reduce using rule 63 (constOp)
 
 
-State 188
+State 191
 
    64 constOp: DECIMAL •
 
@@ -3667,52 +3713,9 @@ State 188
     PARENR     reduce using rule 64 (constOp)
 
 
-State 189
+State 192
 
-   97 factor: ERRORTOKEN •
-
-    ADD        reduce using rule 97 (factor)
-    SUB        reduce using rule 97 (factor)
-    MULT       reduce using rule 97 (factor)
-    DIV        reduce using rule 97 (factor)
-    OR         reduce using rule 97 (factor)
-    AND        reduce using rule 97 (factor)
-    SMALLER    reduce using rule 97 (factor)
-    GREATER    reduce using rule 97 (factor)
-    SMALLEQ    reduce using rule 97 (factor)
-    GREATEQ    reduce using rule 97 (factor)
-    EQUALS     reduce using rule 97 (factor)
-    DIFFERENT  reduce using rule 97 (factor)
-    PARENR     reduce using rule 97 (factor)
-
-
-State 190
-
-   95 factor: PARENL • simpleExp PARENR
-
-    ID          shift, and go to state 104
-    NIL         shift, and go to state 186
-    INTEGER     shift, and go to state 187
-    DECIMAL     shift, and go to state 188
-    ERRORTOKEN  shift, and go to state 189
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 190
-
-    simpleExp      go to state 251
-    constOp        go to state 191
-    binLogicalExp  go to state 192
-    relationalExp  go to state 193
-    sumExp         go to state 194
-    sumOp          go to state 195
-    mulExp         go to state 196
-    factor         go to state 197
-    fCall          go to state 198
-
-
-State 191
-
-   96 factor: constOp •
+   96 factor: ERRORTOKEN •
 
     ADD        reduce using rule 96 (factor)
     SUB        reduce using rule 96 (factor)
@@ -3729,45 +3732,120 @@ State 191
     PARENR     reduce using rule 96 (factor)
 
 
-State 192
+State 193
+
+   90 mulExp: ADD • factor
+
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    PARENL      shift, and go to state 195
+
+    constOp  go to state 196
+    factor   go to state 253
+    fCall    go to state 202
+
+
+State 194
+
+   91 mulExp: SUB • factor
+
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    PARENL      shift, and go to state 195
+
+    constOp  go to state 196
+    factor   go to state 254
+    fCall    go to state 202
+
+
+State 195
+
+   94 factor: PARENL • simpleExp PARENR
+
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    ADD         shift, and go to state 193
+    SUB         shift, and go to state 194
+    PARENL      shift, and go to state 195
+
+    simpleExp      go to state 255
+    constOp        go to state 196
+    binLogicalExp  go to state 197
+    relationalExp  go to state 198
+    sumExp         go to state 199
+    mulExp         go to state 200
+    factor         go to state 201
+    fCall          go to state 202
+
+
+State 196
+
+   95 factor: constOp •
+
+    ADD        reduce using rule 95 (factor)
+    SUB        reduce using rule 95 (factor)
+    MULT       reduce using rule 95 (factor)
+    DIV        reduce using rule 95 (factor)
+    OR         reduce using rule 95 (factor)
+    AND        reduce using rule 95 (factor)
+    SMALLER    reduce using rule 95 (factor)
+    GREATER    reduce using rule 95 (factor)
+    SMALLEQ    reduce using rule 95 (factor)
+    GREATEQ    reduce using rule 95 (factor)
+    EQUALS     reduce using rule 95 (factor)
+    DIFFERENT  reduce using rule 95 (factor)
+    PARENR     reduce using rule 95 (factor)
+
+
+State 197
 
    62 simpleExp: binLogicalExp •
    72 binLogicalExp: binLogicalExp • binLogicalOp relationalOp
 
-    OR   shift, and go to state 111
-    AND  shift, and go to state 112
+    OR   shift, and go to state 112
+    AND  shift, and go to state 113
 
     PARENR  reduce using rule 62 (simpleExp)
 
-    binLogicalOp  go to state 252
+    binLogicalOp  go to state 256
 
 
-State 193
+State 198
 
    73 binLogicalExp: relationalExp •
    76 relationalExp: relationalExp • relationalOp sumExp
 
-    SMALLER    shift, and go to state 114
-    GREATER    shift, and go to state 115
-    SMALLEQ    shift, and go to state 116
-    GREATEQ    shift, and go to state 117
-    EQUALS     shift, and go to state 118
-    DIFFERENT  shift, and go to state 119
+    SMALLER    shift, and go to state 115
+    GREATER    shift, and go to state 116
+    SMALLEQ    shift, and go to state 117
+    GREATEQ    shift, and go to state 118
+    EQUALS     shift, and go to state 119
+    DIFFERENT  shift, and go to state 120
 
     OR      reduce using rule 73 (binLogicalExp)
     AND     reduce using rule 73 (binLogicalExp)
     PARENR  reduce using rule 73 (binLogicalExp)
 
-    relationalOp  go to state 253
+    relationalOp  go to state 257
 
 
-State 194
+State 199
 
    77 relationalExp: sumExp •
-   84 sumExp: sumExp • sumOp mulExp
+   84 sumExp: sumExp • ADD mulExp
+   85       | sumExp • SUB mulExp
 
-    ADD  shift, and go to state 216
-    SUB  shift, and go to state 217
+    ADD  shift, and go to state 258
+    SUB  shift, and go to state 259
 
     OR         reduce using rule 77 (relationalExp)
     AND        reduce using rule 77 (relationalExp)
@@ -3779,49 +3857,30 @@ State 194
     DIFFERENT  reduce using rule 77 (relationalExp)
     PARENR     reduce using rule 77 (relationalExp)
 
-    sumOp  go to state 254
+
+State 200
+
+   86 sumExp: mulExp •
+   87 mulExp: mulExp • MULT factor
+   88       | mulExp • DIV factor
+
+    MULT  shift, and go to state 260
+    DIV   shift, and go to state 261
+
+    ADD        reduce using rule 86 (sumExp)
+    SUB        reduce using rule 86 (sumExp)
+    OR         reduce using rule 86 (sumExp)
+    AND        reduce using rule 86 (sumExp)
+    SMALLER    reduce using rule 86 (sumExp)
+    GREATER    reduce using rule 86 (sumExp)
+    SMALLEQ    reduce using rule 86 (sumExp)
+    GREATEQ    reduce using rule 86 (sumExp)
+    EQUALS     reduce using rule 86 (sumExp)
+    DIFFERENT  reduce using rule 86 (sumExp)
+    PARENR     reduce using rule 86 (sumExp)
 
 
-State 195
-
-   90 mulExp: sumOp • factor
-
-    ID          shift, and go to state 104
-    NIL         shift, and go to state 186
-    INTEGER     shift, and go to state 187
-    DECIMAL     shift, and go to state 188
-    ERRORTOKEN  shift, and go to state 189
-    PARENL      shift, and go to state 190
-
-    constOp  go to state 191
-    factor   go to state 255
-    fCall    go to state 198
-
-
-State 196
-
-   85 sumExp: mulExp •
-   88 mulExp: mulExp • mulOp factor
-
-    MULT  shift, and go to state 123
-    DIV   shift, and go to state 124
-
-    ADD        reduce using rule 85 (sumExp)
-    SUB        reduce using rule 85 (sumExp)
-    OR         reduce using rule 85 (sumExp)
-    AND        reduce using rule 85 (sumExp)
-    SMALLER    reduce using rule 85 (sumExp)
-    GREATER    reduce using rule 85 (sumExp)
-    SMALLEQ    reduce using rule 85 (sumExp)
-    GREATEQ    reduce using rule 85 (sumExp)
-    EQUALS     reduce using rule 85 (sumExp)
-    DIFFERENT  reduce using rule 85 (sumExp)
-    PARENR     reduce using rule 85 (sumExp)
-
-    mulOp  go to state 256
-
-
-State 197
+State 201
 
    89 mulExp: factor •
 
@@ -3840,55 +3899,55 @@ State 197
     PARENR     reduce using rule 89 (mulExp)
 
 
-State 198
+State 202
 
-   94 factor: fCall •
+   93 factor: fCall •
 
-    ADD        reduce using rule 94 (factor)
-    SUB        reduce using rule 94 (factor)
-    MULT       reduce using rule 94 (factor)
-    DIV        reduce using rule 94 (factor)
-    OR         reduce using rule 94 (factor)
-    AND        reduce using rule 94 (factor)
-    SMALLER    reduce using rule 94 (factor)
-    GREATER    reduce using rule 94 (factor)
-    SMALLEQ    reduce using rule 94 (factor)
-    GREATEQ    reduce using rule 94 (factor)
-    EQUALS     reduce using rule 94 (factor)
-    DIFFERENT  reduce using rule 94 (factor)
-    PARENR     reduce using rule 94 (factor)
+    ADD        reduce using rule 93 (factor)
+    SUB        reduce using rule 93 (factor)
+    MULT       reduce using rule 93 (factor)
+    DIV        reduce using rule 93 (factor)
+    OR         reduce using rule 93 (factor)
+    AND        reduce using rule 93 (factor)
+    SMALLER    reduce using rule 93 (factor)
+    GREATER    reduce using rule 93 (factor)
+    SMALLEQ    reduce using rule 93 (factor)
+    GREATEQ    reduce using rule 93 (factor)
+    EQUALS     reduce using rule 93 (factor)
+    DIFFERENT  reduce using rule 93 (factor)
+    PARENR     reduce using rule 93 (factor)
 
 
-State 199
+State 203
 
    44 iterStmt: FOR • PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
    45         | FOR • PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
 
-    PARENL  shift, and go to state 257
+    PARENL  shift, and go to state 262
 
 
-State 200
+State 204
 
    66 inOp: READ • PARENL ID PARENR SEMIC
 
-    PARENL  shift, and go to state 258
+    PARENL  shift, and go to state 263
 
 
-State 201
+State 205
 
    67 outOp: WRITE • PARENL outConst PARENR SEMIC
 
-    PARENL  shift, and go to state 259
+    PARENL  shift, and go to state 264
 
 
-State 202
+State 206
 
    68 outOp: WRITELN • PARENL outConst PARENR SEMIC
 
-    PARENL  shift, and go to state 260
+    PARENL  shift, and go to state 265
 
 
-State 203
+State 207
 
    46 returnStmt: RETURN • expression SEMIC
 
@@ -3910,20 +3969,19 @@ State 203
     returnListOp    go to state 70
     destroyHeadOps  go to state 71
     mapFilterOps    go to state 72
-    expression      go to state 261
+    expression      go to state 266
     assignExp       go to state 74
     simpleExp       go to state 75
     constOp         go to state 76
     binLogicalExp   go to state 79
     relationalExp   go to state 80
     sumExp          go to state 81
-    sumOp           go to state 82
-    mulExp          go to state 83
-    factor          go to state 84
-    fCall           go to state 85
+    mulExp          go to state 82
+    factor          go to state 83
+    fCall           go to state 84
 
 
-State 204
+State 208
 
    27 compoundStmt: STFUNC • stmtList ENDFUNC
 
@@ -3948,9 +4006,9 @@ State 204
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    stmtList              go to state 262
+    stmtList              go to state 267
     primitiveStmt         go to state 61
     exprStmt              go to state 62
     condStmt              go to state 63
@@ -3972,13 +4030,12 @@ State 204
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 205
+State 209
 
    37 primitiveStmt: varDeclaration •
 
@@ -4005,14 +4062,14 @@ State 205
     PARENL       reduce using rule 37 (primitiveStmt)
 
 
-State 206
+State 210
 
     7 varDeclaration: simpleVarDeclaration • SEMIC
 
-    SEMIC  shift, and go to state 263
+    SEMIC  shift, and go to state 268
 
 
-State 207
+State 211
 
    31 primitiveStmt: compoundStmt •
 
@@ -4039,7 +4096,7 @@ State 207
     PARENL       reduce using rule 31 (primitiveStmt)
 
 
-State 208
+State 212
 
    30 primitiveStmt: exprStmt •
 
@@ -4066,7 +4123,7 @@ State 208
     PARENL       reduce using rule 30 (primitiveStmt)
 
 
-State 209
+State 213
 
    32 primitiveStmt: condStmt •
 
@@ -4093,7 +4150,7 @@ State 209
     PARENL       reduce using rule 32 (primitiveStmt)
 
 
-State 210
+State 214
 
    39 condStmt: ifStmt • primitiveStmt
    40         | ifStmt • primitiveStmt elseStmt
@@ -4110,45 +4167,44 @@ State 210
     TAILLIST     shift, and go to state 48
     DESTROYHEAD  shift, and go to state 49
     IF           shift, and go to state 50
-    FOR          shift, and go to state 199
-    READ         shift, and go to state 200
-    WRITE        shift, and go to state 201
-    WRITELN      shift, and go to state 202
-    RETURN       shift, and go to state 203
-    STFUNC       shift, and go to state 204
+    FOR          shift, and go to state 203
+    READ         shift, and go to state 204
+    WRITE        shift, and go to state 205
+    WRITELN      shift, and go to state 206
+    RETURN       shift, and go to state 207
+    STFUNC       shift, and go to state 208
     PARENL       shift, and go to state 57
 
-    varDeclaration        go to state 205
-    simpleVarDeclaration  go to state 206
-    compoundStmt          go to state 207
-    primitiveStmt         go to state 264
-    exprStmt              go to state 208
-    condStmt              go to state 209
-    ifStmt                go to state 210
-    iterStmt              go to state 211
-    returnStmt            go to state 212
+    varDeclaration        go to state 209
+    simpleVarDeclaration  go to state 210
+    compoundStmt          go to state 211
+    primitiveStmt         go to state 269
+    exprStmt              go to state 212
+    condStmt              go to state 213
+    ifStmt                go to state 214
+    iterStmt              go to state 215
+    returnStmt            go to state 216
     listExp               go to state 67
     appendOps             go to state 68
     returnListOps         go to state 69
     returnListOp          go to state 70
     destroyHeadOps        go to state 71
     mapFilterOps          go to state 72
-    expression            go to state 213
+    expression            go to state 217
     assignExp             go to state 74
     simpleExp             go to state 75
     constOp               go to state 76
-    inOp                  go to state 214
-    outOp                 go to state 215
+    inOp                  go to state 218
+    outOp                 go to state 219
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 211
+State 215
 
    33 primitiveStmt: iterStmt •
 
@@ -4175,7 +4231,7 @@ State 211
     PARENL       reduce using rule 33 (primitiveStmt)
 
 
-State 212
+State 216
 
    34 primitiveStmt: returnStmt •
 
@@ -4202,14 +4258,14 @@ State 212
     PARENL       reduce using rule 34 (primitiveStmt)
 
 
-State 213
+State 217
 
    38 exprStmt: expression • SEMIC
 
-    SEMIC  shift, and go to state 265
+    SEMIC  shift, and go to state 270
 
 
-State 214
+State 218
 
    35 primitiveStmt: inOp •
 
@@ -4236,7 +4292,7 @@ State 214
     PARENL       reduce using rule 35 (primitiveStmt)
 
 
-State 215
+State 219
 
    36 primitiveStmt: outOp •
 
@@ -4263,82 +4319,31 @@ State 215
     PARENL       reduce using rule 36 (primitiveStmt)
 
 
-State 216
-
-   86 sumOp: ADD •
-
-    ID          reduce using rule 86 (sumOp)
-    NIL         reduce using rule 86 (sumOp)
-    INTEGER     reduce using rule 86 (sumOp)
-    DECIMAL     reduce using rule 86 (sumOp)
-    ERRORTOKEN  reduce using rule 86 (sumOp)
-    ADD         reduce using rule 86 (sumOp)
-    SUB         reduce using rule 86 (sumOp)
-    PARENL      reduce using rule 86 (sumOp)
-
-
-State 217
-
-   87 sumOp: SUB •
-
-    ID          reduce using rule 87 (sumOp)
-    NIL         reduce using rule 87 (sumOp)
-    INTEGER     reduce using rule 87 (sumOp)
-    DECIMAL     reduce using rule 87 (sumOp)
-    ERRORTOKEN  reduce using rule 87 (sumOp)
-    ADD         reduce using rule 87 (sumOp)
-    SUB         reduce using rule 87 (sumOp)
-    PARENL      reduce using rule 87 (sumOp)
-
-
-State 218
-
-   93 factor: ID •
-   98 fCall: ID • PARENL callParams PARENR
-   99      | ID • PARENL PARENR
-
-    PARENL  shift, and go to state 93
-
-    ADD        reduce using rule 93 (factor)
-    SUB        reduce using rule 93 (factor)
-    MULT       reduce using rule 93 (factor)
-    DIV        reduce using rule 93 (factor)
-    OR         reduce using rule 93 (factor)
-    AND        reduce using rule 93 (factor)
-    SMALLER    reduce using rule 93 (factor)
-    GREATER    reduce using rule 93 (factor)
-    SMALLEQ    reduce using rule 93 (factor)
-    GREATEQ    reduce using rule 93 (factor)
-    EQUALS     reduce using rule 93 (factor)
-    DIFFERENT  reduce using rule 93 (factor)
-    SEMIC      reduce using rule 93 (factor)
-
-
-State 219
-
-   93 factor: ID •
-   98 fCall: ID • PARENL callParams PARENR
-   99      | ID • PARENL PARENR
-
-    PARENL  shift, and go to state 266
-
-    ADD        reduce using rule 93 (factor)
-    SUB        reduce using rule 93 (factor)
-    MULT       reduce using rule 93 (factor)
-    DIV        reduce using rule 93 (factor)
-    OR         reduce using rule 93 (factor)
-    AND        reduce using rule 93 (factor)
-    SMALLER    reduce using rule 93 (factor)
-    GREATER    reduce using rule 93 (factor)
-    SMALLEQ    reduce using rule 93 (factor)
-    GREATEQ    reduce using rule 93 (factor)
-    EQUALS     reduce using rule 93 (factor)
-    DIFFERENT  reduce using rule 93 (factor)
-    COMMA      reduce using rule 93 (factor)
-    PARENR     reduce using rule 93 (factor)
-
-
 State 220
+
+   92 factor: ID •
+   97 fCall: ID • PARENL callParams PARENR
+   98      | ID • PARENL PARENR
+
+    PARENL  shift, and go to state 271
+
+    ADD        reduce using rule 92 (factor)
+    SUB        reduce using rule 92 (factor)
+    MULT       reduce using rule 92 (factor)
+    DIV        reduce using rule 92 (factor)
+    OR         reduce using rule 92 (factor)
+    AND        reduce using rule 92 (factor)
+    SMALLER    reduce using rule 92 (factor)
+    GREATER    reduce using rule 92 (factor)
+    SMALLEQ    reduce using rule 92 (factor)
+    GREATEQ    reduce using rule 92 (factor)
+    EQUALS     reduce using rule 92 (factor)
+    DIFFERENT  reduce using rule 92 (factor)
+    COMMA      reduce using rule 92 (factor)
+    PARENR     reduce using rule 92 (factor)
+
+
+State 221
 
    65 constOp: NIL •
 
@@ -4358,7 +4363,7 @@ State 220
     PARENR     reduce using rule 65 (constOp)
 
 
-State 221
+State 222
 
    63 constOp: INTEGER •
 
@@ -4378,7 +4383,7 @@ State 221
     PARENR     reduce using rule 63 (constOp)
 
 
-State 222
+State 223
 
    64 constOp: DECIMAL •
 
@@ -4398,53 +4403,9 @@ State 222
     PARENR     reduce using rule 64 (constOp)
 
 
-State 223
-
-   97 factor: ERRORTOKEN •
-
-    ADD        reduce using rule 97 (factor)
-    SUB        reduce using rule 97 (factor)
-    MULT       reduce using rule 97 (factor)
-    DIV        reduce using rule 97 (factor)
-    OR         reduce using rule 97 (factor)
-    AND        reduce using rule 97 (factor)
-    SMALLER    reduce using rule 97 (factor)
-    GREATER    reduce using rule 97 (factor)
-    SMALLEQ    reduce using rule 97 (factor)
-    GREATEQ    reduce using rule 97 (factor)
-    EQUALS     reduce using rule 97 (factor)
-    DIFFERENT  reduce using rule 97 (factor)
-    COMMA      reduce using rule 97 (factor)
-    PARENR     reduce using rule 97 (factor)
-
-
 State 224
 
-   95 factor: PARENL • simpleExp PARENR
-
-    ID          shift, and go to state 104
-    NIL         shift, and go to state 186
-    INTEGER     shift, and go to state 187
-    DECIMAL     shift, and go to state 188
-    ERRORTOKEN  shift, and go to state 189
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 190
-
-    simpleExp      go to state 267
-    constOp        go to state 191
-    binLogicalExp  go to state 192
-    relationalExp  go to state 193
-    sumExp         go to state 194
-    sumOp          go to state 195
-    mulExp         go to state 196
-    factor         go to state 197
-    fCall          go to state 198
-
-
-State 225
-
-   96 factor: constOp •
+   96 factor: ERRORTOKEN •
 
     ADD        reduce using rule 96 (factor)
     SUB        reduce using rule 96 (factor)
@@ -4462,47 +4423,123 @@ State 225
     PARENR     reduce using rule 96 (factor)
 
 
+State 225
+
+   90 mulExp: ADD • factor
+
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    PARENL      shift, and go to state 227
+
+    constOp  go to state 228
+    factor   go to state 272
+    fCall    go to state 234
+
+
 State 226
 
-   62 simpleExp: binLogicalExp •
-   72 binLogicalExp: binLogicalExp • binLogicalOp relationalOp
+   91 mulExp: SUB • factor
 
-    OR   shift, and go to state 111
-    AND  shift, and go to state 112
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    PARENL      shift, and go to state 227
 
-    COMMA   reduce using rule 62 (simpleExp)
-    PARENR  reduce using rule 62 (simpleExp)
-
-    binLogicalOp  go to state 268
+    constOp  go to state 228
+    factor   go to state 273
+    fCall    go to state 234
 
 
 State 227
 
+   94 factor: PARENL • simpleExp PARENR
+
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    ADD         shift, and go to state 193
+    SUB         shift, and go to state 194
+    PARENL      shift, and go to state 195
+
+    simpleExp      go to state 274
+    constOp        go to state 196
+    binLogicalExp  go to state 197
+    relationalExp  go to state 198
+    sumExp         go to state 199
+    mulExp         go to state 200
+    factor         go to state 201
+    fCall          go to state 202
+
+
+State 228
+
+   95 factor: constOp •
+
+    ADD        reduce using rule 95 (factor)
+    SUB        reduce using rule 95 (factor)
+    MULT       reduce using rule 95 (factor)
+    DIV        reduce using rule 95 (factor)
+    OR         reduce using rule 95 (factor)
+    AND        reduce using rule 95 (factor)
+    SMALLER    reduce using rule 95 (factor)
+    GREATER    reduce using rule 95 (factor)
+    SMALLEQ    reduce using rule 95 (factor)
+    GREATEQ    reduce using rule 95 (factor)
+    EQUALS     reduce using rule 95 (factor)
+    DIFFERENT  reduce using rule 95 (factor)
+    COMMA      reduce using rule 95 (factor)
+    PARENR     reduce using rule 95 (factor)
+
+
+State 229
+
+   62 simpleExp: binLogicalExp •
+   72 binLogicalExp: binLogicalExp • binLogicalOp relationalOp
+
+    OR   shift, and go to state 112
+    AND  shift, and go to state 113
+
+    COMMA   reduce using rule 62 (simpleExp)
+    PARENR  reduce using rule 62 (simpleExp)
+
+    binLogicalOp  go to state 275
+
+
+State 230
+
    73 binLogicalExp: relationalExp •
    76 relationalExp: relationalExp • relationalOp sumExp
 
-    SMALLER    shift, and go to state 114
-    GREATER    shift, and go to state 115
-    SMALLEQ    shift, and go to state 116
-    GREATEQ    shift, and go to state 117
-    EQUALS     shift, and go to state 118
-    DIFFERENT  shift, and go to state 119
+    SMALLER    shift, and go to state 115
+    GREATER    shift, and go to state 116
+    SMALLEQ    shift, and go to state 117
+    GREATEQ    shift, and go to state 118
+    EQUALS     shift, and go to state 119
+    DIFFERENT  shift, and go to state 120
 
     OR      reduce using rule 73 (binLogicalExp)
     AND     reduce using rule 73 (binLogicalExp)
     COMMA   reduce using rule 73 (binLogicalExp)
     PARENR  reduce using rule 73 (binLogicalExp)
 
-    relationalOp  go to state 269
+    relationalOp  go to state 276
 
 
-State 228
+State 231
 
    77 relationalExp: sumExp •
-   84 sumExp: sumExp • sumOp mulExp
+   84 sumExp: sumExp • ADD mulExp
+   85       | sumExp • SUB mulExp
 
-    ADD  shift, and go to state 216
-    SUB  shift, and go to state 217
+    ADD  shift, and go to state 277
+    SUB  shift, and go to state 278
 
     OR         reduce using rule 77 (relationalExp)
     AND        reduce using rule 77 (relationalExp)
@@ -4515,50 +4552,31 @@ State 228
     COMMA      reduce using rule 77 (relationalExp)
     PARENR     reduce using rule 77 (relationalExp)
 
-    sumOp  go to state 270
+
+State 232
+
+   86 sumExp: mulExp •
+   87 mulExp: mulExp • MULT factor
+   88       | mulExp • DIV factor
+
+    MULT  shift, and go to state 279
+    DIV   shift, and go to state 280
+
+    ADD        reduce using rule 86 (sumExp)
+    SUB        reduce using rule 86 (sumExp)
+    OR         reduce using rule 86 (sumExp)
+    AND        reduce using rule 86 (sumExp)
+    SMALLER    reduce using rule 86 (sumExp)
+    GREATER    reduce using rule 86 (sumExp)
+    SMALLEQ    reduce using rule 86 (sumExp)
+    GREATEQ    reduce using rule 86 (sumExp)
+    EQUALS     reduce using rule 86 (sumExp)
+    DIFFERENT  reduce using rule 86 (sumExp)
+    COMMA      reduce using rule 86 (sumExp)
+    PARENR     reduce using rule 86 (sumExp)
 
 
-State 229
-
-   90 mulExp: sumOp • factor
-
-    ID          shift, and go to state 219
-    NIL         shift, and go to state 220
-    INTEGER     shift, and go to state 221
-    DECIMAL     shift, and go to state 222
-    ERRORTOKEN  shift, and go to state 223
-    PARENL      shift, and go to state 224
-
-    constOp  go to state 225
-    factor   go to state 271
-    fCall    go to state 232
-
-
-State 230
-
-   85 sumExp: mulExp •
-   88 mulExp: mulExp • mulOp factor
-
-    MULT  shift, and go to state 123
-    DIV   shift, and go to state 124
-
-    ADD        reduce using rule 85 (sumExp)
-    SUB        reduce using rule 85 (sumExp)
-    OR         reduce using rule 85 (sumExp)
-    AND        reduce using rule 85 (sumExp)
-    SMALLER    reduce using rule 85 (sumExp)
-    GREATER    reduce using rule 85 (sumExp)
-    SMALLEQ    reduce using rule 85 (sumExp)
-    GREATEQ    reduce using rule 85 (sumExp)
-    EQUALS     reduce using rule 85 (sumExp)
-    DIFFERENT  reduce using rule 85 (sumExp)
-    COMMA      reduce using rule 85 (sumExp)
-    PARENR     reduce using rule 85 (sumExp)
-
-    mulOp  go to state 272
-
-
-State 231
+State 233
 
    89 mulExp: factor •
 
@@ -4578,96 +4596,69 @@ State 231
     PARENR     reduce using rule 89 (mulExp)
 
 
-State 232
+State 234
 
-   94 factor: fCall •
+   93 factor: fCall •
 
-    ADD        reduce using rule 94 (factor)
-    SUB        reduce using rule 94 (factor)
-    MULT       reduce using rule 94 (factor)
-    DIV        reduce using rule 94 (factor)
-    OR         reduce using rule 94 (factor)
-    AND        reduce using rule 94 (factor)
-    SMALLER    reduce using rule 94 (factor)
-    GREATER    reduce using rule 94 (factor)
-    SMALLEQ    reduce using rule 94 (factor)
-    GREATEQ    reduce using rule 94 (factor)
-    EQUALS     reduce using rule 94 (factor)
-    DIFFERENT  reduce using rule 94 (factor)
-    COMMA      reduce using rule 94 (factor)
-    PARENR     reduce using rule 94 (factor)
+    ADD        reduce using rule 93 (factor)
+    SUB        reduce using rule 93 (factor)
+    MULT       reduce using rule 93 (factor)
+    DIV        reduce using rule 93 (factor)
+    OR         reduce using rule 93 (factor)
+    AND        reduce using rule 93 (factor)
+    SMALLER    reduce using rule 93 (factor)
+    GREATER    reduce using rule 93 (factor)
+    SMALLEQ    reduce using rule 93 (factor)
+    GREATEQ    reduce using rule 93 (factor)
+    EQUALS     reduce using rule 93 (factor)
+    DIFFERENT  reduce using rule 93 (factor)
+    COMMA      reduce using rule 93 (factor)
+    PARENR     reduce using rule 93 (factor)
 
 
-State 233
+State 235
 
    55 destroyHeadOps: DESTROYHEAD • ID
 
-    ID  shift, and go to state 273
+    ID  shift, and go to state 281
 
 
-State 234
+State 236
 
    47 listExp: appendOps •
 
     PARENR  reduce using rule 47 (listExp)
 
 
-State 235
+State 237
 
    48 listExp: returnListOps •
 
     PARENR  reduce using rule 48 (listExp)
 
 
-State 236
+State 238
 
    52 returnListOps: returnListOp • ID
 
-    ID  shift, and go to state 274
+    ID  shift, and go to state 282
 
 
-State 237
+State 239
 
    49 listExp: destroyHeadOps •
 
     PARENR  reduce using rule 49 (listExp)
 
 
-State 238
+State 240
 
    50 listExp: mapFilterOps •
 
     PARENR  reduce using rule 50 (listExp)
 
 
-State 239
-
-   98 fCall: ID PARENL • callParams PARENR
-   99      | ID PARENL • PARENR
-
-    ID          shift, and go to state 219
-    NIL         shift, and go to state 220
-    INTEGER     shift, and go to state 221
-    DECIMAL     shift, and go to state 222
-    ERRORTOKEN  shift, and go to state 223
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 224
-    PARENR      shift, and go to state 275
-
-    simpleExp      go to state 134
-    constOp        go to state 225
-    binLogicalExp  go to state 226
-    relationalExp  go to state 227
-    sumExp         go to state 228
-    sumOp          go to state 229
-    mulExp         go to state 230
-    factor         go to state 231
-    fCall          go to state 232
-    callParams     go to state 276
-
-
-State 240
+State 241
 
    78 relationalOp: SMALLER •
 
@@ -4676,7 +4667,7 @@ State 240
     SEMIC  reduce using rule 78 (relationalOp)
 
 
-State 241
+State 242
 
    79 relationalOp: GREATER •
 
@@ -4685,7 +4676,7 @@ State 241
     SEMIC  reduce using rule 79 (relationalOp)
 
 
-State 242
+State 243
 
    80 relationalOp: SMALLEQ •
 
@@ -4694,7 +4685,7 @@ State 242
     SEMIC  reduce using rule 80 (relationalOp)
 
 
-State 243
+State 244
 
    81 relationalOp: GREATEQ •
 
@@ -4703,7 +4694,7 @@ State 243
     SEMIC  reduce using rule 81 (relationalOp)
 
 
-State 244
+State 245
 
    82 relationalOp: EQUALS •
 
@@ -4712,7 +4703,7 @@ State 244
     SEMIC  reduce using rule 82 (relationalOp)
 
 
-State 245
+State 246
 
    83 relationalOp: DIFFERENT •
 
@@ -4721,63 +4712,88 @@ State 245
     SEMIC  reduce using rule 83 (relationalOp)
 
 
-State 246
+State 247
 
    51 appendOps: ID APPEND • ID
 
-    ID  shift, and go to state 277
-
-
-State 247
-
-   57 mapFilterOps: ID FILTER • ID
-
-    ID  shift, and go to state 278
+    ID  shift, and go to state 283
 
 
 State 248
 
-   56 mapFilterOps: ID MAP • ID
+   57 mapFilterOps: ID FILTER • ID
 
-    ID  shift, and go to state 279
+    ID  shift, and go to state 284
 
 
 State 249
 
-   61 assignExp: ID ASSIGN • expression
+   56 mapFilterOps: ID MAP • ID
 
-    ID           shift, and go to state 280
-    NIL          shift, and go to state 186
-    INTEGER      shift, and go to state 187
-    DECIMAL      shift, and go to state 188
-    ERRORTOKEN   shift, and go to state 189
-    ADD          shift, and go to state 45
-    SUB          shift, and go to state 46
-    HEADLIST     shift, and go to state 47
-    TAILLIST     shift, and go to state 48
-    DESTROYHEAD  shift, and go to state 233
-    PARENL       shift, and go to state 190
-
-    listExp         go to state 281
-    appendOps       go to state 234
-    returnListOps   go to state 235
-    returnListOp    go to state 236
-    destroyHeadOps  go to state 237
-    mapFilterOps    go to state 238
-    expression      go to state 282
-    assignExp       go to state 283
-    simpleExp       go to state 284
-    constOp         go to state 191
-    binLogicalExp   go to state 192
-    relationalExp   go to state 193
-    sumExp          go to state 194
-    sumOp           go to state 195
-    mulExp          go to state 196
-    factor          go to state 197
-    fCall           go to state 198
+    ID  shift, and go to state 285
 
 
 State 250
+
+   97 fCall: ID PARENL • callParams PARENR
+   98      | ID PARENL • PARENR
+
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    ADD         shift, and go to state 225
+    SUB         shift, and go to state 226
+    PARENL      shift, and go to state 227
+    PARENR      shift, and go to state 286
+
+    simpleExp      go to state 134
+    constOp        go to state 228
+    binLogicalExp  go to state 229
+    relationalExp  go to state 230
+    sumExp         go to state 231
+    mulExp         go to state 232
+    factor         go to state 233
+    fCall          go to state 234
+    callParams     go to state 287
+
+
+State 251
+
+   61 assignExp: ID ASSIGN • expression
+
+    ID           shift, and go to state 288
+    NIL          shift, and go to state 189
+    INTEGER      shift, and go to state 190
+    DECIMAL      shift, and go to state 191
+    ERRORTOKEN   shift, and go to state 192
+    ADD          shift, and go to state 193
+    SUB          shift, and go to state 194
+    HEADLIST     shift, and go to state 47
+    TAILLIST     shift, and go to state 48
+    DESTROYHEAD  shift, and go to state 235
+    PARENL       shift, and go to state 195
+
+    listExp         go to state 289
+    appendOps       go to state 236
+    returnListOps   go to state 237
+    returnListOp    go to state 238
+    destroyHeadOps  go to state 239
+    mapFilterOps    go to state 240
+    expression      go to state 290
+    assignExp       go to state 291
+    simpleExp       go to state 292
+    constOp         go to state 196
+    binLogicalExp   go to state 197
+    relationalExp   go to state 198
+    sumExp          go to state 199
+    mulExp          go to state 200
+    factor          go to state 201
+    fCall           go to state 202
+
+
+State 252
 
     7 varDeclaration: simpleVarDeclaration SEMIC •
 
@@ -4803,71 +4819,9 @@ State 250
     PARENL       reduce using rule 7 (varDeclaration)
 
 
-State 251
-
-   95 factor: PARENL simpleExp • PARENR
-
-    PARENR  shift, and go to state 285
-
-
-State 252
-
-   72 binLogicalExp: binLogicalExp binLogicalOp • relationalOp
-
-    SMALLER    shift, and go to state 286
-    GREATER    shift, and go to state 287
-    SMALLEQ    shift, and go to state 288
-    GREATEQ    shift, and go to state 289
-    EQUALS     shift, and go to state 290
-    DIFFERENT  shift, and go to state 291
-
-    relationalOp  go to state 292
-
-
 State 253
 
-   76 relationalExp: relationalExp relationalOp • sumExp
-
-    ID          shift, and go to state 104
-    NIL         shift, and go to state 186
-    INTEGER     shift, and go to state 187
-    DECIMAL     shift, and go to state 188
-    ERRORTOKEN  shift, and go to state 189
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 190
-
-    constOp  go to state 191
-    sumExp   go to state 293
-    sumOp    go to state 195
-    mulExp   go to state 196
-    factor   go to state 197
-    fCall    go to state 198
-
-
-State 254
-
-   84 sumExp: sumExp sumOp • mulExp
-
-    ID          shift, and go to state 104
-    NIL         shift, and go to state 186
-    INTEGER     shift, and go to state 187
-    DECIMAL     shift, and go to state 188
-    ERRORTOKEN  shift, and go to state 189
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 190
-
-    constOp  go to state 191
-    sumOp    go to state 195
-    mulExp   go to state 294
-    factor   go to state 197
-    fCall    go to state 198
-
-
-State 255
-
-   90 mulExp: sumOp factor •
+   90 mulExp: ADD factor •
 
     ADD        reduce using rule 90 (mulExp)
     SUB        reduce using rule 90 (mulExp)
@@ -4884,23 +4838,137 @@ State 255
     PARENR     reduce using rule 90 (mulExp)
 
 
+State 254
+
+   91 mulExp: SUB factor •
+
+    ADD        reduce using rule 91 (mulExp)
+    SUB        reduce using rule 91 (mulExp)
+    MULT       reduce using rule 91 (mulExp)
+    DIV        reduce using rule 91 (mulExp)
+    OR         reduce using rule 91 (mulExp)
+    AND        reduce using rule 91 (mulExp)
+    SMALLER    reduce using rule 91 (mulExp)
+    GREATER    reduce using rule 91 (mulExp)
+    SMALLEQ    reduce using rule 91 (mulExp)
+    GREATEQ    reduce using rule 91 (mulExp)
+    EQUALS     reduce using rule 91 (mulExp)
+    DIFFERENT  reduce using rule 91 (mulExp)
+    PARENR     reduce using rule 91 (mulExp)
+
+
+State 255
+
+   94 factor: PARENL simpleExp • PARENR
+
+    PARENR  shift, and go to state 293
+
+
 State 256
 
-   88 mulExp: mulExp mulOp • factor
+   72 binLogicalExp: binLogicalExp binLogicalOp • relationalOp
 
-    ID          shift, and go to state 104
-    NIL         shift, and go to state 186
-    INTEGER     shift, and go to state 187
-    DECIMAL     shift, and go to state 188
-    ERRORTOKEN  shift, and go to state 189
-    PARENL      shift, and go to state 190
+    SMALLER    shift, and go to state 294
+    GREATER    shift, and go to state 295
+    SMALLEQ    shift, and go to state 296
+    GREATEQ    shift, and go to state 297
+    EQUALS     shift, and go to state 298
+    DIFFERENT  shift, and go to state 299
 
-    constOp  go to state 191
-    factor   go to state 295
-    fCall    go to state 198
+    relationalOp  go to state 300
 
 
 State 257
+
+   76 relationalExp: relationalExp relationalOp • sumExp
+
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    ADD         shift, and go to state 193
+    SUB         shift, and go to state 194
+    PARENL      shift, and go to state 195
+
+    constOp  go to state 196
+    sumExp   go to state 301
+    mulExp   go to state 200
+    factor   go to state 201
+    fCall    go to state 202
+
+
+State 258
+
+   84 sumExp: sumExp ADD • mulExp
+
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    ADD         shift, and go to state 193
+    SUB         shift, and go to state 194
+    PARENL      shift, and go to state 195
+
+    constOp  go to state 196
+    mulExp   go to state 302
+    factor   go to state 201
+    fCall    go to state 202
+
+
+State 259
+
+   85 sumExp: sumExp SUB • mulExp
+
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    ADD         shift, and go to state 193
+    SUB         shift, and go to state 194
+    PARENL      shift, and go to state 195
+
+    constOp  go to state 196
+    mulExp   go to state 303
+    factor   go to state 201
+    fCall    go to state 202
+
+
+State 260
+
+   87 mulExp: mulExp MULT • factor
+
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    PARENL      shift, and go to state 195
+
+    constOp  go to state 196
+    factor   go to state 304
+    fCall    go to state 202
+
+
+State 261
+
+   88 mulExp: mulExp DIV • factor
+
+    ID          shift, and go to state 188
+    NIL         shift, and go to state 189
+    INTEGER     shift, and go to state 190
+    DECIMAL     shift, and go to state 191
+    ERRORTOKEN  shift, and go to state 192
+    PARENL      shift, and go to state 195
+
+    constOp  go to state 196
+    factor   go to state 305
+    fCall    go to state 202
+
+
+State 262
 
    44 iterStmt: FOR PARENL • assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
    45         | FOR PARENL • simpleExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
@@ -4914,103 +4982,100 @@ State 257
     SUB         shift, and go to state 46
     PARENL      shift, and go to state 57
 
-    assignExp      go to state 296
-    simpleExp      go to state 297
+    assignExp      go to state 306
+    simpleExp      go to state 307
     constOp        go to state 76
     binLogicalExp  go to state 79
     relationalExp  go to state 80
     sumExp         go to state 81
-    sumOp          go to state 82
-    mulExp         go to state 83
-    factor         go to state 84
-    fCall          go to state 85
+    mulExp         go to state 82
+    factor         go to state 83
+    fCall          go to state 84
 
 
-State 258
+State 263
 
    66 inOp: READ PARENL • ID PARENR SEMIC
 
-    ID  shift, and go to state 298
+    ID  shift, and go to state 308
 
 
-State 259
+State 264
 
    67 outOp: WRITE PARENL • outConst PARENR SEMIC
 
     ID           shift, and go to state 142
     STRING       shift, and go to state 143
-    NIL          shift, and go to state 186
-    INTEGER      shift, and go to state 187
-    DECIMAL      shift, and go to state 188
-    ERRORTOKEN   shift, and go to state 189
-    ADD          shift, and go to state 45
-    SUB          shift, and go to state 46
+    NIL          shift, and go to state 189
+    INTEGER      shift, and go to state 190
+    DECIMAL      shift, and go to state 191
+    ERRORTOKEN   shift, and go to state 192
+    ADD          shift, and go to state 193
+    SUB          shift, and go to state 194
     HEADLIST     shift, and go to state 47
     TAILLIST     shift, and go to state 48
-    DESTROYHEAD  shift, and go to state 233
-    PARENL       shift, and go to state 190
+    DESTROYHEAD  shift, and go to state 235
+    PARENL       shift, and go to state 195
 
     listExp         go to state 144
-    appendOps       go to state 234
-    returnListOps   go to state 235
-    returnListOp    go to state 236
-    destroyHeadOps  go to state 237
-    mapFilterOps    go to state 238
+    appendOps       go to state 236
+    returnListOps   go to state 237
+    returnListOp    go to state 238
+    destroyHeadOps  go to state 239
+    mapFilterOps    go to state 240
     simpleExp       go to state 145
-    constOp         go to state 191
-    outConst        go to state 299
-    binLogicalExp   go to state 192
-    relationalExp   go to state 193
-    sumExp          go to state 194
-    sumOp           go to state 195
-    mulExp          go to state 196
-    factor          go to state 197
-    fCall           go to state 198
+    constOp         go to state 196
+    outConst        go to state 309
+    binLogicalExp   go to state 197
+    relationalExp   go to state 198
+    sumExp          go to state 199
+    mulExp          go to state 200
+    factor          go to state 201
+    fCall           go to state 202
 
 
-State 260
+State 265
 
    68 outOp: WRITELN PARENL • outConst PARENR SEMIC
 
     ID           shift, and go to state 142
     STRING       shift, and go to state 143
-    NIL          shift, and go to state 186
-    INTEGER      shift, and go to state 187
-    DECIMAL      shift, and go to state 188
-    ERRORTOKEN   shift, and go to state 189
-    ADD          shift, and go to state 45
-    SUB          shift, and go to state 46
+    NIL          shift, and go to state 189
+    INTEGER      shift, and go to state 190
+    DECIMAL      shift, and go to state 191
+    ERRORTOKEN   shift, and go to state 192
+    ADD          shift, and go to state 193
+    SUB          shift, and go to state 194
     HEADLIST     shift, and go to state 47
     TAILLIST     shift, and go to state 48
-    DESTROYHEAD  shift, and go to state 233
-    PARENL       shift, and go to state 190
+    DESTROYHEAD  shift, and go to state 235
+    PARENL       shift, and go to state 195
 
     listExp         go to state 144
-    appendOps       go to state 234
-    returnListOps   go to state 235
-    returnListOp    go to state 236
-    destroyHeadOps  go to state 237
-    mapFilterOps    go to state 238
+    appendOps       go to state 236
+    returnListOps   go to state 237
+    returnListOp    go to state 238
+    destroyHeadOps  go to state 239
+    mapFilterOps    go to state 240
     simpleExp       go to state 145
-    constOp         go to state 191
-    outConst        go to state 300
-    binLogicalExp   go to state 192
-    relationalExp   go to state 193
-    sumExp          go to state 194
-    sumOp           go to state 195
-    mulExp          go to state 196
-    factor          go to state 197
-    fCall           go to state 198
+    constOp         go to state 196
+    outConst        go to state 310
+    binLogicalExp   go to state 197
+    relationalExp   go to state 198
+    sumExp          go to state 199
+    mulExp          go to state 200
+    factor          go to state 201
+    fCall           go to state 202
 
 
-State 261
+State 266
 
    46 returnStmt: RETURN expression • SEMIC
 
-    SEMIC  shift, and go to state 301
+    SEMIC  shift, and go to state 311
 
 
-State 262
+State 267
 
    27 compoundStmt: STFUNC stmtList • ENDFUNC
    28 stmtList: stmtList • primitiveStmt
@@ -5033,13 +5098,13 @@ State 262
     WRITELN      shift, and go to state 54
     RETURN       shift, and go to state 55
     STFUNC       shift, and go to state 56
-    ENDFUNC      shift, and go to state 302
+    ENDFUNC      shift, and go to state 312
     PARENL       shift, and go to state 57
 
     varDeclaration        go to state 58
-    simpleVarDeclaration  go to state 185
+    simpleVarDeclaration  go to state 187
     compoundStmt          go to state 59
-    primitiveStmt         go to state 107
+    primitiveStmt         go to state 108
     exprStmt              go to state 62
     condStmt              go to state 63
     ifStmt                go to state 64
@@ -5060,13 +5125,12 @@ State 262
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 263
+State 268
 
     7 varDeclaration: simpleVarDeclaration SEMIC •
 
@@ -5093,12 +5157,12 @@ State 263
     PARENL       reduce using rule 7 (varDeclaration)
 
 
-State 264
+State 269
 
    39 condStmt: ifStmt primitiveStmt •
    40         | ifStmt primitiveStmt • elseStmt
 
-    ELSE  shift, and go to state 303
+    ELSE  shift, and go to state 313
 
     ID           reduce using rule 39 (condStmt)
     TYPE         reduce using rule 39 (condStmt)
@@ -5121,10 +5185,10 @@ State 264
     ENDFUNC      reduce using rule 39 (condStmt)
     PARENL       reduce using rule 39 (condStmt)
 
-    elseStmt  go to state 304
+    elseStmt  go to state 314
 
 
-State 265
+State 270
 
    38 exprStmt: expression SEMIC •
 
@@ -5151,98 +5215,35 @@ State 265
     PARENL       reduce using rule 38 (exprStmt)
 
 
-State 266
-
-   98 fCall: ID PARENL • callParams PARENR
-   99      | ID PARENL • PARENR
-
-    ID          shift, and go to state 219
-    NIL         shift, and go to state 220
-    INTEGER     shift, and go to state 221
-    DECIMAL     shift, and go to state 222
-    ERRORTOKEN  shift, and go to state 223
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 224
-    PARENR      shift, and go to state 305
-
-    simpleExp      go to state 134
-    constOp        go to state 225
-    binLogicalExp  go to state 226
-    relationalExp  go to state 227
-    sumExp         go to state 228
-    sumOp          go to state 229
-    mulExp         go to state 230
-    factor         go to state 231
-    fCall          go to state 232
-    callParams     go to state 306
-
-
-State 267
-
-   95 factor: PARENL simpleExp • PARENR
-
-    PARENR  shift, and go to state 307
-
-
-State 268
-
-   72 binLogicalExp: binLogicalExp binLogicalOp • relationalOp
-
-    SMALLER    shift, and go to state 308
-    GREATER    shift, and go to state 309
-    SMALLEQ    shift, and go to state 310
-    GREATEQ    shift, and go to state 311
-    EQUALS     shift, and go to state 312
-    DIFFERENT  shift, and go to state 313
-
-    relationalOp  go to state 314
-
-
-State 269
-
-   76 relationalExp: relationalExp relationalOp • sumExp
-
-    ID          shift, and go to state 219
-    NIL         shift, and go to state 220
-    INTEGER     shift, and go to state 221
-    DECIMAL     shift, and go to state 222
-    ERRORTOKEN  shift, and go to state 223
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 224
-
-    constOp  go to state 225
-    sumExp   go to state 315
-    sumOp    go to state 229
-    mulExp   go to state 230
-    factor   go to state 231
-    fCall    go to state 232
-
-
-State 270
-
-   84 sumExp: sumExp sumOp • mulExp
-
-    ID          shift, and go to state 219
-    NIL         shift, and go to state 220
-    INTEGER     shift, and go to state 221
-    DECIMAL     shift, and go to state 222
-    ERRORTOKEN  shift, and go to state 223
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 224
-
-    constOp  go to state 225
-    sumOp    go to state 229
-    mulExp   go to state 316
-    factor   go to state 231
-    fCall    go to state 232
-
-
 State 271
 
-   90 mulExp: sumOp factor •
+   97 fCall: ID PARENL • callParams PARENR
+   98      | ID PARENL • PARENR
+
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    ADD         shift, and go to state 225
+    SUB         shift, and go to state 226
+    PARENL      shift, and go to state 227
+    PARENR      shift, and go to state 315
+
+    simpleExp      go to state 134
+    constOp        go to state 228
+    binLogicalExp  go to state 229
+    relationalExp  go to state 230
+    sumExp         go to state 231
+    mulExp         go to state 232
+    factor         go to state 233
+    fCall          go to state 234
+    callParams     go to state 316
+
+
+State 272
+
+   90 mulExp: ADD factor •
 
     ADD        reduce using rule 90 (mulExp)
     SUB        reduce using rule 90 (mulExp)
@@ -5260,164 +5261,279 @@ State 271
     PARENR     reduce using rule 90 (mulExp)
 
 
-State 272
-
-   88 mulExp: mulExp mulOp • factor
-
-    ID          shift, and go to state 219
-    NIL         shift, and go to state 220
-    INTEGER     shift, and go to state 221
-    DECIMAL     shift, and go to state 222
-    ERRORTOKEN  shift, and go to state 223
-    PARENL      shift, and go to state 224
-
-    constOp  go to state 225
-    factor   go to state 317
-    fCall    go to state 232
-
-
 State 273
+
+   91 mulExp: SUB factor •
+
+    ADD        reduce using rule 91 (mulExp)
+    SUB        reduce using rule 91 (mulExp)
+    MULT       reduce using rule 91 (mulExp)
+    DIV        reduce using rule 91 (mulExp)
+    OR         reduce using rule 91 (mulExp)
+    AND        reduce using rule 91 (mulExp)
+    SMALLER    reduce using rule 91 (mulExp)
+    GREATER    reduce using rule 91 (mulExp)
+    SMALLEQ    reduce using rule 91 (mulExp)
+    GREATEQ    reduce using rule 91 (mulExp)
+    EQUALS     reduce using rule 91 (mulExp)
+    DIFFERENT  reduce using rule 91 (mulExp)
+    COMMA      reduce using rule 91 (mulExp)
+    PARENR     reduce using rule 91 (mulExp)
+
+
+State 274
+
+   94 factor: PARENL simpleExp • PARENR
+
+    PARENR  shift, and go to state 317
+
+
+State 275
+
+   72 binLogicalExp: binLogicalExp binLogicalOp • relationalOp
+
+    SMALLER    shift, and go to state 318
+    GREATER    shift, and go to state 319
+    SMALLEQ    shift, and go to state 320
+    GREATEQ    shift, and go to state 321
+    EQUALS     shift, and go to state 322
+    DIFFERENT  shift, and go to state 323
+
+    relationalOp  go to state 324
+
+
+State 276
+
+   76 relationalExp: relationalExp relationalOp • sumExp
+
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    ADD         shift, and go to state 225
+    SUB         shift, and go to state 226
+    PARENL      shift, and go to state 227
+
+    constOp  go to state 228
+    sumExp   go to state 325
+    mulExp   go to state 232
+    factor   go to state 233
+    fCall    go to state 234
+
+
+State 277
+
+   84 sumExp: sumExp ADD • mulExp
+
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    ADD         shift, and go to state 225
+    SUB         shift, and go to state 226
+    PARENL      shift, and go to state 227
+
+    constOp  go to state 228
+    mulExp   go to state 326
+    factor   go to state 233
+    fCall    go to state 234
+
+
+State 278
+
+   85 sumExp: sumExp SUB • mulExp
+
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    ADD         shift, and go to state 225
+    SUB         shift, and go to state 226
+    PARENL      shift, and go to state 227
+
+    constOp  go to state 228
+    mulExp   go to state 327
+    factor   go to state 233
+    fCall    go to state 234
+
+
+State 279
+
+   87 mulExp: mulExp MULT • factor
+
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    PARENL      shift, and go to state 227
+
+    constOp  go to state 228
+    factor   go to state 328
+    fCall    go to state 234
+
+
+State 280
+
+   88 mulExp: mulExp DIV • factor
+
+    ID          shift, and go to state 220
+    NIL         shift, and go to state 221
+    INTEGER     shift, and go to state 222
+    DECIMAL     shift, and go to state 223
+    ERRORTOKEN  shift, and go to state 224
+    PARENL      shift, and go to state 227
+
+    constOp  go to state 228
+    factor   go to state 329
+    fCall    go to state 234
+
+
+State 281
 
    55 destroyHeadOps: DESTROYHEAD ID •
 
     PARENR  reduce using rule 55 (destroyHeadOps)
 
 
-State 274
+State 282
 
    52 returnListOps: returnListOp ID •
 
     PARENR  reduce using rule 52 (returnListOps)
 
 
-State 275
-
-   99 fCall: ID PARENL PARENR •
-
-    ADD        reduce using rule 99 (fCall)
-    SUB        reduce using rule 99 (fCall)
-    MULT       reduce using rule 99 (fCall)
-    DIV        reduce using rule 99 (fCall)
-    OR         reduce using rule 99 (fCall)
-    AND        reduce using rule 99 (fCall)
-    SMALLER    reduce using rule 99 (fCall)
-    GREATER    reduce using rule 99 (fCall)
-    SMALLEQ    reduce using rule 99 (fCall)
-    GREATEQ    reduce using rule 99 (fCall)
-    EQUALS     reduce using rule 99 (fCall)
-    DIFFERENT  reduce using rule 99 (fCall)
-    PARENR     reduce using rule 99 (fCall)
-
-
-State 276
-
-   98 fCall: ID PARENL callParams • PARENR
-  100 callParams: callParams • COMMA simpleExp
-
-    COMMA   shift, and go to state 159
-    PARENR  shift, and go to state 318
-
-
-State 277
+State 283
 
    51 appendOps: ID APPEND ID •
 
     PARENR  reduce using rule 51 (appendOps)
 
 
-State 278
+State 284
 
    57 mapFilterOps: ID FILTER ID •
 
     PARENR  reduce using rule 57 (mapFilterOps)
 
 
-State 279
+State 285
 
    56 mapFilterOps: ID MAP ID •
 
     PARENR  reduce using rule 56 (mapFilterOps)
 
 
-State 280
+State 286
+
+   98 fCall: ID PARENL PARENR •
+
+    ADD        reduce using rule 98 (fCall)
+    SUB        reduce using rule 98 (fCall)
+    MULT       reduce using rule 98 (fCall)
+    DIV        reduce using rule 98 (fCall)
+    OR         reduce using rule 98 (fCall)
+    AND        reduce using rule 98 (fCall)
+    SMALLER    reduce using rule 98 (fCall)
+    GREATER    reduce using rule 98 (fCall)
+    SMALLEQ    reduce using rule 98 (fCall)
+    GREATEQ    reduce using rule 98 (fCall)
+    EQUALS     reduce using rule 98 (fCall)
+    DIFFERENT  reduce using rule 98 (fCall)
+    PARENR     reduce using rule 98 (fCall)
+
+
+State 287
+
+   97 fCall: ID PARENL callParams • PARENR
+   99 callParams: callParams • COMMA simpleExp
+
+    COMMA   shift, and go to state 161
+    PARENR  shift, and go to state 330
+
+
+State 288
 
    51 appendOps: ID • APPEND ID
    56 mapFilterOps: ID • MAP ID
    57             | ID • FILTER ID
    61 assignExp: ID • ASSIGN expression
-   93 factor: ID •
-   98 fCall: ID • PARENL callParams PARENR
-   99      | ID • PARENL PARENR
+   92 factor: ID •
+   97 fCall: ID • PARENL callParams PARENR
+   98      | ID • PARENL PARENR
 
-    APPEND  shift, and go to state 246
-    FILTER  shift, and go to state 247
-    ASSIGN  shift, and go to state 249
-    MAP     shift, and go to state 248
-    PARENL  shift, and go to state 239
+    APPEND  shift, and go to state 247
+    FILTER  shift, and go to state 248
+    ASSIGN  shift, and go to state 251
+    MAP     shift, and go to state 249
+    PARENL  shift, and go to state 250
 
-    ADD        reduce using rule 93 (factor)
-    SUB        reduce using rule 93 (factor)
-    MULT       reduce using rule 93 (factor)
-    DIV        reduce using rule 93 (factor)
-    OR         reduce using rule 93 (factor)
-    AND        reduce using rule 93 (factor)
-    SMALLER    reduce using rule 93 (factor)
-    GREATER    reduce using rule 93 (factor)
-    SMALLEQ    reduce using rule 93 (factor)
-    GREATEQ    reduce using rule 93 (factor)
-    EQUALS     reduce using rule 93 (factor)
-    DIFFERENT  reduce using rule 93 (factor)
-    PARENR     reduce using rule 93 (factor)
+    ADD        reduce using rule 92 (factor)
+    SUB        reduce using rule 92 (factor)
+    MULT       reduce using rule 92 (factor)
+    DIV        reduce using rule 92 (factor)
+    OR         reduce using rule 92 (factor)
+    AND        reduce using rule 92 (factor)
+    SMALLER    reduce using rule 92 (factor)
+    GREATER    reduce using rule 92 (factor)
+    SMALLEQ    reduce using rule 92 (factor)
+    GREATEQ    reduce using rule 92 (factor)
+    EQUALS     reduce using rule 92 (factor)
+    DIFFERENT  reduce using rule 92 (factor)
+    PARENR     reduce using rule 92 (factor)
 
 
-State 281
+State 289
 
    60 expression: listExp •
 
     PARENR  reduce using rule 60 (expression)
 
 
-State 282
+State 290
 
    61 assignExp: ID ASSIGN expression •
 
     PARENR  reduce using rule 61 (assignExp)
 
 
-State 283
+State 291
 
    58 expression: assignExp •
 
     PARENR  reduce using rule 58 (expression)
 
 
-State 284
+State 292
 
    59 expression: simpleExp •
 
     PARENR  reduce using rule 59 (expression)
 
 
-State 285
+State 293
 
-   95 factor: PARENL simpleExp PARENR •
+   94 factor: PARENL simpleExp PARENR •
 
-    ADD        reduce using rule 95 (factor)
-    SUB        reduce using rule 95 (factor)
-    MULT       reduce using rule 95 (factor)
-    DIV        reduce using rule 95 (factor)
-    OR         reduce using rule 95 (factor)
-    AND        reduce using rule 95 (factor)
-    SMALLER    reduce using rule 95 (factor)
-    GREATER    reduce using rule 95 (factor)
-    SMALLEQ    reduce using rule 95 (factor)
-    GREATEQ    reduce using rule 95 (factor)
-    EQUALS     reduce using rule 95 (factor)
-    DIFFERENT  reduce using rule 95 (factor)
-    PARENR     reduce using rule 95 (factor)
+    ADD        reduce using rule 94 (factor)
+    SUB        reduce using rule 94 (factor)
+    MULT       reduce using rule 94 (factor)
+    DIV        reduce using rule 94 (factor)
+    OR         reduce using rule 94 (factor)
+    AND        reduce using rule 94 (factor)
+    SMALLER    reduce using rule 94 (factor)
+    GREATER    reduce using rule 94 (factor)
+    SMALLEQ    reduce using rule 94 (factor)
+    GREATEQ    reduce using rule 94 (factor)
+    EQUALS     reduce using rule 94 (factor)
+    DIFFERENT  reduce using rule 94 (factor)
+    PARENR     reduce using rule 94 (factor)
 
 
-State 286
+State 294
 
    78 relationalOp: SMALLER •
 
@@ -5426,7 +5542,7 @@ State 286
     PARENR  reduce using rule 78 (relationalOp)
 
 
-State 287
+State 295
 
    79 relationalOp: GREATER •
 
@@ -5435,7 +5551,7 @@ State 287
     PARENR  reduce using rule 79 (relationalOp)
 
 
-State 288
+State 296
 
    80 relationalOp: SMALLEQ •
 
@@ -5444,7 +5560,7 @@ State 288
     PARENR  reduce using rule 80 (relationalOp)
 
 
-State 289
+State 297
 
    81 relationalOp: GREATEQ •
 
@@ -5453,7 +5569,7 @@ State 289
     PARENR  reduce using rule 81 (relationalOp)
 
 
-State 290
+State 298
 
    82 relationalOp: EQUALS •
 
@@ -5462,7 +5578,7 @@ State 290
     PARENR  reduce using rule 82 (relationalOp)
 
 
-State 291
+State 299
 
    83 relationalOp: DIFFERENT •
 
@@ -5471,7 +5587,7 @@ State 291
     PARENR  reduce using rule 83 (relationalOp)
 
 
-State 292
+State 300
 
    72 binLogicalExp: binLogicalExp binLogicalOp relationalOp •
 
@@ -5480,13 +5596,14 @@ State 292
     PARENR  reduce using rule 72 (binLogicalExp)
 
 
-State 293
+State 301
 
    76 relationalExp: relationalExp relationalOp sumExp •
-   84 sumExp: sumExp • sumOp mulExp
+   84 sumExp: sumExp • ADD mulExp
+   85       | sumExp • SUB mulExp
 
-    ADD  shift, and go to state 216
-    SUB  shift, and go to state 217
+    ADD  shift, and go to state 258
+    SUB  shift, and go to state 259
 
     OR         reduce using rule 76 (relationalExp)
     AND        reduce using rule 76 (relationalExp)
@@ -5498,16 +5615,15 @@ State 293
     DIFFERENT  reduce using rule 76 (relationalExp)
     PARENR     reduce using rule 76 (relationalExp)
 
-    sumOp  go to state 254
 
+State 302
 
-State 294
+   84 sumExp: sumExp ADD mulExp •
+   87 mulExp: mulExp • MULT factor
+   88       | mulExp • DIV factor
 
-   84 sumExp: sumExp sumOp mulExp •
-   88 mulExp: mulExp • mulOp factor
-
-    MULT  shift, and go to state 123
-    DIV   shift, and go to state 124
+    MULT  shift, and go to state 260
+    DIV   shift, and go to state 261
 
     ADD        reduce using rule 84 (sumExp)
     SUB        reduce using rule 84 (sumExp)
@@ -5521,12 +5637,51 @@ State 294
     DIFFERENT  reduce using rule 84 (sumExp)
     PARENR     reduce using rule 84 (sumExp)
 
-    mulOp  go to state 256
+
+State 303
+
+   85 sumExp: sumExp SUB mulExp •
+   87 mulExp: mulExp • MULT factor
+   88       | mulExp • DIV factor
+
+    MULT  shift, and go to state 260
+    DIV   shift, and go to state 261
+
+    ADD        reduce using rule 85 (sumExp)
+    SUB        reduce using rule 85 (sumExp)
+    OR         reduce using rule 85 (sumExp)
+    AND        reduce using rule 85 (sumExp)
+    SMALLER    reduce using rule 85 (sumExp)
+    GREATER    reduce using rule 85 (sumExp)
+    SMALLEQ    reduce using rule 85 (sumExp)
+    GREATEQ    reduce using rule 85 (sumExp)
+    EQUALS     reduce using rule 85 (sumExp)
+    DIFFERENT  reduce using rule 85 (sumExp)
+    PARENR     reduce using rule 85 (sumExp)
 
 
-State 295
+State 304
 
-   88 mulExp: mulExp mulOp factor •
+   87 mulExp: mulExp MULT factor •
+
+    ADD        reduce using rule 87 (mulExp)
+    SUB        reduce using rule 87 (mulExp)
+    MULT       reduce using rule 87 (mulExp)
+    DIV        reduce using rule 87 (mulExp)
+    OR         reduce using rule 87 (mulExp)
+    AND        reduce using rule 87 (mulExp)
+    SMALLER    reduce using rule 87 (mulExp)
+    GREATER    reduce using rule 87 (mulExp)
+    SMALLEQ    reduce using rule 87 (mulExp)
+    GREATEQ    reduce using rule 87 (mulExp)
+    EQUALS     reduce using rule 87 (mulExp)
+    DIFFERENT  reduce using rule 87 (mulExp)
+    PARENR     reduce using rule 87 (mulExp)
+
+
+State 305
+
+   88 mulExp: mulExp DIV factor •
 
     ADD        reduce using rule 88 (mulExp)
     SUB        reduce using rule 88 (mulExp)
@@ -5543,42 +5698,42 @@ State 295
     PARENR     reduce using rule 88 (mulExp)
 
 
-State 296
+State 306
 
    44 iterStmt: FOR PARENL assignExp • SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
 
-    SEMIC  shift, and go to state 319
+    SEMIC  shift, and go to state 331
 
 
-State 297
+State 307
 
    45 iterStmt: FOR PARENL simpleExp • SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
 
-    SEMIC  shift, and go to state 320
+    SEMIC  shift, and go to state 332
 
 
-State 298
+State 308
 
    66 inOp: READ PARENL ID • PARENR SEMIC
 
-    PARENR  shift, and go to state 321
+    PARENR  shift, and go to state 333
 
 
-State 299
+State 309
 
    67 outOp: WRITE PARENL outConst • PARENR SEMIC
 
-    PARENR  shift, and go to state 322
+    PARENR  shift, and go to state 334
 
 
-State 300
+State 310
 
    68 outOp: WRITELN PARENL outConst • PARENR SEMIC
 
-    PARENR  shift, and go to state 323
+    PARENR  shift, and go to state 335
 
 
-State 301
+State 311
 
    46 returnStmt: RETURN expression SEMIC •
 
@@ -5605,7 +5760,7 @@ State 301
     PARENL       reduce using rule 46 (returnStmt)
 
 
-State 302
+State 312
 
    27 compoundStmt: STFUNC stmtList ENDFUNC •
 
@@ -5632,7 +5787,7 @@ State 302
     PARENL       reduce using rule 27 (compoundStmt)
 
 
-State 303
+State 313
 
    43 elseStmt: ELSE • $@9 primitiveStmt
 
@@ -5656,10 +5811,10 @@ State 303
     STFUNC       reduce using rule 42 ($@9)
     PARENL       reduce using rule 42 ($@9)
 
-    $@9  go to state 324
+    $@9  go to state 336
 
 
-State 304
+State 314
 
    40 condStmt: ifStmt primitiveStmt elseStmt •
 
@@ -5686,336 +5841,9 @@ State 304
     PARENL       reduce using rule 40 (condStmt)
 
 
-State 305
-
-   99 fCall: ID PARENL PARENR •
-
-    ADD        reduce using rule 99 (fCall)
-    SUB        reduce using rule 99 (fCall)
-    MULT       reduce using rule 99 (fCall)
-    DIV        reduce using rule 99 (fCall)
-    OR         reduce using rule 99 (fCall)
-    AND        reduce using rule 99 (fCall)
-    SMALLER    reduce using rule 99 (fCall)
-    GREATER    reduce using rule 99 (fCall)
-    SMALLEQ    reduce using rule 99 (fCall)
-    GREATEQ    reduce using rule 99 (fCall)
-    EQUALS     reduce using rule 99 (fCall)
-    DIFFERENT  reduce using rule 99 (fCall)
-    COMMA      reduce using rule 99 (fCall)
-    PARENR     reduce using rule 99 (fCall)
-
-
-State 306
-
-   98 fCall: ID PARENL callParams • PARENR
-  100 callParams: callParams • COMMA simpleExp
-
-    COMMA   shift, and go to state 159
-    PARENR  shift, and go to state 325
-
-
-State 307
-
-   95 factor: PARENL simpleExp PARENR •
-
-    ADD        reduce using rule 95 (factor)
-    SUB        reduce using rule 95 (factor)
-    MULT       reduce using rule 95 (factor)
-    DIV        reduce using rule 95 (factor)
-    OR         reduce using rule 95 (factor)
-    AND        reduce using rule 95 (factor)
-    SMALLER    reduce using rule 95 (factor)
-    GREATER    reduce using rule 95 (factor)
-    SMALLEQ    reduce using rule 95 (factor)
-    GREATEQ    reduce using rule 95 (factor)
-    EQUALS     reduce using rule 95 (factor)
-    DIFFERENT  reduce using rule 95 (factor)
-    COMMA      reduce using rule 95 (factor)
-    PARENR     reduce using rule 95 (factor)
-
-
-State 308
-
-   78 relationalOp: SMALLER •
-
-    OR      reduce using rule 78 (relationalOp)
-    AND     reduce using rule 78 (relationalOp)
-    COMMA   reduce using rule 78 (relationalOp)
-    PARENR  reduce using rule 78 (relationalOp)
-
-
-State 309
-
-   79 relationalOp: GREATER •
-
-    OR      reduce using rule 79 (relationalOp)
-    AND     reduce using rule 79 (relationalOp)
-    COMMA   reduce using rule 79 (relationalOp)
-    PARENR  reduce using rule 79 (relationalOp)
-
-
-State 310
-
-   80 relationalOp: SMALLEQ •
-
-    OR      reduce using rule 80 (relationalOp)
-    AND     reduce using rule 80 (relationalOp)
-    COMMA   reduce using rule 80 (relationalOp)
-    PARENR  reduce using rule 80 (relationalOp)
-
-
-State 311
-
-   81 relationalOp: GREATEQ •
-
-    OR      reduce using rule 81 (relationalOp)
-    AND     reduce using rule 81 (relationalOp)
-    COMMA   reduce using rule 81 (relationalOp)
-    PARENR  reduce using rule 81 (relationalOp)
-
-
-State 312
-
-   82 relationalOp: EQUALS •
-
-    OR      reduce using rule 82 (relationalOp)
-    AND     reduce using rule 82 (relationalOp)
-    COMMA   reduce using rule 82 (relationalOp)
-    PARENR  reduce using rule 82 (relationalOp)
-
-
-State 313
-
-   83 relationalOp: DIFFERENT •
-
-    OR      reduce using rule 83 (relationalOp)
-    AND     reduce using rule 83 (relationalOp)
-    COMMA   reduce using rule 83 (relationalOp)
-    PARENR  reduce using rule 83 (relationalOp)
-
-
-State 314
-
-   72 binLogicalExp: binLogicalExp binLogicalOp relationalOp •
-
-    OR      reduce using rule 72 (binLogicalExp)
-    AND     reduce using rule 72 (binLogicalExp)
-    COMMA   reduce using rule 72 (binLogicalExp)
-    PARENR  reduce using rule 72 (binLogicalExp)
-
-
 State 315
 
-   76 relationalExp: relationalExp relationalOp sumExp •
-   84 sumExp: sumExp • sumOp mulExp
-
-    ADD  shift, and go to state 216
-    SUB  shift, and go to state 217
-
-    OR         reduce using rule 76 (relationalExp)
-    AND        reduce using rule 76 (relationalExp)
-    SMALLER    reduce using rule 76 (relationalExp)
-    GREATER    reduce using rule 76 (relationalExp)
-    SMALLEQ    reduce using rule 76 (relationalExp)
-    GREATEQ    reduce using rule 76 (relationalExp)
-    EQUALS     reduce using rule 76 (relationalExp)
-    DIFFERENT  reduce using rule 76 (relationalExp)
-    COMMA      reduce using rule 76 (relationalExp)
-    PARENR     reduce using rule 76 (relationalExp)
-
-    sumOp  go to state 270
-
-
-State 316
-
-   84 sumExp: sumExp sumOp mulExp •
-   88 mulExp: mulExp • mulOp factor
-
-    MULT  shift, and go to state 123
-    DIV   shift, and go to state 124
-
-    ADD        reduce using rule 84 (sumExp)
-    SUB        reduce using rule 84 (sumExp)
-    OR         reduce using rule 84 (sumExp)
-    AND        reduce using rule 84 (sumExp)
-    SMALLER    reduce using rule 84 (sumExp)
-    GREATER    reduce using rule 84 (sumExp)
-    SMALLEQ    reduce using rule 84 (sumExp)
-    GREATEQ    reduce using rule 84 (sumExp)
-    EQUALS     reduce using rule 84 (sumExp)
-    DIFFERENT  reduce using rule 84 (sumExp)
-    COMMA      reduce using rule 84 (sumExp)
-    PARENR     reduce using rule 84 (sumExp)
-
-    mulOp  go to state 272
-
-
-State 317
-
-   88 mulExp: mulExp mulOp factor •
-
-    ADD        reduce using rule 88 (mulExp)
-    SUB        reduce using rule 88 (mulExp)
-    MULT       reduce using rule 88 (mulExp)
-    DIV        reduce using rule 88 (mulExp)
-    OR         reduce using rule 88 (mulExp)
-    AND        reduce using rule 88 (mulExp)
-    SMALLER    reduce using rule 88 (mulExp)
-    GREATER    reduce using rule 88 (mulExp)
-    SMALLEQ    reduce using rule 88 (mulExp)
-    GREATEQ    reduce using rule 88 (mulExp)
-    EQUALS     reduce using rule 88 (mulExp)
-    DIFFERENT  reduce using rule 88 (mulExp)
-    COMMA      reduce using rule 88 (mulExp)
-    PARENR     reduce using rule 88 (mulExp)
-
-
-State 318
-
-   98 fCall: ID PARENL callParams PARENR •
-
-    ADD        reduce using rule 98 (fCall)
-    SUB        reduce using rule 98 (fCall)
-    MULT       reduce using rule 98 (fCall)
-    DIV        reduce using rule 98 (fCall)
-    OR         reduce using rule 98 (fCall)
-    AND        reduce using rule 98 (fCall)
-    SMALLER    reduce using rule 98 (fCall)
-    GREATER    reduce using rule 98 (fCall)
-    SMALLEQ    reduce using rule 98 (fCall)
-    GREATEQ    reduce using rule 98 (fCall)
-    EQUALS     reduce using rule 98 (fCall)
-    DIFFERENT  reduce using rule 98 (fCall)
-    PARENR     reduce using rule 98 (fCall)
-
-
-State 319
-
-   44 iterStmt: FOR PARENL assignExp SEMIC • simpleExp SEMIC assignExp PARENR primitiveStmt
-
-    ID          shift, and go to state 218
-    NIL         shift, and go to state 41
-    INTEGER     shift, and go to state 42
-    DECIMAL     shift, and go to state 43
-    ERRORTOKEN  shift, and go to state 44
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 57
-
-    simpleExp      go to state 326
-    constOp        go to state 76
-    binLogicalExp  go to state 79
-    relationalExp  go to state 80
-    sumExp         go to state 81
-    sumOp          go to state 82
-    mulExp         go to state 83
-    factor         go to state 84
-    fCall          go to state 85
-
-
-State 320
-
-   45 iterStmt: FOR PARENL simpleExp SEMIC • simpleExp SEMIC assignExp PARENR primitiveStmt
-
-    ID          shift, and go to state 218
-    NIL         shift, and go to state 41
-    INTEGER     shift, and go to state 42
-    DECIMAL     shift, and go to state 43
-    ERRORTOKEN  shift, and go to state 44
-    ADD         shift, and go to state 45
-    SUB         shift, and go to state 46
-    PARENL      shift, and go to state 57
-
-    simpleExp      go to state 327
-    constOp        go to state 76
-    binLogicalExp  go to state 79
-    relationalExp  go to state 80
-    sumExp         go to state 81
-    sumOp          go to state 82
-    mulExp         go to state 83
-    factor         go to state 84
-    fCall          go to state 85
-
-
-State 321
-
-   66 inOp: READ PARENL ID PARENR • SEMIC
-
-    SEMIC  shift, and go to state 328
-
-
-State 322
-
-   67 outOp: WRITE PARENL outConst PARENR • SEMIC
-
-    SEMIC  shift, and go to state 329
-
-
-State 323
-
-   68 outOp: WRITELN PARENL outConst PARENR • SEMIC
-
-    SEMIC  shift, and go to state 330
-
-
-State 324
-
-   43 elseStmt: ELSE $@9 • primitiveStmt
-
-    ID           shift, and go to state 39
-    TYPE         shift, and go to state 40
-    NIL          shift, and go to state 41
-    INTEGER      shift, and go to state 42
-    DECIMAL      shift, and go to state 43
-    ERRORTOKEN   shift, and go to state 44
-    ADD          shift, and go to state 45
-    SUB          shift, and go to state 46
-    HEADLIST     shift, and go to state 47
-    TAILLIST     shift, and go to state 48
-    DESTROYHEAD  shift, and go to state 49
-    IF           shift, and go to state 50
-    FOR          shift, and go to state 199
-    READ         shift, and go to state 200
-    WRITE        shift, and go to state 201
-    WRITELN      shift, and go to state 202
-    RETURN       shift, and go to state 203
-    STFUNC       shift, and go to state 204
-    PARENL       shift, and go to state 57
-
-    varDeclaration        go to state 205
-    simpleVarDeclaration  go to state 206
-    compoundStmt          go to state 207
-    primitiveStmt         go to state 331
-    exprStmt              go to state 208
-    condStmt              go to state 209
-    ifStmt                go to state 210
-    iterStmt              go to state 211
-    returnStmt            go to state 212
-    listExp               go to state 67
-    appendOps             go to state 68
-    returnListOps         go to state 69
-    returnListOp          go to state 70
-    destroyHeadOps        go to state 71
-    mapFilterOps          go to state 72
-    expression            go to state 213
-    assignExp             go to state 74
-    simpleExp             go to state 75
-    constOp               go to state 76
-    inOp                  go to state 214
-    outOp                 go to state 215
-    binLogicalExp         go to state 79
-    relationalExp         go to state 80
-    sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
-
-
-State 325
-
-   98 fCall: ID PARENL callParams PARENR •
+   98 fCall: ID PARENL PARENR •
 
     ADD        reduce using rule 98 (fCall)
     SUB        reduce using rule 98 (fCall)
@@ -6033,21 +5861,386 @@ State 325
     PARENR     reduce using rule 98 (fCall)
 
 
+State 316
+
+   97 fCall: ID PARENL callParams • PARENR
+   99 callParams: callParams • COMMA simpleExp
+
+    COMMA   shift, and go to state 161
+    PARENR  shift, and go to state 337
+
+
+State 317
+
+   94 factor: PARENL simpleExp PARENR •
+
+    ADD        reduce using rule 94 (factor)
+    SUB        reduce using rule 94 (factor)
+    MULT       reduce using rule 94 (factor)
+    DIV        reduce using rule 94 (factor)
+    OR         reduce using rule 94 (factor)
+    AND        reduce using rule 94 (factor)
+    SMALLER    reduce using rule 94 (factor)
+    GREATER    reduce using rule 94 (factor)
+    SMALLEQ    reduce using rule 94 (factor)
+    GREATEQ    reduce using rule 94 (factor)
+    EQUALS     reduce using rule 94 (factor)
+    DIFFERENT  reduce using rule 94 (factor)
+    COMMA      reduce using rule 94 (factor)
+    PARENR     reduce using rule 94 (factor)
+
+
+State 318
+
+   78 relationalOp: SMALLER •
+
+    OR      reduce using rule 78 (relationalOp)
+    AND     reduce using rule 78 (relationalOp)
+    COMMA   reduce using rule 78 (relationalOp)
+    PARENR  reduce using rule 78 (relationalOp)
+
+
+State 319
+
+   79 relationalOp: GREATER •
+
+    OR      reduce using rule 79 (relationalOp)
+    AND     reduce using rule 79 (relationalOp)
+    COMMA   reduce using rule 79 (relationalOp)
+    PARENR  reduce using rule 79 (relationalOp)
+
+
+State 320
+
+   80 relationalOp: SMALLEQ •
+
+    OR      reduce using rule 80 (relationalOp)
+    AND     reduce using rule 80 (relationalOp)
+    COMMA   reduce using rule 80 (relationalOp)
+    PARENR  reduce using rule 80 (relationalOp)
+
+
+State 321
+
+   81 relationalOp: GREATEQ •
+
+    OR      reduce using rule 81 (relationalOp)
+    AND     reduce using rule 81 (relationalOp)
+    COMMA   reduce using rule 81 (relationalOp)
+    PARENR  reduce using rule 81 (relationalOp)
+
+
+State 322
+
+   82 relationalOp: EQUALS •
+
+    OR      reduce using rule 82 (relationalOp)
+    AND     reduce using rule 82 (relationalOp)
+    COMMA   reduce using rule 82 (relationalOp)
+    PARENR  reduce using rule 82 (relationalOp)
+
+
+State 323
+
+   83 relationalOp: DIFFERENT •
+
+    OR      reduce using rule 83 (relationalOp)
+    AND     reduce using rule 83 (relationalOp)
+    COMMA   reduce using rule 83 (relationalOp)
+    PARENR  reduce using rule 83 (relationalOp)
+
+
+State 324
+
+   72 binLogicalExp: binLogicalExp binLogicalOp relationalOp •
+
+    OR      reduce using rule 72 (binLogicalExp)
+    AND     reduce using rule 72 (binLogicalExp)
+    COMMA   reduce using rule 72 (binLogicalExp)
+    PARENR  reduce using rule 72 (binLogicalExp)
+
+
+State 325
+
+   76 relationalExp: relationalExp relationalOp sumExp •
+   84 sumExp: sumExp • ADD mulExp
+   85       | sumExp • SUB mulExp
+
+    ADD  shift, and go to state 277
+    SUB  shift, and go to state 278
+
+    OR         reduce using rule 76 (relationalExp)
+    AND        reduce using rule 76 (relationalExp)
+    SMALLER    reduce using rule 76 (relationalExp)
+    GREATER    reduce using rule 76 (relationalExp)
+    SMALLEQ    reduce using rule 76 (relationalExp)
+    GREATEQ    reduce using rule 76 (relationalExp)
+    EQUALS     reduce using rule 76 (relationalExp)
+    DIFFERENT  reduce using rule 76 (relationalExp)
+    COMMA      reduce using rule 76 (relationalExp)
+    PARENR     reduce using rule 76 (relationalExp)
+
+
 State 326
 
-   44 iterStmt: FOR PARENL assignExp SEMIC simpleExp • SEMIC assignExp PARENR primitiveStmt
+   84 sumExp: sumExp ADD mulExp •
+   87 mulExp: mulExp • MULT factor
+   88       | mulExp • DIV factor
 
-    SEMIC  shift, and go to state 332
+    MULT  shift, and go to state 279
+    DIV   shift, and go to state 280
+
+    ADD        reduce using rule 84 (sumExp)
+    SUB        reduce using rule 84 (sumExp)
+    OR         reduce using rule 84 (sumExp)
+    AND        reduce using rule 84 (sumExp)
+    SMALLER    reduce using rule 84 (sumExp)
+    GREATER    reduce using rule 84 (sumExp)
+    SMALLEQ    reduce using rule 84 (sumExp)
+    GREATEQ    reduce using rule 84 (sumExp)
+    EQUALS     reduce using rule 84 (sumExp)
+    DIFFERENT  reduce using rule 84 (sumExp)
+    COMMA      reduce using rule 84 (sumExp)
+    PARENR     reduce using rule 84 (sumExp)
 
 
 State 327
 
-   45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp • SEMIC assignExp PARENR primitiveStmt
+   85 sumExp: sumExp SUB mulExp •
+   87 mulExp: mulExp • MULT factor
+   88       | mulExp • DIV factor
 
-    SEMIC  shift, and go to state 333
+    MULT  shift, and go to state 279
+    DIV   shift, and go to state 280
+
+    ADD        reduce using rule 85 (sumExp)
+    SUB        reduce using rule 85 (sumExp)
+    OR         reduce using rule 85 (sumExp)
+    AND        reduce using rule 85 (sumExp)
+    SMALLER    reduce using rule 85 (sumExp)
+    GREATER    reduce using rule 85 (sumExp)
+    SMALLEQ    reduce using rule 85 (sumExp)
+    GREATEQ    reduce using rule 85 (sumExp)
+    EQUALS     reduce using rule 85 (sumExp)
+    DIFFERENT  reduce using rule 85 (sumExp)
+    COMMA      reduce using rule 85 (sumExp)
+    PARENR     reduce using rule 85 (sumExp)
 
 
 State 328
+
+   87 mulExp: mulExp MULT factor •
+
+    ADD        reduce using rule 87 (mulExp)
+    SUB        reduce using rule 87 (mulExp)
+    MULT       reduce using rule 87 (mulExp)
+    DIV        reduce using rule 87 (mulExp)
+    OR         reduce using rule 87 (mulExp)
+    AND        reduce using rule 87 (mulExp)
+    SMALLER    reduce using rule 87 (mulExp)
+    GREATER    reduce using rule 87 (mulExp)
+    SMALLEQ    reduce using rule 87 (mulExp)
+    GREATEQ    reduce using rule 87 (mulExp)
+    EQUALS     reduce using rule 87 (mulExp)
+    DIFFERENT  reduce using rule 87 (mulExp)
+    COMMA      reduce using rule 87 (mulExp)
+    PARENR     reduce using rule 87 (mulExp)
+
+
+State 329
+
+   88 mulExp: mulExp DIV factor •
+
+    ADD        reduce using rule 88 (mulExp)
+    SUB        reduce using rule 88 (mulExp)
+    MULT       reduce using rule 88 (mulExp)
+    DIV        reduce using rule 88 (mulExp)
+    OR         reduce using rule 88 (mulExp)
+    AND        reduce using rule 88 (mulExp)
+    SMALLER    reduce using rule 88 (mulExp)
+    GREATER    reduce using rule 88 (mulExp)
+    SMALLEQ    reduce using rule 88 (mulExp)
+    GREATEQ    reduce using rule 88 (mulExp)
+    EQUALS     reduce using rule 88 (mulExp)
+    DIFFERENT  reduce using rule 88 (mulExp)
+    COMMA      reduce using rule 88 (mulExp)
+    PARENR     reduce using rule 88 (mulExp)
+
+
+State 330
+
+   97 fCall: ID PARENL callParams PARENR •
+
+    ADD        reduce using rule 97 (fCall)
+    SUB        reduce using rule 97 (fCall)
+    MULT       reduce using rule 97 (fCall)
+    DIV        reduce using rule 97 (fCall)
+    OR         reduce using rule 97 (fCall)
+    AND        reduce using rule 97 (fCall)
+    SMALLER    reduce using rule 97 (fCall)
+    GREATER    reduce using rule 97 (fCall)
+    SMALLEQ    reduce using rule 97 (fCall)
+    GREATEQ    reduce using rule 97 (fCall)
+    EQUALS     reduce using rule 97 (fCall)
+    DIFFERENT  reduce using rule 97 (fCall)
+    PARENR     reduce using rule 97 (fCall)
+
+
+State 331
+
+   44 iterStmt: FOR PARENL assignExp SEMIC • simpleExp SEMIC assignExp PARENR primitiveStmt
+
+    ID          shift, and go to state 95
+    NIL         shift, and go to state 41
+    INTEGER     shift, and go to state 42
+    DECIMAL     shift, and go to state 43
+    ERRORTOKEN  shift, and go to state 44
+    ADD         shift, and go to state 45
+    SUB         shift, and go to state 46
+    PARENL      shift, and go to state 57
+
+    simpleExp      go to state 338
+    constOp        go to state 76
+    binLogicalExp  go to state 79
+    relationalExp  go to state 80
+    sumExp         go to state 81
+    mulExp         go to state 82
+    factor         go to state 83
+    fCall          go to state 84
+
+
+State 332
+
+   45 iterStmt: FOR PARENL simpleExp SEMIC • simpleExp SEMIC assignExp PARENR primitiveStmt
+
+    ID          shift, and go to state 95
+    NIL         shift, and go to state 41
+    INTEGER     shift, and go to state 42
+    DECIMAL     shift, and go to state 43
+    ERRORTOKEN  shift, and go to state 44
+    ADD         shift, and go to state 45
+    SUB         shift, and go to state 46
+    PARENL      shift, and go to state 57
+
+    simpleExp      go to state 339
+    constOp        go to state 76
+    binLogicalExp  go to state 79
+    relationalExp  go to state 80
+    sumExp         go to state 81
+    mulExp         go to state 82
+    factor         go to state 83
+    fCall          go to state 84
+
+
+State 333
+
+   66 inOp: READ PARENL ID PARENR • SEMIC
+
+    SEMIC  shift, and go to state 340
+
+
+State 334
+
+   67 outOp: WRITE PARENL outConst PARENR • SEMIC
+
+    SEMIC  shift, and go to state 341
+
+
+State 335
+
+   68 outOp: WRITELN PARENL outConst PARENR • SEMIC
+
+    SEMIC  shift, and go to state 342
+
+
+State 336
+
+   43 elseStmt: ELSE $@9 • primitiveStmt
+
+    ID           shift, and go to state 39
+    TYPE         shift, and go to state 40
+    NIL          shift, and go to state 41
+    INTEGER      shift, and go to state 42
+    DECIMAL      shift, and go to state 43
+    ERRORTOKEN   shift, and go to state 44
+    ADD          shift, and go to state 45
+    SUB          shift, and go to state 46
+    HEADLIST     shift, and go to state 47
+    TAILLIST     shift, and go to state 48
+    DESTROYHEAD  shift, and go to state 49
+    IF           shift, and go to state 50
+    FOR          shift, and go to state 203
+    READ         shift, and go to state 204
+    WRITE        shift, and go to state 205
+    WRITELN      shift, and go to state 206
+    RETURN       shift, and go to state 207
+    STFUNC       shift, and go to state 208
+    PARENL       shift, and go to state 57
+
+    varDeclaration        go to state 209
+    simpleVarDeclaration  go to state 210
+    compoundStmt          go to state 211
+    primitiveStmt         go to state 343
+    exprStmt              go to state 212
+    condStmt              go to state 213
+    ifStmt                go to state 214
+    iterStmt              go to state 215
+    returnStmt            go to state 216
+    listExp               go to state 67
+    appendOps             go to state 68
+    returnListOps         go to state 69
+    returnListOp          go to state 70
+    destroyHeadOps        go to state 71
+    mapFilterOps          go to state 72
+    expression            go to state 217
+    assignExp             go to state 74
+    simpleExp             go to state 75
+    constOp               go to state 76
+    inOp                  go to state 218
+    outOp                 go to state 219
+    binLogicalExp         go to state 79
+    relationalExp         go to state 80
+    sumExp                go to state 81
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
+
+
+State 337
+
+   97 fCall: ID PARENL callParams PARENR •
+
+    ADD        reduce using rule 97 (fCall)
+    SUB        reduce using rule 97 (fCall)
+    MULT       reduce using rule 97 (fCall)
+    DIV        reduce using rule 97 (fCall)
+    OR         reduce using rule 97 (fCall)
+    AND        reduce using rule 97 (fCall)
+    SMALLER    reduce using rule 97 (fCall)
+    GREATER    reduce using rule 97 (fCall)
+    SMALLEQ    reduce using rule 97 (fCall)
+    GREATEQ    reduce using rule 97 (fCall)
+    EQUALS     reduce using rule 97 (fCall)
+    DIFFERENT  reduce using rule 97 (fCall)
+    COMMA      reduce using rule 97 (fCall)
+    PARENR     reduce using rule 97 (fCall)
+
+
+State 338
+
+   44 iterStmt: FOR PARENL assignExp SEMIC simpleExp • SEMIC assignExp PARENR primitiveStmt
+
+    SEMIC  shift, and go to state 344
+
+
+State 339
+
+   45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp • SEMIC assignExp PARENR primitiveStmt
+
+    SEMIC  shift, and go to state 345
+
+
+State 340
 
    66 inOp: READ PARENL ID PARENR SEMIC •
 
@@ -6074,7 +6267,7 @@ State 328
     PARENL       reduce using rule 66 (inOp)
 
 
-State 329
+State 341
 
    67 outOp: WRITE PARENL outConst PARENR SEMIC •
 
@@ -6101,7 +6294,7 @@ State 329
     PARENL       reduce using rule 67 (outOp)
 
 
-State 330
+State 342
 
    68 outOp: WRITELN PARENL outConst PARENR SEMIC •
 
@@ -6128,7 +6321,7 @@ State 330
     PARENL       reduce using rule 68 (outOp)
 
 
-State 331
+State 343
 
    43 elseStmt: ELSE $@9 primitiveStmt •
 
@@ -6155,39 +6348,39 @@ State 331
     PARENL       reduce using rule 43 (elseStmt)
 
 
-State 332
+State 344
 
    44 iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC • assignExp PARENR primitiveStmt
 
-    ID  shift, and go to state 178
+    ID  shift, and go to state 180
 
-    assignExp  go to state 334
+    assignExp  go to state 346
 
 
-State 333
+State 345
 
    45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC • assignExp PARENR primitiveStmt
 
-    ID  shift, and go to state 178
+    ID  shift, and go to state 180
 
-    assignExp  go to state 335
+    assignExp  go to state 347
 
 
-State 334
+State 346
 
    44 iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp • PARENR primitiveStmt
 
-    PARENR  shift, and go to state 336
+    PARENR  shift, and go to state 348
 
 
-State 335
+State 347
 
    45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp • PARENR primitiveStmt
 
-    PARENR  shift, and go to state 337
+    PARENR  shift, and go to state 349
 
 
-State 336
+State 348
 
    44 iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR • primitiveStmt
 
@@ -6203,45 +6396,44 @@ State 336
     TAILLIST     shift, and go to state 48
     DESTROYHEAD  shift, and go to state 49
     IF           shift, and go to state 50
-    FOR          shift, and go to state 199
-    READ         shift, and go to state 200
-    WRITE        shift, and go to state 201
-    WRITELN      shift, and go to state 202
-    RETURN       shift, and go to state 203
-    STFUNC       shift, and go to state 204
+    FOR          shift, and go to state 203
+    READ         shift, and go to state 204
+    WRITE        shift, and go to state 205
+    WRITELN      shift, and go to state 206
+    RETURN       shift, and go to state 207
+    STFUNC       shift, and go to state 208
     PARENL       shift, and go to state 57
 
-    varDeclaration        go to state 205
-    simpleVarDeclaration  go to state 206
-    compoundStmt          go to state 207
-    primitiveStmt         go to state 338
-    exprStmt              go to state 208
-    condStmt              go to state 209
-    ifStmt                go to state 210
-    iterStmt              go to state 211
-    returnStmt            go to state 212
+    varDeclaration        go to state 209
+    simpleVarDeclaration  go to state 210
+    compoundStmt          go to state 211
+    primitiveStmt         go to state 350
+    exprStmt              go to state 212
+    condStmt              go to state 213
+    ifStmt                go to state 214
+    iterStmt              go to state 215
+    returnStmt            go to state 216
     listExp               go to state 67
     appendOps             go to state 68
     returnListOps         go to state 69
     returnListOp          go to state 70
     destroyHeadOps        go to state 71
     mapFilterOps          go to state 72
-    expression            go to state 213
+    expression            go to state 217
     assignExp             go to state 74
     simpleExp             go to state 75
     constOp               go to state 76
-    inOp                  go to state 214
-    outOp                 go to state 215
+    inOp                  go to state 218
+    outOp                 go to state 219
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 337
+State 349
 
    45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR • primitiveStmt
 
@@ -6257,45 +6449,44 @@ State 337
     TAILLIST     shift, and go to state 48
     DESTROYHEAD  shift, and go to state 49
     IF           shift, and go to state 50
-    FOR          shift, and go to state 199
-    READ         shift, and go to state 200
-    WRITE        shift, and go to state 201
-    WRITELN      shift, and go to state 202
-    RETURN       shift, and go to state 203
-    STFUNC       shift, and go to state 204
+    FOR          shift, and go to state 203
+    READ         shift, and go to state 204
+    WRITE        shift, and go to state 205
+    WRITELN      shift, and go to state 206
+    RETURN       shift, and go to state 207
+    STFUNC       shift, and go to state 208
     PARENL       shift, and go to state 57
 
-    varDeclaration        go to state 205
-    simpleVarDeclaration  go to state 206
-    compoundStmt          go to state 207
-    primitiveStmt         go to state 339
-    exprStmt              go to state 208
-    condStmt              go to state 209
-    ifStmt                go to state 210
-    iterStmt              go to state 211
-    returnStmt            go to state 212
+    varDeclaration        go to state 209
+    simpleVarDeclaration  go to state 210
+    compoundStmt          go to state 211
+    primitiveStmt         go to state 351
+    exprStmt              go to state 212
+    condStmt              go to state 213
+    ifStmt                go to state 214
+    iterStmt              go to state 215
+    returnStmt            go to state 216
     listExp               go to state 67
     appendOps             go to state 68
     returnListOps         go to state 69
     returnListOp          go to state 70
     destroyHeadOps        go to state 71
     mapFilterOps          go to state 72
-    expression            go to state 213
+    expression            go to state 217
     assignExp             go to state 74
     simpleExp             go to state 75
     constOp               go to state 76
-    inOp                  go to state 214
-    outOp                 go to state 215
+    inOp                  go to state 218
+    outOp                 go to state 219
     binLogicalExp         go to state 79
     relationalExp         go to state 80
     sumExp                go to state 81
-    sumOp                 go to state 82
-    mulExp                go to state 83
-    factor                go to state 84
-    fCall                 go to state 85
+    mulExp                go to state 82
+    factor                go to state 83
+    fCall                 go to state 84
 
 
-State 338
+State 350
 
    44 iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt •
 
@@ -6322,7 +6513,7 @@ State 338
     PARENL       reduce using rule 44 (iterStmt)
 
 
-State 339
+State 351
 
    45 iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt •
 

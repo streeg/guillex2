@@ -14,6 +14,7 @@
 #include "../lib/utstring.h"
 #include "../lib/utlist.h"
 #include <stdbool.h>
+#define _GNU_SOURCE
 
 
 extern int yylex();
@@ -37,6 +38,7 @@ typedef struct node {
   float decimal;
   char *nodeValue;
   char nodeType;
+  char *saved;
   struct node *left;
   struct node *leftMiddle;
   struct node *middle;
@@ -298,13 +300,13 @@ typedef struct symbol {
   char *varFuncName; // var or func name
   int scope;
   int parameters;
-  int varReg;
+  UT_string *varReg;
   UT_hash_handle hh;
 }Symbol;
 
 Symbol *symbolTable = NULL;
 
-int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int parameters, int varReg) {
+int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int parameters, UT_string *varReg) {
   struct symbol *s;
   
   HASH_FIND_STR(symbolTable, name, s);
@@ -414,19 +416,18 @@ bool checkIsInScope(char *name, int num) {
 
 
 
-int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int parameters, int varReg);
+int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int parameters, UT_string *varReg);
 void freeSymbols();
 void printSymbols();
 extern Symbol *symbol;
 
 typedef struct codegen{
   UT_string *line;
-  struct codegen *next;
   struct codegen *prev;
+  struct codegen *next;
 } Codegen;
 
 FILE *tacfile;
-Codegen *codegen = NULL;
 Codegen *currentLine = NULL;
 
 void addFunc(char *name) {
@@ -434,14 +435,35 @@ void addFunc(char *name) {
 
   utstring_new(code -> line);
   utstring_printf(code -> line, "%s:\n", name);
-  DL_PREPEND(currentLine, code);
+  DL_APPEND(currentLine, code);
 }
 
-void varDec(char *name, char *value){
+void varDecAssign(char *name, char *value){
   Codegen *code = (Codegen *)malloc(sizeof *code);
   utstring_new(code -> line);
   utstring_printf(code -> line, "mov %s, %s\n", name, value);
-  DL_PREPEND(currentLine, code);
+  DL_APPEND(currentLine, code);
+}
+
+void writeFunc(char *value){
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "print %s\n", value);
+  DL_APPEND(currentLine, code);
+}
+
+void writelnFunc(char *value){
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "println %s\n", value);
+  DL_APPEND(currentLine, code);
+}
+
+void mathOpFile(char *op, char *dest, char *operand1, char *operand2) {
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "%s %s, %s, %s\n", op, dest, operand1, operand2);
+  DL_APPEND(currentLine, code);
 }
 
 void writeTacFile(Codegen *originalNode) {
@@ -450,6 +472,30 @@ void writeTacFile(Codegen *originalNode) {
 
   fprintf(tacfile, "%s", utstring_body(originalNode -> line));
   writeTacFile(originalNode -> next);
+}
+
+UT_string *create_new_reg(int varReg) {
+  UT_string *r;
+  utstring_new(r);
+  utstring_printf(r, "$%d", varReg);
+
+  return r;
+}
+
+UT_string *int_as_str(int value) {
+  UT_string *r;
+  utstring_new(r);
+  utstring_printf(r, "%d", value);
+
+  return r;
+}
+
+UT_string *float_as_str(float value) {
+  UT_string *r;
+  utstring_new(r);
+  utstring_printf(r, "%f", value);
+
+  return r;
 }
 
 %}  
@@ -482,7 +528,7 @@ void writeTacFile(Codegen *originalNode) {
 %type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt ifStmt elseStmt iterStmt returnStmt listExp 
 %type<treeNode> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
 %type<treeNode> constOp inOp outOp outConst binLogicalExp binLogicalOp relationalExp relationalOp
-%type<treeNode> sumExp sumOp mulExp mulOp factor fCall callParams error
+%type<treeNode> sumExp mulExp factor fCall callParams error
 %%
 
 program:
@@ -520,25 +566,46 @@ varDeclaration:
   ;
 
 funcDeclaration:  
-    TYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters, 0); parameters = 0;} stmtList ENDFUNC {
-      $$ = createNode4("TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC", createNode0($1), createNode0($2), $5, $9);
+    TYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {
+      UT_string *r;
+      utstring_new(r);
+      errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters, 0);
       addFunc($2);
+      parameters = 0;
+      } stmtList ENDFUNC {
+      $$ = createNode4("TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC", createNode0($1), createNode0($2), $5, $9);
       popStack();
   }
-  | TYPE ID PARENL {pushStack(scope);} PARENR STFUNC {errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters, 0);  parameters = 0;} stmtList ENDFUNC {
+  | TYPE ID PARENL {pushStack(scope);} PARENR STFUNC {
+    UT_string *r;
+    utstring_new(r);
+    errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters, 0);
+    parameters = 0;
+    addFunc($2);
+    } stmtList ENDFUNC {
     
       $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $8); 
-      addFunc($2);
       popStack();                                                                      
   }
-  | TYPE LISTTYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters, 0);  parameters = 0;} stmtList ENDFUNC{
+  | TYPE LISTTYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {
+    UT_string *r;
+    utstring_new(r);
+    errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters, 0);  
+    parameters = 0;
+    addFunc($3);
+    } stmtList ENDFUNC{
       $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $6, $10);
-      addFunc($3);
       popStack();
   }   
-  | TYPE LISTTYPE ID PARENL {pushStack(scope);} PARENR STFUNC {errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters, 0);  parameters = 0;} stmtList ENDFUNC{
+  | TYPE LISTTYPE ID PARENL {pushStack(scope);} PARENR STFUNC {
+    UT_string *r;
+    utstring_new(r);
+    errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters, 0);
+    parameters = 0;
+    addFunc($3);
+    
+    } stmtList ENDFUNC{
       $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $9);
-      addFunc($3);
       popStack();
     }
   ;
@@ -547,23 +614,23 @@ simpleVarDeclaration:
     TYPE ID {
 
       pushStack(scope);
-      semanticErrors += addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value, 0, varReg);
+      semanticErrors += addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
        UT_string *s;
       if($1[0] == 'i' || $1[0] == 'e') {
         utstring_new(s);
         utstring_printf(s, "$%d", varReg);
 
-        varDec(utstring_body(s), "0");
+        varDecAssign(utstring_body(s), "0");
       } else if($1[0] == 'f') {
         utstring_new(s);
         utstring_printf(s, "$%d", varReg);
 
-        varDec(utstring_body(s), "0.0");
+        varDecAssign(utstring_body(s), "0.0");
       } else if($1[0] == 's') {
         utstring_new(s);
         utstring_printf(s, "$%d", varReg);
 
-        varDec(utstring_body(s), "0");
+        varDecAssign(utstring_body(s), "0");
       }
       varReg++;
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
@@ -572,7 +639,7 @@ simpleVarDeclaration:
     | TYPE LISTTYPE ID {
 
       pushStack(scope);
-      semanticErrors += addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value, 0, varReg);
+      semanticErrors += addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
       varReg++;
       $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
       popStack();
@@ -599,14 +666,14 @@ param:
       parameters++;
       pushStack(scope);
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
-      semanticErrors += addSymbol($2, "param", $1, STACK_TOP(stackScope) -> value, 0, varReg);
+      semanticErrors += addSymbol($2, "param", $1, STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
       varReg++;
       popStack();
       }
     | TYPE LISTTYPE ID {
       parameters++;
       pushStack(scope);
-      semanticErrors += addSymbol($3, "param", $2, STACK_TOP(stackScope) -> value, 0, varReg);
+      semanticErrors += addSymbol($3, "param", $2, STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
       $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
       varReg++;
       popStack();
@@ -766,19 +833,24 @@ mapFilterOps:
 expression:
     assignExp {
       $$ = createNode1("assignExp", $1);
+      $$ -> saved = $1 -> saved;
     }
   | simpleExp {
       $$ = createNode1("simpleExp", $1);
+      $$ -> saved = $1 -> saved;
   }
   | listExp {
     $$ = createNode1("listExp", $1);
+    $$ -> saved = $1 -> saved;
   }
   ;
 
 assignExp:
     ID ASSIGN expression {
-      if (checkIsInScope($1, STACK_TOP(stackScope) -> value))
+      if (checkIsInScope($1, STACK_TOP(stackScope) -> value)){
         $$ = createNode3("ID ASSIGN expression", createNode0($1), createNode0("="), $3);
+        $$ -> saved = $1;
+    }
       else{
         printf("Semantic error");
         printf("Var: <%s> Not Declared, line %d, column %d\n\n", $1, line, wordPosition);
@@ -792,15 +864,20 @@ assignExp:
 simpleExp:
     binLogicalExp {
       $$ = createNode1("binLogicalExp", $1);
+      $$ -> saved = $1 -> saved;
     }
   ;
 
 constOp:
     INTEGER {
       $$ = createNode0Int($1, 'i');
+      UT_string *s = int_as_str($1);
+      $$ -> saved = utstring_body(s);
     }
   | DECIMAL {
     $$ = createNode0Dec($1, 'd');
+    UT_string *s = float_as_str($1);
+    $$ -> saved = utstring_body(s);
   }
   | NIL {
     $$ = createNode0Nil($1, 'n');
@@ -816,21 +893,28 @@ inOp:
 outOp:
     WRITE PARENL outConst PARENR SEMIC{
       $$ = createNode2("WRITE PARENL outConst PARENR SEMIC", createNode0($1), $3);
+      writeFunc($3 -> saved);
+      $$ -> saved = $3 -> saved;
     }
   | WRITELN PARENL outConst PARENR SEMIC {
       $$ = createNode2("WRITELN PARENL outConst PARENR SEMIC", createNode0($1), $3);
+      writelnFunc($3 -> saved);
+      $$ -> saved = $3 -> saved;
   }
   ;
 
 outConst:
     STRING {
       $$ = createNode1("STRING", createNode0($1));
+      $$ -> saved = $1;
     }
   | simpleExp {
       $$ = createNode1("simpleExp", $1);
+      $$ -> saved = $1 -> saved;
   }
   | listExp {
     $$ = createNode1("listExp", $1);
+    $$ -> saved = $1 -> saved;
   }
   ;
 
@@ -840,6 +924,7 @@ binLogicalExp:
     }
   | relationalExp {
     $$ = createNode1("relationalExp", $1);
+    $$ -> saved = $1 -> saved;
   }
   ;
 
@@ -859,6 +944,7 @@ relationalExp:
     }
   | sumExp {
       $$ = createNode1("sumExp", $1);
+      $$ -> saved = $1 -> saved;
   }
   ;
 
@@ -885,57 +971,69 @@ relationalOp:
   ;
 
 sumExp:
-    sumExp sumOp mulExp {
-      $$ = createNode3("sumExp sumOp mulExp", $1, $2, $3);
+    sumExp ADD mulExp {
+      $$ = createNode3("sumExp add mulExp", $1, createNode0("+"), $3);
+      UT_string *s = create_new_reg(varReg);
+      mathOpFile("add", utstring_body(s), $1 -> saved, $3 -> saved);
+      $$ -> saved = utstring_body(s);
+    }
+    |
+        sumExp SUB mulExp {
+      $$ = createNode3("sumExp sub mulExp", $1, createNode0("-"), $3);
+      UT_string *s = create_new_reg(varReg);
+      mathOpFile("sub", utstring_body(s), $1 -> saved, $3 -> saved);
+      $$ -> saved = utstring_body(s);
     }
   | mulExp {
       $$ = createNode1("mulExp", $1);
-  }
-  ;
-
-sumOp:
-    ADD {
-      $$ = createNode1("ADD", createNode0("+"));
-    }
-  | SUB {
-      $$ = createNode1("SUB", createNode0("-"));
+      $$ -> saved = $1 -> saved;
   }
   ;
 
 mulExp:
-    mulExp mulOp factor {
-      $$ = createNode3("mulExp mulOp factor", $1, $2, $3);
+    mulExp MULT factor {
+      $$ = createNode3("mulExp mulOp factor", $1, createNode0("*"), $3);
+      UT_string *s = create_new_reg(varReg);
+      mathOpFile("mul", utstring_body(s), $1 -> saved, $3 -> saved);
+      $$ -> saved = utstring_body(s);
+    }
+    |
+     mulExp DIV factor {
+      $$ = createNode3("mulExp mulOp factor", $1, createNode0("/"), $3);
+      UT_string *s = create_new_reg(varReg);
+      mathOpFile("div", utstring_body(s), $1 -> saved, $3 -> saved);
+      $$ -> saved = utstring_body(s);
     }
   | factor {
       $$ = createNode1("factor", $1);
+      $$ -> saved = $1 -> saved;
   }
-  | sumOp factor {
-      $$ = createNode2("sumOp factor", $1, $2);
+  | ADD factor {
+      $$ = createNode2("ADD factor", createNode0("+"), $2);
+  }
+  | SUB factor {
+      $$ = createNode2("SUB factor", createNode0("-"), $2);
   }
   ;
 
-mulOp:
-    MULT {
-      $$ = createNode1("MULT", createNode0("*"));
-    }
-  | DIV {
-      $$ = createNode1("DIV", createNode0("/"));
-  }
-  ;
 
 factor:
     ID {
       argsParams++;
       $$ = createNode1("ID", createNode0($1));
+      $$ -> saved = $1;
     }
   | fCall {
       $$ = createNode1("fCall", $1);
+      $$ -> saved = $1 -> saved;
   }
   | PARENL simpleExp PARENR {
       $$ = createNode1("PARENL simpleExp PARENR", $2);
+      $$ -> saved = $2 -> saved;
   }
   | constOp {
       $$ = createNode1("constOp", $1);
+      $$ -> saved = $1 -> saved;
   }
   | ERRORTOKEN {
       $$ = createNodeE();
@@ -947,7 +1045,8 @@ fCall:
       if (findSymbolFunc($1) != NULL){
        if (checkNumberOfParams(argsParams, $1)){
          argsParams = 0;
-        $$ = createNode2("ID PARENL callParams PARENR", createNode0($1), $3);  
+        $$ = createNode2("ID PARENL callParams PARENR", createNode0($1), $3);
+        $$ -> saved = $1;  
         }else{
           printf("Semantic error");
           printf("Function: <%s> has wrong number of parameters, line %d, column %d\n\n", $1, line, wordPosition);
@@ -967,6 +1066,7 @@ fCall:
     if (findSymbolFunc($1) != NULL){
       if (checkNumberOfParams(argsParams, $1)){
         $$ = createNode1("ID PARENL PARENR", createNode0($1));
+        $$ -> saved = $1;
       }else{
         printf("Semantic error");
         printf("Function: <%s> has wrong number of parameters, line %d, column %d\n\n", $1, line, wordPosition);
@@ -986,9 +1086,11 @@ fCall:
 callParams:
     callParams COMMA simpleExp {
       $$ = createNode2("callParams COMMA simpleExp", $1, $3);
+      $$ -> saved = $1 -> saved;
     }
   | simpleExp {
       $$ = createNode1("simpleExp", $1);
+      $$ -> saved = $1 -> saved;
   }
   ;
 

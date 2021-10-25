@@ -1,11 +1,11 @@
 .table
 .code
+mov $1, 0
 main:
-mov $13, 0
-mov $10, 0
-leq_10:
-succ:
-read_list:
-mov $7, 0
-mov $6, 0
-mov $4, 0.0
+add $2, x, 1
+add $2, x, 1
+println x
+mul $2, -2, 3
+add $2, 2, $2
+println x
+println x

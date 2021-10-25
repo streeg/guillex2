@@ -13,7 +13,7 @@ runbison:
 	bison -vdt -Wconflicts-sr -Wcounterexamples --graph guillex.y
 
 compilefile:
-	gcc lex.yy.c guillex.tab.c -ll -o tradutor
+	gcc-11 lex.yy.c guillex.tab.c -ll -o tradutor
 
 
 moveheader:
@@ -31,5 +31,5 @@ test:
 	./tradutor ../tests/test3incorreto.c > ../results/test3resultincorreto.txt
 
 testtac: 
-	./tradutor ../tests/testnalon.c > ../results/testenalon.txt
+	./tradutor ../tests/test1correto.c > ../results/test1resultcorreto.txt
 	

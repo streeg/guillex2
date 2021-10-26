@@ -1,7 +1,7 @@
 
 # Please change test to testtac if you want to test code generation or use test if you want to check the output from bison.
-# runtests: all test
-runtests: all testtac
+runtests: all test
+# runtests: all testtac
 
 all: compile
 
@@ -33,5 +33,5 @@ test:
 	./tradutor ../tests/test3incorreto.c > ../results/test3resultincorreto.txt
 
 testtac: 
-	./tradutor ../tests/testtac.c > ../results/testtac.txt
+	./tradutor ../tests/testnalon.c > ../results/testnalon.txt
 	

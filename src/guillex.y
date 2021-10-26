@@ -74,7 +74,7 @@ Node* createNode0(char *nodeValue) {
   return node;
 }
 
-Node* createNode0Int(int nodeValue, char nodeType) {
+Node* createNode0Int(int nodeValue) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> integer = nodeValue;
@@ -88,7 +88,7 @@ Node* createNode0Int(int nodeValue, char nodeType) {
   return node;
 }
 
-Node* createNode0Dec(float nodeValue, char nodeType) {
+Node* createNode0Dec(float nodeValue) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> decimal = nodeValue;
@@ -102,7 +102,7 @@ Node* createNode0Dec(float nodeValue, char nodeType) {
   return node;
 }
 
-Node* createNode0List(char *nodeValue, char nodeType) {
+Node* createNode0List(char *nodeValue) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = nodeValue;
@@ -116,7 +116,7 @@ Node* createNode0List(char *nodeValue, char nodeType) {
   return node;
 }
 
-Node* createNode0Nil(char *nodeValue, char nodeType) {
+Node* createNode0Nil(char *nodeValue) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = nodeValue;
@@ -251,10 +251,10 @@ void printAndFreeTree(int indentCount, Node *node) {
 
 
 Node* createNode0(char *nodeValue);
-Node* createNode0Int(int nodeValue, char nodeType); 
-Node* createNode0Dec(float nodeValue, char nodeType);
-Node* createNode0List(char *nodeValue, char nodeType);
-Node* createNode0Nil(char *nodeValue, char nodeType);
+Node* createNode0Int(int nodeValue); 
+Node* createNode0Dec(float nodeValue);
+Node* createNode0List(char *nodeValue);
+Node* createNode0Nil(char *nodeValue);
 Node* createNode1(char *nodeValue, Node* left);
 Node* createNode2(char *nodeValue, Node* left, Node* leftMiddle);
 Node* createNode3(char *nodeValue, Node* left, Node* leftMiddle, Node* middle);
@@ -341,12 +341,12 @@ int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int pa
 
 
 
-extern int findSymbolMain(char *name) {
+extern int findSymbolMain(char *namecomp) {
     struct symbol *s;
     int hasMain = 0;
 
     for (s = symbolTable; s != NULL; s = s -> hh.next){
-      if ((strcmp(s -> name, "main") == 0 && (strcmp(s -> symbolType, "func") == 0 ))){
+      if ((strcmp(s -> name, namecomp) == 0 && (strcmp(s -> symbolType, "func") == 0 ))){
         hasMain++;
       }
     }
@@ -397,7 +397,7 @@ bool checkNumberOfParams(int argsParams, char* funcName) {
   return false;
 }
 
-bool checkIsInScope(char *name, int num) {
+bool checkIsInScope(char *name) {
   struct symbol *s;
   Scope *scope;
   Scope *scopeAux;
@@ -514,8 +514,7 @@ UT_string *float_as_str(float value) {
 %token<str> ERRORTOKEN
 
 
-%left ADD SUB MULT DIV OR AND SMALLER GREATER SMALLEQ GREATEQ EQUALS DIFFERENT APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
-%right ASSIGN MAP ELSE THEN
+%right ELSE THEN
 
 %token <str> ADD SUB MULT DIV OR AND SMALLER GREATER SMALLEQ GREATEQ EQUALS DIFFERENT APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
 %token <str> ASSIGN MAP ELSE THEN
@@ -594,7 +593,7 @@ funcDeclaration:
     parameters = 0;
     addFunc($3);
     } stmtList ENDFUNC{
-      $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $6, $10);
+      $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2), createNode0($3), $6, $10);
       popStack();
   }   
   | TYPE LISTTYPE ID PARENL {pushStack(scope);} PARENR STFUNC {
@@ -605,7 +604,7 @@ funcDeclaration:
     addFunc($3);
     
     } stmtList ENDFUNC{
-      $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2, 'l'), createNode0($3), $9);
+      $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2), createNode0($3), $9);
       popStack();
     }
   ;
@@ -641,7 +640,7 @@ simpleVarDeclaration:
       pushStack(scope);
       semanticErrors += addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
       varReg++;
-      $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
+      $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2), createNode0($3));
       popStack();
     }
     
@@ -674,7 +673,7 @@ param:
       parameters++;
       pushStack(scope);
       semanticErrors += addSymbol($3, "param", $2, STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
-      $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2, 'l'), createNode0($3));
+      $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2), createNode0($3));
       varReg++;
       popStack();
     }
@@ -847,7 +846,7 @@ expression:
 
 assignExp:
     ID ASSIGN expression {
-      if (checkIsInScope($1, STACK_TOP(stackScope) -> value)){
+      if (checkIsInScope($1)){
         $$ = createNode3("ID ASSIGN expression", createNode0($1), createNode0("="), $3);
         UT_string *s = create_new_reg(varReg);
         varDecAssign(utstring_body(s), $3 -> saved);
@@ -872,17 +871,17 @@ simpleExp:
 
 constOp:
     INTEGER {
-      $$ = createNode0Int($1, 'i');
+      $$ = createNode0Int($1);
       UT_string *s = int_as_str($1);
       $$ -> saved = utstring_body(s);
     }
   | DECIMAL {
-    $$ = createNode0Dec($1, 'd');
+    $$ = createNode0Dec($1);
     UT_string *s = float_as_str($1);
     $$ -> saved = utstring_body(s);
   }
   | NIL {
-    $$ = createNode0Nil($1, 'n');
+    $$ = createNode0Nil($1);
   }
   ;
 

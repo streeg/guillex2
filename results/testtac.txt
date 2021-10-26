@@ -3,61 +3,84 @@
 #### beginning ####
 
 ------------------------Semantic analysis---------------------
-Type: 'int' on line: 3, column: 1
-Id: 'main' at line: 3, column: 5
-'(' at line: 3, column: 9
-')' at line: 3, column: 10
-'{' on line: 4, column: 1
-Type: 'int' on line: 5, column: 5
-Id: 'x' at line: 5, column: 9
-';' at line: 5, column: 10
-Type: 'int' on line: 6, column: 5
-Id: 'y' at line: 6, column: 9
-';' at line: 6, column: 10
-Id: 'x' at line: 7, column: 5
-'=' at line: 7, column: 7
-Integer: '1' at line: 7, column: 9
-';' at line: 7, column: 10
-Id: 'x' at line: 8, column: 5
-'=' at line: 8, column: 7
-Id: 'x' at line: 8, column: 9
-'+' at line: 8, column: 11
-Integer: '1' at line: 8, column: 13
-';' at line: 8, column: 14
-Id: 'x' at line: 9, column: 5
-'=' at line: 9, column: 7
+Type: 'int' on line: 2, column: 1
+Id: 'add' at line: 2, column: 5
+'(' at line: 2, column: 8
+Type: 'int' on line: 2, column: 9
+Id: 'x' at line: 2, column: 13
+')' at line: 2, column: 14
+'{' on line: 3, column: 1
+Keyword [RETURN]: 'return' at line: 4, column: 5
+Id: 'x' at line: 4, column: 12
+'*' at line: 4, column: 14
+Id: 'x' at line: 4, column: 16
+';' at line: 4, column: 17
+'}' at line: 5, column: 1
+Type: 'int' on line: 7, column: 1
+Id: 'main' at line: 7, column: 5
+'(' at line: 7, column: 9
+')' at line: 7, column: 10
+'{' on line: 8, column: 1
+Type: 'int' on line: 9, column: 5
 Id: 'x' at line: 9, column: 9
-'+' at line: 9, column: 11
-Integer: '2' at line: 9, column: 13
-';' at line: 9, column: 14
-Id: 'x' at line: 10, column: 5
-'=' at line: 10, column: 7
-Id: 'x' at line: 10, column: 9
-'+' at line: 10, column: 11
-Decimal: '3.3' at line: 10, column: 13
-';' at line: 10, column: 16
+';' at line: 9, column: 10
+Semantic Error
+Variable or Function already declared in this scope
+
+Type: 'int' on line: 10, column: 5
+Id: 'y' at line: 10, column: 9
+';' at line: 10, column: 10
+Id: 'x' at line: 11, column: 5
+'=' at line: 11, column: 7
+Integer: '1' at line: 11, column: 9
+';' at line: 11, column: 10
 Id: 'x' at line: 12, column: 5
 '=' at line: 12, column: 7
-Id: 'y' at line: 12, column: 9
-';' at line: 12, column: 10
+Id: 'x' at line: 12, column: 9
+'+' at line: 12, column: 11
+Integer: '1' at line: 12, column: 13
+';' at line: 12, column: 14
 Id: 'x' at line: 13, column: 5
 '=' at line: 13, column: 7
-Integer: '2' at line: 13, column: 9
+Id: 'x' at line: 13, column: 9
 '+' at line: 13, column: 11
 Integer: '2' at line: 13, column: 13
-'-' at line: 13, column: 15
-Integer: '2' at line: 13, column: 17
-'*' at line: 13, column: 19
-Integer: '2' at line: 13, column: 21
-'/' at line: 13, column: 23
-Integer: '2' at line: 13, column: 25
-';' at line: 13, column: 26
-Keyword [WRITELN]: 'writeln' at line: 14, column: 5
-'(' at line: 14, column: 12
-Id: 'x' at line: 14, column: 13
-')' at line: 14, column: 14
-';' at line: 14, column: 15
-'}' at line: 15, column: 1
+';' at line: 13, column: 14
+Id: 'x' at line: 14, column: 5
+'=' at line: 14, column: 7
+Id: 'x' at line: 14, column: 9
+'+' at line: 14, column: 11
+Decimal: '3.3' at line: 14, column: 13
+';' at line: 14, column: 16
+Id: 'x' at line: 16, column: 5
+'=' at line: 16, column: 7
+Id: 'y' at line: 16, column: 9
+';' at line: 16, column: 10
+Id: 'x' at line: 17, column: 5
+'=' at line: 17, column: 7
+Integer: '2' at line: 17, column: 9
+'+' at line: 17, column: 11
+Integer: '2' at line: 17, column: 13
+'-' at line: 17, column: 15
+Integer: '2' at line: 17, column: 17
+'*' at line: 17, column: 19
+Integer: '2' at line: 17, column: 21
+'/' at line: 17, column: 23
+Integer: '2' at line: 17, column: 25
+';' at line: 17, column: 26
+Keyword [WRITELN]: 'writeln' at line: 18, column: 5
+'(' at line: 18, column: 12
+Id: 'x' at line: 18, column: 13
+')' at line: 18, column: 14
+';' at line: 18, column: 15
+Id: 'add' at line: 19, column: 5
+'(' at line: 19, column: 8
+Id: 'x' at line: 19, column: 9
+')' at line: 19, column: 10
+';' at line: 19, column: 11
+Semantic errorFunction: <add> has wrong number of parameters, line 19, column 12
+
+'}' at line: 20, column: 1
 
 
 #### EOF ####
@@ -70,24 +93,73 @@ Id: 'x' at line: 14, column: 13
 
 |         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |
 
-|   main                |    func                         |      int                     |         0            |         0          |
-|   x                   |    var                          |      int                     |         0            |         0          |
-|   y                   |    var                          |      int                     |         0            |         0          |
+|   x                   |    param                        |      int                     |         1            |         0          |
+|   add                 |    func                         |      int                     |         1            |         1          |
+|   main                |    func                         |      int                     |         1            |         0          |
+|   y                   |    var                          |      int                     |         1            |         0          |
 
 
 --------------------------------tree--------------------------------
 
 
-declaration
--->   funcDeclaration
+declarationsList declaration
+-->   declaration
 
---->   TYPE ID PARENL PARENR compoundStmt
+--->   funcDeclaration
 
----->   int
+---->   TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
 
------>   main
+----->   int
 
------->   stmtList primitiveStmt
+------>   add
+
+------->   param
+
+-------->   TYPE ID
+
+--------->   int
+
+---------->   x
+
+-------->   primitiveStmt
+
+--------->   returnStmt
+
+---------->   RETURN expression SEMIC
+
+----------->   return
+
+------------>   simpleExp
+
+------------->   binLogicalExp
+
+-------------->   relationalExp
+
+--------------->   sumExp
+
+---------------->   mulExp
+
+----------------->   mulExp mulOp factor
+
+------------------>   factor
+
+------------------->   ID
+
+-------------------->   x
+
+------------------->   *
+
+-------------------->   ID
+
+--------------------->   x
+
+--->   funcDeclaration
+
+---->   TYPE ID PARENL PARENR compoundStmt
+
+----->   int
+
+------>   main
 
 ------->   stmtList primitiveStmt
 
@@ -103,27 +175,97 @@ declaration
 
 ------------->   stmtList primitiveStmt
 
--------------->   primitiveStmt
+-------------->   stmtList primitiveStmt
 
---------------->   varDeclaration
+--------------->   stmtList primitiveStmt
 
----------------->   simpleVarDeclaration
+---------------->   primitiveStmt
 
------------------>   TYPE ID
+----------------->   varDeclaration
 
------------------->   int
+------------------>   simpleVarDeclaration
+
+------------------->   TYPE ID
+
+-------------------->   int
+
+--------------------->   x
+
+----------------->   varDeclaration
+
+------------------>   simpleVarDeclaration
+
+------------------->   TYPE ID
+
+-------------------->   int
+
+--------------------->   y
+
+---------------->   exprStmt
+
+----------------->   expression SEMIC
+
+------------------>   assignExp
+
+------------------->   ID ASSIGN expression
+
+-------------------->   x
+
+--------------------->   =
+
+---------------------->   simpleExp
+
+----------------------->   binLogicalExp
+
+------------------------>   relationalExp
+
+------------------------->   sumExp
+
+-------------------------->   mulExp
+
+--------------------------->   factor
+
+---------------------------->   constOp
+
+----------------------------->   1
+
+--------------->   exprStmt
+
+---------------->   expression SEMIC
+
+----------------->   assignExp
+
+------------------>   ID ASSIGN expression
 
 ------------------->   x
 
---------------->   varDeclaration
+-------------------->   =
 
----------------->   simpleVarDeclaration
+--------------------->   simpleExp
 
------------------>   TYPE ID
+---------------------->   binLogicalExp
 
------------------->   int
+----------------------->   relationalExp
 
-------------------->   y
+------------------------>   sumExp
+
+------------------------->   sumExp add mulExp
+
+-------------------------->   mulExp
+
+--------------------------->   factor
+
+---------------------------->   ID
+
+----------------------------->   x
+
+--------------------------->   +
+
+---------------------------->   factor
+
+----------------------------->   constOp
+
+------------------------------>   1
 
 -------------->   exprStmt
 
@@ -145,13 +287,23 @@ declaration
 
 ----------------------->   sumExp
 
------------------------->   mulExp
+------------------------>   sumExp add mulExp
 
-------------------------->   factor
+------------------------->   mulExp
 
--------------------------->   constOp
+-------------------------->   factor
 
---------------------------->   1
+--------------------------->   ID
+
+---------------------------->   x
+
+-------------------------->   +
+
+--------------------------->   factor
+
+---------------------------->   constOp
+
+----------------------------->   2
 
 ------------->   exprStmt
 
@@ -189,7 +341,7 @@ declaration
 
 --------------------------->   constOp
 
----------------------------->   1
+---------------------------->   3.300000
 
 ------------>   exprStmt
 
@@ -211,23 +363,13 @@ declaration
 
 --------------------->   sumExp
 
----------------------->   sumExp add mulExp
+---------------------->   mulExp
 
------------------------>   mulExp
+----------------------->   factor
 
------------------------->   factor
+------------------------>   ID
 
-------------------------->   ID
-
--------------------------->   x
-
------------------------->   +
-
-------------------------->   factor
-
--------------------------->   constOp
-
---------------------------->   2
+------------------------->   y
 
 ----------->   exprStmt
 
@@ -249,97 +391,11 @@ declaration
 
 -------------------->   sumExp
 
---------------------->   sumExp add mulExp
+--------------------->   sumExp sub mulExp
 
----------------------->   mulExp
+---------------------->   sumExp add mulExp
 
------------------------>   factor
-
------------------------->   ID
-
-------------------------->   x
-
------------------------>   +
-
------------------------->   factor
-
-------------------------->   constOp
-
--------------------------->   3.300000
-
----------->   exprStmt
-
------------>   expression SEMIC
-
------------->   assignExp
-
-------------->   ID ASSIGN expression
-
--------------->   x
-
---------------->   =
-
----------------->   simpleExp
-
------------------>   binLogicalExp
-
------------------->   relationalExp
-
-------------------->   sumExp
-
--------------------->   mulExp
-
---------------------->   factor
-
----------------------->   ID
-
------------------------>   y
-
---------->   exprStmt
-
----------->   expression SEMIC
-
------------>   assignExp
-
------------->   ID ASSIGN expression
-
-------------->   x
-
--------------->   =
-
---------------->   simpleExp
-
----------------->   binLogicalExp
-
------------------>   relationalExp
-
------------------->   sumExp
-
-------------------->   sumExp sub mulExp
-
--------------------->   sumExp add mulExp
-
---------------------->   mulExp
-
----------------------->   factor
-
------------------------>   constOp
-
------------------------->   2
-
----------------------->   +
-
------------------------>   factor
-
------------------------->   constOp
-
-------------------------->   2
-
---------------------->   -
-
----------------------->   mulExp mulOp factor
-
------------------------>   mulExp mulOp factor
+----------------------->   mulExp
 
 ------------------------>   factor
 
@@ -347,23 +403,63 @@ declaration
 
 -------------------------->   2
 
-------------------------->   *
+------------------------>   +
+
+------------------------->   factor
 
 -------------------------->   constOp
 
 --------------------------->   2
 
------------------------->   /
+----------------------->   -
 
-------------------------->   constOp
+------------------------>   mulExp mulOp factor
 
--------------------------->   2
+------------------------->   mulExp mulOp factor
 
--------->   outOp
+-------------------------->   factor
 
---------->   WRITELN PARENL outConst PARENR SEMIC
+--------------------------->   constOp
 
----------->   writeln
+---------------------------->   2
+
+--------------------------->   *
+
+---------------------------->   constOp
+
+----------------------------->   2
+
+-------------------------->   /
+
+--------------------------->   constOp
+
+---------------------------->   2
+
+---------->   outOp
+
+----------->   WRITELN PARENL outConst PARENR SEMIC
+
+------------>   writeln
+
+------------->   simpleExp
+
+-------------->   binLogicalExp
+
+--------------->   relationalExp
+
+---------------->   sumExp
+
+----------------->   mulExp
+
+------------------>   factor
+
+------------------->   ID
+
+-------------------->   x
+
+--------->   exprStmt
+
+---------->   expression SEMIC
 
 ----------->   simpleExp
 
@@ -377,10 +473,9 @@ declaration
 
 ---------------->   factor
 
------------------>   ID
+----------------->   fCall
 
------------------->   x
+------------------
 
-
- There is 0 errors and 0 warnings in the file
+ There is 2 warnings in the file
 

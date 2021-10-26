@@ -1,4 +1,8 @@
 
+int add(int x)
+{
+    return x * x;
+}
 
 int main()
 {
@@ -12,4 +16,5 @@ int main()
     x = y;
     x = 2 + 2 - 2 * 2 / 2;
     writeln(x);
+    add(x);
 }

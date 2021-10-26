@@ -166,27 +166,27 @@ Terminals, with rules where they appear
     INTEGER <integer> (263) 63
     DECIMAL <dec> (264) 64
     ERRORTOKEN <str> (265) 96
-    ADD <str> (266) 84 90
-    SUB <str> (267) 85 91
-    MULT <str> (268) 87
-    DIV <str> (269) 88
-    OR <str> (270) 74
-    AND <str> (271) 75
-    SMALLER <str> (272) 78
-    GREATER <str> (273) 79
-    SMALLEQ <str> (274) 80
-    GREATEQ <str> (275) 81
-    EQUALS <str> (276) 82
-    DIFFERENT <str> (277) 83
-    APPEND <str> (278) 51
-    HEADLIST <str> (279) 53
-    TAILLIST <str> (280) 54
-    DESTROYHEAD <str> (281) 55
-    FILTER <str> (282) 57
-    ASSIGN <str> (283) 61
-    MAP <str> (284) 56
-    ELSE <str> (285) 43
-    THEN <str> (286)
+    ELSE <str> (266) 43
+    THEN <str> (267)
+    ADD <str> (268) 84 90
+    SUB <str> (269) 85 91
+    MULT <str> (270) 87
+    DIV <str> (271) 88
+    OR <str> (272) 74
+    AND <str> (273) 75
+    SMALLER <str> (274) 78
+    GREATER <str> (275) 79
+    SMALLEQ <str> (276) 80
+    GREATEQ <str> (277) 81
+    EQUALS <str> (278) 82
+    DIFFERENT <str> (279) 83
+    APPEND <str> (280) 51
+    HEADLIST <str> (281) 53
+    TAILLIST <str> (282) 54
+    DESTROYHEAD <str> (283) 55
+    FILTER <str> (284) 57
+    ASSIGN <str> (285) 61
+    MAP <str> (286) 56
     IF <str> (287) 41
     FOR <str> (288) 44 45
     READ <str> (289) 66
@@ -4045,12 +4045,12 @@ State 209
     INTEGER      reduce using rule 37 (primitiveStmt)
     DECIMAL      reduce using rule 37 (primitiveStmt)
     ERRORTOKEN   reduce using rule 37 (primitiveStmt)
+    ELSE         reduce using rule 37 (primitiveStmt)
     ADD          reduce using rule 37 (primitiveStmt)
     SUB          reduce using rule 37 (primitiveStmt)
     HEADLIST     reduce using rule 37 (primitiveStmt)
     TAILLIST     reduce using rule 37 (primitiveStmt)
     DESTROYHEAD  reduce using rule 37 (primitiveStmt)
-    ELSE         reduce using rule 37 (primitiveStmt)
     IF           reduce using rule 37 (primitiveStmt)
     FOR          reduce using rule 37 (primitiveStmt)
     READ         reduce using rule 37 (primitiveStmt)
@@ -4079,12 +4079,12 @@ State 211
     INTEGER      reduce using rule 31 (primitiveStmt)
     DECIMAL      reduce using rule 31 (primitiveStmt)
     ERRORTOKEN   reduce using rule 31 (primitiveStmt)
+    ELSE         reduce using rule 31 (primitiveStmt)
     ADD          reduce using rule 31 (primitiveStmt)
     SUB          reduce using rule 31 (primitiveStmt)
     HEADLIST     reduce using rule 31 (primitiveStmt)
     TAILLIST     reduce using rule 31 (primitiveStmt)
     DESTROYHEAD  reduce using rule 31 (primitiveStmt)
-    ELSE         reduce using rule 31 (primitiveStmt)
     IF           reduce using rule 31 (primitiveStmt)
     FOR          reduce using rule 31 (primitiveStmt)
     READ         reduce using rule 31 (primitiveStmt)
@@ -4106,12 +4106,12 @@ State 212
     INTEGER      reduce using rule 30 (primitiveStmt)
     DECIMAL      reduce using rule 30 (primitiveStmt)
     ERRORTOKEN   reduce using rule 30 (primitiveStmt)
+    ELSE         reduce using rule 30 (primitiveStmt)
     ADD          reduce using rule 30 (primitiveStmt)
     SUB          reduce using rule 30 (primitiveStmt)
     HEADLIST     reduce using rule 30 (primitiveStmt)
     TAILLIST     reduce using rule 30 (primitiveStmt)
     DESTROYHEAD  reduce using rule 30 (primitiveStmt)
-    ELSE         reduce using rule 30 (primitiveStmt)
     IF           reduce using rule 30 (primitiveStmt)
     FOR          reduce using rule 30 (primitiveStmt)
     READ         reduce using rule 30 (primitiveStmt)
@@ -4133,12 +4133,12 @@ State 213
     INTEGER      reduce using rule 32 (primitiveStmt)
     DECIMAL      reduce using rule 32 (primitiveStmt)
     ERRORTOKEN   reduce using rule 32 (primitiveStmt)
+    ELSE         reduce using rule 32 (primitiveStmt)
     ADD          reduce using rule 32 (primitiveStmt)
     SUB          reduce using rule 32 (primitiveStmt)
     HEADLIST     reduce using rule 32 (primitiveStmt)
     TAILLIST     reduce using rule 32 (primitiveStmt)
     DESTROYHEAD  reduce using rule 32 (primitiveStmt)
-    ELSE         reduce using rule 32 (primitiveStmt)
     IF           reduce using rule 32 (primitiveStmt)
     FOR          reduce using rule 32 (primitiveStmt)
     READ         reduce using rule 32 (primitiveStmt)
@@ -4214,12 +4214,12 @@ State 215
     INTEGER      reduce using rule 33 (primitiveStmt)
     DECIMAL      reduce using rule 33 (primitiveStmt)
     ERRORTOKEN   reduce using rule 33 (primitiveStmt)
+    ELSE         reduce using rule 33 (primitiveStmt)
     ADD          reduce using rule 33 (primitiveStmt)
     SUB          reduce using rule 33 (primitiveStmt)
     HEADLIST     reduce using rule 33 (primitiveStmt)
     TAILLIST     reduce using rule 33 (primitiveStmt)
     DESTROYHEAD  reduce using rule 33 (primitiveStmt)
-    ELSE         reduce using rule 33 (primitiveStmt)
     IF           reduce using rule 33 (primitiveStmt)
     FOR          reduce using rule 33 (primitiveStmt)
     READ         reduce using rule 33 (primitiveStmt)
@@ -4241,12 +4241,12 @@ State 216
     INTEGER      reduce using rule 34 (primitiveStmt)
     DECIMAL      reduce using rule 34 (primitiveStmt)
     ERRORTOKEN   reduce using rule 34 (primitiveStmt)
+    ELSE         reduce using rule 34 (primitiveStmt)
     ADD          reduce using rule 34 (primitiveStmt)
     SUB          reduce using rule 34 (primitiveStmt)
     HEADLIST     reduce using rule 34 (primitiveStmt)
     TAILLIST     reduce using rule 34 (primitiveStmt)
     DESTROYHEAD  reduce using rule 34 (primitiveStmt)
-    ELSE         reduce using rule 34 (primitiveStmt)
     IF           reduce using rule 34 (primitiveStmt)
     FOR          reduce using rule 34 (primitiveStmt)
     READ         reduce using rule 34 (primitiveStmt)
@@ -4275,12 +4275,12 @@ State 218
     INTEGER      reduce using rule 35 (primitiveStmt)
     DECIMAL      reduce using rule 35 (primitiveStmt)
     ERRORTOKEN   reduce using rule 35 (primitiveStmt)
+    ELSE         reduce using rule 35 (primitiveStmt)
     ADD          reduce using rule 35 (primitiveStmt)
     SUB          reduce using rule 35 (primitiveStmt)
     HEADLIST     reduce using rule 35 (primitiveStmt)
     TAILLIST     reduce using rule 35 (primitiveStmt)
     DESTROYHEAD  reduce using rule 35 (primitiveStmt)
-    ELSE         reduce using rule 35 (primitiveStmt)
     IF           reduce using rule 35 (primitiveStmt)
     FOR          reduce using rule 35 (primitiveStmt)
     READ         reduce using rule 35 (primitiveStmt)
@@ -4302,12 +4302,12 @@ State 219
     INTEGER      reduce using rule 36 (primitiveStmt)
     DECIMAL      reduce using rule 36 (primitiveStmt)
     ERRORTOKEN   reduce using rule 36 (primitiveStmt)
+    ELSE         reduce using rule 36 (primitiveStmt)
     ADD          reduce using rule 36 (primitiveStmt)
     SUB          reduce using rule 36 (primitiveStmt)
     HEADLIST     reduce using rule 36 (primitiveStmt)
     TAILLIST     reduce using rule 36 (primitiveStmt)
     DESTROYHEAD  reduce using rule 36 (primitiveStmt)
-    ELSE         reduce using rule 36 (primitiveStmt)
     IF           reduce using rule 36 (primitiveStmt)
     FOR          reduce using rule 36 (primitiveStmt)
     READ         reduce using rule 36 (primitiveStmt)
@@ -5140,12 +5140,12 @@ State 268
     INTEGER      reduce using rule 7 (varDeclaration)
     DECIMAL      reduce using rule 7 (varDeclaration)
     ERRORTOKEN   reduce using rule 7 (varDeclaration)
+    ELSE         reduce using rule 7 (varDeclaration)
     ADD          reduce using rule 7 (varDeclaration)
     SUB          reduce using rule 7 (varDeclaration)
     HEADLIST     reduce using rule 7 (varDeclaration)
     TAILLIST     reduce using rule 7 (varDeclaration)
     DESTROYHEAD  reduce using rule 7 (varDeclaration)
-    ELSE         reduce using rule 7 (varDeclaration)
     IF           reduce using rule 7 (varDeclaration)
     FOR          reduce using rule 7 (varDeclaration)
     READ         reduce using rule 7 (varDeclaration)
@@ -5198,12 +5198,12 @@ State 270
     INTEGER      reduce using rule 38 (exprStmt)
     DECIMAL      reduce using rule 38 (exprStmt)
     ERRORTOKEN   reduce using rule 38 (exprStmt)
+    ELSE         reduce using rule 38 (exprStmt)
     ADD          reduce using rule 38 (exprStmt)
     SUB          reduce using rule 38 (exprStmt)
     HEADLIST     reduce using rule 38 (exprStmt)
     TAILLIST     reduce using rule 38 (exprStmt)
     DESTROYHEAD  reduce using rule 38 (exprStmt)
-    ELSE         reduce using rule 38 (exprStmt)
     IF           reduce using rule 38 (exprStmt)
     FOR          reduce using rule 38 (exprStmt)
     READ         reduce using rule 38 (exprStmt)
@@ -5743,12 +5743,12 @@ State 311
     INTEGER      reduce using rule 46 (returnStmt)
     DECIMAL      reduce using rule 46 (returnStmt)
     ERRORTOKEN   reduce using rule 46 (returnStmt)
+    ELSE         reduce using rule 46 (returnStmt)
     ADD          reduce using rule 46 (returnStmt)
     SUB          reduce using rule 46 (returnStmt)
     HEADLIST     reduce using rule 46 (returnStmt)
     TAILLIST     reduce using rule 46 (returnStmt)
     DESTROYHEAD  reduce using rule 46 (returnStmt)
-    ELSE         reduce using rule 46 (returnStmt)
     IF           reduce using rule 46 (returnStmt)
     FOR          reduce using rule 46 (returnStmt)
     READ         reduce using rule 46 (returnStmt)
@@ -5770,12 +5770,12 @@ State 312
     INTEGER      reduce using rule 27 (compoundStmt)
     DECIMAL      reduce using rule 27 (compoundStmt)
     ERRORTOKEN   reduce using rule 27 (compoundStmt)
+    ELSE         reduce using rule 27 (compoundStmt)
     ADD          reduce using rule 27 (compoundStmt)
     SUB          reduce using rule 27 (compoundStmt)
     HEADLIST     reduce using rule 27 (compoundStmt)
     TAILLIST     reduce using rule 27 (compoundStmt)
     DESTROYHEAD  reduce using rule 27 (compoundStmt)
-    ELSE         reduce using rule 27 (compoundStmt)
     IF           reduce using rule 27 (compoundStmt)
     FOR          reduce using rule 27 (compoundStmt)
     READ         reduce using rule 27 (compoundStmt)
@@ -5824,12 +5824,12 @@ State 314
     INTEGER      reduce using rule 40 (condStmt)
     DECIMAL      reduce using rule 40 (condStmt)
     ERRORTOKEN   reduce using rule 40 (condStmt)
+    ELSE         reduce using rule 40 (condStmt)
     ADD          reduce using rule 40 (condStmt)
     SUB          reduce using rule 40 (condStmt)
     HEADLIST     reduce using rule 40 (condStmt)
     TAILLIST     reduce using rule 40 (condStmt)
     DESTROYHEAD  reduce using rule 40 (condStmt)
-    ELSE         reduce using rule 40 (condStmt)
     IF           reduce using rule 40 (condStmt)
     FOR          reduce using rule 40 (condStmt)
     READ         reduce using rule 40 (condStmt)
@@ -6250,12 +6250,12 @@ State 340
     INTEGER      reduce using rule 66 (inOp)
     DECIMAL      reduce using rule 66 (inOp)
     ERRORTOKEN   reduce using rule 66 (inOp)
+    ELSE         reduce using rule 66 (inOp)
     ADD          reduce using rule 66 (inOp)
     SUB          reduce using rule 66 (inOp)
     HEADLIST     reduce using rule 66 (inOp)
     TAILLIST     reduce using rule 66 (inOp)
     DESTROYHEAD  reduce using rule 66 (inOp)
-    ELSE         reduce using rule 66 (inOp)
     IF           reduce using rule 66 (inOp)
     FOR          reduce using rule 66 (inOp)
     READ         reduce using rule 66 (inOp)
@@ -6277,12 +6277,12 @@ State 341
     INTEGER      reduce using rule 67 (outOp)
     DECIMAL      reduce using rule 67 (outOp)
     ERRORTOKEN   reduce using rule 67 (outOp)
+    ELSE         reduce using rule 67 (outOp)
     ADD          reduce using rule 67 (outOp)
     SUB          reduce using rule 67 (outOp)
     HEADLIST     reduce using rule 67 (outOp)
     TAILLIST     reduce using rule 67 (outOp)
     DESTROYHEAD  reduce using rule 67 (outOp)
-    ELSE         reduce using rule 67 (outOp)
     IF           reduce using rule 67 (outOp)
     FOR          reduce using rule 67 (outOp)
     READ         reduce using rule 67 (outOp)
@@ -6304,12 +6304,12 @@ State 342
     INTEGER      reduce using rule 68 (outOp)
     DECIMAL      reduce using rule 68 (outOp)
     ERRORTOKEN   reduce using rule 68 (outOp)
+    ELSE         reduce using rule 68 (outOp)
     ADD          reduce using rule 68 (outOp)
     SUB          reduce using rule 68 (outOp)
     HEADLIST     reduce using rule 68 (outOp)
     TAILLIST     reduce using rule 68 (outOp)
     DESTROYHEAD  reduce using rule 68 (outOp)
-    ELSE         reduce using rule 68 (outOp)
     IF           reduce using rule 68 (outOp)
     FOR          reduce using rule 68 (outOp)
     READ         reduce using rule 68 (outOp)
@@ -6331,12 +6331,12 @@ State 343
     INTEGER      reduce using rule 43 (elseStmt)
     DECIMAL      reduce using rule 43 (elseStmt)
     ERRORTOKEN   reduce using rule 43 (elseStmt)
+    ELSE         reduce using rule 43 (elseStmt)
     ADD          reduce using rule 43 (elseStmt)
     SUB          reduce using rule 43 (elseStmt)
     HEADLIST     reduce using rule 43 (elseStmt)
     TAILLIST     reduce using rule 43 (elseStmt)
     DESTROYHEAD  reduce using rule 43 (elseStmt)
-    ELSE         reduce using rule 43 (elseStmt)
     IF           reduce using rule 43 (elseStmt)
     FOR          reduce using rule 43 (elseStmt)
     READ         reduce using rule 43 (elseStmt)
@@ -6496,12 +6496,12 @@ State 350
     INTEGER      reduce using rule 44 (iterStmt)
     DECIMAL      reduce using rule 44 (iterStmt)
     ERRORTOKEN   reduce using rule 44 (iterStmt)
+    ELSE         reduce using rule 44 (iterStmt)
     ADD          reduce using rule 44 (iterStmt)
     SUB          reduce using rule 44 (iterStmt)
     HEADLIST     reduce using rule 44 (iterStmt)
     TAILLIST     reduce using rule 44 (iterStmt)
     DESTROYHEAD  reduce using rule 44 (iterStmt)
-    ELSE         reduce using rule 44 (iterStmt)
     IF           reduce using rule 44 (iterStmt)
     FOR          reduce using rule 44 (iterStmt)
     READ         reduce using rule 44 (iterStmt)
@@ -6523,12 +6523,12 @@ State 351
     INTEGER      reduce using rule 45 (iterStmt)
     DECIMAL      reduce using rule 45 (iterStmt)
     ERRORTOKEN   reduce using rule 45 (iterStmt)
+    ELSE         reduce using rule 45 (iterStmt)
     ADD          reduce using rule 45 (iterStmt)
     SUB          reduce using rule 45 (iterStmt)
     HEADLIST     reduce using rule 45 (iterStmt)
     TAILLIST     reduce using rule 45 (iterStmt)
     DESTROYHEAD  reduce using rule 45 (iterStmt)
-    ELSE         reduce using rule 45 (iterStmt)
     IF           reduce using rule 45 (iterStmt)
     FOR          reduce using rule 45 (iterStmt)
     READ         reduce using rule 45 (iterStmt)

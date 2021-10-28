@@ -1,8 +1,8 @@
 
 # Please change test to testtac if you want to test code generation or use test if you want to check the output from bison.
-runtests: all test
+# runtests: all test
 # runtests: all testtac
-# runtests: all testlab
+runtests: all testlab
 
 all: compile
 
@@ -26,7 +26,7 @@ test:
 # ./tradutor ../tests/test1correto.c > ../results/test1resultcorreto.txt
 # ./tradutor ../tests/test2correto.c > ../results/test2resultcorreto.txt
 # ./tradutor ../tests/test3correto.c > ../results/test3resultcorreto.txt
-	./tradutor ../tests/test4correto.c > ../results/test4resultcorreto.txt
+# ./tradutor ../tests/test4correto.c > ../results/test4resultcorreto.txt
 # ./tradutor ../tests/test5correto.c > ../results/test5resultcorreto.txt
 # ./tradutor ../tests/testnalon.c > ../results/testenalon.txt
 # ./tradutor ../tests/test1incorreto.c > ../results/test1resultincorreto.txt
@@ -41,5 +41,5 @@ testlab:
 # ./tradutor ../tests/teste2_lab4.c > ../results/teste2_lab4.txt
 # ./tradutor ../tests/teste3_lab4.c > ../results/teste3_lab4.txt
 # ./tradutor ../tests/teste1_Nalon.c > ../results/teste1_Nalon.txt
-# ./tradutor ../tests/teste2_Nalon.c > ../results/teste2_Nalon.txt
+	./tradutor ../tests/teste2_Nalon.c > ../results/teste2_Nalon.txt
 # ./tradutor ../tests/teste3_Nalon.c > ../results/teste3_Nalon.txt

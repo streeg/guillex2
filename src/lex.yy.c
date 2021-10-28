@@ -363,17 +363,17 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[90] =
+static const flex_int16_t yy_accept[91] =
     {   0,
         0,    0,   46,   44,    7,    9,    8,   36,   44,   37,
        44,   14,   15,    5,    3,    2,    4,   44,    6,   41,
        34,    1,   21,   17,   22,   35,   42,   42,   42,   42,
-       42,   42,   42,   42,   42,   12,   44,   13,   26,    0,
-       43,    0,   19,    0,   41,   40,   18,   39,   23,   25,
-       24,   38,    0,   42,   42,   42,   42,   42,   42,   27,
-       42,   42,   42,   42,   42,   20,   18,   16,   42,   42,
-       29,   10,   42,   42,   42,   42,   42,   28,   42,   11,
-       31,   42,   42,   42,   32,   30,   42,   33,    0
+       42,   42,   42,   42,   12,   44,   13,   26,    0,   43,
+        0,   19,    0,   41,   40,   18,   39,   23,   25,   24,
+       38,    0,   42,   42,   42,   42,   42,   42,   27,   42,
+       42,   42,   42,   20,   18,   16,   42,   42,   29,   10,
+       42,   42,   42,   42,   28,   42,    0,   31,   42,   42,
+        0,   42,   32,    0,   30,   42,    0,   33,   11,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -417,68 +417,68 @@ static const YY_CHAR yy_meta[48] =
         3,    3,    3,    3,    1,    1,    1
     } ;
 
-static const flex_int16_t yy_base[94] =
+static const flex_int16_t yy_base[95] =
     {   0,
-        0,    0,  196,  197,  197,  197,  197,  174,   42,  197,
-      186,  197,  197,  197,  197,  197,   34,  176,  175,   35,
-      197,  197,   33,  164,   34,  197,   43,   44,   45,   49,
-       46,   29,   53,   40,   54,  197,  126,  197,  197,   66,
-      197,  140,  197,  105,   80,   89,    0,  197,  197,  197,
-      197,  197,   59,   63,   60,   73,   64,   65,   69,   74,
-       77,   81,   89,   88,   93,  197,    0,   78,   99,  102,
-       98,  103,  106,  113,  110,  118,  117,  121,  124,  125,
-      128,  131,  135,  138,  141,  142,  145,  148,  197,  186,
-       68,  189,   65
+        0,    0,  189,  199,  199,  199,  199,  167,   42,  199,
+      179,  199,  199,  199,  199,  199,   34,  169,  169,   35,
+      199,  199,   33,  163,   34,  199,   43,   44,   45,   49,
+       46,   53,   29,   54,  199,  136,  199,  199,   66,  199,
+      173,  199,  128,   61,  122,    0,  199,  199,  199,  199,
+      199,   85,   92,   59,   62,   63,   66,   69,   73,   74,
+       82,   81,   86,  199,    0,   89,   93,   97,   94,  132,
+      105,  104,  112,  111,  115,  118,  156,  119,  125,  133,
+       61,  136,  129,   37,  139,  142,   30,  145,  199,  199,
+      192,   65,  195,   61
 
     } ;
 
-static const flex_int16_t yy_def[94] =
+static const flex_int16_t yy_def[95] =
     {   0,
-       89,    1,   89,   89,   89,   89,   89,   89,   90,   89,
-       89,   89,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89,   89,   89,   91,   91,   91,   91,
-       30,   30,   30,   30,   30,   89,   89,   89,   89,   90,
-       89,   90,   89,   89,   89,   89,   92,   89,   89,   89,
-       89,   89,   89,   93,   30,   30,   30,   30,   30,   30,
-       30,   30,   30,   30,   30,   89,   92,   30,   30,   30,
-       30,   30,   30,   30,   30,   30,   30,   30,   30,   30,
-       30,   30,   30,   30,   30,   30,   30,   30,    0,   89,
-       89,   89,   89
+       90,    1,   90,   90,   90,   90,   90,   90,   91,   90,
+       90,   90,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90,   92,   92,   92,   92,
+       30,   30,   30,   30,   90,   90,   90,   90,   91,   90,
+       91,   90,   90,   90,   90,   93,   90,   90,   90,   90,
+       90,   90,   94,   30,   30,   30,   30,   30,   30,   30,
+       30,   30,   30,   90,   93,   30,   30,   30,   30,   30,
+       30,   30,   30,   30,   30,   30,   90,   30,   30,   30,
+       90,   30,   30,   90,   30,   30,   90,   30,   90,    0,
+       90,   90,   90,   90
 
     } ;
 
-static const flex_int16_t yy_nxt[245] =
+static const flex_int16_t yy_nxt[247] =
     {   0,
         4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
        14,   15,   16,   17,   18,   19,   20,   21,   22,   23,
        24,   25,   26,   27,   27,   27,   28,    4,    4,    4,
-       27,   27,   29,   30,   31,   32,   27,   27,   33,   27,
-       27,   27,   34,   35,   36,   37,   38,   41,   44,   44,
-       45,   45,   48,   49,   51,   52,   53,   53,   53,   54,
-       54,   54,   53,   62,   55,   54,   55,   54,   56,   42,
-       55,   41,   54,   54,   54,   55,   53,   64,   54,   60,
-       57,   55,   61,   55,   58,   63,   59,   54,   55,   55,
-       55,   55,   65,   42,   44,   55,   45,   55,   68,   55,
+       27,   27,   29,   30,   31,   27,   27,   27,   32,   27,
+       27,   27,   33,   34,   35,   36,   37,   40,   43,   43,
+       44,   44,   47,   48,   50,   51,   52,   52,   52,   53,
+       53,   53,   52,   53,   54,   53,   62,   54,   55,   41,
+       89,   40,   53,   53,   53,   43,   87,   44,   53,   59,
+       56,   54,   60,   54,   57,   61,   58,   66,   54,   54,
+       54,   54,   63,   41,   54,   84,   54,   54,   54,   54,
 
-       55,   55,   70,   69,   55,   46,   55,   71,   55,   55,
-       55,   55,   55,   55,   55,   55,   55,   72,   55,   74,
-       73,   46,   76,   55,   55,   55,   55,   77,   55,   75,
-       55,   78,   79,   55,   55,   55,   55,   55,   55,   55,
-       55,   55,   89,   55,   81,   55,   80,   55,   55,   72,
-       55,   82,   55,   55,   55,   55,   55,   83,   55,   55,
-       55,   55,   55,   55,   72,   55,   55,   85,   55,   84,
-       55,   66,   55,   55,   86,   55,   87,   55,   55,   55,
-       55,   88,   55,   55,   50,   55,   40,   40,   40,   67,
-       47,   67,   46,   43,   39,   89,    3,   89,   89,   89,
+       54,   54,   67,   68,   54,   52,   54,   69,   54,   54,
+       54,   54,   71,   53,   70,   73,   54,   54,   54,   54,
+       74,   54,   72,   54,   54,   75,   54,   76,   54,   54,
+       54,   54,   54,   77,   54,   77,   78,   77,   45,   54,
+       54,   54,   54,   70,   45,   79,   54,   54,   54,   54,
+       54,   80,   54,   54,   54,   54,   54,   77,   70,   77,
+       54,   77,   54,   82,   86,   83,   54,   54,   54,   54,
+       54,   54,   85,   54,   54,   90,   54,   54,   88,   54,
+       54,   64,   54,   49,   46,   45,   42,   38,   90,   90,
+       90,   81,   39,   39,   39,   65,   90,   65,    3,   90,
 
-       89,   89,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89
+       90,   90,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90
     } ;
 
-static const flex_int16_t yy_chk[245] =
+static const flex_int16_t yy_chk[247] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -486,27 +486,27 @@ static const flex_int16_t yy_chk[245] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    9,   17,   20,
        17,   20,   23,   23,   25,   25,   27,   28,   29,   27,
-       28,   29,   30,   32,   32,   30,   32,   93,   28,    9,
-       91,   40,   27,   28,   29,   34,   54,   34,   30,   31,
-       29,   31,   31,   31,   30,   33,   30,   53,   33,   35,
-       33,   35,   35,   40,   45,   55,   45,   55,   56,   57,
+       28,   29,   30,   94,   33,   30,   33,   92,   28,    9,
+       87,   39,   27,   28,   29,   44,   84,   44,   30,   31,
+       29,   31,   31,   31,   30,   32,   30,   55,   32,   34,
+       32,   34,   34,   39,   54,   81,   54,   55,   56,   55,
 
-       58,   57,   58,   57,   59,   46,   59,   59,   56,   60,
-       56,   60,   61,   68,   61,   68,   62,   61,   62,   63,
-       62,   44,   64,   64,   63,   64,   63,   65,   65,   63,
-       65,   69,   70,   71,   69,   71,   69,   70,   72,   70,
-       72,   73,   42,   73,   74,   75,   73,   75,   74,   76,
-       74,   75,   77,   76,   77,   76,   78,   77,   78,   79,
-       80,   79,   80,   81,   79,   81,   82,   83,   82,   82,
-       83,   37,   83,   84,   84,   84,   85,   86,   85,   86,
-       87,   87,   87,   88,   24,   88,   90,   90,   90,   92,
-       19,   92,   18,   11,    8,    3,   89,   89,   89,   89,
+       56,   57,   56,   57,   58,   53,   58,   58,   59,   60,
+       59,   60,   61,   52,   60,   62,   62,   61,   62,   61,
+       63,   63,   61,   63,   66,   67,   66,   68,   67,   69,
+       67,   69,   68,   70,   68,   70,   71,   70,   45,   72,
+       71,   72,   71,   73,   43,   72,   74,   73,   74,   73,
+       75,   74,   75,   76,   78,   76,   78,   77,   76,   77,
+       79,   77,   79,   79,   83,   80,   83,   70,   80,   70,
+       80,   82,   82,   82,   85,   41,   85,   86,   86,   86,
+       88,   36,   88,   24,   19,   18,   11,    8,    3,    0,
+        0,   77,   91,   91,   91,   93,    0,   93,   90,   90,
 
-       89,   89,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89
+       90,   90,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -532,8 +532,9 @@ char *yytext;
 
   int line = 1;
   int wordPosition = 1;
+  char *removeSubstring(char *str);
 
-#line 537 "lex.yy.c"
+#line 538 "lex.yy.c"
 #define YY_NO_INPUT 1
 /*ArithmeticOP*/
 /*BinLogicalOP*/
@@ -541,7 +542,7 @@ char *yytext;
 /*assignOP*/
 /*IO*/
 /*Keywords*/
-#line 545 "lex.yy.c"
+#line 546 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -759,7 +760,7 @@ YY_DECL
 #line 79 "guillex.l"
 
 
-#line 763 "lex.yy.c"
+#line 764 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -786,13 +787,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 90 )
+				if ( yy_current_state >= 91 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 197 );
+		while ( yy_base[yy_current_state] != 199 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -909,15 +910,15 @@ case 11:
 YY_RULE_SETUP
 #line 139 "guillex.l"
 {
-            printf("ListType: '%s' on line: %d, column: %d\n", yytext, line, wordPosition);
+            printf("Type: '%s' on line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
-            return LISTTYPE;            
+            yylval.str = (char *) strdup(removeSubstring(yytext));
+            return TYPE;            
           }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 146 "guillex.l"
+#line 147 "guillex.l"
 {
             printf("'%s' on line: %d, column: %d\n", yytext, line, wordPosition);
             yylval.str = (char *) strdup(yytext);
@@ -927,7 +928,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 153 "guillex.l"
+#line 154 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             yylval.str = (char *) strdup(yytext);
@@ -937,7 +938,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 160 "guillex.l"
+#line 161 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             yylval.str = (char *) strdup(yytext);
@@ -947,7 +948,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 167 "guillex.l"
+#line 168 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             yylval.str = (char *) strdup(yytext);
@@ -957,7 +958,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 174 "guillex.l"
+#line 175 "guillex.l"
 {
             printf("Constant: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -967,7 +968,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 181 "guillex.l"
+#line 182 "guillex.l"
 {
             printf("'%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -976,14 +977,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 187 "guillex.l"
+#line 188 "guillex.l"
 {
             wordPosition += yyleng;
           }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 191 "guillex.l"
+#line 192 "guillex.l"
 {
             printf("OP [AND]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -992,7 +993,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 197 "guillex.l"
+#line 198 "guillex.l"
 {
             printf("OP [OR]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1001,7 +1002,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 203 "guillex.l"
+#line 204 "guillex.l"
 {
             printf("OP [SMALLER THAN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1010,7 +1011,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 209 "guillex.l"
+#line 210 "guillex.l"
 {
             printf("OP [GREATER THAN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1019,7 +1020,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 215 "guillex.l"
+#line 216 "guillex.l"
 {
             printf("OP [SMALLER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1028,7 +1029,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 221 "guillex.l"
+#line 222 "guillex.l"
 {
             printf("OP [GREATER THAN OR EQUAL]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1037,7 +1038,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 227 "guillex.l"
+#line 228 "guillex.l"
 {
             printf("OP [EQUALS]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1046,7 +1047,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 233 "guillex.l"
+#line 234 "guillex.l"
 {
             printf("OP [IS DIFFERENT]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1055,7 +1056,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 239 "guillex.l"
+#line 240 "guillex.l"
 {
             printf("Keyword [IF]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1065,7 +1066,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 246 "guillex.l"
+#line 247 "guillex.l"
 {
             printf("Keyword [ELSE]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1075,7 +1076,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 253 "guillex.l"
+#line 254 "guillex.l"
 {
             printf("Keyword [FOR]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1085,7 +1086,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 260 "guillex.l"
+#line 261 "guillex.l"
 {
             printf("Keyword [RETURN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1095,7 +1096,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 267 "guillex.l"
+#line 268 "guillex.l"
 {
             printf("Keyword [READ]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1105,7 +1106,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 274 "guillex.l"
+#line 275 "guillex.l"
 {
             printf("Keyword [WRITE]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1115,7 +1116,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 281 "guillex.l"
+#line 282 "guillex.l"
 {
             printf("Keyword [WRITELN]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1125,7 +1126,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 288 "guillex.l"
+#line 289 "guillex.l"
 {
             printf("Keyword [APPEND]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1135,7 +1136,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 295 "guillex.l"
+#line 296 "guillex.l"
 {
             printf("Keyword [HEADLIST]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1145,7 +1146,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 302 "guillex.l"
+#line 303 "guillex.l"
 {
             printf("Keyword [TAILLIST]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1155,7 +1156,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 309 "guillex.l"
+#line 310 "guillex.l"
 {
             printf("Keyword [DESTROYHEAD]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1165,7 +1166,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 316 "guillex.l"
+#line 317 "guillex.l"
 {
             printf("Keyword [MAP]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1175,7 +1176,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 323 "guillex.l"
+#line 324 "guillex.l"
 {
             printf("Keyword [FILTER]: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1185,7 +1186,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 330 "guillex.l"
+#line 331 "guillex.l"
 {
             printf("Decimal: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1195,7 +1196,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 337 "guillex.l"
+#line 338 "guillex.l"
 {
             printf("Integer: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1205,7 +1206,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 344 "guillex.l"
+#line 345 "guillex.l"
 {
             printf("Id: '%s' at line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1216,7 +1217,7 @@ YY_RULE_SETUP
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
-#line 352 "guillex.l"
+#line 353 "guillex.l"
 {
             printf("String: %s on line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
@@ -1226,7 +1227,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 359 "guillex.l"
+#line 360 "guillex.l"
 {
             printf("\nERROR!!\n");
             printf("%s at line: %d, column: %d\n\n", yytext, line, wordPosition);
@@ -1236,10 +1237,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 366 "guillex.l"
+#line 367 "guillex.l"
 ECHO;
 	YY_BREAK
-#line 1243 "lex.yy.c"
+#line 1244 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1536,7 +1537,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 90 )
+			if ( yy_current_state >= 91 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1564,11 +1565,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 90 )
+		if ( yy_current_state >= 91 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 89);
+	yy_is_jam = (yy_current_state == 90);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2207,5 +2208,15 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 366 "guillex.l"
+#line 367 "guillex.l"
+
+
+char *removeSubstring(char *str) {
+    
+    if(strstr(str, "int") != NULL) {
+        return "int list";
+    }else{
+        return "float list";
+    }
+}
 

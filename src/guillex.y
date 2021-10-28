@@ -508,7 +508,7 @@ UT_string *float_as_str(float value) {
   struct node *treeNode;
 }
 
-%token<str> ID TYPE LISTTYPE STRING NIL
+%token<str> ID TYPE STRING NIL
 %token<integer> INTEGER
 %token<dec> DECIMAL
 %token<str> ERRORTOKEN
@@ -524,10 +524,11 @@ UT_string *float_as_str(float value) {
 %start program
 
 %type<treeNode> program declarationList declaration varDeclaration funcDeclaration simpleVarDeclaration 
-%type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt ifStmt elseStmt iterStmt returnStmt listExp 
-%type<treeNode> appendOps returnListOps returnListOp destroyHeadOps mapFilterOps expression assignExp simpleExp
+%type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt ifStmt elseStmt iterStmt returnStmt 
+%type<treeNode> expression assignExp simpleExp
 %type<treeNode> constOp inOp outOp outConst binLogicalExp binLogicalOp relationalExp relationalOp
 %type<treeNode> sumExp mulExp factor fCall callParams error
+%type<treeNode> binListExp unaryListExp
 %%
 
 program:
@@ -586,28 +587,6 @@ funcDeclaration:
       $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $8); 
       popStack();                                                                      
   }
-  | TYPE LISTTYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {
-    UT_string *r;
-    utstring_new(r);
-    errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters, 0);  
-    parameters = 0;
-    addFunc($3);
-    } stmtList ENDFUNC{
-      $$ = createNode5("TYPE LISTTYPE ID PARENL params PARENR compoundStmt", createNode0($1), createNode0List($2), createNode0($3), $6, $10);
-      popStack();
-  }   
-  | TYPE LISTTYPE ID PARENL {pushStack(scope);} PARENR STFUNC {
-    UT_string *r;
-    utstring_new(r);
-    errors += addSymbol($3, "func", $2, STACK_TOP(stackScope) -> value, parameters, 0);
-    parameters = 0;
-    addFunc($3);
-    
-    } stmtList ENDFUNC{
-      $$ = createNode4("TYPE LISTTYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0List($2), createNode0($3), $9);
-      popStack();
-    }
-  ;
 
 simpleVarDeclaration:
     TYPE ID {
@@ -635,14 +614,6 @@ simpleVarDeclaration:
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
       popStack();
       }
-    | TYPE LISTTYPE ID {
-
-      pushStack(scope);
-      semanticErrors += addSymbol($3, "var", $2, STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
-      varReg++;
-      $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2), createNode0($3));
-      popStack();
-    }
     
   ;
 
@@ -669,14 +640,6 @@ param:
       varReg++;
       popStack();
       }
-    | TYPE LISTTYPE ID {
-      parameters++;
-      pushStack(scope);
-      semanticErrors += addSymbol($3, "param", $2, STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
-      $$ = createNode3("TYPE ID", createNode0($1), createNode0List($2), createNode0($3));
-      varReg++;
-      popStack();
-    }
   ;
 
 compoundStmt:
@@ -784,57 +747,6 @@ returnStmt:
     }
   ;
 
-listExp:
-    appendOps {
-      $$ = createNode1("appendOps", $1);
-    }
-  | returnListOps {
-    $$ = createNode1("returnListOps", $1);
-  }
-  | destroyHeadOps {
-    $$ = createNode1("destroyHeadOps", $1);
-  }
-  | mapFilterOps {
-    $$ = createNode1("mapFilterOps", $1);
-  }
-  ;
-
-appendOps:
-    ID APPEND ID {
-      $$ = createNode3("ID APPEND ID SEMIC", createNode0($1), createNode0($2), createNode0($3));
-    }
-  ;
-
-returnListOps:
-    returnListOp ID{
-      $$ = createNode2("returnListOp ID", $1, createNode0($2));
-    }
-  ;
-
-returnListOp:
-    HEADLIST {
-      $$ = createNode1("HEADLIST", createNode0($1));
-    }
-  | TAILLIST {
-      $$ = createNode1("TAILLIST", createNode0($1));
-  }
-  ;
-
-destroyHeadOps:
-    DESTROYHEAD ID {
-      $$ = createNode2("DESTROYHEAD ID", createNode0($1), createNode0($2));
-    }
-  ;
-
-mapFilterOps:
-    ID MAP ID {
-      $$ = createNode3("ID MAP ID SEMIC", createNode0($1), createNode0($2), createNode0($3));
-    }
-    |
-    ID FILTER ID {
-      $$ = createNode3("ID FILTER ID SEMIC", createNode0($1), createNode0($2), createNode0($3));
-    }
-  ;
 
 expression:
     assignExp {
@@ -844,10 +756,6 @@ expression:
   | simpleExp {
       $$ = createNode1("simpleExp", $1);
       $$ -> saved = $1 -> saved;
-  }
-  | listExp {
-    $$ = createNode1("listExp", $1);
-    $$ -> saved = $1 -> saved;
   }
   ;
 
@@ -872,6 +780,11 @@ assignExp:
 simpleExp:
     binLogicalExp {
       $$ = createNode1("binLogicalExp", $1);
+      $$ -> saved = $1 -> saved;
+    }
+    |
+    binListExp{
+      $$ = createNode1("binListExp", $1);
       $$ -> saved = $1 -> saved;
     }
   ;
@@ -920,11 +833,33 @@ outConst:
       $$ = createNode1("simpleExp", $1);
       $$ -> saved = $1 -> saved;
   }
-  | listExp {
-    $$ = createNode1("listExp", $1);
-    $$ -> saved = $1 -> saved;
-  }
   ;
+
+  binListExp:
+	factor APPEND factor {
+		$$ = createNode3("factor APPEND factor", $1, createNode0(":"), $3);		
+    $$ -> saved = $1 -> saved;
+	}
+	| factor MAP factor {
+		
+		$$ = createNode3("factor MAP factor", $1, createNode0(">>"), $3);		
+    $$ -> saved = $1 -> saved;
+	}
+	| factor FILTER factor {
+		$$ = createNode3("factor FILTER factor", $1, createNode0("<<"), $3);	
+    $$ -> saved = $1 -> saved;	
+	}
+
+unaryListExp:
+	HEADLIST factor {
+		$$ = createNode2("? factor", createNode0("?"), $2);
+    $$ -> saved = $2 -> saved;	
+	}
+	| TAILLIST factor {
+    $$ = createNode2("! factor", createNode0("!"), $2);
+    $$ -> saved = $2 -> saved;	
+	}
+;  
 
 binLogicalExp:
     binLogicalExp binLogicalOp relationalOp{
@@ -1022,6 +957,9 @@ mulExp:
   | SUB factor {
       $$ = createNode2("SUB factor", createNode0("-"), $2);
   }
+  | unaryListExp {
+		$$ = createNode1("unaryListExp", $1);
+	}
   ;
 
 

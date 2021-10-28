@@ -1,14 +1,9 @@
 int main()
 {
 
-  float media1;
-  float media2;
-  float notas;
+  float list notas;
   notas = NIL;
   int n;
-  float soma;
-  soma = 0;
-  float AUX;
 
   writeln("Qual o número de provas?");
   read(n);
@@ -26,8 +21,15 @@ int main()
     notas = nota : notas;
   }
 
+  float soma;
+  soma = 0;
+  float list AUX;
+
   for (AUX = notas; AUX != NIL; AUX = !AUX)
-    soma = soma + AUX;
+    soma = soma + ? AUX;
+
+  float media1;
+  float media2;
 
   media1 = soma / n - 10 * (1 / 10);
   media2 = soma / n;

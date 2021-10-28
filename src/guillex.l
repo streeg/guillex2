@@ -6,6 +6,7 @@
 
   int line = 1;
   int wordPosition = 1;
+  char *removeSubstring(char *str);
 
 %}
 
@@ -28,7 +29,6 @@ integer   -?{digit}+
 decimal   -?{digit}*[.]{digit}+
 string    \"(\\.|[^"\\])*\" 
 type      "int"|"float"|"void"
-listtype  "list"
 comment   "//".*
 
 /*ArithmeticOP*/
@@ -135,13 +135,14 @@ comma     [,]
             yylval.str = (char *) strdup(yytext);
             return TYPE;            
           }
-
-{listtype}    {
-            printf("ListType: '%s' on line: %d, column: %d\n", yytext, line, wordPosition);
+          
+{type}[" \t"]+"list"  {
+            printf("Type: '%s' on line: %d, column: %d\n", yytext, line, wordPosition);
             wordPosition += yyleng;
-            yylval.str = (char *) strdup(yytext);
-            return LISTTYPE;            
+            yylval.str = (char *) strdup(removeSubstring(yytext));
+            return TYPE;            
           }
+
 
 {stfunc}  {
             printf("'%s' on line: %d, column: %d\n", yytext, line, wordPosition);
@@ -364,3 +365,12 @@ comma     [,]
           }
 
 %%
+
+char *removeSubstring(char *str) {
+    
+    if(strstr(str, "int") != NULL) {
+        return "int list";
+    }else{
+        return "float list";
+    }
+}

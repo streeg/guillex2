@@ -1,0 +1,499 @@
+
+
+#### beginning ####
+
+------------------------Semantic analysis---------------------
+Type: 'int' on line: 2, column: 1
+Id: 'n_times_plus_one' at line: 2, column: 5
+'(' at line: 2, column: 21
+Type: 'float' on line: 2, column: 22
+Id: 'a' at line: 2, column: 28
+')' at line: 2, column: 29
+'{' on line: 3, column: 1
+Type: 'int' on line: 4, column: 5
+Id: 'a' at line: 4, column: 9
+';' at line: 4, column: 10
+Semantic Error
+Variable or Function already declared in this scope
+
+Type: 'int' on line: 5, column: 5
+Id: 'c' at line: 5, column: 9
+';' at line: 5, column: 10
+Keyword [FOR]: 'for' at line: 6, column: 5
+'(' at line: 6, column: 9
+Id: 'c' at line: 6, column: 10
+'=' at line: 6, column: 12
+Integer: '0' at line: 6, column: 14
+';' at line: 6, column: 15
+Id: 'c' at line: 6, column: 17
+OP [SMALLER THAN]: '<' at line: 6, column: 19
+Id: 'a' at line: 6, column: 21
+';' at line: 6, column: 22
+Id: 'c' at line: 6, column: 24
+'=' at line: 6, column: 26
+Id: 'c' at line: 6, column: 28
+'+' at line: 6, column: 30
+Integer: '1' at line: 6, column: 32
+')' at line: 6, column: 33
+'{' on line: 7, column: 5
+Id: 'a' at line: 8, column: 9
+'=' at line: 8, column: 11
+Id: 'a' at line: 8, column: 13
+'*' at line: 8, column: 15
+Id: 'a' at line: 8, column: 17
+'+' at line: 8, column: 19
+Integer: '1' at line: 8, column: 21
+';' at line: 8, column: 22
+Keyword [WRITELN]: 'writeln' at line: 9, column: 9
+'(' at line: 9, column: 16
+Id: 'a' at line: 9, column: 17
+')' at line: 9, column: 18
+';' at line: 9, column: 19
+'}' at line: 10, column: 5
+Keyword [RETURN]: 'return' at line: 11, column: 5
+Id: 'a' at line: 11, column: 12
+';' at line: 11, column: 13
+'}' at line: 12, column: 1
+Type: 'int' on line: 14, column: 1
+Id: 'main' at line: 14, column: 5
+'(' at line: 14, column: 9
+')' at line: 14, column: 10
+'{' on line: 15, column: 1
+Type: 'int' on line: 16, column: 5
+Id: 'a' at line: 16, column: 9
+';' at line: 16, column: 10
+Type: 'int' on line: 17, column: 5
+Id: 'b' at line: 17, column: 9
+';' at line: 17, column: 10
+Type: 'int' on line: 18, column: 5
+Id: 'c' at line: 18, column: 9
+';' at line: 18, column: 10
+Keyword [READ]: 'read' at line: 20, column: 5
+'(' at line: 20, column: 9
+Id: 'a' at line: 20, column: 10
+')' at line: 20, column: 11
+';' at line: 20, column: 12
+Keyword [READ]: 'read' at line: 21, column: 5
+'(' at line: 21, column: 9
+Id: 'b' at line: 21, column: 10
+')' at line: 21, column: 11
+';' at line: 21, column: 12
+Id: 'c' at line: 23, column: 5
+'=' at line: 23, column: 7
+Id: 'n_times_plus_one' at line: 23, column: 9
+'(' at line: 23, column: 25
+Id: 'a' at line: 23, column: 26
+')' at line: 23, column: 27
+';' at line: 23, column: 28
+Semantic errorFunction: <n_times_plus_one> has wrong number of parameters, line 23, column 29
+
+Keyword [WRITELN]: 'writeln' at line: 25, column: 5
+'(' at line: 25, column: 12
+Id: 'c' at line: 25, column: 13
+')' at line: 25, column: 14
+';' at line: 25, column: 15
+Keyword [RETURN]: 'return' at line: 26, column: 5
+Id: 'c' at line: 26, column: 12
+';' at line: 26, column: 13
+'}' at line: 27, column: 1
+
+
+#### EOF ####
+
+
+
+------------------------------------------------------symbols------------------------------------------------
+
+
+
+|         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |
+
+|   a                   |    param                        |      float                   |         1            |         0          |
+|   n_times_plus_one    |    func                         |      int                     |         1            |         1          |
+|   c                   |    var                          |      int                     |         1            |         0          |
+|   main                |    func                         |      int                     |         2            |         0          |
+|   a                   |    var                          |      int                     |         2            |         0          |
+|   b                   |    var                          |      int                     |         2            |         0          |
+|   c                   |    var                          |      int                     |         2            |         0          |
+
+
+--------------------------------tree--------------------------------
+
+
+declarationsList declaration
+-->   declaration
+
+--->   funcDeclaration
+
+---->   TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
+
+----->   int
+
+------>   n_times_plus_one
+
+------->   param
+
+-------->   TYPE ID
+
+--------->   float
+
+---------->   a
+
+-------->   stmtList primitiveStmt
+
+--------->   stmtList primitiveStmt
+
+---------->   stmtList primitiveStmt
+
+----------->   primitiveStmt
+
+------------>   varDeclaration
+
+------------->   simpleVarDeclaration
+
+-------------->   TYPE ID
+
+--------------->   int
+
+---------------->   a
+
+------------>   varDeclaration
+
+------------->   simpleVarDeclaration
+
+-------------->   TYPE ID
+
+--------------->   int
+
+---------------->   c
+
+----------->   iterStmt
+
+------------>   FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
+
+------------->   for
+
+-------------->   ID ASSIGN expression
+
+--------------->   c
+
+---------------->   =
+
+----------------->   simpleExp
+
+------------------>   binLogicalExp
+
+------------------->   relationalExp
+
+-------------------->   sumExp
+
+--------------------->   mulExp
+
+---------------------->   factor
+
+----------------------->   constOp
+
+------------------------>   0
+
+--------------->   binLogicalExp
+
+---------------->   relationalExp
+
+----------------->   relationalExp relationalOp sumExp
+
+------------------>   sumExp
+
+------------------->   mulExp
+
+-------------------->   factor
+
+--------------------->   ID
+
+---------------------->   c
+
+------------------->   SMALLER
+
+-------------------->   <
+
+-------------------->   mulExp
+
+--------------------->   factor
+
+---------------------->   ID
+
+----------------------->   a
+
+---------------->   ID ASSIGN expression
+
+----------------->   c
+
+------------------>   =
+
+------------------->   simpleExp
+
+-------------------->   binLogicalExp
+
+--------------------->   relationalExp
+
+---------------------->   sumExp
+
+----------------------->   sumExp add mulExp
+
+------------------------>   mulExp
+
+------------------------->   factor
+
+-------------------------->   ID
+
+--------------------------->   c
+
+------------------------->   +
+
+-------------------------->   factor
+
+--------------------------->   constOp
+
+---------------------------->   1
+
+----------------->   compoundStmt
+
+------------------>   compoundStmt
+
+------------------->   stmtList primitiveStmt
+
+-------------------->   primitiveStmt
+
+--------------------->   exprStmt
+
+---------------------->   expression SEMIC
+
+----------------------->   assignExp
+
+------------------------>   ID ASSIGN expression
+
+------------------------->   a
+
+-------------------------->   =
+
+--------------------------->   simpleExp
+
+---------------------------->   binLogicalExp
+
+----------------------------->   relationalExp
+
+------------------------------>   sumExp
+
+------------------------------->   sumExp add mulExp
+
+-------------------------------->   mulExp
+
+--------------------------------->   mulExp mulOp factor
+
+---------------------------------->   factor
+
+----------------------------------->   ID
+
+------------------------------------>   a
+
+----------------------------------->   *
+
+------------------------------------>   ID
+
+------------------------------------->   a
+
+--------------------------------->   +
+
+---------------------------------->   factor
+
+----------------------------------->   constOp
+
+------------------------------------>   1
+
+--------------------->   outOp
+
+---------------------->   WRITELN PARENL outConst PARENR SEMIC
+
+----------------------->   writeln
+
+------------------------>   simpleExp
+
+------------------------->   binLogicalExp
+
+-------------------------->   relationalExp
+
+--------------------------->   sumExp
+
+---------------------------->   mulExp
+
+----------------------------->   factor
+
+------------------------------>   ID
+
+------------------------------->   a
+
+---------->   returnStmt
+
+----------->   RETURN expression SEMIC
+
+------------>   return
+
+------------->   simpleExp
+
+-------------->   binLogicalExp
+
+--------------->   relationalExp
+
+---------------->   sumExp
+
+----------------->   mulExp
+
+------------------>   factor
+
+------------------->   ID
+
+-------------------->   a
+
+--->   funcDeclaration
+
+---->   TYPE ID PARENL PARENR compoundStmt
+
+----->   int
+
+------>   main
+
+------->   stmtList primitiveStmt
+
+-------->   stmtList primitiveStmt
+
+--------->   stmtList primitiveStmt
+
+---------->   stmtList primitiveStmt
+
+----------->   stmtList primitiveStmt
+
+------------>   stmtList primitiveStmt
+
+------------->   stmtList primitiveStmt
+
+-------------->   primitiveStmt
+
+--------------->   varDeclaration
+
+---------------->   simpleVarDeclaration
+
+----------------->   TYPE ID
+
+------------------>   int
+
+------------------->   a
+
+--------------->   varDeclaration
+
+---------------->   simpleVarDeclaration
+
+----------------->   TYPE ID
+
+------------------>   int
+
+------------------->   b
+
+-------------->   varDeclaration
+
+--------------->   simpleVarDeclaration
+
+---------------->   TYPE ID
+
+----------------->   int
+
+------------------>   c
+
+------------->   inOp
+
+-------------->   READ PARENL ID PARENR SEMIC
+
+--------------->   read
+
+---------------->   a
+
+------------>   inOp
+
+------------->   READ PARENL ID PARENR SEMIC
+
+-------------->   read
+
+--------------->   b
+
+----------->   exprStmt
+
+------------>   expression SEMIC
+
+------------->   assignExp
+
+-------------->   ID ASSIGN expression
+
+--------------->   c
+
+---------------->   =
+
+----------------->   simpleExp
+
+------------------>   binLogicalExp
+
+------------------->   relationalExp
+
+-------------------->   sumExp
+
+--------------------->   mulExp
+
+---------------------->   factor
+
+----------------------->   fCall
+
+------------------------
+---------->   outOp
+
+----------->   WRITELN PARENL outConst PARENR SEMIC
+
+------------>   writeln
+
+------------->   simpleExp
+
+-------------->   binLogicalExp
+
+--------------->   relationalExp
+
+---------------->   sumExp
+
+----------------->   mulExp
+
+------------------>   factor
+
+------------------->   ID
+
+-------------------->   c
+
+--------->   returnStmt
+
+---------->   RETURN expression SEMIC
+
+----------->   return
+
+------------>   simpleExp
+
+------------->   binLogicalExp
+
+-------------->   relationalExp
+
+--------------->   sumExp
+
+---------------->   mulExp
+
+----------------->   factor
+
+------------------>   ID
+
+------------------->   c
+
+
+ There is 2 warnings in the file
+

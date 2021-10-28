@@ -647,8 +647,8 @@ simpleVarDeclaration:
   ;
 
 params:
-    params param {
-      $$ = createNode2("params param", $1, $2);
+    params COMMA param {
+      $$ = createNode2("params COMMA param", $1, $3);
       }
   | param { 
     $$ = createNode1("param", $1); 
@@ -735,6 +735,14 @@ condStmt:
   | ifStmt primitiveStmt elseStmt  {
     $$ = createNode3("ifStmt primitiveStmt elseStmt", $1, $2, $3);
   }
+  | ifStmt STFUNC ENDFUNC %prec THEN{
+        $$ = createNode1("ifStmt", $1);
+  }
+  | ifStmt STFUNC ENDFUNC elseStmt  {
+    $$ = createNode2("ifStmt primitiveStmt elseStmt", $1, $4);
+  }
+  
+  
   ;
 
 ifStmt:
@@ -755,7 +763,6 @@ elseStmt:
     $$ = createNode2("ELSE primitiveStmt", createNode0($1), $3);
   }
 ;
-
 iterStmt:
     FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt {
       scope++;
@@ -1020,7 +1027,6 @@ mulExp:
 
 factor:
     ID {
-      argsParams++;
       $$ = createNode1("ID", createNode0($1));
       $$ -> saved = $1;
     }
@@ -1086,10 +1092,12 @@ fCall:
 
 callParams:
     callParams COMMA simpleExp {
+      argsParams++;
       $$ = createNode2("callParams COMMA simpleExp", $1, $3);
       $$ -> saved = $1 -> saved;
     }
   | simpleExp {
+      argsParams++;
       $$ = createNode1("simpleExp", $1);
       $$ -> saved = $1 -> saved;
   }

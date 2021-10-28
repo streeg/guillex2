@@ -1,0 +1,447 @@
+
+
+#### beginning ####
+
+------------------------Semantic analysis---------------------
+Type: 'int' on line: 1, column: 1
+Id: 'i' at line: 1, column: 5
+';' at line: 1, column: 6
+Type: 'int' on line: 3, column: 1
+Id: 'fib' at line: 3, column: 5
+'(' at line: 3, column: 8
+Type: 'int' on line: 3, column: 9
+Id: 'i' at line: 3, column: 13
+')' at line: 3, column: 14
+'{' on line: 4, column: 1
+Keyword [IF]: 'if' at line: 5, column: 3
+'(' at line: 5, column: 6
+Id: 'i' at line: 5, column: 7
+OP [EQUALS]: '==' at line: 5, column: 9
+Integer: '1' at line: 5, column: 12
+')' at line: 5, column: 13
+Keyword [RETURN]: 'return' at line: 6, column: 5
+Integer: '1' at line: 6, column: 12
+';' at line: 6, column: 13
+Keyword [ELSE]: 'else' at line: 7, column: 3
+Keyword [IF]: 'if' at line: 7, column: 8
+'(' at line: 7, column: 11
+Id: 'i' at line: 7, column: 12
+OP [EQUALS]: '==' at line: 7, column: 14
+Integer: '2' at line: 7, column: 17
+')' at line: 7, column: 18
+Keyword [RETURN]: 'return' at line: 8, column: 5
+Integer: '1' at line: 8, column: 12
+';' at line: 8, column: 13
+Keyword [ELSE]: 'else' at line: 9, column: 3
+Keyword [RETURN]: 'return' at line: 10, column: 5
+Id: 'fib' at line: 10, column: 12
+'(' at line: 10, column: 15
+Id: 'i' at line: 10, column: 16
+'-' at line: 10, column: 18
+Integer: '1' at line: 10, column: 20
+')' at line: 10, column: 21
+'+' at line: 10, column: 23
+Semantic errorFunction: <fib> has wrong number of parameters, line 10, column 24
+
+Id: 'fib' at line: 10, column: 25
+'(' at line: 10, column: 28
+Id: 'i' at line: 10, column: 29
+'-' at line: 10, column: 31
+Integer: '2' at line: 10, column: 33
+')' at line: 10, column: 34
+';' at line: 10, column: 35
+'}' at line: 11, column: 1
+Type: 'int' on line: 13, column: 1
+Id: 'main' at line: 13, column: 5
+'(' at line: 13, column: 9
+')' at line: 13, column: 10
+'{' on line: 14, column: 1
+Type: 'int' on line: 15, column: 3
+Id: 'i' at line: 15, column: 7
+';' at line: 15, column: 8
+Id: 'i' at line: 16, column: 3
+'=' at line: 16, column: 5
+Integer: '0' at line: 16, column: 7
+';' at line: 16, column: 8
+Keyword [READ]: 'read' at line: 18, column: 3
+'(' at line: 18, column: 7
+Id: 'i' at line: 18, column: 8
+')' at line: 18, column: 9
+';' at line: 18, column: 10
+Keyword [IF]: 'if' at line: 19, column: 3
+'(' at line: 19, column: 6
+Id: 'i' at line: 19, column: 7
+OP [GREATER THAN]: '>' at line: 19, column: 9
+Integer: '0' at line: 19, column: 11
+')' at line: 19, column: 12
+Keyword [WRITE]: 'write' at line: 20, column: 5
+'(' at line: 20, column: 10
+Id: 'fib' at line: 20, column: 11
+'(' at line: 20, column: 14
+Id: 'i' at line: 20, column: 15
+')' at line: 20, column: 16
+')' at line: 20, column: 17
+Semantic errorFunction: <fib> has wrong number of parameters, line 20, column 18
+
+';' at line: 20, column: 18
+'}' at line: 21, column: 1
+
+
+#### EOF ####
+
+
+
+------------------------------------------------------symbols------------------------------------------------
+
+
+
+|         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |
+
+|   i                   |    var                          |      int                     |         0            |         0          |
+|   i                   |    param                        |      int                     |         1            |         0          |
+|   fib                 |    func                         |      int                     |         1            |         1          |
+|   main                |    func                         |      int                     |         5            |         0          |
+|   i                   |    var                          |      int                     |         5            |         0          |
+
+
+--------------------------------tree--------------------------------
+
+
+declarationsList declaration
+-->   declarationsList declaration
+
+--->   declaration
+
+---->   varDeclaration
+
+----->   simpleVarDeclaration
+
+------>   TYPE ID
+
+------->   int
+
+-------->   i
+
+---->   funcDeclaration
+
+----->   TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
+
+------>   int
+
+------->   fib
+
+-------->   param
+
+--------->   TYPE ID
+
+---------->   int
+
+----------->   i
+
+--------->   primitiveStmt
+
+---------->   condStmt
+
+----------->   ifStmt primitiveStmt elseStmt
+
+------------>   IF PARENL simpleExp PARENR
+
+------------->   if
+
+-------------->   binLogicalExp
+
+--------------->   relationalExp
+
+---------------->   relationalExp relationalOp sumExp
+
+----------------->   sumExp
+
+------------------>   mulExp
+
+------------------->   factor
+
+-------------------->   ID
+
+--------------------->   i
+
+------------------>   EQUALS
+
+------------------->   ==
+
+------------------->   mulExp
+
+-------------------->   factor
+
+--------------------->   constOp
+
+---------------------->   1
+
+------------->   returnStmt
+
+-------------->   RETURN expression SEMIC
+
+--------------->   return
+
+---------------->   simpleExp
+
+----------------->   binLogicalExp
+
+------------------>   relationalExp
+
+------------------->   sumExp
+
+-------------------->   mulExp
+
+--------------------->   factor
+
+---------------------->   constOp
+
+----------------------->   1
+
+-------------->   ELSE primitiveStmt
+
+--------------->   else
+
+---------------->   condStmt
+
+----------------->   ifStmt primitiveStmt elseStmt
+
+------------------>   IF PARENL simpleExp PARENR
+
+------------------->   if
+
+-------------------->   binLogicalExp
+
+--------------------->   relationalExp
+
+---------------------->   relationalExp relationalOp sumExp
+
+----------------------->   sumExp
+
+------------------------>   mulExp
+
+------------------------->   factor
+
+-------------------------->   ID
+
+--------------------------->   i
+
+------------------------>   EQUALS
+
+------------------------->   ==
+
+------------------------->   mulExp
+
+-------------------------->   factor
+
+--------------------------->   constOp
+
+---------------------------->   2
+
+------------------->   returnStmt
+
+-------------------->   RETURN expression SEMIC
+
+--------------------->   return
+
+---------------------->   simpleExp
+
+----------------------->   binLogicalExp
+
+------------------------>   relationalExp
+
+------------------------->   sumExp
+
+-------------------------->   mulExp
+
+--------------------------->   factor
+
+---------------------------->   constOp
+
+----------------------------->   1
+
+-------------------->   ELSE primitiveStmt
+
+--------------------->   else
+
+---------------------->   returnStmt
+
+----------------------->   RETURN expression SEMIC
+
+------------------------>   return
+
+------------------------->   simpleExp
+
+-------------------------->   binLogicalExp
+
+--------------------------->   relationalExp
+
+---------------------------->   sumExp
+
+----------------------------->   sumExp add mulExp
+
+------------------------------>   mulExp
+
+------------------------------->   factor
+
+-------------------------------->   fCall
+
+---------------------------------
+------------------------------->   +
+
+-------------------------------->   factor
+
+--------------------------------->   fCall
+
+---------------------------------->   ID PARENL callParams PARENR
+
+----------------------------------->   fib
+
+------------------------------------>   simpleExp
+
+------------------------------------->   binLogicalExp
+
+-------------------------------------->   relationalExp
+
+--------------------------------------->   sumExp
+
+---------------------------------------->   sumExp sub mulExp
+
+----------------------------------------->   mulExp
+
+------------------------------------------>   factor
+
+------------------------------------------->   ID
+
+-------------------------------------------->   i
+
+------------------------------------------>   -
+
+------------------------------------------->   factor
+
+-------------------------------------------->   constOp
+
+--------------------------------------------->   2
+
+--->   funcDeclaration
+
+---->   TYPE ID PARENL PARENR compoundStmt
+
+----->   int
+
+------>   main
+
+------->   stmtList primitiveStmt
+
+-------->   stmtList primitiveStmt
+
+--------->   stmtList primitiveStmt
+
+---------->   primitiveStmt
+
+----------->   varDeclaration
+
+------------>   simpleVarDeclaration
+
+------------->   TYPE ID
+
+-------------->   int
+
+--------------->   i
+
+----------->   exprStmt
+
+------------>   expression SEMIC
+
+------------->   assignExp
+
+-------------->   ID ASSIGN expression
+
+--------------->   i
+
+---------------->   =
+
+----------------->   simpleExp
+
+------------------>   binLogicalExp
+
+------------------->   relationalExp
+
+-------------------->   sumExp
+
+--------------------->   mulExp
+
+---------------------->   factor
+
+----------------------->   constOp
+
+------------------------>   0
+
+---------->   inOp
+
+----------->   READ PARENL ID PARENR SEMIC
+
+------------>   read
+
+------------->   i
+
+--------->   condStmt
+
+---------->   ifStmt primitiveStmt
+
+----------->   IF PARENL simpleExp PARENR
+
+------------>   if
+
+------------->   binLogicalExp
+
+-------------->   relationalExp
+
+--------------->   relationalExp relationalOp sumExp
+
+---------------->   sumExp
+
+----------------->   mulExp
+
+------------------>   factor
+
+------------------->   ID
+
+-------------------->   i
+
+----------------->   GREATER
+
+------------------>   >
+
+------------------>   mulExp
+
+------------------->   factor
+
+-------------------->   constOp
+
+--------------------->   0
+
+------------>   outOp
+
+------------->   WRITE PARENL outConst PARENR SEMIC
+
+-------------->   write
+
+--------------->   simpleExp
+
+---------------->   binLogicalExp
+
+----------------->   relationalExp
+
+------------------>   sumExp
+
+------------------->   mulExp
+
+-------------------->   factor
+
+--------------------->   fCall
+
+----------------------
+
+ There is 2 warnings in the file
+

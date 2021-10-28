@@ -23,13 +23,16 @@ Id: 'somadois' at line: 8, column: 5
 '(' at line: 8, column: 13
 Type: 'int' on line: 8, column: 14
 Id: 'a' at line: 8, column: 18
-')' at line: 8, column: 19
+',' at line: 8, column: 19
+Type: 'int' on line: 8, column: 21
+Id: 'b' at line: 8, column: 25
+')' at line: 8, column: 26
 '{' on line: 9, column: 1
 Id: 'a' at line: 10, column: 5
 '=' at line: 10, column: 7
 Id: 'a' at line: 10, column: 9
 '+' at line: 10, column: 11
-Integer: '2' at line: 10, column: 13
+Id: 'b' at line: 10, column: 13
 ';' at line: 10, column: 14
 Keyword [RETURN]: 'return' at line: 11, column: 5
 Id: 'a' at line: 11, column: 12
@@ -58,10 +61,10 @@ Id: 'resp' at line: 20, column: 5
 Id: 'somadois' at line: 20, column: 12
 '(' at line: 20, column: 20
 Id: 'a' at line: 20, column: 21
-')' at line: 20, column: 22
-';' at line: 20, column: 23
-Semantic errorFunction: <somadois> has wrong number of parameters, line 20, column 24
-
+',' at line: 20, column: 22
+Id: 'b' at line: 20, column: 24
+')' at line: 20, column: 25
+';' at line: 20, column: 26
 Id: 'c' at line: 21, column: 5
 '=' at line: 21, column: 7
 Id: 'a' at line: 21, column: 9
@@ -106,7 +109,8 @@ Integer: '0' at line: 25, column: 12
 |   d                   |    var                          |      float                   |         0            |         0          |
 |   resp                |    var                          |      int                     |         0            |         0          |
 |   a                   |    param                        |      int                     |         1            |         0          |
-|   somadois            |    func                         |      int                     |         1            |         1          |
+|   b                   |    param                        |      int                     |         1            |         0          |
+|   somadois            |    func                         |      int                     |         1            |         2          |
 |   main                |    func                         |      int                     |         1            |         0          |
 
 
@@ -184,13 +188,21 @@ declarationsList declaration
 
 ------->   somadois
 
--------->   param
+-------->   params COMMA param
 
---------->   TYPE ID
+--------->   param
 
----------->   int
+---------->   TYPE ID
 
------------>   a
+----------->   int
+
+------------>   a
+
+---------->   TYPE ID
+
+----------->   int
+
+------------>   b
 
 --------->   stmtList primitiveStmt
 
@@ -230,9 +242,9 @@ declarationsList declaration
 
 ------------------------>   factor
 
-------------------------->   constOp
+------------------------->   ID
 
--------------------------->   2
+-------------------------->   b
 
 ----------->   returnStmt
 
@@ -374,7 +386,42 @@ declarationsList declaration
 
 -------------------------->   fCall
 
----------------------------
+--------------------------->   ID PARENL callParams PARENR
+
+---------------------------->   somadois
+
+----------------------------->   callParams COMMA simpleExp
+
+------------------------------>   simpleExp
+
+------------------------------->   binLogicalExp
+
+-------------------------------->   relationalExp
+
+--------------------------------->   sumExp
+
+---------------------------------->   mulExp
+
+----------------------------------->   factor
+
+------------------------------------>   ID
+
+------------------------------------->   a
+
+------------------------------->   binLogicalExp
+
+-------------------------------->   relationalExp
+
+--------------------------------->   sumExp
+
+---------------------------------->   mulExp
+
+----------------------------------->   factor
+
+------------------------------------>   ID
+
+------------------------------------->   b
+
 ------------->   exprStmt
 
 -------------->   expression SEMIC
@@ -516,5 +563,5 @@ declarationsList declaration
 ------------------->   0
 
 
- There is 1 warnings in the file
-
+ There is 0 errors and 0 warnings in the file
+    

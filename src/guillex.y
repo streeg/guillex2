@@ -32,13 +32,14 @@ int scope = 0;
 int varReg = 1;
 
 
-
 typedef struct node {
   int integer;
   float decimal;
   char *nodeValue;
   char nodeType;
   char *saved;
+  bool terminal;
+  char  returnType;
   struct node *left;
   struct node *leftMiddle;
   struct node *middle;
@@ -46,11 +47,15 @@ typedef struct node {
   struct node *right;
 }Node;
 
+
+int depth = 0;
+
 Node* createNodeE() {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = NULL;
   node -> nodeType = 'e';
+  node -> returnType = 'x';
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -64,7 +69,8 @@ Node* createNode0(char *nodeValue) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = nodeValue;
-  node -> nodeType = 's';
+  node -> nodeType = '\0';
+  node -> returnType = 'x';
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -74,11 +80,29 @@ Node* createNode0(char *nodeValue) {
   return node;
 }
 
-Node* createNode0Int(int nodeValue) {
+Node* createNode0String(char *nodeValue) {
+  Node *node = (Node *)calloc(1, sizeof(Node));
+
+  node -> nodeValue = nodeValue;
+  node -> nodeType = 's';
+  node -> returnType = 'x'; 
+  node -> terminal = true;
+  node -> left = NULL;
+  node -> leftMiddle = NULL;
+  node -> middle = NULL;
+  node -> rightMiddle = NULL;
+  node -> right = NULL;
+
+  return node;
+}
+
+Node* createNode0Int(int nodeValue, char nodeType) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> integer = nodeValue;
-  node -> nodeType = 'i';
+  node -> nodeType = nodeType;
+  node -> returnType = 'x'; 
+  node -> terminal = true;
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -88,11 +112,13 @@ Node* createNode0Int(int nodeValue) {
   return node;
 }
 
-Node* createNode0Dec(float nodeValue) {
+Node* createNode0Dec(float nodeValue, char nodeType) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> decimal = nodeValue;
-  node -> nodeType = 'd';
+  node -> nodeType = nodeType;
+  node -> returnType = 'x'; 
+  node -> terminal = true;
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -102,25 +128,14 @@ Node* createNode0Dec(float nodeValue) {
   return node;
 }
 
-Node* createNode0List(char *nodeValue) {
+
+Node* createNode0Nil(char *nodeValue, char nodeType) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = nodeValue;
-  node -> nodeType = 'l';
-  node -> left = NULL;
-  node -> leftMiddle = NULL;
-  node -> middle = NULL;
-  node -> rightMiddle = NULL;
-  node -> right = NULL;
-
-  return node;
-}
-
-Node* createNode0Nil(char *nodeValue) {
-  Node *node = (Node *)calloc(1, sizeof(Node));
-
-  node -> nodeValue = nodeValue;
-  node -> nodeType = 'n';
+  node -> nodeType = nodeType;
+  node -> returnType = 'x'; 
+  node -> terminal = true;
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -135,7 +150,8 @@ Node* createNode1(char *nodeValue, Node* left) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = nodeValue;
-  node -> nodeType = 's';
+  node -> nodeType = '\0';
+  node -> returnType = 'x';
   node -> left = left;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -149,7 +165,8 @@ Node* createNode2(char *nodeValue, Node* left, Node* leftMiddle) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = nodeValue;
-  node -> nodeType = 's';
+  node -> nodeType = '\0';
+  node -> returnType = 'x';
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = NULL;
@@ -163,7 +180,8 @@ Node* createNode3(char *nodeValue, Node* left, Node* leftMiddle, Node* middle) {
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = nodeValue;
-  node -> nodeType = 's';
+  node -> nodeType = '\0';
+  node -> returnType = 'x';
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = middle;
@@ -177,7 +195,8 @@ Node* createNode4(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, N
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = nodeValue;
-  node -> nodeType = 's';
+  node -> nodeType = '\0';
+  node -> returnType = 'x';
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = middle;
@@ -191,7 +210,8 @@ Node* createNode5(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, N
   Node *node = (Node *)calloc(1, sizeof(Node));
 
   node -> nodeValue = nodeValue;
-  node -> nodeType = 's';
+  node -> nodeType = '\0';
+  node -> returnType = 'x';
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = middle;
@@ -201,66 +221,60 @@ Node* createNode5(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, N
   return node;
 }
 
-void printAndFreeTree(int indentCount, Node *node) {
-
-  int i;
+void printAndFreeTree(Node *node) {
 
   if(node == NULL)
     return;
 
-  if (indentCount == 0) {
-    printf("\n%s",node-> nodeValue);
-  }else{
-    printf("\n");
-    for(i=0;i<indentCount+1;i++){
-            printf("-");
-        }
-        if(node -> nodeType == 's')
-          printf(">   %s\n", node -> nodeValue); 
-        if(node -> nodeType == 'i')
-          printf(">   %d\n", node -> integer);
-        if(node -> nodeType == 'd')
-          printf(">   %f\n", node -> decimal);
-        if(node -> nodeType == 'l')
-          printf(">   %s\n", node -> nodeValue);
-        if(node -> nodeType == 'n')
-          printf(">   %s\n", node -> nodeValue);
+  if (!(node -> terminal)) {
+    for (int i = 0; i < depth; i++){
+      printf("-");
     }
-  if(node -> left != NULL){
-    indentCount += 1;
-    printAndFreeTree(indentCount, node -> left);
+     printf(">%s\n", node -> nodeValue);
+    } else {
+      if(node -> nodeType == 's'){
+        for (int i = 0; i < depth; i++){
+          printf("~");
+      }
+    }if(node -> nodeType == 'i'){
+      for (int i = 0; i < depth; i++){
+        printf("~");
+      }
+      printf("%d\n", node -> integer);
+       }if(node -> nodeType == 'f'){
+      for (int i = 0; i < depth; i++){
+        printf("~");
+      }
+      printf("%f\n", node -> decimal);
+      }if(node -> nodeType ==  't'){
+      for (int i = 0; i < depth; i++){
+        printf("~");
+      }
+    }
   }
-  if(node -> leftMiddle != NULL){
-    indentCount += 1;
-    printAndFreeTree(indentCount, node -> leftMiddle);
-  }
-  if(node -> middle != NULL){
-    indentCount += 1;
-    printAndFreeTree(indentCount, node -> middle);
-  }
-  if(node -> rightMiddle != NULL){
-    indentCount += 1;
-    printAndFreeTree(indentCount, node -> rightMiddle);
-  }
-  if(node -> right != NULL){
-    indentCount += 1;
-    printAndFreeTree(indentCount, node -> right);
-  }
-  free(node);
+  depth++;
+
+
+    printAndFreeTree(node -> left);
+    printAndFreeTree(node -> leftMiddle);
+    printAndFreeTree(node -> middle);
+    printAndFreeTree(node -> rightMiddle);
+    printAndFreeTree(node -> right);
+  depth--;
+    free(node);
 }
 
 
 Node* createNode0(char *nodeValue);
-Node* createNode0Int(int nodeValue); 
-Node* createNode0Dec(float nodeValue);
-Node* createNode0List(char *nodeValue);
-Node* createNode0Nil(char *nodeValue);
+Node* createNode0Int(int nodeValue, char nodeType); 
+Node* createNode0Dec(float nodeValue, char nodeType);
+Node* createNode0Nil(char *nodeValue, char nodeType);
 Node* createNode1(char *nodeValue, Node* left);
 Node* createNode2(char *nodeValue, Node* left, Node* leftMiddle);
 Node* createNode3(char *nodeValue, Node* left, Node* leftMiddle, Node* middle);
 Node* createNode4(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle);
 Node* createNode5(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, Node* rightMiddle, Node* right);
-void printAndFreeTree(int indentCount, Node *node);
+void printAndFreeTree(Node *node);
 Node *abstractSyntaxTree = NULL;
 
 
@@ -397,7 +411,7 @@ bool checkNumberOfParams(int argsParams, char* funcName) {
   return false;
 }
 
-bool checkIsInScope(char *name) {
+struct symbol *checkIsInScope(char *name, int num) {
   struct symbol *s;
   Scope *scope;
   Scope *scopeAux;
@@ -405,12 +419,12 @@ bool checkIsInScope(char *name) {
   for (scope = stackScope; !STACK_EMPTY(scope);){
     for (s = symbolTable; s != NULL; s = s -> hh.next){
       if (strcmp(s -> name, name) == 0 && s -> scope == scope -> value && (strcmp(s -> symbolType, "var") == 0 || strcmp(s -> symbolType, "param") == 0)){
-        return true;
+        return s;
       }
     }
     STACK_POP(scope, scopeAux);
   }
-  return false;
+  return NULL;
   free(scopeAux);
 }
 
@@ -498,6 +512,37 @@ UT_string *float_as_str(float value) {
   return r;
 }
 
+char checkTypes(char type1, char type2) {
+  if (type1 == type2)
+    return type1;
+  if (type1 == 'i' && type2 == 'f')
+    return 'f';
+  if (type1 == 'f' && type2 == 'i')
+    return 'f';
+  return 'n';
+}
+
+bool checkTypesVar(char varType, char value) {
+  if (varType == 'i' && (value == 'i' || value == 'f' || value == 'n'))
+  return true;
+  if (varType == 'f' && (value == 'i' || value == 'f' || value == 'n'))
+    return true;
+  if (varType == value)
+    return true;
+  return false;
+}
+
+int checkTypesReturnFunction(char value, char returnType) {
+
+  if (returnType == 'v' && value != 'x')
+    return 0;
+  if (returnType != 'v' && value == 'x')
+    return 1;
+  if (returnType == value || (returnType == 'v' && value == 'x'))
+    return 2;
+  return 3;
+}
+
 %}  
 
 %union{
@@ -526,7 +571,7 @@ UT_string *float_as_str(float value) {
 %type<treeNode> program declarationList declaration varDeclaration funcDeclaration simpleVarDeclaration 
 %type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt ifStmt elseStmt iterStmt returnStmt 
 %type<treeNode> expression assignExp simpleExp
-%type<treeNode> constOp inOp outOp outConst binLogicalExp binLogicalOp relationalExp relationalOp
+%type<treeNode> inOp outOp outConst binLogicalExp binLogicalOp relationalExp relationalOp
 %type<treeNode> sumExp mulExp factor fCall callParams error
 %type<treeNode> binListExp unaryListExp
 %%
@@ -575,6 +620,19 @@ funcDeclaration:
       } stmtList ENDFUNC {
       $$ = createNode4("TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC", createNode0($1), createNode0($2), $5, $9);
       popStack();
+      if(checkTypesReturnFunction($9 -> returnType, $1[0]) == 0) {
+        printf("Semantic Error\n");
+        printf("function %s with unexpected return, line %d, column %d\n\n", $2, line, wordPosition);
+        semanticErrors += 1;
+      }else if(checkTypesReturnFunction($9 -> returnType, $1[0]) == 1) {
+        printf("Semantic Error\n");
+        printf("function %s without expected return, line %d, column %d\n\n", $2, line, wordPosition);
+        semanticErrors += 1;
+      } else if (checkTypesReturnFunction($9 -> returnType, $1[0]) == 3) {
+        printf("Semantic Error\n");
+        printf("function %s with return with wrong type, line %d, column %d\n\n", $2, line, wordPosition);
+        semanticErrors += 1;
+      }
   }
   | TYPE ID PARENL {pushStack(scope);} PARENR STFUNC {
     UT_string *r;
@@ -584,14 +642,26 @@ funcDeclaration:
     addFunc($2);
     } stmtList ENDFUNC {
     
-      $$ = createNode3("TYPE ID PARENL PARENR compoundStmt", createNode0($1), createNode0($2), $8); 
-      popStack();                                                                      
+      $$ = createNode3("TYPE ID PARENL PARENR stmtList ENDFUNC ", createNode0($1), createNode0($2), $8); 
+      popStack();
+      if(checkTypesReturnFunction($8 -> returnType, $1[0]) == 0) {
+      printf("Semantic Error\n");
+      printf("function %s with unexpected return, line %d, column %d\n\n", $2, line, wordPosition);
+      semanticErrors += 1;
+    }else if(checkTypesReturnFunction($8 -> returnType, $1[0]) == 1) {
+      printf("Semantic Error\n");
+      printf("function %s without expected return, line %d, column %d\n\n", $2, line, wordPosition);
+      semanticErrors += 1;
+    } else if (checkTypesReturnFunction($8 -> returnType, $1[0]) == 3) {
+      printf("Semantic Error\n");
+      printf("function %s with return with wrong type, line %d, column %d\n\n", $2, line, wordPosition);
+      semanticErrors += 1;
+    }                                                                      
   }
 
 simpleVarDeclaration:
     TYPE ID {
 
-      pushStack(scope);
       semanticErrors += addSymbol($2, "var", $1, STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
        UT_string *s;
       if($1[0] == 'i' || $1[0] == 'e') {
@@ -612,7 +682,6 @@ simpleVarDeclaration:
       }
       varReg++;
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
-      popStack();
       }
     
   ;
@@ -651,15 +720,23 @@ compoundStmt:
 stmtList:
     stmtList primitiveStmt    {
       $$ = createNode2("stmtList primitiveStmt", $1, $2);
+      if($1 -> returnType == 'x')
+        $$ -> returnType = $2 -> returnType;
+      else
+        $$ -> returnType = $1 -> returnType;
     }
   | primitiveStmt {
     $$ = createNode1("primitiveStmt", $1);
   }
+  | error {
+      $$ = createNodeE();
+    }
   ;
 
 primitiveStmt:
     exprStmt {
       $$ = createNode1("exprStmt", $1);
+      $$ -> nodeType = $1 -> nodeType;
     }
   | compoundStmt {
     $$ = createNode1("compoundStmt", $1);
@@ -672,6 +749,7 @@ primitiveStmt:
   }
   | returnStmt {
     $$ = createNode1("returnStmt", $1);
+    $$ -> returnType = $1 -> returnType;
   }
   | inOp {
     $$ = createNode1("inOp", $1);
@@ -687,6 +765,7 @@ primitiveStmt:
 exprStmt:
     expression SEMIC {
       $$ = createNode1("expression SEMIC", $1);
+      $$ -> nodeType = $1 -> nodeType;
     }
   ;
 
@@ -765,6 +844,7 @@ iterStmt:
 returnStmt:
     RETURN expression SEMIC {
       $$ = createNode2("RETURN expression SEMIC", createNode0($1), $2);
+      $$ -> returnType = $2 -> nodeType;
     }
   ;
 
@@ -773,26 +853,37 @@ expression:
     assignExp {
       $$ = createNode1("assignExp", $1);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
     }
   | simpleExp {
       $$ = createNode1("simpleExp", $1);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
   }
   ;
 
 assignExp:
     ID ASSIGN expression {
-      if (checkIsInScope($1)){
+      struct symbol *s = checkIsInScope($1, STACK_TOP(stackScope) -> value);
+      if (s != NULL){
         $$ = createNode3("ID ASSIGN expression", createNode0($1), createNode0("="), $3);
-        UT_string *s = create_new_reg(varReg);
-        varDecAssign(utstring_body(s), $3 -> saved);
-        $$ -> saved = $1;
-    }
-      else{
-        printf("Semantic error");
-        printf("Var: <%s> Not Declared, line %d, column %d\n\n", $1, line, wordPosition);
-        semanticErrors++;
-        $$ = createNodeE();
+        varDecAssign(utstring_body(s -> varReg), $3 -> saved);
+        $$ -> saved = $3 -> saved;
+        $$ -> nodeType = s -> varFuncName[0];
+      if (s -> varFuncName[0] != 'e')
+          $$ -> nodeType = s -> varFuncName[0];
+      else
+          $$ -> nodeType = $3 -> nodeType;
+      if(!checkTypesVar(s -> varFuncName[0], $3 -> nodeType)) {
+        printf("Semantic Error\n");
+        printf("var %s from type %s receiving wrong type value, line %d, column %d\n\n", $1, s -> varFuncName, line, wordPosition);
+        semanticErrors += 1;
+        }
+      }else{
+          printf("Semantic error");
+          printf("Var: <%s> Not Declared, line %d, column %d\n\n", $1, line, wordPosition);
+          semanticErrors++;
+          $$ = createNodeE();
       }
     }
   ; 
@@ -802,33 +893,24 @@ simpleExp:
     binLogicalExp {
       $$ = createNode1("binLogicalExp", $1);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
     }
     |
     binListExp{
       $$ = createNode1("binListExp", $1);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
     }
   ;
 
-constOp:
-    INTEGER {
-      $$ = createNode0Int($1);
-      UT_string *s = int_as_str($1);
-      $$ -> saved = utstring_body(s);
-    }
-  | DECIMAL {
-    $$ = createNode0Dec($1);
-    UT_string *s = float_as_str($1);
-    $$ -> saved = utstring_body(s);
-  }
-  | NIL {
-    $$ = createNode0Nil($1);
-  }
-  ;
 
 inOp:
   READ PARENL ID PARENR SEMIC{
     $$ = createNode2("READ PARENL ID PARENR SEMIC", createNode0($1), createNode0($3));
+  }
+  |
+    READ PARENL PARENR SEMIC{
+    $$ = createNode1("READ PARENL PARENR SEMIC", createNode0($1));
   }
   ;
 
@@ -848,6 +930,7 @@ outOp:
 outConst:
     STRING {
       $$ = createNode1("STRING", createNode0($1));
+      $$ -> nodeType = 't';
       $$ -> saved = $1;
     }
   | simpleExp {
@@ -860,35 +943,42 @@ outConst:
 	factor APPEND factor {
 		$$ = createNode3("factor APPEND factor", $1, createNode0(":"), $3);		
     $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
 	}
 	| factor MAP factor {
 		
 		$$ = createNode3("factor MAP factor", $1, createNode0(">>"), $3);		
     $$ -> saved = $1 -> saved;
+    $$ -> nodeType = $1 -> nodeType;
 	}
 	| factor FILTER factor {
 		$$ = createNode3("factor FILTER factor", $1, createNode0("<<"), $3);	
     $$ -> saved = $1 -> saved;	
+    $$ -> nodeType = $1 -> nodeType;
 	}
 
 unaryListExp:
 	HEADLIST factor {
 		$$ = createNode2("? factor", createNode0("?"), $2);
-    $$ -> saved = $2 -> saved;	
+    $$ -> saved = $2 -> saved;
+      $$ -> nodeType = $2 -> nodeType;	
 	}
 	| TAILLIST factor {
     $$ = createNode2("! factor", createNode0("!"), $2);
-    $$ -> saved = $2 -> saved;	
+    $$ -> saved = $2 -> saved;
+    $$ -> nodeType = $2 -> nodeType;	
 	}
 ;  
 
 binLogicalExp:
     binLogicalExp binLogicalOp relationalExp{
       $$ = createNode3("binLogicalExp binLogicalOp relationalOp", $1, $2, $3);
+      $$ -> nodeType = $1 -> nodeType;
     }
   | relationalExp {
     $$ = createNode1("relationalExp", $1);
     $$ -> saved = $1 -> saved;
+    $$ -> nodeType = $1 -> nodeType;
   }
   ;
 
@@ -905,10 +995,12 @@ binLogicalOp:
 relationalExp:
     relationalExp relationalOp sumExp {
       $$ = createNode3("relationalExp relationalOp sumExp", $1, $2, $3);
+      $$ -> nodeType = $1 -> nodeType;
     }
   | sumExp {
       $$ = createNode1("sumExp", $1);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
   }
   ;
 
@@ -937,6 +1029,7 @@ relationalOp:
 sumExp:
     sumExp ADD mulExp {
       $$ = createNode3("sumExp add mulExp", $1, createNode0("+"), $3);
+      $$ -> nodeType = checkTypes($1 -> nodeType, $3 -> nodeType);
       UT_string *s = create_new_reg(varReg);
       mathOpFile("add", utstring_body(s), $1 -> saved, $3 -> saved);
       $$ -> saved = utstring_body(s);
@@ -944,12 +1037,14 @@ sumExp:
     |
         sumExp SUB mulExp {
       $$ = createNode3("sumExp sub mulExp", $1, createNode0("-"), $3);
+      $$ -> nodeType = checkTypes($1 -> nodeType, $3 -> nodeType);
       UT_string *s = create_new_reg(varReg);
       mathOpFile("sub", utstring_body(s), $1 -> saved, $3 -> saved);
       $$ -> saved = utstring_body(s);
     }
   | mulExp {
       $$ = createNode1("mulExp", $1);
+      $$ -> nodeType = $1 -> nodeType;
       $$ -> saved = $1 -> saved;
   }
   ;
@@ -957,6 +1052,7 @@ sumExp:
 mulExp:
     mulExp MULT factor {
       $$ = createNode3("mulExp mulOp factor", $1, createNode0("*"), $3);
+      $$ -> nodeType = checkTypes($1 -> nodeType, $3 -> nodeType);
       UT_string *s = create_new_reg(varReg);
       mathOpFile("mul", utstring_body(s), $1 -> saved, $3 -> saved);
       $$ -> saved = utstring_body(s);
@@ -964,6 +1060,7 @@ mulExp:
     |
      mulExp DIV factor {
       $$ = createNode3("mulExp mulOp factor", $1, createNode0("/"), $3);
+      $$ -> nodeType = checkTypes($1 -> nodeType, $3 -> nodeType);
       UT_string *s = create_new_reg(varReg);
       mathOpFile("div", utstring_body(s), $1 -> saved, $3 -> saved);
       $$ -> saved = utstring_body(s);
@@ -971,35 +1068,62 @@ mulExp:
   | factor {
       $$ = createNode1("factor", $1);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
   }
   | ADD factor {
       $$ = createNode2("ADD factor", createNode0("+"), $2);
+      $$ -> nodeType = $2 -> nodeType;
   }
   | SUB factor {
       $$ = createNode2("SUB factor", createNode0("-"), $2);
+      $$ -> nodeType = $2 -> nodeType;
   }
   | unaryListExp {
 		$$ = createNode1("unaryListExp", $1);
+    $$ -> nodeType = $1 -> nodeType;
 	}
   ;
 
 
 factor:
     ID {
-      $$ = createNode1("ID", createNode0($1));
-      $$ -> saved = $1;
+      struct symbol *s = checkIsInScope($1, STACK_TOP(stackScope) -> value);
+      if (s != NULL) {
+        $$ = createNode1("ID", createNode0String($1));
+        $$ -> saved = $1;
+        $$ -> nodeType = s -> varFuncName[0];
+    }else{
+        printf("Semantic error\n");
+        printf("var %s not declared, line %d, column %d\n\n", $1, line, wordPosition);
+        semanticErrors += 1;
+        $$ = createNodeE();
+      }
     }
   | fCall {
       $$ = createNode1("fCall", $1);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
   }
   | PARENL simpleExp PARENR {
       $$ = createNode1("PARENL simpleExp PARENR", $2);
+      $$ -> nodeType = $2 -> nodeType;
       $$ -> saved = $2 -> saved;
   }
-  | constOp {
-      $$ = createNode1("constOp", $1);
-      $$ -> saved = $1 -> saved;
+  | INTEGER {
+      $$ = createNode0Int($1, 'i');
+      $$ -> nodeType = 'i';
+      UT_string *s = int_as_str($1);
+      $$ -> saved = utstring_body(s);
+    }
+  | DECIMAL {
+    $$ = createNode0Dec($1, 'f');
+    $$ -> nodeType = 'f';
+    UT_string *s = float_as_str($1);
+    $$ -> saved = utstring_body(s);
+  }
+  | NIL {
+    $$ = createNode0Nil($1, 'n');
+    $$ -> nodeType = 'n';
   }
   | ERRORTOKEN {
       $$ = createNodeE();
@@ -1012,6 +1136,7 @@ fCall:
        if (checkNumberOfParams(argsParams, $1)){
          argsParams = 0;
         $$ = createNode2("ID PARENL callParams PARENR", createNode0($1), $3);
+        $$ -> nodeType = findSymbolFunc($1) -> varFuncName[0];
         $$ -> saved = $1;  
         }else{
           printf("Semantic error");
@@ -1097,7 +1222,7 @@ int main(int argc, char *argv[]) {
         printf("\n\n|         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |\n\n");
         printSymbols();
         printf("\n\n--------------------------------tree--------------------------------\n\n");
-        printAndFreeTree(0, abstractSyntaxTree);
+        printAndFreeTree(abstractSyntaxTree);
         if (semanticErrors > 0) {
           printf("\n\n There is %d warnings in the file\n\n", semanticErrors);
         }else{

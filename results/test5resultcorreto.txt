@@ -15,15 +15,20 @@ Id: 'x' at line: 4, column: 5
 '=' at line: 4, column: 7
 Integer: '10' at line: 4, column: 9
 ';' at line: 4, column: 11
-Type: 'int' on line: 5, column: 5
-ListType: 'list' on line: 5, column: 9
+Type: 'int list' on line: 5, column: 5
 Id: 'newList' at line: 5, column: 14
 ';' at line: 5, column: 21
 Id: 'newList' at line: 6, column: 5
 '=' at line: 6, column: 13
 Constant: 'NIL' at line: 6, column: 15
 ';' at line: 6, column: 18
+Semantic Error
+var newList from type int list receiving wrong type value, line 6, column 19
+
 '}' at line: 7, column: 1
+Semantic Error
+function main without expected return, line 7, column 2
+
 
 
 #### EOF ####
@@ -38,107 +43,56 @@ Constant: 'NIL' at line: 6, column: 15
 
 |   x                   |    var                          |      int                     |         0            |         0          |
 |   main                |    func                         |      int                     |         0            |         0          |
-|   newList             |    var                          |      list                    |         0            |         0          |
+|   newList             |    var                          |      int list                |         0            |         0          |
 
 
 --------------------------------tree--------------------------------
 
-
-declarationsList declaration
--->   declaration
-
---->   varDeclaration
-
----->   simpleVarDeclaration
-
------>   TYPE ID
-
------->   int
-
-------->   x
-
---->   funcDeclaration
-
----->   TYPE ID PARENL PARENR compoundStmt
-
------>   int
-
------->   main
-
-------->   stmtList primitiveStmt
-
--------->   stmtList primitiveStmt
-
---------->   primitiveStmt
-
----------->   exprStmt
-
------------>   expression SEMIC
-
------------->   assignExp
-
-------------->   ID ASSIGN expression
-
--------------->   x
-
---------------->   =
-
----------------->   simpleExp
-
------------------>   binLogicalExp
-
------------------->   relationalExp
-
-------------------->   sumExp
-
--------------------->   mulExp
-
---------------------->   factor
-
----------------------->   constOp
-
------------------------>   10
-
----------->   varDeclaration
-
------------>   simpleVarDeclaration
-
------------->   TYPE ID
-
-------------->   int
-
--------------->   list
-
---------------->   newList
-
---------->   exprStmt
-
----------->   expression SEMIC
-
------------>   assignExp
-
------------->   ID ASSIGN expression
-
-------------->   newList
-
--------------->   =
-
---------------->   simpleExp
-
----------------->   binLogicalExp
-
------------------>   relationalExp
-
------------------->   sumExp
-
-------------------->   mulExp
-
--------------------->   factor
-
---------------------->   constOp
-
----------------------->   NIL
+>declarationsList declaration
+->declaration
+-->varDeclaration
+--->simpleVarDeclaration
+---->TYPE ID
+----->int
+----->x
+->funcDeclaration
+-->TYPE ID PARENL PARENR stmtList ENDFUNC 
+--->int
+--->main
+--->stmtList primitiveStmt
+---->stmtList primitiveStmt
+----->primitiveStmt
+------>exprStmt
+------->expression SEMIC
+-------->assignExp
+--------->ID ASSIGN expression
+---------->x
+---------->=
+---------->simpleExp
+----------->binLogicalExp
+------------>relationalExp
+------------->sumExp
+-------------->mulExp
+--------------->factor
+~~~~~~~~~~~~~~~~10
+----->varDeclaration
+------>simpleVarDeclaration
+------->TYPE ID
+-------->int list
+-------->newList
+---->exprStmt
+----->expression SEMIC
+------>assignExp
+------->ID ASSIGN expression
+-------->newList
+-------->=
+-------->simpleExp
+--------->binLogicalExp
+---------->relationalExp
+----------->sumExp
+------------>mulExp
+------------->factor
 
 
- There is 0 errors and 0 warnings in the file
+ There is 2 warnings in the file
 

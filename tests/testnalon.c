@@ -1,20 +1,21 @@
+
 int list IL;
 float list FL;
 
 int list read_list(int n)
 {
-  float i;
+  int i;
   i = -435.7;
   int list new;
   new = NIL;
-  int j;
-  for (j = 0; j < n; j = j + 1)
+  for (i = 0; i < n; i = i + 1)
   {
     int elem;
     writeln("Digite o elemento da lista: ");
     read(elem);
     new = elem : new;
   }
+
   return new;
 }
 
@@ -41,18 +42,24 @@ int main()
   FL = succ >> IL;
 
   FL10 = leq_10 << FL;
+
   if (FL10 != NIL)
   {
+
     float list AUXL;
     int n;
     n = 0;
+
     for (AUXL = FL10; AUXL != NIL; AUXL = !AUXL)
     {
+
       n = n + 1;
-      write(?AUXL);
-      write(" ");
+
+               write(?AUXL);
+               write(" ");
     }
     writeln(" ");
+
     write("A nova lista tem ");
     write(n);
     writeln(" elementos.");

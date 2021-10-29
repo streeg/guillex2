@@ -18,4 +18,5 @@ int main()
   read(i);
   if (i > 0)
     write(fib(i));
+  return 0;
 }

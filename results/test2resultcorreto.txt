@@ -44,121 +44,60 @@ Integer: '1' at line: 7, column: 12
 
 --------------------------------tree--------------------------------
 
-
-declaration
--->   funcDeclaration
-
---->   TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
-
----->   int
-
------>   main
-
------->   param
-
-------->   TYPE ID
-
--------->   int
-
---------->   a
-
-------->   stmtList primitiveStmt
-
--------->   stmtList primitiveStmt
-
---------->   stmtList primitiveStmt
-
----------->   primitiveStmt
-
------------>   varDeclaration
-
------------->   simpleVarDeclaration
-
-------------->   TYPE ID
-
--------------->   int
-
---------------->   i
-
------------>   exprStmt
-
------------->   expression SEMIC
-
-------------->   assignExp
-
--------------->   ID ASSIGN expression
-
---------------->   i
-
----------------->   =
-
------------------>   simpleExp
-
------------------->   binLogicalExp
-
-------------------->   relationalExp
-
--------------------->   sumExp
-
---------------------->   mulExp
-
----------------------->   factor
-
------------------------>   constOp
-
------------------------->   2
-
----------->   exprStmt
-
------------>   expression SEMIC
-
------------->   simpleExp
-
-------------->   binLogicalExp
-
--------------->   relationalExp
-
---------------->   sumExp
-
----------------->   sumExp add mulExp
-
------------------>   mulExp
-
------------------->   factor
-
-------------------->   constOp
-
--------------------->   1
-
------------------->   +
-
-------------------->   factor
-
--------------------->   constOp
-
---------------------->   1
-
---------->   returnStmt
-
----------->   RETURN expression SEMIC
-
------------>   return
-
------------->   simpleExp
-
-------------->   binLogicalExp
-
--------------->   relationalExp
-
---------------->   sumExp
-
----------------->   mulExp
-
------------------>   factor
-
------------------->   constOp
-
-------------------->   1
+>declaration
+->funcDeclaration
+-->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
+--->int
+--->main
+--->param
+---->TYPE ID
+----->int
+----->a
+--->stmtList primitiveStmt
+---->stmtList primitiveStmt
+----->stmtList primitiveStmt
+------>primitiveStmt
+------->varDeclaration
+-------->simpleVarDeclaration
+--------->TYPE ID
+---------->int
+---------->i
+------>exprStmt
+------->expression SEMIC
+-------->assignExp
+--------->ID ASSIGN expression
+---------->i
+---------->=
+---------->simpleExp
+----------->binLogicalExp
+------------>relationalExp
+------------->sumExp
+-------------->mulExp
+--------------->factor
+~~~~~~~~~~~~~~~~2
+----->exprStmt
+------>expression SEMIC
+------->simpleExp
+-------->binLogicalExp
+--------->relationalExp
+---------->sumExp
+----------->sumExp add mulExp
+------------>mulExp
+------------->factor
+~~~~~~~~~~~~~~1
+------------>+
+------------>factor
+~~~~~~~~~~~~~1
+---->returnStmt
+----->RETURN expression SEMIC
+------>return
+------>simpleExp
+------->binLogicalExp
+-------->relationalExp
+--------->sumExp
+---------->mulExp
+----------->factor
+~~~~~~~~~~~~1
 
 
  There is 0 errors and 0 warnings in the file

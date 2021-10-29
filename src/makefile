@@ -1,8 +1,8 @@
 
 # Please change test to testtac if you want to test code generation or use test if you want to check the output from bison.
 # runtests: all test
-# runtests: all testtac
-runtests: all testlab
+runtests: all testtac
+# runtests: all test
 
 all: compile
 
@@ -23,15 +23,15 @@ moveheader:
 	mv guillex.tab.h ../lib/
 
 test:
-# ./tradutor ../tests/test1correto.c > ../results/test1resultcorreto.txt
-# ./tradutor ../tests/test2correto.c > ../results/test2resultcorreto.txt
-# ./tradutor ../tests/test3correto.c > ../results/test3resultcorreto.txt
-# ./tradutor ../tests/test4correto.c > ../results/test4resultcorreto.txt
-# ./tradutor ../tests/test5correto.c > ../results/test5resultcorreto.txt
-# ./tradutor ../tests/testnalon.c > ../results/testenalon.txt
-# ./tradutor ../tests/test1incorreto.c > ../results/test1resultincorreto.txt
-# ./tradutor ../tests/test2incorreto.c > ../results/test2resultincorreto.txt
-# ./tradutor ../tests/test3incorreto.c > ../results/test3resultincorreto.txt
+	./tradutor ../tests/test1correto.c > ../results/test1resultcorreto.txt
+	./tradutor ../tests/test2correto.c > ../results/test2resultcorreto.txt
+	./tradutor ../tests/test3correto.c > ../results/test3resultcorreto.txt
+	./tradutor ../tests/test4correto.c > ../results/test4resultcorreto.txt
+	./tradutor ../tests/test5correto.c > ../results/test5resultcorreto.txt
+	./tradutor ../tests/testnalon.c > ../results/testenalon.txt
+	./tradutor ../tests/test1incorreto.c > ../results/test1resultincorreto.txt
+	./tradutor ../tests/test2incorreto.c > ../results/test2resultincorreto.txt
+	./tradutor ../tests/test3incorreto.c > ../results/test3resultincorreto.txt
 
 testtac: 
 	./tradutor ../tests/testnalon.c > ../results/testnalon.txt

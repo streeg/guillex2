@@ -11,234 +11,233 @@ Id: 'main' at line: 1, column: 5
 Type: 'float list' on line: 4, column: 3
 Id: 'notas' at line: 4, column: 14
 ';' at line: 4, column: 19
-Id: 'notas' at line: 5, column: 3
-'=' at line: 5, column: 9
-Constant: 'NIL' at line: 5, column: 11
-';' at line: 5, column: 14
-Type: 'int' on line: 6, column: 3
-Id: 'n' at line: 6, column: 7
-';' at line: 6, column: 8
-Keyword [WRITELN]: 'writeln' at line: 8, column: 3
-'(' at line: 8, column: 10
-String: "Qual o número de provas?" on line: 8, column: 11
-')' at line: 8, column: 38
-';' at line: 8, column: 39
-Keyword [READ]: 'read' at line: 9, column: 3
-'(' at line: 9, column: 7
-Id: 'n' at line: 9, column: 8
-')' at line: 9, column: 9
-';' at line: 9, column: 10
-Type: 'int' on line: 11, column: 3
-Id: 'i' at line: 11, column: 7
-';' at line: 11, column: 8
-Keyword [FOR]: 'for' at line: 13, column: 3
-'(' at line: 13, column: 7
-Id: 'i' at line: 13, column: 8
-'=' at line: 13, column: 10
-Integer: '0' at line: 13, column: 12
-';' at line: 13, column: 13
-Id: 'i' at line: 13, column: 15
-OP [SMALLER THAN]: '<' at line: 13, column: 17
-Id: 'n' at line: 13, column: 19
-';' at line: 13, column: 20
-Id: 'i' at line: 13, column: 22
-'=' at line: 13, column: 24
-Id: 'i' at line: 13, column: 26
-'+' at line: 13, column: 28
-Integer: '1' at line: 13, column: 30
-')' at line: 13, column: 31
-'{' on line: 14, column: 3
-Type: 'float' on line: 15, column: 5
-Id: 'nota' at line: 15, column: 11
-';' at line: 15, column: 15
+Type: 'int' on line: 5, column: 3
+Id: 'n' at line: 5, column: 7
+';' at line: 5, column: 8
+Keyword [WRITELN]: 'writeln' at line: 7, column: 3
+'(' at line: 7, column: 10
+String: "Qual o número de provas?" on line: 7, column: 11
+')' at line: 7, column: 38
+';' at line: 7, column: 39
+Keyword [READ]: 'read' at line: 8, column: 3
+'(' at line: 8, column: 7
+Id: 'n' at line: 8, column: 8
+')' at line: 8, column: 9
+';' at line: 8, column: 10
+Type: 'int' on line: 10, column: 3
+Id: 'i' at line: 10, column: 7
+';' at line: 10, column: 8
+Keyword [FOR]: 'for' at line: 12, column: 3
+'(' at line: 12, column: 7
+Id: 'i' at line: 12, column: 8
+'=' at line: 12, column: 10
+Integer: '0' at line: 12, column: 12
+';' at line: 12, column: 13
+Id: 'i' at line: 12, column: 15
+OP [SMALLER THAN]: '<' at line: 12, column: 17
+Id: 'n' at line: 12, column: 19
+';' at line: 12, column: 20
+Id: 'i' at line: 12, column: 22
+'=' at line: 12, column: 24
+Id: 'i' at line: 12, column: 26
+'+' at line: 12, column: 28
+Integer: '1' at line: 12, column: 30
+')' at line: 12, column: 31
+'{' on line: 13, column: 3
+Type: 'float' on line: 14, column: 5
+Id: 'nota' at line: 14, column: 11
+';' at line: 14, column: 15
+Keyword [WRITE]: 'write' at line: 16, column: 5
+'(' at line: 16, column: 10
+String: "Digite a nota da prova " on line: 16, column: 11
+')' at line: 16, column: 36
+';' at line: 16, column: 37
 Keyword [WRITE]: 'write' at line: 17, column: 5
 '(' at line: 17, column: 10
-String: "Digite a nota da prova " on line: 17, column: 11
-')' at line: 17, column: 36
-';' at line: 17, column: 37
-Keyword [WRITE]: 'write' at line: 18, column: 5
-'(' at line: 18, column: 10
-Id: 'n' at line: 18, column: 11
-')' at line: 18, column: 12
-';' at line: 18, column: 13
-Keyword [WRITELN]: 'writeln' at line: 19, column: 5
-'(' at line: 19, column: 12
-String: ":" on line: 19, column: 13
-')' at line: 19, column: 16
-';' at line: 19, column: 17
-Keyword [READ]: 'read' at line: 20, column: 5
-'(' at line: 20, column: 9
-Id: 'nota' at line: 20, column: 10
-')' at line: 20, column: 14
-';' at line: 20, column: 15
-Id: 'notas' at line: 21, column: 5
-'=' at line: 21, column: 11
-Id: 'nota' at line: 21, column: 13
-Keyword [APPEND]: ':' at line: 21, column: 18
-Id: 'notas' at line: 21, column: 20
-';' at line: 21, column: 25
-'}' at line: 22, column: 3
-Keyword [IF]: 'if' at line: 23, column: 3
-'(' at line: 23, column: 6
-Integer: '1' at line: 23, column: 7
-OP [EQUALS]: '==' at line: 23, column: 9
-Integer: '2' at line: 23, column: 12
-')' at line: 23, column: 13
-'{' on line: 24, column: 3
-Type: 'int' on line: 25, column: 5
-Id: 'abacaxi' at line: 25, column: 9
+Id: 'n' at line: 17, column: 11
+')' at line: 17, column: 12
+';' at line: 17, column: 13
+Keyword [WRITELN]: 'writeln' at line: 18, column: 5
+'(' at line: 18, column: 12
+String: ":" on line: 18, column: 13
+')' at line: 18, column: 16
+';' at line: 18, column: 17
+Keyword [READ]: 'read' at line: 19, column: 5
+'(' at line: 19, column: 9
+Id: 'nota' at line: 19, column: 10
+')' at line: 19, column: 14
+';' at line: 19, column: 15
+Id: 'notas' at line: 20, column: 5
+'=' at line: 20, column: 11
+Id: 'nota' at line: 20, column: 13
+Keyword [APPEND]: ':' at line: 20, column: 18
+Id: 'notas' at line: 20, column: 20
+';' at line: 20, column: 25
+'}' at line: 21, column: 3
+Keyword [IF]: 'if' at line: 22, column: 3
+'(' at line: 22, column: 6
+Integer: '1' at line: 22, column: 7
+OP [EQUALS]: '==' at line: 22, column: 9
+Integer: '2' at line: 22, column: 12
+')' at line: 22, column: 13
+'{' on line: 23, column: 3
+Type: 'int' on line: 24, column: 5
+Id: 'abacaxi' at line: 24, column: 9
+';' at line: 24, column: 16
+Id: 'abacaxi' at line: 25, column: 5
+'=' at line: 25, column: 13
+Integer: '0' at line: 25, column: 15
 ';' at line: 25, column: 16
-Id: 'abacaxi' at line: 26, column: 5
-'=' at line: 26, column: 13
-Integer: '0' at line: 26, column: 15
-';' at line: 26, column: 16
-Keyword [WRITELN]: 'writeln' at line: 27, column: 5
-'(' at line: 27, column: 12
-Id: 'nota' at line: 27, column: 13
-')' at line: 27, column: 17
-';' at line: 27, column: 18
-Keyword [IF]: 'if' at line: 28, column: 5
-'(' at line: 28, column: 8
-Integer: '2' at line: 28, column: 9
-OP [IS DIFFERENT]: '!=' at line: 28, column: 11
-Integer: '3' at line: 28, column: 14
-')' at line: 28, column: 15
-'{' on line: 29, column: 5
-Type: 'float' on line: 30, column: 7
-Id: 'pera' at line: 30, column: 13
+Keyword [WRITELN]: 'writeln' at line: 26, column: 5
+'(' at line: 26, column: 12
+Id: 'nota' at line: 26, column: 13
+')' at line: 26, column: 17
+';' at line: 26, column: 18
+Keyword [IF]: 'if' at line: 27, column: 5
+'(' at line: 27, column: 8
+Integer: '2' at line: 27, column: 9
+OP [IS DIFFERENT]: '!=' at line: 27, column: 11
+Integer: '3' at line: 27, column: 14
+')' at line: 27, column: 15
+'{' on line: 28, column: 5
+Type: 'float' on line: 29, column: 7
+Id: 'pera' at line: 29, column: 13
+';' at line: 29, column: 17
+Id: 'pera' at line: 30, column: 7
+'=' at line: 30, column: 12
+Decimal: '1.1' at line: 30, column: 14
 ';' at line: 30, column: 17
-Id: 'pera' at line: 31, column: 7
-'=' at line: 31, column: 12
-Decimal: '1.1' at line: 31, column: 14
-';' at line: 31, column: 17
-Keyword [WRITELN]: 'writeln' at line: 32, column: 7
-'(' at line: 32, column: 14
-Id: 'nota' at line: 32, column: 15
-')' at line: 32, column: 19
-';' at line: 32, column: 20
-'}' at line: 33, column: 5
-'}' at line: 34, column: 3
-Keyword [ELSE]: 'else' at line: 35, column: 3
-'{' on line: 36, column: 3
-Type: 'int' on line: 37, column: 5
-Id: 'banana' at line: 37, column: 9
+Keyword [WRITELN]: 'writeln' at line: 31, column: 7
+'(' at line: 31, column: 14
+Id: 'nota' at line: 31, column: 15
+')' at line: 31, column: 19
+';' at line: 31, column: 20
+'}' at line: 32, column: 5
+'}' at line: 33, column: 3
+Keyword [ELSE]: 'else' at line: 34, column: 3
+'{' on line: 35, column: 3
+Type: 'int' on line: 36, column: 5
+Id: 'banana' at line: 36, column: 9
+';' at line: 36, column: 15
+Id: 'banana' at line: 37, column: 5
+'=' at line: 37, column: 12
+Integer: '2' at line: 37, column: 14
 ';' at line: 37, column: 15
-Id: 'banana' at line: 38, column: 5
-'=' at line: 38, column: 12
-Integer: '2' at line: 38, column: 14
-';' at line: 38, column: 15
-Keyword [WRITELN]: 'writeln' at line: 39, column: 5
-'(' at line: 39, column: 12
-Id: 'nota' at line: 39, column: 13
-')' at line: 39, column: 17
-';' at line: 39, column: 18
-Keyword [IF]: 'if' at line: 40, column: 5
-'(' at line: 40, column: 8
-Integer: '2' at line: 40, column: 9
-OP [IS DIFFERENT]: '!=' at line: 40, column: 11
-Integer: '3' at line: 40, column: 14
-')' at line: 40, column: 15
-'{' on line: 41, column: 5
-Type: 'float' on line: 42, column: 7
-Id: 'maca' at line: 42, column: 13
+Keyword [WRITELN]: 'writeln' at line: 38, column: 5
+'(' at line: 38, column: 12
+Id: 'nota' at line: 38, column: 13
+')' at line: 38, column: 17
+';' at line: 38, column: 18
+Keyword [IF]: 'if' at line: 39, column: 5
+'(' at line: 39, column: 8
+Integer: '2' at line: 39, column: 9
+OP [IS DIFFERENT]: '!=' at line: 39, column: 11
+Integer: '3' at line: 39, column: 14
+')' at line: 39, column: 15
+'{' on line: 40, column: 5
+Type: 'float' on line: 41, column: 7
+Id: 'maca' at line: 41, column: 13
+';' at line: 41, column: 17
+Id: 'maca' at line: 42, column: 7
+'=' at line: 42, column: 12
+Decimal: '1.1' at line: 42, column: 14
 ';' at line: 42, column: 17
-Id: 'maca' at line: 43, column: 7
-'=' at line: 43, column: 12
-Decimal: '1.1' at line: 43, column: 14
-';' at line: 43, column: 17
-Keyword [WRITELN]: 'writeln' at line: 44, column: 7
-'(' at line: 44, column: 14
-Id: 'nota' at line: 44, column: 15
-')' at line: 44, column: 19
-';' at line: 44, column: 20
-'}' at line: 45, column: 5
-'}' at line: 46, column: 3
-Type: 'float' on line: 47, column: 3
-Id: 'soma' at line: 47, column: 9
-';' at line: 47, column: 13
-Id: 'soma' at line: 48, column: 3
-'=' at line: 48, column: 8
-Integer: '0' at line: 48, column: 10
-';' at line: 48, column: 11
-Type: 'float list' on line: 49, column: 3
-Id: 'AUX' at line: 49, column: 14
-';' at line: 49, column: 17
-Keyword [FOR]: 'for' at line: 51, column: 3
-'(' at line: 51, column: 7
-Id: 'AUX' at line: 51, column: 8
-'=' at line: 51, column: 12
-Id: 'notas' at line: 51, column: 14
-';' at line: 51, column: 19
+Keyword [WRITELN]: 'writeln' at line: 43, column: 7
+'(' at line: 43, column: 14
+Id: 'nota' at line: 43, column: 15
+')' at line: 43, column: 19
+';' at line: 43, column: 20
+'}' at line: 44, column: 5
+'}' at line: 45, column: 3
+Type: 'float' on line: 46, column: 3
+Id: 'soma' at line: 46, column: 9
+';' at line: 46, column: 13
+Id: 'soma' at line: 47, column: 3
+'=' at line: 47, column: 8
+Integer: '0' at line: 47, column: 10
+';' at line: 47, column: 11
+Type: 'float list' on line: 48, column: 3
+Id: 'AUX' at line: 48, column: 14
+';' at line: 48, column: 17
+Keyword [FOR]: 'for' at line: 50, column: 3
+'(' at line: 50, column: 7
+Id: 'AUX' at line: 50, column: 8
+'=' at line: 50, column: 12
+Id: 'notas' at line: 50, column: 14
+';' at line: 50, column: 19
+Id: 'AUX' at line: 50, column: 21
+OP [IS DIFFERENT]: '!=' at line: 50, column: 25
+Constant: 'NIL' at line: 50, column: 28
+';' at line: 50, column: 31
+Id: 'AUX' at line: 50, column: 33
+'=' at line: 50, column: 37
+Keyword [TAILLIST]: '!' at line: 50, column: 39
+Id: 'AUX' at line: 50, column: 40
+')' at line: 50, column: 43
+Id: 'soma' at line: 51, column: 5
+'=' at line: 51, column: 10
+Id: 'soma' at line: 51, column: 12
+'+' at line: 51, column: 17
+Keyword [HEADLIST]: '?' at line: 51, column: 19
 Id: 'AUX' at line: 51, column: 21
-OP [IS DIFFERENT]: '!=' at line: 51, column: 25
-Constant: 'NIL' at line: 51, column: 28
-';' at line: 51, column: 31
-Id: 'AUX' at line: 51, column: 33
-'=' at line: 51, column: 37
-Keyword [TAILLIST]: '!' at line: 51, column: 39
-Id: 'AUX' at line: 51, column: 40
-')' at line: 51, column: 43
-Id: 'soma' at line: 52, column: 5
-'=' at line: 52, column: 10
-Id: 'soma' at line: 52, column: 12
-'+' at line: 52, column: 17
-Keyword [HEADLIST]: '?' at line: 52, column: 19
-Id: 'AUX' at line: 52, column: 21
-';' at line: 52, column: 24
+';' at line: 51, column: 24
+Type: 'float' on line: 53, column: 3
+Id: 'media1' at line: 53, column: 9
+';' at line: 53, column: 15
 Type: 'float' on line: 54, column: 3
-Id: 'media1' at line: 54, column: 9
+Id: 'media2' at line: 54, column: 9
 ';' at line: 54, column: 15
-Type: 'float' on line: 55, column: 3
-Id: 'media2' at line: 55, column: 9
-';' at line: 55, column: 15
-Id: 'media1' at line: 57, column: 3
+Id: 'media1' at line: 56, column: 3
+'=' at line: 56, column: 10
+Id: 'soma' at line: 56, column: 12
+'/' at line: 56, column: 17
+Id: 'n' at line: 56, column: 19
+'-' at line: 56, column: 21
+Integer: '10' at line: 56, column: 23
+'*' at line: 56, column: 26
+'(' at line: 56, column: 28
+Integer: '1' at line: 56, column: 29
+'/' at line: 56, column: 31
+Integer: '10' at line: 56, column: 33
+')' at line: 56, column: 35
+';' at line: 56, column: 36
+Id: 'media2' at line: 57, column: 3
 '=' at line: 57, column: 10
 Id: 'soma' at line: 57, column: 12
 '/' at line: 57, column: 17
 Id: 'n' at line: 57, column: 19
-'-' at line: 57, column: 21
-Integer: '10' at line: 57, column: 23
-'*' at line: 57, column: 26
-'(' at line: 57, column: 28
-Integer: '1' at line: 57, column: 29
-'/' at line: 57, column: 31
-Integer: '10' at line: 57, column: 33
-')' at line: 57, column: 35
-';' at line: 57, column: 36
-Id: 'media2' at line: 58, column: 3
-'=' at line: 58, column: 10
-Id: 'soma' at line: 58, column: 12
-'/' at line: 58, column: 17
-Id: 'n' at line: 58, column: 19
-';' at line: 58, column: 20
-Keyword [IF]: 'if' at line: 60, column: 3
-'(' at line: 60, column: 6
-Id: 'media1' at line: 60, column: 7
-OP [IS DIFFERENT]: '!=' at line: 60, column: 14
-Id: 'media2' at line: 60, column: 17
-')' at line: 60, column: 23
-Keyword [WRITELN]: 'writeln' at line: 61, column: 5
-'(' at line: 61, column: 12
-String: "Há um problema no cálculo da média" on line: 61, column: 13
-')' at line: 61, column: 52
-';' at line: 61, column: 53
-Keyword [ELSE]: 'else' at line: 62, column: 3
-Keyword [IF]: 'if' at line: 62, column: 8
-'(' at line: 62, column: 11
-Id: 'media1' at line: 62, column: 12
-OP [EQUALS]: '==' at line: 62, column: 19
-Id: 'media2' at line: 62, column: 22
-OP [AND]: '&&' at line: 62, column: 29
-Id: 'media1' at line: 62, column: 32
-OP [GREATER THAN OR EQUAL]: '>=' at line: 62, column: 39
-Integer: '5' at line: 62, column: 42
-')' at line: 62, column: 43
-Keyword [WRITELN]: 'writeln' at line: 63, column: 5
-'(' at line: 63, column: 12
-String: "Parabéns!" on line: 63, column: 13
-')' at line: 63, column: 25
-';' at line: 63, column: 26
-'}' at line: 64, column: 1
+';' at line: 57, column: 20
+Keyword [IF]: 'if' at line: 59, column: 3
+'(' at line: 59, column: 6
+Id: 'media1' at line: 59, column: 7
+OP [IS DIFFERENT]: '!=' at line: 59, column: 14
+Id: 'media2' at line: 59, column: 17
+')' at line: 59, column: 23
+Keyword [WRITELN]: 'writeln' at line: 60, column: 5
+'(' at line: 60, column: 12
+String: "Há um problema no cálculo da média" on line: 60, column: 13
+')' at line: 60, column: 52
+';' at line: 60, column: 53
+Keyword [ELSE]: 'else' at line: 61, column: 3
+Keyword [IF]: 'if' at line: 61, column: 8
+'(' at line: 61, column: 11
+Id: 'media1' at line: 61, column: 12
+OP [EQUALS]: '==' at line: 61, column: 19
+Id: 'media2' at line: 61, column: 22
+OP [AND]: '&&' at line: 61, column: 29
+Id: 'media1' at line: 61, column: 32
+OP [GREATER THAN OR EQUAL]: '>=' at line: 61, column: 39
+Integer: '5' at line: 61, column: 42
+')' at line: 61, column: 43
+Keyword [WRITELN]: 'writeln' at line: 62, column: 5
+'(' at line: 62, column: 12
+String: "Parabéns!" on line: 62, column: 13
+')' at line: 62, column: 25
+';' at line: 62, column: 26
+Keyword [RETURN]: 'return' at line: 64, column: 3
+Integer: '0' at line: 64, column: 10
+';' at line: 64, column: 11
+'}' at line: 65, column: 1
 
 
 #### EOF ####
@@ -268,1141 +267,527 @@ String: "Parabéns!" on line: 63, column: 13
 
 --------------------------------tree--------------------------------
 
-
-declaration
--->   funcDeclaration
-
---->   TYPE ID PARENL PARENR compoundStmt
-
----->   int
-
------>   main
-
------->   stmtList primitiveStmt
-
-------->   stmtList primitiveStmt
-
--------->   stmtList primitiveStmt
-
---------->   stmtList primitiveStmt
-
----------->   stmtList primitiveStmt
-
------------>   stmtList primitiveStmt
-
------------->   stmtList primitiveStmt
-
-------------->   stmtList primitiveStmt
-
--------------->   stmtList primitiveStmt
-
---------------->   stmtList primitiveStmt
-
----------------->   stmtList primitiveStmt
-
------------------>   stmtList primitiveStmt
-
------------------->   stmtList primitiveStmt
-
-------------------->   stmtList primitiveStmt
-
--------------------->   stmtList primitiveStmt
-
---------------------->   stmtList primitiveStmt
-
----------------------->   primitiveStmt
-
------------------------>   varDeclaration
-
------------------------->   simpleVarDeclaration
-
-------------------------->   TYPE ID
-
--------------------------->   float list
-
---------------------------->   notas
-
------------------------>   exprStmt
-
------------------------->   expression SEMIC
-
-------------------------->   assignExp
-
--------------------------->   ID ASSIGN expression
-
---------------------------->   notas
-
----------------------------->   =
-
------------------------------>   simpleExp
-
------------------------------->   binLogicalExp
-
-------------------------------->   relationalExp
-
--------------------------------->   sumExp
-
---------------------------------->   mulExp
-
----------------------------------->   factor
-
------------------------------------>   constOp
-
------------------------------------->   NIL
-
----------------------->   varDeclaration
-
------------------------>   simpleVarDeclaration
-
------------------------->   TYPE ID
-
-------------------------->   int
-
--------------------------->   n
-
---------------------->   outOp
-
----------------------->   WRITELN PARENL outConst PARENR SEMIC
-
------------------------>   writeln
-
------------------------->   STRING
-
-------------------------->   "Qual o número de provas?"
-
--------------------->   inOp
-
---------------------->   READ PARENL ID PARENR SEMIC
-
----------------------->   read
-
------------------------>   n
-
-------------------->   varDeclaration
-
--------------------->   simpleVarDeclaration
-
---------------------->   TYPE ID
-
----------------------->   int
-
------------------------>   i
-
------------------->   iterStmt
-
-------------------->   FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
-
--------------------->   for
-
---------------------->   ID ASSIGN expression
-
----------------------->   i
-
------------------------>   =
-
------------------------->   simpleExp
-
-------------------------->   binLogicalExp
-
--------------------------->   relationalExp
-
---------------------------->   sumExp
-
----------------------------->   mulExp
-
------------------------------>   factor
-
------------------------------->   constOp
-
-------------------------------->   0
-
----------------------->   binLogicalExp
-
------------------------>   relationalExp
-
------------------------->   relationalExp relationalOp sumExp
-
-------------------------->   sumExp
-
--------------------------->   mulExp
-
---------------------------->   factor
-
----------------------------->   ID
-
------------------------------>   i
-
--------------------------->   SMALLER
-
---------------------------->   <
-
---------------------------->   mulExp
-
----------------------------->   factor
-
------------------------------>   ID
-
------------------------------->   n
-
------------------------>   ID ASSIGN expression
-
------------------------->   i
-
-------------------------->   =
-
--------------------------->   simpleExp
-
---------------------------->   binLogicalExp
-
----------------------------->   relationalExp
-
------------------------------>   sumExp
-
------------------------------->   sumExp add mulExp
-
-------------------------------->   mulExp
-
--------------------------------->   factor
-
---------------------------------->   ID
-
----------------------------------->   i
-
--------------------------------->   +
-
---------------------------------->   factor
-
----------------------------------->   constOp
-
------------------------------------>   1
-
------------------------->   compoundStmt
-
-------------------------->   compoundStmt
-
--------------------------->   stmtList primitiveStmt
-
---------------------------->   stmtList primitiveStmt
-
----------------------------->   stmtList primitiveStmt
-
------------------------------>   stmtList primitiveStmt
-
------------------------------->   stmtList primitiveStmt
-
-------------------------------->   primitiveStmt
-
--------------------------------->   varDeclaration
-
---------------------------------->   simpleVarDeclaration
-
----------------------------------->   TYPE ID
-
------------------------------------>   float
-
------------------------------------->   nota
-
--------------------------------->   outOp
-
---------------------------------->   WRITE PARENL outConst PARENR SEMIC
-
----------------------------------->   write
-
------------------------------------>   STRING
-
------------------------------------->   "Digite a nota da prova "
-
-------------------------------->   outOp
-
--------------------------------->   WRITE PARENL outConst PARENR SEMIC
-
---------------------------------->   write
-
----------------------------------->   simpleExp
-
------------------------------------>   binLogicalExp
-
------------------------------------->   relationalExp
-
-------------------------------------->   sumExp
-
--------------------------------------->   mulExp
-
---------------------------------------->   factor
-
----------------------------------------->   ID
-
------------------------------------------>   n
-
------------------------------->   outOp
-
-------------------------------->   WRITELN PARENL outConst PARENR SEMIC
-
--------------------------------->   writeln
-
---------------------------------->   STRING
-
----------------------------------->   ":"
-
------------------------------>   inOp
-
------------------------------->   READ PARENL ID PARENR SEMIC
-
-------------------------------->   read
-
--------------------------------->   nota
-
----------------------------->   exprStmt
-
------------------------------>   expression SEMIC
-
------------------------------->   assignExp
-
-------------------------------->   ID ASSIGN expression
-
--------------------------------->   notas
-
---------------------------------->   =
-
----------------------------------->   simpleExp
-
------------------------------------>   binListExp
-
------------------------------------->   factor APPEND factor
-
-------------------------------------->   ID
-
--------------------------------------->   nota
-
--------------------------------------->   :
-
---------------------------------------->   ID
-
----------------------------------------->   notas
-
------------------>   condStmt
-
------------------->   ifStmt primitiveStmt elseStmt
-
-------------------->   IF PARENL simpleExp PARENR
-
--------------------->   if
-
---------------------->   binLogicalExp
-
----------------------->   relationalExp
-
------------------------>   relationalExp relationalOp sumExp
-
------------------------->   sumExp
-
-------------------------->   mulExp
-
--------------------------->   factor
-
---------------------------->   constOp
-
----------------------------->   1
-
-------------------------->   EQUALS
-
--------------------------->   ==
-
--------------------------->   mulExp
-
---------------------------->   factor
-
----------------------------->   constOp
-
------------------------------>   2
-
--------------------->   compoundStmt
-
---------------------->   compoundStmt
-
----------------------->   stmtList primitiveStmt
-
------------------------>   stmtList primitiveStmt
-
------------------------->   stmtList primitiveStmt
-
-------------------------->   primitiveStmt
-
--------------------------->   varDeclaration
-
---------------------------->   simpleVarDeclaration
-
----------------------------->   TYPE ID
-
------------------------------>   int
-
------------------------------->   abacaxi
-
--------------------------->   exprStmt
-
---------------------------->   expression SEMIC
-
----------------------------->   assignExp
-
------------------------------>   ID ASSIGN expression
-
------------------------------->   abacaxi
-
-------------------------------->   =
-
--------------------------------->   simpleExp
-
---------------------------------->   binLogicalExp
-
----------------------------------->   relationalExp
-
------------------------------------>   sumExp
-
------------------------------------->   mulExp
-
-------------------------------------->   factor
-
--------------------------------------->   constOp
-
---------------------------------------->   0
-
-------------------------->   outOp
-
--------------------------->   WRITELN PARENL outConst PARENR SEMIC
-
---------------------------->   writeln
-
----------------------------->   simpleExp
-
------------------------------>   binLogicalExp
-
------------------------------->   relationalExp
-
-------------------------------->   sumExp
-
--------------------------------->   mulExp
-
---------------------------------->   factor
-
----------------------------------->   ID
-
------------------------------------>   nota
-
------------------------->   condStmt
-
-------------------------->   ifStmt primitiveStmt
-
--------------------------->   IF PARENL simpleExp PARENR
-
---------------------------->   if
-
----------------------------->   binLogicalExp
-
------------------------------>   relationalExp
-
------------------------------->   relationalExp relationalOp sumExp
-
-------------------------------->   sumExp
-
--------------------------------->   mulExp
-
---------------------------------->   factor
-
----------------------------------->   constOp
-
------------------------------------>   2
-
--------------------------------->   DIFFERENT
-
---------------------------------->   !=
-
---------------------------------->   mulExp
-
----------------------------------->   factor
-
------------------------------------>   constOp
-
------------------------------------->   3
-
---------------------------->   compoundStmt
-
----------------------------->   compoundStmt
-
------------------------------>   stmtList primitiveStmt
-
------------------------------->   stmtList primitiveStmt
-
-------------------------------->   primitiveStmt
-
--------------------------------->   varDeclaration
-
---------------------------------->   simpleVarDeclaration
-
----------------------------------->   TYPE ID
-
------------------------------------>   float
-
------------------------------------->   pera
-
--------------------------------->   exprStmt
-
---------------------------------->   expression SEMIC
-
----------------------------------->   assignExp
-
------------------------------------>   ID ASSIGN expression
-
------------------------------------->   pera
-
-------------------------------------->   =
-
--------------------------------------->   simpleExp
-
---------------------------------------->   binLogicalExp
-
----------------------------------------->   relationalExp
-
------------------------------------------>   sumExp
-
------------------------------------------->   mulExp
-
-------------------------------------------->   factor
-
--------------------------------------------->   constOp
-
---------------------------------------------->   1.100000
-
-------------------------------->   outOp
-
--------------------------------->   WRITELN PARENL outConst PARENR SEMIC
-
---------------------------------->   writeln
-
----------------------------------->   simpleExp
-
------------------------------------>   binLogicalExp
-
------------------------------------->   relationalExp
-
-------------------------------------->   sumExp
-
--------------------------------------->   mulExp
-
---------------------------------------->   factor
-
----------------------------------------->   ID
-
------------------------------------------>   nota
-
---------------------->   ELSE primitiveStmt
-
----------------------->   else
-
------------------------>   compoundStmt
-
------------------------->   compoundStmt
-
-------------------------->   stmtList primitiveStmt
-
--------------------------->   stmtList primitiveStmt
-
---------------------------->   stmtList primitiveStmt
-
----------------------------->   primitiveStmt
-
------------------------------>   varDeclaration
-
------------------------------->   simpleVarDeclaration
-
-------------------------------->   TYPE ID
-
--------------------------------->   int
-
---------------------------------->   banana
-
------------------------------>   exprStmt
-
------------------------------->   expression SEMIC
-
-------------------------------->   assignExp
-
--------------------------------->   ID ASSIGN expression
-
---------------------------------->   banana
-
----------------------------------->   =
-
------------------------------------>   simpleExp
-
------------------------------------->   binLogicalExp
-
-------------------------------------->   relationalExp
-
--------------------------------------->   sumExp
-
---------------------------------------->   mulExp
-
----------------------------------------->   factor
-
------------------------------------------>   constOp
-
------------------------------------------->   2
-
----------------------------->   outOp
-
------------------------------>   WRITELN PARENL outConst PARENR SEMIC
-
------------------------------->   writeln
-
-------------------------------->   simpleExp
-
--------------------------------->   binLogicalExp
-
---------------------------------->   relationalExp
-
----------------------------------->   sumExp
-
------------------------------------>   mulExp
-
------------------------------------->   factor
-
-------------------------------------->   ID
-
--------------------------------------->   nota
-
---------------------------->   condStmt
-
----------------------------->   ifStmt primitiveStmt
-
------------------------------>   IF PARENL simpleExp PARENR
-
------------------------------->   if
-
-------------------------------->   binLogicalExp
-
--------------------------------->   relationalExp
-
---------------------------------->   relationalExp relationalOp sumExp
-
----------------------------------->   sumExp
-
------------------------------------>   mulExp
-
------------------------------------->   factor
-
-------------------------------------->   constOp
-
--------------------------------------->   2
-
------------------------------------>   DIFFERENT
-
------------------------------------->   !=
-
------------------------------------->   mulExp
-
-------------------------------------->   factor
-
--------------------------------------->   constOp
-
---------------------------------------->   3
-
------------------------------->   compoundStmt
-
-------------------------------->   compoundStmt
-
--------------------------------->   stmtList primitiveStmt
-
---------------------------------->   stmtList primitiveStmt
-
----------------------------------->   primitiveStmt
-
------------------------------------>   varDeclaration
-
------------------------------------->   simpleVarDeclaration
-
-------------------------------------->   TYPE ID
-
--------------------------------------->   float
-
---------------------------------------->   maca
-
------------------------------------>   exprStmt
-
------------------------------------->   expression SEMIC
-
-------------------------------------->   assignExp
-
--------------------------------------->   ID ASSIGN expression
-
---------------------------------------->   maca
-
----------------------------------------->   =
-
------------------------------------------>   simpleExp
-
------------------------------------------->   binLogicalExp
-
-------------------------------------------->   relationalExp
-
--------------------------------------------->   sumExp
-
---------------------------------------------->   mulExp
-
----------------------------------------------->   factor
-
------------------------------------------------>   constOp
-
------------------------------------------------->   1.100000
-
----------------------------------->   outOp
-
------------------------------------>   WRITELN PARENL outConst PARENR SEMIC
-
------------------------------------->   writeln
-
-------------------------------------->   simpleExp
-
--------------------------------------->   binLogicalExp
-
---------------------------------------->   relationalExp
-
----------------------------------------->   sumExp
-
------------------------------------------>   mulExp
-
------------------------------------------->   factor
-
-------------------------------------------->   ID
-
--------------------------------------------->   nota
-
----------------->   varDeclaration
-
------------------>   simpleVarDeclaration
-
------------------->   TYPE ID
-
-------------------->   float
-
--------------------->   soma
-
---------------->   exprStmt
-
----------------->   expression SEMIC
-
------------------>   assignExp
-
------------------->   ID ASSIGN expression
-
-------------------->   soma
-
--------------------->   =
-
---------------------->   simpleExp
-
----------------------->   binLogicalExp
-
------------------------>   relationalExp
-
------------------------->   sumExp
-
-------------------------->   mulExp
-
--------------------------->   factor
-
---------------------------->   constOp
-
----------------------------->   0
-
--------------->   varDeclaration
-
---------------->   simpleVarDeclaration
-
----------------->   TYPE ID
-
------------------>   float list
-
------------------->   AUX
-
-------------->   iterStmt
-
--------------->   FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
-
---------------->   for
-
----------------->   ID ASSIGN expression
-
------------------>   AUX
-
------------------->   =
-
-------------------->   simpleExp
-
--------------------->   binLogicalExp
-
---------------------->   relationalExp
-
----------------------->   sumExp
-
------------------------>   mulExp
-
------------------------->   factor
-
-------------------------->   ID
-
--------------------------->   notas
-
------------------>   binLogicalExp
-
------------------->   relationalExp
-
-------------------->   relationalExp relationalOp sumExp
-
--------------------->   sumExp
-
---------------------->   mulExp
-
----------------------->   factor
-
------------------------>   ID
-
------------------------->   AUX
-
---------------------->   DIFFERENT
-
----------------------->   !=
-
----------------------->   mulExp
-
------------------------>   factor
-
------------------------->   constOp
-
-------------------------->   NIL
-
------------------->   ID ASSIGN expression
-
-------------------->   AUX
-
--------------------->   =
-
---------------------->   simpleExp
-
----------------------->   binLogicalExp
-
------------------------>   relationalExp
-
------------------------->   sumExp
-
-------------------------->   mulExp
-
--------------------------->   unaryListExp
-
---------------------------->   ! factor
-
----------------------------->   !
-
------------------------------>   ID
-
------------------------------->   AUX
-
-------------------->   exprStmt
-
--------------------->   expression SEMIC
-
---------------------->   assignExp
-
----------------------->   ID ASSIGN expression
-
------------------------>   soma
-
------------------------->   =
-
-------------------------->   simpleExp
-
--------------------------->   binLogicalExp
-
---------------------------->   relationalExp
-
----------------------------->   sumExp
-
------------------------------>   sumExp add mulExp
-
------------------------------->   mulExp
-
-------------------------------->   factor
-
--------------------------------->   ID
-
---------------------------------->   soma
-
-------------------------------->   +
-
--------------------------------->   unaryListExp
-
---------------------------------->   ? factor
-
----------------------------------->   ?
-
------------------------------------>   ID
-
------------------------------------->   AUX
-
------------->   varDeclaration
-
-------------->   simpleVarDeclaration
-
--------------->   TYPE ID
-
---------------->   float
-
----------------->   media1
-
------------>   varDeclaration
-
------------->   simpleVarDeclaration
-
-------------->   TYPE ID
-
--------------->   float
-
---------------->   media2
-
----------->   exprStmt
-
------------>   expression SEMIC
-
------------->   assignExp
-
-------------->   ID ASSIGN expression
-
--------------->   media1
-
---------------->   =
-
----------------->   simpleExp
-
------------------>   binLogicalExp
-
------------------->   relationalExp
-
-------------------->   sumExp
-
--------------------->   sumExp sub mulExp
-
---------------------->   mulExp
-
----------------------->   mulExp mulOp factor
-
------------------------>   factor
-
------------------------->   ID
-
-------------------------->   soma
-
------------------------->   /
-
-------------------------->   ID
-
--------------------------->   n
-
----------------------->   -
-
------------------------>   mulExp mulOp factor
-
------------------------->   factor
-
-------------------------->   constOp
-
--------------------------->   10
-
-------------------------->   *
-
--------------------------->   PARENL simpleExp PARENR
-
---------------------------->   binLogicalExp
-
----------------------------->   relationalExp
-
------------------------------>   sumExp
-
------------------------------->   mulExp
-
-------------------------------->   mulExp mulOp factor
-
--------------------------------->   factor
-
---------------------------------->   constOp
-
----------------------------------->   1
-
---------------------------------->   /
-
----------------------------------->   constOp
-
------------------------------------>   10
-
---------->   exprStmt
-
----------->   expression SEMIC
-
------------>   assignExp
-
------------->   ID ASSIGN expression
-
-------------->   media2
-
--------------->   =
-
---------------->   simpleExp
-
----------------->   binLogicalExp
-
------------------>   relationalExp
-
------------------->   sumExp
-
-------------------->   mulExp
-
--------------------->   mulExp mulOp factor
-
---------------------->   factor
-
----------------------->   ID
-
------------------------>   soma
-
----------------------->   /
-
------------------------>   ID
-
------------------------->   n
-
--------->   condStmt
-
---------->   ifStmt primitiveStmt elseStmt
-
----------->   IF PARENL simpleExp PARENR
-
------------>   if
-
------------->   binLogicalExp
-
-------------->   relationalExp
-
--------------->   relationalExp relationalOp sumExp
-
---------------->   sumExp
-
----------------->   mulExp
-
------------------>   factor
-
------------------->   ID
-
-------------------->   media1
-
----------------->   DIFFERENT
-
------------------>   !=
-
------------------>   mulExp
-
------------------->   factor
-
-------------------->   ID
-
--------------------->   media2
-
------------>   outOp
-
------------->   WRITELN PARENL outConst PARENR SEMIC
-
-------------->   writeln
-
--------------->   STRING
-
---------------->   "Há um problema no cálculo da média"
-
------------->   ELSE primitiveStmt
-
-------------->   else
-
--------------->   condStmt
-
---------------->   ifStmt primitiveStmt
-
----------------->   IF PARENL simpleExp PARENR
-
------------------>   if
-
------------------->   binLogicalExp
-
-------------------->   binLogicalExp binLogicalOp relationalOp
-
--------------------->   relationalExp
-
---------------------->   relationalExp relationalOp sumExp
-
----------------------->   sumExp
-
------------------------>   mulExp
-
------------------------->   factor
-
-------------------------->   ID
-
--------------------------->   media1
-
------------------------>   EQUALS
-
------------------------->   ==
-
------------------------->   mulExp
-
-------------------------->   factor
-
--------------------------->   ID
-
---------------------------->   media2
-
---------------------->   AND
-
----------------------->   &&
-
----------------------->   relationalExp relationalOp sumExp
-
------------------------>   sumExp
-
------------------------->   mulExp
-
-------------------------->   factor
-
--------------------------->   ID
-
---------------------------->   media1
-
------------------------->   GREATEQ
-
-------------------------->   >=
-
-------------------------->   mulExp
-
--------------------------->   factor
-
---------------------------->   constOp
-
----------------------------->   5
-
------------------>   outOp
-
------------------->   WRITELN PARENL outConst PARENR SEMIC
-
-------------------->   writeln
-
--------------------->   STRING
-
---------------------->   "Parabéns!"
+>declaration
+->funcDeclaration
+-->TYPE ID PARENL PARENR stmtList ENDFUNC 
+--->int
+--->main
+--->stmtList primitiveStmt
+---->stmtList primitiveStmt
+----->stmtList primitiveStmt
+------>stmtList primitiveStmt
+------->stmtList primitiveStmt
+-------->stmtList primitiveStmt
+--------->stmtList primitiveStmt
+---------->stmtList primitiveStmt
+----------->stmtList primitiveStmt
+------------>stmtList primitiveStmt
+------------->stmtList primitiveStmt
+-------------->stmtList primitiveStmt
+--------------->stmtList primitiveStmt
+---------------->stmtList primitiveStmt
+----------------->stmtList primitiveStmt
+------------------>stmtList primitiveStmt
+------------------->primitiveStmt
+-------------------->varDeclaration
+--------------------->simpleVarDeclaration
+---------------------->TYPE ID
+----------------------->float list
+----------------------->notas
+------------------->varDeclaration
+-------------------->simpleVarDeclaration
+--------------------->TYPE ID
+---------------------->int
+---------------------->n
+------------------>outOp
+------------------->WRITELN PARENL outConst PARENR SEMIC
+-------------------->writeln
+-------------------->STRING
+--------------------->"Qual o número de provas?"
+----------------->inOp
+------------------>READ PARENL ID PARENR SEMIC
+------------------->read
+------------------->n
+---------------->varDeclaration
+----------------->simpleVarDeclaration
+------------------>TYPE ID
+------------------->int
+------------------->i
+--------------->iterStmt
+---------------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
+----------------->for
+----------------->ID ASSIGN expression
+------------------>i
+------------------>=
+------------------>simpleExp
+------------------->binLogicalExp
+-------------------->relationalExp
+--------------------->sumExp
+---------------------->mulExp
+----------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~0
+----------------->binLogicalExp
+------------------>relationalExp
+------------------->relationalExp relationalOp sumExp
+-------------------->sumExp
+--------------------->mulExp
+---------------------->factor
+----------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~-------------------->SMALLER
+---------------------><
+-------------------->mulExp
+--------------------->factor
+---------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~----------------->ID ASSIGN expression
+------------------>i
+------------------>=
+------------------>simpleExp
+------------------->binLogicalExp
+-------------------->relationalExp
+--------------------->sumExp
+---------------------->sumExp add mulExp
+----------------------->mulExp
+------------------------>factor
+------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~----------------------->+
+----------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~1
+----------------->compoundStmt
+------------------>compoundStmt
+------------------->stmtList primitiveStmt
+-------------------->stmtList primitiveStmt
+--------------------->stmtList primitiveStmt
+---------------------->stmtList primitiveStmt
+----------------------->stmtList primitiveStmt
+------------------------>primitiveStmt
+------------------------->varDeclaration
+-------------------------->simpleVarDeclaration
+--------------------------->TYPE ID
+---------------------------->float
+---------------------------->nota
+------------------------>outOp
+------------------------->WRITE PARENL outConst PARENR SEMIC
+-------------------------->write
+-------------------------->STRING
+--------------------------->"Digite a nota da prova "
+----------------------->outOp
+------------------------>WRITE PARENL outConst PARENR SEMIC
+------------------------->write
+------------------------->simpleExp
+-------------------------->binLogicalExp
+--------------------------->relationalExp
+---------------------------->sumExp
+----------------------------->mulExp
+------------------------------>factor
+------------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~---------------------->outOp
+----------------------->WRITELN PARENL outConst PARENR SEMIC
+------------------------>writeln
+------------------------>STRING
+------------------------->":"
+--------------------->inOp
+---------------------->READ PARENL ID PARENR SEMIC
+----------------------->read
+----------------------->nota
+-------------------->exprStmt
+--------------------->expression SEMIC
+---------------------->assignExp
+----------------------->ID ASSIGN expression
+------------------------>notas
+------------------------>=
+------------------------>simpleExp
+------------------------->binListExp
+-------------------------->factor APPEND factor
+--------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~--------------------------->:
+--------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~-------------->condStmt
+--------------->ifStmt primitiveStmt elseStmt
+---------------->IF PARENL simpleExp PARENR
+----------------->if
+----------------->binLogicalExp
+------------------>relationalExp
+------------------->relationalExp relationalOp sumExp
+-------------------->sumExp
+--------------------->mulExp
+---------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~1
+-------------------->EQUALS
+--------------------->==
+-------------------->mulExp
+--------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~2
+---------------->compoundStmt
+----------------->compoundStmt
+------------------>stmtList primitiveStmt
+------------------->stmtList primitiveStmt
+-------------------->stmtList primitiveStmt
+--------------------->primitiveStmt
+---------------------->varDeclaration
+----------------------->simpleVarDeclaration
+------------------------>TYPE ID
+------------------------->int
+------------------------->abacaxi
+--------------------->exprStmt
+---------------------->expression SEMIC
+----------------------->assignExp
+------------------------>ID ASSIGN expression
+------------------------->abacaxi
+------------------------->=
+------------------------->simpleExp
+-------------------------->binLogicalExp
+--------------------------->relationalExp
+---------------------------->sumExp
+----------------------------->mulExp
+------------------------------>factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~0
+-------------------->outOp
+--------------------->WRITELN PARENL outConst PARENR SEMIC
+---------------------->writeln
+---------------------->simpleExp
+----------------------->binLogicalExp
+------------------------>relationalExp
+------------------------->sumExp
+-------------------------->mulExp
+--------------------------->factor
+---------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------------->condStmt
+-------------------->ifStmt primitiveStmt
+--------------------->IF PARENL simpleExp PARENR
+---------------------->if
+---------------------->binLogicalExp
+----------------------->relationalExp
+------------------------>relationalExp relationalOp sumExp
+------------------------->sumExp
+-------------------------->mulExp
+--------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~2
+------------------------->DIFFERENT
+-------------------------->!=
+------------------------->mulExp
+-------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~3
+--------------------->compoundStmt
+---------------------->compoundStmt
+----------------------->stmtList primitiveStmt
+------------------------>stmtList primitiveStmt
+------------------------->primitiveStmt
+-------------------------->varDeclaration
+--------------------------->simpleVarDeclaration
+---------------------------->TYPE ID
+----------------------------->float
+----------------------------->pera
+------------------------->exprStmt
+-------------------------->expression SEMIC
+--------------------------->assignExp
+---------------------------->ID ASSIGN expression
+----------------------------->pera
+----------------------------->=
+----------------------------->simpleExp
+------------------------------>binLogicalExp
+------------------------------->relationalExp
+-------------------------------->sumExp
+--------------------------------->mulExp
+---------------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~1.100000
+------------------------>outOp
+------------------------->WRITELN PARENL outConst PARENR SEMIC
+-------------------------->writeln
+-------------------------->simpleExp
+--------------------------->binLogicalExp
+---------------------------->relationalExp
+----------------------------->sumExp
+------------------------------>mulExp
+------------------------------->factor
+-------------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~---------------->ELSE primitiveStmt
+----------------->else
+----------------->compoundStmt
+------------------>compoundStmt
+------------------->stmtList primitiveStmt
+-------------------->stmtList primitiveStmt
+--------------------->stmtList primitiveStmt
+---------------------->primitiveStmt
+----------------------->varDeclaration
+------------------------>simpleVarDeclaration
+------------------------->TYPE ID
+-------------------------->int
+-------------------------->banana
+---------------------->exprStmt
+----------------------->expression SEMIC
+------------------------>assignExp
+------------------------->ID ASSIGN expression
+-------------------------->banana
+-------------------------->=
+-------------------------->simpleExp
+--------------------------->binLogicalExp
+---------------------------->relationalExp
+----------------------------->sumExp
+------------------------------>mulExp
+------------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~2
+--------------------->outOp
+---------------------->WRITELN PARENL outConst PARENR SEMIC
+----------------------->writeln
+----------------------->simpleExp
+------------------------>binLogicalExp
+------------------------->relationalExp
+-------------------------->sumExp
+--------------------------->mulExp
+---------------------------->factor
+----------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-------------------->condStmt
+--------------------->ifStmt primitiveStmt
+---------------------->IF PARENL simpleExp PARENR
+----------------------->if
+----------------------->binLogicalExp
+------------------------>relationalExp
+------------------------->relationalExp relationalOp sumExp
+-------------------------->sumExp
+--------------------------->mulExp
+---------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~2
+-------------------------->DIFFERENT
+--------------------------->!=
+-------------------------->mulExp
+--------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~3
+---------------------->compoundStmt
+----------------------->compoundStmt
+------------------------>stmtList primitiveStmt
+------------------------->stmtList primitiveStmt
+-------------------------->primitiveStmt
+--------------------------->varDeclaration
+---------------------------->simpleVarDeclaration
+----------------------------->TYPE ID
+------------------------------>float
+------------------------------>maca
+-------------------------->exprStmt
+--------------------------->expression SEMIC
+---------------------------->assignExp
+----------------------------->ID ASSIGN expression
+------------------------------>maca
+------------------------------>=
+------------------------------>simpleExp
+------------------------------->binLogicalExp
+-------------------------------->relationalExp
+--------------------------------->sumExp
+---------------------------------->mulExp
+----------------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~1.100000
+------------------------->outOp
+-------------------------->WRITELN PARENL outConst PARENR SEMIC
+--------------------------->writeln
+--------------------------->simpleExp
+---------------------------->binLogicalExp
+----------------------------->relationalExp
+------------------------------>sumExp
+------------------------------->mulExp
+-------------------------------->factor
+--------------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------->varDeclaration
+-------------->simpleVarDeclaration
+--------------->TYPE ID
+---------------->float
+---------------->soma
+------------>exprStmt
+------------->expression SEMIC
+-------------->assignExp
+--------------->ID ASSIGN expression
+---------------->soma
+---------------->=
+---------------->simpleExp
+----------------->binLogicalExp
+------------------>relationalExp
+------------------->sumExp
+-------------------->mulExp
+--------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~0
+----------->varDeclaration
+------------>simpleVarDeclaration
+------------->TYPE ID
+-------------->float list
+-------------->AUX
+---------->iterStmt
+----------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
+------------>for
+------------>ID ASSIGN expression
+------------->AUX
+------------->=
+------------->simpleExp
+-------------->binLogicalExp
+--------------->relationalExp
+---------------->sumExp
+----------------->mulExp
+------------------>factor
+------------------->ID
+~~~~~~~~~~~~~~~~~~~~------------>binLogicalExp
+------------->relationalExp
+-------------->relationalExp relationalOp sumExp
+--------------->sumExp
+---------------->mulExp
+----------------->factor
+------------------>ID
+~~~~~~~~~~~~~~~~~~~--------------->DIFFERENT
+---------------->!=
+--------------->mulExp
+---------------->factor
+------------>ID ASSIGN expression
+------------->AUX
+------------->=
+------------->simpleExp
+-------------->binLogicalExp
+--------------->relationalExp
+---------------->sumExp
+----------------->mulExp
+------------------>unaryListExp
+------------------->! factor
+-------------------->!
+-------------------->ID
+~~~~~~~~~~~~~~~~~~~~~------------>exprStmt
+------------->expression SEMIC
+-------------->assignExp
+--------------->ID ASSIGN expression
+---------------->soma
+---------------->=
+---------------->simpleExp
+----------------->binLogicalExp
+------------------>relationalExp
+------------------->sumExp
+-------------------->sumExp add mulExp
+--------------------->mulExp
+---------------------->factor
+----------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~--------------------->+
+--------------------->unaryListExp
+---------------------->? factor
+----------------------->?
+----------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~--------->varDeclaration
+---------->simpleVarDeclaration
+----------->TYPE ID
+------------>float
+------------>media1
+-------->varDeclaration
+--------->simpleVarDeclaration
+---------->TYPE ID
+----------->float
+----------->media2
+------->exprStmt
+-------->expression SEMIC
+--------->assignExp
+---------->ID ASSIGN expression
+----------->media1
+----------->=
+----------->simpleExp
+------------>binLogicalExp
+------------->relationalExp
+-------------->sumExp
+--------------->sumExp sub mulExp
+---------------->mulExp
+----------------->mulExp mulOp factor
+------------------>factor
+------------------->ID
+~~~~~~~~~~~~~~~~~~~~------------------>/
+------------------>ID
+~~~~~~~~~~~~~~~~~~~---------------->-
+---------------->mulExp mulOp factor
+----------------->factor
+~~~~~~~~~~~~~~~~~~10
+----------------->*
+----------------->PARENL simpleExp PARENR
+------------------>binLogicalExp
+------------------->relationalExp
+-------------------->sumExp
+--------------------->mulExp
+---------------------->mulExp mulOp factor
+----------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~1
+----------------------->/
+~~~~~~~~~~~~~~~~~~~~~~~10
+------>exprStmt
+------->expression SEMIC
+-------->assignExp
+--------->ID ASSIGN expression
+---------->media2
+---------->=
+---------->simpleExp
+----------->binLogicalExp
+------------>relationalExp
+------------->sumExp
+-------------->mulExp
+--------------->mulExp mulOp factor
+---------------->factor
+----------------->ID
+~~~~~~~~~~~~~~~~~~---------------->/
+---------------->ID
+~~~~~~~~~~~~~~~~~----->condStmt
+------>ifStmt primitiveStmt elseStmt
+------->IF PARENL simpleExp PARENR
+-------->if
+-------->binLogicalExp
+--------->relationalExp
+---------->relationalExp relationalOp sumExp
+----------->sumExp
+------------>mulExp
+------------->factor
+-------------->ID
+~~~~~~~~~~~~~~~----------->DIFFERENT
+------------>!=
+----------->mulExp
+------------>factor
+------------->ID
+~~~~~~~~~~~~~~------->outOp
+-------->WRITELN PARENL outConst PARENR SEMIC
+--------->writeln
+--------->STRING
+---------->"Há um problema no cálculo da média"
+------->ELSE primitiveStmt
+-------->else
+-------->condStmt
+--------->ifStmt primitiveStmt
+---------->IF PARENL simpleExp PARENR
+----------->if
+----------->binLogicalExp
+------------>binLogicalExp binLogicalOp relationalOp
+------------->relationalExp
+-------------->relationalExp relationalOp sumExp
+--------------->sumExp
+---------------->mulExp
+----------------->factor
+------------------>ID
+~~~~~~~~~~~~~~~~~~~--------------->EQUALS
+---------------->==
+--------------->mulExp
+---------------->factor
+----------------->ID
+~~~~~~~~~~~~~~~~~~------------->AND
+-------------->&&
+------------->relationalExp relationalOp sumExp
+-------------->sumExp
+--------------->mulExp
+---------------->factor
+----------------->ID
+~~~~~~~~~~~~~~~~~~-------------->GREATEQ
+--------------->>=
+-------------->mulExp
+--------------->factor
+~~~~~~~~~~~~~~~~5
+---------->outOp
+----------->WRITELN PARENL outConst PARENR SEMIC
+------------>writeln
+------------>STRING
+------------->"Parabéns!"
+---->returnStmt
+----->RETURN expression SEMIC
+------>return
+------>simpleExp
+------->binLogicalExp
+-------->relationalExp
+--------->sumExp
+---------->mulExp
+----------->factor
+~~~~~~~~~~~~0
 
 
  There is 0 errors and 0 warnings in the file

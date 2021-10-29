@@ -8,8 +8,7 @@ Id: 'main' at line: 1, column: 5
 '(' at line: 1, column: 9
 ')' at line: 1, column: 10
 '{' on line: 2, column: 1
-Type: 'int' on line: 4, column: 3
-ListType: 'list' on line: 4, column: 7
+Type: 'int list' on line: 4, column: 3
 Id: 'x' at line: 4, column: 12
 ';' at line: 4, column: 13
 Type: 'int' on line: 5, column: 3
@@ -71,7 +70,7 @@ Integer: '0' at line: 14, column: 10
 |         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |
 
 |   main                |    func                         |      int                     |         0            |         0          |
-|   x                   |    var                          |      list                    |         0            |         0          |
+|   x                   |    var                          |      int list                |         0            |         0          |
 |   i                   |    var                          |      int                     |         0            |         0          |
 |   n                   |    var                          |      int                     |         0            |         0          |
 |   elem                |    var                          |      int                     |         0            |         0          |
@@ -79,229 +78,110 @@ Integer: '0' at line: 14, column: 10
 
 --------------------------------tree--------------------------------
 
-
-declaration
--->   funcDeclaration
-
---->   TYPE ID PARENL PARENR compoundStmt
-
----->   int
-
------>   main
-
------->   stmtList primitiveStmt
-
-------->   stmtList primitiveStmt
-
--------->   stmtList primitiveStmt
-
---------->   stmtList primitiveStmt
-
----------->   stmtList primitiveStmt
-
------------>   primitiveStmt
-
------------->   varDeclaration
-
-------------->   simpleVarDeclaration
-
--------------->   TYPE ID
-
---------------->   int
-
----------------->   list
-
------------------>   x
-
------------->   varDeclaration
-
-------------->   simpleVarDeclaration
-
--------------->   TYPE ID
-
---------------->   int
-
----------------->   i
-
------------>   varDeclaration
-
------------->   simpleVarDeclaration
-
-------------->   TYPE ID
-
--------------->   int
-
---------------->   n
-
----------->   varDeclaration
-
------------>   simpleVarDeclaration
-
------------->   TYPE ID
-
-------------->   int
-
--------------->   elem
-
---------->   iterStmt
-
----------->   FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
-
------------>   for
-
------------->   ID ASSIGN expression
-
-------------->   i
-
--------------->   =
-
---------------->   simpleExp
-
----------------->   binLogicalExp
-
------------------>   relationalExp
-
------------------->   sumExp
-
-------------------->   mulExp
-
--------------------->   factor
-
---------------------->   constOp
-
----------------------->   0
-
-------------->   binLogicalExp
-
--------------->   relationalExp
-
---------------->   relationalExp relationalOp sumExp
-
----------------->   sumExp
-
------------------>   mulExp
-
------------------->   factor
-
-------------------->   ID
-
--------------------->   i
-
------------------>   SMALLER
-
------------------->   <
-
------------------->   mulExp
-
-------------------->   factor
-
--------------------->   ID
-
---------------------->   n
-
--------------->   ID ASSIGN expression
-
---------------->   i
-
----------------->   =
-
------------------>   simpleExp
-
------------------->   binLogicalExp
-
-------------------->   relationalExp
-
--------------------->   sumExp
-
---------------------->   sumExp add mulExp
-
----------------------->   mulExp
-
------------------------>   factor
-
------------------------->   ID
-
-------------------------->   i
-
------------------------>   +
-
------------------------->   factor
-
-------------------------->   constOp
-
--------------------------->   1
-
---------------->   compoundStmt
-
----------------->   compoundStmt
-
------------------>   stmtList primitiveStmt
-
------------------->   stmtList primitiveStmt
-
-------------------->   primitiveStmt
-
--------------------->   outOp
-
---------------------->   WRITELN PARENL outConst PARENR SEMIC
-
----------------------->   writeln
-
------------------------>   simpleExp
-
------------------------->   binLogicalExp
-
-------------------------->   relationalExp
-
--------------------------->   sumExp
-
---------------------------->   mulExp
-
----------------------------->   factor
-
------------------------------>   ID
-
------------------------------->   n
-
--------------------->   inOp
-
---------------------->   READ PARENL ID PARENR SEMIC
-
----------------------->   read
-
------------------------>   elem
-
-------------------->   outOp
-
--------------------->   WRITE PARENL outConst PARENR SEMIC
-
---------------------->   write
-
----------------------->   STRING
-
------------------------>   "oi"
-
--------->   returnStmt
-
---------->   RETURN expression SEMIC
-
----------->   return
-
------------>   simpleExp
-
------------->   binLogicalExp
-
-------------->   relationalExp
-
--------------->   sumExp
-
---------------->   mulExp
-
----------------->   factor
-
------------------>   constOp
-
------------------->   0
+>declaration
+->funcDeclaration
+-->TYPE ID PARENL PARENR stmtList ENDFUNC 
+--->int
+--->main
+--->stmtList primitiveStmt
+---->stmtList primitiveStmt
+----->stmtList primitiveStmt
+------>stmtList primitiveStmt
+------->stmtList primitiveStmt
+-------->primitiveStmt
+--------->varDeclaration
+---------->simpleVarDeclaration
+----------->TYPE ID
+------------>int list
+------------>x
+-------->varDeclaration
+--------->simpleVarDeclaration
+---------->TYPE ID
+----------->int
+----------->i
+------->varDeclaration
+-------->simpleVarDeclaration
+--------->TYPE ID
+---------->int
+---------->n
+------>varDeclaration
+------->simpleVarDeclaration
+-------->TYPE ID
+--------->int
+--------->elem
+----->iterStmt
+------>FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
+------->for
+------->ID ASSIGN expression
+-------->i
+-------->=
+-------->simpleExp
+--------->binLogicalExp
+---------->relationalExp
+----------->sumExp
+------------>mulExp
+------------->factor
+~~~~~~~~~~~~~~0
+------->binLogicalExp
+-------->relationalExp
+--------->relationalExp relationalOp sumExp
+---------->sumExp
+----------->mulExp
+------------>factor
+------------->ID
+~~~~~~~~~~~~~~---------->SMALLER
+-----------><
+---------->mulExp
+----------->factor
+------------>ID
+~~~~~~~~~~~~~------->ID ASSIGN expression
+-------->i
+-------->=
+-------->simpleExp
+--------->binLogicalExp
+---------->relationalExp
+----------->sumExp
+------------>sumExp add mulExp
+------------->mulExp
+-------------->factor
+--------------->ID
+~~~~~~~~~~~~~~~~------------->+
+------------->factor
+~~~~~~~~~~~~~~1
+------->compoundStmt
+-------->compoundStmt
+--------->stmtList primitiveStmt
+---------->stmtList primitiveStmt
+----------->primitiveStmt
+------------>outOp
+------------->WRITELN PARENL outConst PARENR SEMIC
+-------------->writeln
+-------------->simpleExp
+--------------->binLogicalExp
+---------------->relationalExp
+----------------->sumExp
+------------------>mulExp
+------------------->factor
+-------------------->ID
+~~~~~~~~~~~~~~~~~~~~~----------->inOp
+------------>READ PARENL ID PARENR SEMIC
+------------->read
+------------->elem
+---------->outOp
+----------->WRITE PARENL outConst PARENR SEMIC
+------------>write
+------------>STRING
+------------->"oi"
+---->returnStmt
+----->RETURN expression SEMIC
+------>return
+------>simpleExp
+------->binLogicalExp
+-------->relationalExp
+--------->sumExp
+---------->mulExp
+----------->factor
+~~~~~~~~~~~~0
 
 
  There is 0 errors and 0 warnings in the file

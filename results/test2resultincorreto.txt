@@ -25,26 +25,32 @@ Semantic errorVar: <aa> Not Declared, line 4, column 12
 
 Type: 'float' on line: 5, column: 5
 '*' at line: 5, column: 10
-syntax error, unexpected MULT, expecting ID or LISTTYPE
-syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 5, coluna: 11
+syntax error, unexpected MULT, expecting ID
+syntax error, unexpected MULT, expecting ID, linha: 5, coluna: 11
 Id: 'b' at line: 5, column: 12
 ';' at line: 5, column: 13
+Semantic error
+var b not declared, line 5, column 14
+
 '}' at line: 6, column: 1
 Type: 'int' on line: 8, column: 1
-syntax error, unexpected MULT, expecting ID or LISTTYPE
-syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 8, coluna: 4
+Semantic Error
+function min without expected return, line 8, column 4
+
 Id: 'maini' at line: 8, column: 5
 '(' at line: 8, column: 10
 Keyword [HEADLIST]: '?' at line: 8, column: 11
+syntax error, unexpected HEADLIST, expecting TYPE or PARENR
+syntax error, unexpected HEADLIST, expecting TYPE or PARENR, linha: 8, coluna: 12
 ')' at line: 8, column: 12
-syntax error, unexpected MULT, expecting ID or LISTTYPE
-syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 8, coluna: 13
 '{' on line: 8, column: 13
 '}' at line: 10, column: 1
 
 ERROR!!
 @ at line: 11, column: 5
 
+syntax error, unexpected HEADLIST, expecting TYPE or PARENR
+syntax error, unexpected HEADLIST, expecting TYPE or PARENR, linha: 12, coluna: 1
 
 
 #### EOF ####
@@ -52,4 +58,4 @@ ERROR!!
 Semantic Error --> Undefined reference to 'main'
 
 
-There were 5 errors in the file
+There were 4 errors in the file

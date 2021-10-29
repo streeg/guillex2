@@ -47,16 +47,10 @@ Id: 'lst' at line: 18, column: 5
 '=' at line: 18, column: 9
 Constant: 'NIL' at line: 18, column: 11
 ';' at line: 18, column: 14
-Semantic Error
-var lst from type int list receiving wrong type value, line 18, column 15
-
 Id: 'lst2' at line: 19, column: 5
 '=' at line: 19, column: 10
 Constant: 'NIL' at line: 19, column: 12
 ';' at line: 19, column: 15
-Semantic Error
-var lst2 from type int list receiving wrong type value, line 19, column 16
-
 Id: 'count' at line: 21, column: 5
 '=' at line: 21, column: 11
 Integer: '10' at line: 21, column: 13
@@ -601,5 +595,5 @@ Integer: '0' at line: 47, column: 12
 ~~~~~~~~~~~~0
 
 
- There is 4 warnings in the file
+ There is 2 warnings in the file
 

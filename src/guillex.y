@@ -519,7 +519,7 @@ char checkTypes(char type1, char type2) {
     return 'f';
   if (type1 == 'f' && type2 == 'i')
     return 'f';
-  return 'n';
+  return 'e';
 }
 
 bool checkTypesVar(char varType, char value) {
@@ -533,7 +533,7 @@ bool checkTypesVar(char varType, char value) {
 }
 
 int checkTypesReturnFunction(char value, char returnType) {
-
+  printf("-----<>%c, %c<>-------", value, returnType);
   if (returnType == 'v' && value != 'x')
     return 0;
   if (returnType != 'v' && value == 'x')
@@ -614,7 +614,7 @@ funcDeclaration:
     TYPE ID PARENL {scope++; pushStack(scope);} params PARENR STFUNC {
       UT_string *r;
       utstring_new(r);
-      errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters, 0);
+      errors += addSymbol($2, "func", $1, STACK_TOP(stackScope) -> value, parameters, r);
       addFunc($2);
       parameters = 0;
       } stmtList ENDFUNC {
@@ -689,9 +689,11 @@ simpleVarDeclaration:
 params:
     params COMMA param {
       $$ = createNode2("params COMMA param", $1, $3);
+      $$ -> nodeType = $1 -> nodeType;
       }
   | param { 
     $$ = createNode1("param", $1); 
+    $$ -> nodeType = $1 -> nodeType;
     }
   | error {
       $$ = createNodeE();
@@ -714,6 +716,7 @@ param:
 compoundStmt:
     STFUNC stmtList ENDFUNC {
       $$ = createNode1("compoundStmt", $2);
+      $$ -> nodeType = $2 -> nodeType;
     }
   ;
 
@@ -727,6 +730,7 @@ stmtList:
     }
   | primitiveStmt {
     $$ = createNode1("primitiveStmt", $1);
+    $$ -> returnType = $1 -> returnType;
   }
   | error {
       $$ = createNodeE();
@@ -740,6 +744,7 @@ primitiveStmt:
     }
   | compoundStmt {
     $$ = createNode1("compoundStmt", $1);
+    $$ -> nodeType = $1 -> nodeType;
   }
   | condStmt {
     $$ = createNode1("condStmt", $1);
@@ -759,6 +764,7 @@ primitiveStmt:
   }
   | varDeclaration {
     $$ = createNode1("varDeclaration", $1);
+    $$ -> nodeType = $1 -> nodeType;
   }
   ;
 
@@ -936,6 +942,7 @@ outConst:
   | simpleExp {
       $$ = createNode1("simpleExp", $1);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
   }
   ;
 
@@ -943,7 +950,7 @@ outConst:
 	factor APPEND factor {
 		$$ = createNode3("factor APPEND factor", $1, createNode0(":"), $3);		
     $$ -> saved = $1 -> saved;
-      $$ -> nodeType = $1 -> nodeType;
+    $$ -> nodeType = $1 -> nodeType;
 	}
 	| factor MAP factor {
 		
@@ -961,7 +968,7 @@ unaryListExp:
 	HEADLIST factor {
 		$$ = createNode2("? factor", createNode0("?"), $2);
     $$ -> saved = $2 -> saved;
-      $$ -> nodeType = $2 -> nodeType;	
+    $$ -> nodeType = $2 -> nodeType;	
 	}
 	| TAILLIST factor {
     $$ = createNode2("! factor", createNode0("!"), $2);
@@ -1157,6 +1164,7 @@ fCall:
     if (findSymbolFunc($1) != NULL){
       if (checkNumberOfParams(argsParams, $1)){
         $$ = createNode1("ID PARENL PARENR", createNode0($1));
+        $$ -> nodeType = findSymbolFunc($1) -> varFuncName[0];
         $$ -> saved = $1;
       }else{
         printf("Semantic error");
@@ -1179,11 +1187,13 @@ callParams:
       argsParams++;
       $$ = createNode2("callParams COMMA simpleExp", $1, $3);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $3 -> nodeType;
     }
   | simpleExp {
       argsParams++;
       $$ = createNode1("simpleExp", $1);
       $$ -> saved = $1 -> saved;
+      $$ -> nodeType = $1 -> nodeType;
   }
   ;
 

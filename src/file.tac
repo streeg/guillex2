@@ -1,45 +1,39 @@
 .table
 .code
+mov $1, 0
+mov $2, 0.0
+read_list:
+mov $4, 0
+mov $4, -435.700012
+mov $5, 0
+mov $5, (null)
+mov $4, 0
+add $6, i, 1
+mov $4, $6
+mov $6, 0
+println "Digite o elemento da lista: "
+mov $5, elem
+succ:
+add $8, i, 1
+leq_10:
 main:
-mov $1, 0.0
-mov $2, 0
-println "Qual o número de provas?"
-mov $3, 0
-mov $3, 0
-add $4, i, 1
-mov $3, $4
-mov $4, 0.0
-print "Digite a nota da prova "
-print n
-println ":"
-mov $1, nota
-mov $5, 0
-mov $5, 0
-println nota
-mov $6, 0.0
-mov $6, 1.100000
-println nota
-mov $7, 0
-mov $7, 2
-println nota
-mov $8, 0.0
-mov $8, 1.100000
-println nota
-mov $9, 0.0
+println "Digite os número de elementos da lista: "
 mov $9, 0
 mov $10, 0.0
-mov $10, notas
+mov $1, read_list
+mov $2, (null)
 mov $10, (null)
-add $11, soma, (null)
-mov $9, $11
 mov $11, 0.0
-mov $12, 0.0
-div $13, soma, n
-div $13, 1, 10
-mul $13, 10, $13
-sub $13, $13, $13
-mov $11, $13
-div $13, soma, n
+mov $12, 0
+mov $12, 0
+mov $11, FL10
+mov $11, (null)
+add $13, n, 1
 mov $12, $13
-println "Há um problema no cálculo da média"
-println "Parabéns!"
+print (null)
+print " "
+println " "
+print "A nova lista tem "
+print n
+println " elementos."
+println "A nova lista não possui elementos."

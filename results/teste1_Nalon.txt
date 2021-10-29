@@ -50,6 +50,9 @@ Integer: '2' at line: 10, column: 33
 ';' at line: 10, column: 35
 '}' at line: 11, column: 1
 Type: 'int' on line: 13, column: 1
+Semantic Error
+function fib without expected return, line 13, column 4
+
 Id: 'main' at line: 13, column: 5
 '(' at line: 13, column: 9
 ')' at line: 13, column: 10
@@ -83,7 +86,10 @@ Id: 'i' at line: 20, column: 15
 ')' at line: 20, column: 16
 ')' at line: 20, column: 17
 ';' at line: 20, column: 18
-'}' at line: 21, column: 1
+Keyword [RETURN]: 'return' at line: 21, column: 3
+Integer: '0' at line: 21, column: 10
+';' at line: 21, column: 11
+'}' at line: 22, column: 1
 
 
 #### EOF ####
@@ -104,390 +110,196 @@ Id: 'i' at line: 20, column: 15
 
 --------------------------------tree--------------------------------
 
-
-declarationsList declaration
--->   declarationsList declaration
-
---->   declaration
-
----->   varDeclaration
-
------>   simpleVarDeclaration
-
------->   TYPE ID
-
-------->   int
-
--------->   i
-
----->   funcDeclaration
-
------>   TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
-
------->   int
-
-------->   fib
-
--------->   param
-
---------->   TYPE ID
-
----------->   int
-
------------>   i
-
---------->   primitiveStmt
-
----------->   condStmt
-
------------>   ifStmt primitiveStmt elseStmt
-
------------->   IF PARENL simpleExp PARENR
-
-------------->   if
-
--------------->   binLogicalExp
-
---------------->   relationalExp
-
----------------->   relationalExp relationalOp sumExp
-
------------------>   sumExp
-
------------------->   mulExp
-
-------------------->   factor
-
--------------------->   ID
-
---------------------->   i
-
------------------->   EQUALS
-
-------------------->   ==
-
-------------------->   mulExp
-
--------------------->   factor
-
---------------------->   constOp
-
----------------------->   1
-
-------------->   returnStmt
-
--------------->   RETURN expression SEMIC
-
---------------->   return
-
----------------->   simpleExp
-
------------------>   binLogicalExp
-
------------------->   relationalExp
-
-------------------->   sumExp
-
--------------------->   mulExp
-
---------------------->   factor
-
----------------------->   constOp
-
------------------------>   1
-
--------------->   ELSE primitiveStmt
-
---------------->   else
-
----------------->   condStmt
-
------------------>   ifStmt primitiveStmt elseStmt
-
------------------->   IF PARENL simpleExp PARENR
-
-------------------->   if
-
--------------------->   binLogicalExp
-
---------------------->   relationalExp
-
----------------------->   relationalExp relationalOp sumExp
-
------------------------>   sumExp
-
------------------------->   mulExp
-
-------------------------->   factor
-
--------------------------->   ID
-
---------------------------->   i
-
------------------------->   EQUALS
-
-------------------------->   ==
-
-------------------------->   mulExp
-
--------------------------->   factor
-
---------------------------->   constOp
-
----------------------------->   2
-
-------------------->   returnStmt
-
--------------------->   RETURN expression SEMIC
-
---------------------->   return
-
----------------------->   simpleExp
-
------------------------>   binLogicalExp
-
------------------------->   relationalExp
-
-------------------------->   sumExp
-
--------------------------->   mulExp
-
---------------------------->   factor
-
----------------------------->   constOp
-
------------------------------>   1
-
--------------------->   ELSE primitiveStmt
-
---------------------->   else
-
----------------------->   returnStmt
-
------------------------>   RETURN expression SEMIC
-
------------------------->   return
-
-------------------------->   simpleExp
-
--------------------------->   binLogicalExp
-
---------------------------->   relationalExp
-
----------------------------->   sumExp
-
------------------------------>   sumExp add mulExp
-
------------------------------->   mulExp
-
-------------------------------->   factor
-
--------------------------------->   fCall
-
---------------------------------->   ID PARENL callParams PARENR
-
----------------------------------->   fib
-
------------------------------------>   simpleExp
-
------------------------------------->   binLogicalExp
-
-------------------------------------->   relationalExp
-
--------------------------------------->   sumExp
-
---------------------------------------->   sumExp sub mulExp
-
----------------------------------------->   mulExp
-
------------------------------------------>   factor
-
------------------------------------------->   ID
-
-------------------------------------------->   i
-
------------------------------------------>   -
-
------------------------------------------->   factor
-
-------------------------------------------->   constOp
-
--------------------------------------------->   1
-
-------------------------------->   +
-
--------------------------------->   factor
-
---------------------------------->   fCall
-
----------------------------------->   ID PARENL callParams PARENR
-
------------------------------------>   fib
-
------------------------------------->   simpleExp
-
-------------------------------------->   binLogicalExp
-
--------------------------------------->   relationalExp
-
---------------------------------------->   sumExp
-
----------------------------------------->   sumExp sub mulExp
-
------------------------------------------>   mulExp
-
------------------------------------------->   factor
-
-------------------------------------------->   ID
-
--------------------------------------------->   i
-
------------------------------------------->   -
-
-------------------------------------------->   factor
-
--------------------------------------------->   constOp
-
---------------------------------------------->   2
-
---->   funcDeclaration
-
----->   TYPE ID PARENL PARENR compoundStmt
-
------>   int
-
------->   main
-
-------->   stmtList primitiveStmt
-
--------->   stmtList primitiveStmt
-
---------->   stmtList primitiveStmt
-
----------->   primitiveStmt
-
------------>   varDeclaration
-
------------->   simpleVarDeclaration
-
-------------->   TYPE ID
-
--------------->   int
-
---------------->   i
-
------------>   exprStmt
-
------------->   expression SEMIC
-
-------------->   assignExp
-
--------------->   ID ASSIGN expression
-
---------------->   i
-
----------------->   =
-
------------------>   simpleExp
-
------------------->   binLogicalExp
-
-------------------->   relationalExp
-
--------------------->   sumExp
-
---------------------->   mulExp
-
----------------------->   factor
-
------------------------>   constOp
-
------------------------->   0
-
----------->   inOp
-
------------>   READ PARENL ID PARENR SEMIC
-
------------->   read
-
-------------->   i
-
---------->   condStmt
-
----------->   ifStmt primitiveStmt
-
------------>   IF PARENL simpleExp PARENR
-
------------->   if
-
-------------->   binLogicalExp
-
--------------->   relationalExp
-
---------------->   relationalExp relationalOp sumExp
-
----------------->   sumExp
-
------------------>   mulExp
-
------------------->   factor
-
-------------------->   ID
-
--------------------->   i
-
------------------>   GREATER
-
------------------->   >
-
------------------->   mulExp
-
-------------------->   factor
-
--------------------->   constOp
-
---------------------->   0
-
------------->   outOp
-
-------------->   WRITE PARENL outConst PARENR SEMIC
-
--------------->   write
-
---------------->   simpleExp
-
----------------->   binLogicalExp
-
------------------>   relationalExp
-
------------------->   sumExp
-
-------------------->   mulExp
-
--------------------->   factor
-
---------------------->   fCall
-
----------------------->   ID PARENL callParams PARENR
-
------------------------>   fib
-
------------------------->   simpleExp
-
-------------------------->   binLogicalExp
-
--------------------------->   relationalExp
-
---------------------------->   sumExp
-
----------------------------->   mulExp
-
------------------------------>   factor
-
------------------------------->   ID
-
-------------------------------->   i
-
-
- There is 1 warnings in the file
+>declarationsList declaration
+->declarationsList declaration
+-->declaration
+--->varDeclaration
+---->simpleVarDeclaration
+----->TYPE ID
+------>int
+------>i
+-->funcDeclaration
+--->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
+---->int
+---->fib
+---->param
+----->TYPE ID
+------>int
+------>i
+---->primitiveStmt
+----->condStmt
+------>ifStmt primitiveStmt elseStmt
+------->IF PARENL simpleExp PARENR
+-------->if
+-------->binLogicalExp
+--------->relationalExp
+---------->relationalExp relationalOp sumExp
+----------->sumExp
+------------>mulExp
+------------->factor
+-------------->ID
+~~~~~~~~~~~~~~~----------->EQUALS
+------------>==
+----------->mulExp
+------------>factor
+~~~~~~~~~~~~~1
+------->returnStmt
+-------->RETURN expression SEMIC
+--------->return
+--------->simpleExp
+---------->binLogicalExp
+----------->relationalExp
+------------>sumExp
+------------->mulExp
+-------------->factor
+~~~~~~~~~~~~~~~1
+------->ELSE primitiveStmt
+-------->else
+-------->condStmt
+--------->ifStmt primitiveStmt elseStmt
+---------->IF PARENL simpleExp PARENR
+----------->if
+----------->binLogicalExp
+------------>relationalExp
+------------->relationalExp relationalOp sumExp
+-------------->sumExp
+--------------->mulExp
+---------------->factor
+----------------->ID
+~~~~~~~~~~~~~~~~~~-------------->EQUALS
+--------------->==
+-------------->mulExp
+--------------->factor
+~~~~~~~~~~~~~~~~2
+---------->returnStmt
+----------->RETURN expression SEMIC
+------------>return
+------------>simpleExp
+------------->binLogicalExp
+-------------->relationalExp
+--------------->sumExp
+---------------->mulExp
+----------------->factor
+~~~~~~~~~~~~~~~~~~1
+---------->ELSE primitiveStmt
+----------->else
+----------->returnStmt
+------------>RETURN expression SEMIC
+------------->return
+------------->simpleExp
+-------------->binLogicalExp
+--------------->relationalExp
+---------------->sumExp
+----------------->sumExp add mulExp
+------------------>mulExp
+------------------->factor
+-------------------->fCall
+--------------------->ID PARENL callParams PARENR
+---------------------->fib
+---------------------->simpleExp
+----------------------->binLogicalExp
+------------------------>relationalExp
+------------------------->sumExp
+-------------------------->sumExp sub mulExp
+--------------------------->mulExp
+---------------------------->factor
+----------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--------------------------->-
+--------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~1
+------------------>+
+------------------>factor
+------------------->fCall
+-------------------->ID PARENL callParams PARENR
+--------------------->fib
+--------------------->simpleExp
+---------------------->binLogicalExp
+----------------------->relationalExp
+------------------------>sumExp
+------------------------->sumExp sub mulExp
+-------------------------->mulExp
+--------------------------->factor
+---------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-------------------------->-
+-------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~2
+->funcDeclaration
+-->TYPE ID PARENL PARENR stmtList ENDFUNC 
+--->int
+--->main
+--->stmtList primitiveStmt
+---->stmtList primitiveStmt
+----->stmtList primitiveStmt
+------>stmtList primitiveStmt
+------->primitiveStmt
+-------->varDeclaration
+--------->simpleVarDeclaration
+---------->TYPE ID
+----------->int
+----------->i
+------->exprStmt
+-------->expression SEMIC
+--------->assignExp
+---------->ID ASSIGN expression
+----------->i
+----------->=
+----------->simpleExp
+------------>binLogicalExp
+------------->relationalExp
+-------------->sumExp
+--------------->mulExp
+---------------->factor
+~~~~~~~~~~~~~~~~~0
+------>inOp
+------->READ PARENL ID PARENR SEMIC
+-------->read
+-------->i
+----->condStmt
+------>ifStmt primitiveStmt
+------->IF PARENL simpleExp PARENR
+-------->if
+-------->binLogicalExp
+--------->relationalExp
+---------->relationalExp relationalOp sumExp
+----------->sumExp
+------------>mulExp
+------------->factor
+-------------->ID
+~~~~~~~~~~~~~~~----------->GREATER
+------------>>
+----------->mulExp
+------------>factor
+~~~~~~~~~~~~~0
+------->outOp
+-------->WRITE PARENL outConst PARENR SEMIC
+--------->write
+--------->simpleExp
+---------->binLogicalExp
+----------->relationalExp
+------------>sumExp
+------------->mulExp
+-------------->factor
+--------------->fCall
+---------------->ID PARENL callParams PARENR
+----------------->fib
+----------------->simpleExp
+------------------>binLogicalExp
+------------------->relationalExp
+-------------------->sumExp
+--------------------->mulExp
+---------------------->factor
+----------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~---->returnStmt
+----->RETURN expression SEMIC
+------>return
+------>simpleExp
+------->binLogicalExp
+-------->relationalExp
+--------->sumExp
+---------->mulExp
+----------->factor
+~~~~~~~~~~~~0
+
+
+ There is 2 warnings in the file
 

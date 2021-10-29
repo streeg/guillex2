@@ -32,17 +32,32 @@ Id: 'i' at line: 8, column: 7
 '+' at line: 8, column: 9
 Id: 'l' at line: 8, column: 11
 ';' at line: 8, column: 12
+Semantic error
+var l not declared, line 8, column 13
+
+Semantic Error
+var i from type int receiving wrong type value, line 8, column 13
+
 Id: 'i' at line: 9, column: 3
 '=' at line: 9, column: 5
 Id: 'x' at line: 9, column: 7
 '+' at line: 9, column: 9
+Semantic error
+var x not declared, line 9, column 10
+
 Keyword [TAILLIST]: '!' at line: 9, column: 11
 Id: 'fl' at line: 9, column: 12
 ';' at line: 9, column: 14
+Semantic Error
+var i from type int receiving wrong type value, line 9, column 15
+
 Id: 'i' at line: 10, column: 3
 '=' at line: 10, column: 5
 Id: 'x' at line: 10, column: 7
 '+' at line: 10, column: 9
+Semantic error
+var x not declared, line 10, column 10
+
 Keyword [DESTROYHEAD]: '%' at line: 10, column: 11
 syntax error, unexpected DESTROYHEAD
 syntax error, unexpected DESTROYHEAD, linha: 10, coluna: 12
@@ -64,6 +79,8 @@ Id: 'il' at line: 13, column: 3
 '=' at line: 13, column: 6
 Keyword [TAILLIST]: '!' at line: 13, column: 8
 Keyword [DESTROYHEAD]: '%' at line: 13, column: 9
+syntax error, unexpected DESTROYHEAD
+syntax error, unexpected DESTROYHEAD, linha: 13, coluna: 10
 Keyword [HEADLIST]: '?' at line: 13, column: 10
 Id: 'fl' at line: 13, column: 11
 ';' at line: 13, column: 13
@@ -71,12 +88,13 @@ Keyword [RETURN]: 'return' at line: 14, column: 3
 Decimal: '4.5' at line: 14, column: 10
 ';' at line: 14, column: 13
 '}' at line: 15, column: 1
-syntax error, unexpected DESTROYHEAD
-syntax error, unexpected DESTROYHEAD, linha: 15, coluna: 2
+Semantic Error
+function main with return with wrong type, line 15, column 2
+
 
 
 #### EOF ####
 
 
 
-There were 3 errors in the file
+There were 2 errors in the file

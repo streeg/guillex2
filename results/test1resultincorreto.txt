@@ -14,10 +14,9 @@ syntax error, unexpected ERRORTOKEN, expecting TYPE
 syntax error, unexpected ERRORTOKEN, expecting TYPE, linha: 2, coluna: 4
 Id: 'a' at line: 2, column: 5
 ',' at line: 2, column: 6
-Type: 'int' on line: 2, column: 8
+Type: 'int list' on line: 2, column: 8
 syntax error, unexpected ERRORTOKEN, expecting TYPE
-syntax error, unexpected ERRORTOKEN, expecting TYPE, linha: 2, coluna: 11
-ListType: 'list' on line: 2, column: 12
+syntax error, unexpected ERRORTOKEN, expecting TYPE, linha: 2, coluna: 16
 Id: 'b' at line: 2, column: 17
 ';' at line: 2, column: 18
 Type: 'int' on line: 4, column: 1
@@ -33,6 +32,9 @@ Semantic Error
 Function soma2 not declared, line 7, column 13
 
 '}' at line: 8, column: 1
+Semantic Error
+function main without expected return, line 8, column 2
+
 
 
 #### EOF ####

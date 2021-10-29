@@ -587,9 +587,9 @@ char checkTypes(char type1, char type2) {
 }
 
 bool checkTypesVar(char varType, char value) {
-  if (varType == 'i' && (value == 'i' || value == 'f'))
+  if (varType == 'i' && (value == 'i' || value == 'f' || value == 'n'))
   return true;
-  if (varType == 'f' && (value == 'i' || value == 'f'))
+  if (varType == 'f' && (value == 'i' || value == 'f' || value == 'n'))
     return true;
   if (varType == value)
     return true;

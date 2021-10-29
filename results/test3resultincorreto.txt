@@ -15,10 +15,19 @@ Id: 'i' at line: 4, column: 5
 '=' at line: 4, column: 7
 Id: 'a' at line: 4, column: 9
 ';' at line: 4, column: 10
+Semantic error
+var a not declared, line 4, column 11
+
+Semantic Error
+var i from type float receiving wrong type value, line 4, column 11
+
 Id: 'aa' at line: 5, column: 5
 '=' at line: 5, column: 8
 Id: 'a' at line: 5, column: 10
 ';' at line: 5, column: 11
+Semantic error
+var a not declared, line 5, column 12
+
 Semantic errorVar: <aa> Not Declared, line 5, column 12
 
 Id: 'fff' at line: 6, column: 5
@@ -31,6 +40,9 @@ Id: 'listF' at line: 7, column: 5
 '=' at line: 7, column: 11
 Id: 'listD' at line: 7, column: 13
 ';' at line: 7, column: 18
+Semantic error
+var listD not declared, line 7, column 19
+
 Semantic errorVar: <listF> Not Declared, line 7, column 19
 
 Id: 'i' at line: 8, column: 5
@@ -39,13 +51,16 @@ Decimal: '0.99' at line: 8, column: 9
 ';' at line: 8, column: 13
 '}' at line: 9, column: 1
 Type: 'float' on line: 10, column: 1
+Semantic Error
+function main without expected return, line 10, column 6
+
 '*' at line: 10, column: 7
-syntax error, unexpected MULT, expecting ID or LISTTYPE
-syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 10, coluna: 8
+syntax error, unexpected MULT, expecting ID
+syntax error, unexpected MULT, expecting ID, linha: 10, coluna: 8
 Id: 'b' at line: 10, column: 8
 ';' at line: 10, column: 9
-syntax error, unexpected MULT, expecting ID or LISTTYPE
-syntax error, unexpected MULT, expecting ID or LISTTYPE, linha: 11, coluna: 1
+syntax error, unexpected MULT, expecting ID
+syntax error, unexpected MULT, expecting ID, linha: 11, coluna: 1
 
 
 #### EOF ####

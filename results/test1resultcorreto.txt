@@ -93,375 +93,173 @@ Integer: '0' at line: 20, column: 12
 
 --------------------------------tree--------------------------------
 
-
-declarationsList declaration
--->   declaration
-
---->   varDeclaration
-
----->   simpleVarDeclaration
-
------>   TYPE ID
-
------->   int
-
-------->   x
-
---->   funcDeclaration
-
----->   TYPE ID PARENL PARENR compoundStmt
-
------>   int
-
------->   main
-
-------->   stmtList primitiveStmt
-
--------->   stmtList primitiveStmt
-
---------->   primitiveStmt
-
----------->   iterStmt
-
------------>   FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
-
------------->   for
-
-------------->   binLogicalExp
-
--------------->   relationalExp
-
---------------->   sumExp
-
----------------->   mulExp
-
------------------>   factor
-
------------------->   ID
-
-------------------->   x
-
--------------->   binLogicalExp
-
---------------->   relationalExp
-
----------------->   relationalExp relationalOp sumExp
-
------------------>   sumExp
-
------------------->   mulExp
-
-------------------->   factor
-
--------------------->   ID
-
---------------------->   x
-
------------------->   SMALLER
-
-------------------->   <
-
-------------------->   mulExp
-
--------------------->   factor
-
---------------------->   constOp
-
----------------------->   5
-
---------------->   ID ASSIGN expression
-
----------------->   x
-
------------------>   =
-
------------------->   simpleExp
-
-------------------->   binLogicalExp
-
--------------------->   relationalExp
-
---------------------->   sumExp
-
----------------------->   sumExp add mulExp
-
------------------------>   mulExp
-
------------------------->   factor
-
-------------------------->   ID
-
--------------------------->   x
-
------------------------->   +
-
-------------------------->   factor
-
--------------------------->   constOp
-
---------------------------->   1
-
----------------->   compoundStmt
-
------------------>   compoundStmt
-
------------------->   stmtList primitiveStmt
-
-------------------->   stmtList primitiveStmt
-
--------------------->   primitiveStmt
-
---------------------->   exprStmt
-
----------------------->   expression SEMIC
-
------------------------>   assignExp
-
------------------------->   ID ASSIGN expression
-
-------------------------->   x
-
--------------------------->   =
-
---------------------------->   simpleExp
-
----------------------------->   binLogicalExp
-
------------------------------>   relationalExp
-
------------------------------->   sumExp
-
-------------------------------->   sumExp add mulExp
-
--------------------------------->   mulExp
-
---------------------------------->   factor
-
----------------------------------->   ID
-
------------------------------------>   x
-
---------------------------------->   +
-
----------------------------------->   factor
-
------------------------------------>   constOp
-
------------------------------------->   1
-
---------------------->   outOp
-
----------------------->   WRITELN PARENL outConst PARENR SEMIC
-
------------------------>   writeln
-
------------------------->   simpleExp
-
-------------------------->   binLogicalExp
-
--------------------------->   relationalExp
-
---------------------------->   sumExp
-
----------------------------->   mulExp
-
------------------------------>   factor
-
------------------------------->   ID
-
-------------------------------->   x
-
--------------------->   exprStmt
-
---------------------->   expression SEMIC
-
----------------------->   simpleExp
-
------------------------>   binLogicalExp
-
------------------------->   relationalExp
-
-------------------------->   sumExp
-
--------------------------->   sumExp add mulExp
-
---------------------------->   mulExp
-
----------------------------->   factor
-
------------------------------>   constOp
-
------------------------------->   2
-
----------------------------->   +
-
------------------------------>   mulExp mulOp factor
-
------------------------------->   factor
-
-------------------------------->   constOp
-
--------------------------------->   -2
-
-------------------------------->   *
-
--------------------------------->   constOp
-
---------------------------------->   3
-
----------->   condStmt
-
------------>   ifStmt primitiveStmt elseStmt
-
------------->   IF PARENL simpleExp PARENR
-
-------------->   if
-
--------------->   binLogicalExp
-
---------------->   relationalExp
-
----------------->   relationalExp relationalOp sumExp
-
------------------>   sumExp
-
------------------->   mulExp
-
-------------------->   factor
-
--------------------->   constOp
-
---------------------->   1
-
------------------->   SMALLER
-
-------------------->   <
-
-------------------->   mulExp
-
--------------------->   factor
-
---------------------->   constOp
-
----------------------->   2
-
-------------->   compoundStmt
-
--------------->   compoundStmt
-
---------------->   primitiveStmt
-
----------------->   outOp
-
------------------>   WRITELN PARENL outConst PARENR SEMIC
-
------------------->   writeln
-
-------------------->   simpleExp
-
--------------------->   binLogicalExp
-
---------------------->   relationalExp
-
----------------------->   sumExp
-
------------------------>   mulExp
-
------------------------->   factor
-
-------------------------->   ID
-
--------------------------->   x
-
--------------->   ELSE primitiveStmt
-
---------------->   else
-
----------------->   compoundStmt
-
------------------>   compoundStmt
-
------------------->   primitiveStmt
-
-------------------->   condStmt
-
--------------------->   ifStmt primitiveStmt
-
---------------------->   IF PARENL simpleExp PARENR
-
----------------------->   if
-
------------------------>   binLogicalExp
-
------------------------->   relationalExp
-
-------------------------->   relationalExp relationalOp sumExp
-
--------------------------->   sumExp
-
---------------------------->   mulExp
-
----------------------------->   factor
-
------------------------------>   constOp
-
------------------------------->   2
-
---------------------------->   SMALLER
-
----------------------------->   <
-
----------------------------->   mulExp
-
------------------------------>   factor
-
------------------------------->   constOp
-
-------------------------------->   1
-
----------------------->   outOp
-
------------------------>   WRITELN PARENL outConst PARENR SEMIC
-
------------------------->   writeln
-
-------------------------->   simpleExp
-
--------------------------->   binLogicalExp
-
---------------------------->   relationalExp
-
----------------------------->   sumExp
-
------------------------------>   mulExp
-
------------------------------->   factor
-
-------------------------------->   ID
-
--------------------------------->   x
-
---------->   returnStmt
-
----------->   RETURN expression SEMIC
-
------------>   return
-
------------->   simpleExp
-
-------------->   binLogicalExp
-
--------------->   relationalExp
-
---------------->   sumExp
-
----------------->   mulExp
-
------------------>   factor
-
------------------->   constOp
-
-------------------->   0
+>declarationsList declaration
+->declaration
+-->varDeclaration
+--->simpleVarDeclaration
+---->TYPE ID
+----->int
+----->x
+->funcDeclaration
+-->TYPE ID PARENL PARENR stmtList ENDFUNC 
+--->int
+--->main
+--->stmtList primitiveStmt
+---->stmtList primitiveStmt
+----->primitiveStmt
+------>iterStmt
+------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
+-------->for
+-------->binLogicalExp
+--------->relationalExp
+---------->sumExp
+----------->mulExp
+------------>factor
+------------->ID
+~~~~~~~~~~~~~~-------->binLogicalExp
+--------->relationalExp
+---------->relationalExp relationalOp sumExp
+----------->sumExp
+------------>mulExp
+------------->factor
+-------------->ID
+~~~~~~~~~~~~~~~----------->SMALLER
+------------><
+----------->mulExp
+------------>factor
+~~~~~~~~~~~~~5
+-------->ID ASSIGN expression
+--------->x
+--------->=
+--------->simpleExp
+---------->binLogicalExp
+----------->relationalExp
+------------>sumExp
+------------->sumExp add mulExp
+-------------->mulExp
+--------------->factor
+---------------->ID
+~~~~~~~~~~~~~~~~~-------------->+
+-------------->factor
+~~~~~~~~~~~~~~~1
+-------->compoundStmt
+--------->compoundStmt
+---------->stmtList primitiveStmt
+----------->stmtList primitiveStmt
+------------>primitiveStmt
+------------->exprStmt
+-------------->expression SEMIC
+--------------->assignExp
+---------------->ID ASSIGN expression
+----------------->x
+----------------->=
+----------------->simpleExp
+------------------>binLogicalExp
+------------------->relationalExp
+-------------------->sumExp
+--------------------->sumExp add mulExp
+---------------------->mulExp
+----------------------->factor
+------------------------>ID
+~~~~~~~~~~~~~~~~~~~~~~~~~---------------------->+
+---------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~1
+------------>outOp
+------------->WRITELN PARENL outConst PARENR SEMIC
+-------------->writeln
+-------------->simpleExp
+--------------->binLogicalExp
+---------------->relationalExp
+----------------->sumExp
+------------------>mulExp
+------------------->factor
+-------------------->ID
+~~~~~~~~~~~~~~~~~~~~~----------->exprStmt
+------------>expression SEMIC
+------------->simpleExp
+-------------->binLogicalExp
+--------------->relationalExp
+---------------->sumExp
+----------------->sumExp add mulExp
+------------------>mulExp
+------------------->factor
+~~~~~~~~~~~~~~~~~~~~2
+------------------>+
+------------------>mulExp mulOp factor
+------------------->factor
+~~~~~~~~~~~~~~~~~~~~-2
+------------------->*
+~~~~~~~~~~~~~~~~~~~3
+----->condStmt
+------>ifStmt primitiveStmt elseStmt
+------->IF PARENL simpleExp PARENR
+-------->if
+-------->binLogicalExp
+--------->relationalExp
+---------->relationalExp relationalOp sumExp
+----------->sumExp
+------------>mulExp
+------------->factor
+~~~~~~~~~~~~~~1
+----------->SMALLER
+------------><
+----------->mulExp
+------------>factor
+~~~~~~~~~~~~~2
+------->compoundStmt
+-------->compoundStmt
+--------->primitiveStmt
+---------->outOp
+----------->WRITELN PARENL outConst PARENR SEMIC
+------------>writeln
+------------>simpleExp
+------------->binLogicalExp
+-------------->relationalExp
+--------------->sumExp
+---------------->mulExp
+----------------->factor
+------------------>ID
+~~~~~~~~~~~~~~~~~~~------->ELSE primitiveStmt
+-------->else
+-------->compoundStmt
+--------->compoundStmt
+---------->primitiveStmt
+----------->condStmt
+------------>ifStmt primitiveStmt
+------------->IF PARENL simpleExp PARENR
+-------------->if
+-------------->binLogicalExp
+--------------->relationalExp
+---------------->relationalExp relationalOp sumExp
+----------------->sumExp
+------------------>mulExp
+------------------->factor
+~~~~~~~~~~~~~~~~~~~~2
+----------------->SMALLER
+------------------><
+----------------->mulExp
+------------------>factor
+~~~~~~~~~~~~~~~~~~~1
+------------->outOp
+-------------->WRITELN PARENL outConst PARENR SEMIC
+--------------->writeln
+--------------->simpleExp
+---------------->binLogicalExp
+----------------->relationalExp
+------------------>sumExp
+------------------->mulExp
+-------------------->factor
+--------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~---->returnStmt
+----->RETURN expression SEMIC
+------>return
+------>simpleExp
+------->binLogicalExp
+-------->relationalExp
+--------->sumExp
+---------->mulExp
+----------->factor
+~~~~~~~~~~~~0
 
 
  There is 0 errors and 0 warnings in the file

@@ -2,7 +2,6 @@ int main()
 {
 
   float list notas;
-  notas = NIL;
   int n;
 
   writeln("Qual o número de provas?");
@@ -61,4 +60,6 @@ int main()
     writeln("Há um problema no cálculo da média");
   else if (media1 == media2 && media1 >= 5)
     writeln("Parabéns!");
+
+  return 0;
 }

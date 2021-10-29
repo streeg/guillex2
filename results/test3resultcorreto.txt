@@ -81,8 +81,6 @@ Integer: '0' at line: 14, column: 10
 >declaration
 ->funcDeclaration
 -->TYPE ID PARENL PARENR stmtList ENDFUNC 
---->int
---->main
 --->stmtList primitiveStmt
 ---->stmtList primitiveStmt
 ----->stmtList primitiveStmt
@@ -92,29 +90,18 @@ Integer: '0' at line: 14, column: 10
 --------->varDeclaration
 ---------->simpleVarDeclaration
 ----------->TYPE ID
------------->int list
------------->x
 -------->varDeclaration
 --------->simpleVarDeclaration
 ---------->TYPE ID
------------>int
------------>i
 ------->varDeclaration
 -------->simpleVarDeclaration
 --------->TYPE ID
----------->int
----------->n
 ------>varDeclaration
 ------->simpleVarDeclaration
 -------->TYPE ID
---------->int
---------->elem
 ----->iterStmt
 ------>FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
-------->for
 ------->ID ASSIGN expression
--------->i
--------->=
 -------->simpleExp
 --------->binLogicalExp
 ---------->relationalExp
@@ -124,19 +111,15 @@ Integer: '0' at line: 14, column: 10
 ~~~~~~~~~~~~~~0
 ------->binLogicalExp
 -------->relationalExp
---------->relationalExp relationalOp sumExp
+--------->relationalExp SMALLER sumExp
 ---------->sumExp
 ----------->mulExp
 ------------>factor
 ------------->ID
-~~~~~~~~~~~~~~---------->SMALLER
------------><
----------->mulExp
+~~~~~~~~~~~~~~---------->mulExp
 ----------->factor
 ------------>ID
 ~~~~~~~~~~~~~------->ID ASSIGN expression
--------->i
--------->=
 -------->simpleExp
 --------->binLogicalExp
 ---------->relationalExp
@@ -145,8 +128,7 @@ Integer: '0' at line: 14, column: 10
 ------------->mulExp
 -------------->factor
 --------------->ID
-~~~~~~~~~~~~~~~~------------->+
-------------->factor
+~~~~~~~~~~~~~~~~------------->factor
 ~~~~~~~~~~~~~~1
 ------->compoundStmt
 -------->compoundStmt
@@ -155,7 +137,6 @@ Integer: '0' at line: 14, column: 10
 ----------->primitiveStmt
 ------------>outOp
 ------------->WRITELN PARENL outConst PARENR SEMIC
--------------->writeln
 -------------->simpleExp
 --------------->binLogicalExp
 ---------------->relationalExp
@@ -165,16 +146,11 @@ Integer: '0' at line: 14, column: 10
 -------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~----------->inOp
 ------------>READ PARENL ID PARENR SEMIC
-------------->read
-------------->elem
 ---------->outOp
 ----------->WRITE PARENL outConst PARENR SEMIC
------------->write
 ------------>STRING
-------------->"oi"
 ---->returnStmt
 ----->RETURN expression SEMIC
------->return
 ------>simpleExp
 ------->binLogicalExp
 -------->relationalExp

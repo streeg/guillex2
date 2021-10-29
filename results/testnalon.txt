@@ -77,16 +77,20 @@ Id: 'succ' at line: 22, column: 7
 Type: 'int' on line: 22, column: 12
 Id: 'i' at line: 22, column: 16
 ')' at line: 22, column: 17
+Semantic Error
 '{' on line: 23, column: 1
 Keyword [RETURN]: 'return' at line: 24, column: 3
 Id: 'i' at line: 24, column: 10
 '+' at line: 24, column: 12
+Semantic error
+var i not declared, line 24, column 13
+
 Integer: '1' at line: 24, column: 14
 ';' at line: 24, column: 15
 '}' at line: 25, column: 1
 Type: 'int' on line: 27, column: 1
 Semantic Error
-function succ without expected return, line 27, column 4
+function succ with return with wrong type, line 27, column 4
 
 Id: 'leq_10' at line: 27, column: 5
 '(' at line: 27, column: 11
@@ -102,7 +106,7 @@ Integer: '10' at line: 29, column: 15
 '}' at line: 30, column: 1
 Type: 'int' on line: 32, column: 1
 Semantic Error
-function leq_10 without expected return, line 32, column 4
+function leq_10 with return with wrong type, line 32, column 4
 
 Id: 'main' at line: 32, column: 5
 '(' at line: 32, column: 9
@@ -256,7 +260,6 @@ Integer: '0' at line: 70, column: 10
 |   i                   |    var                          |      int                     |         1            |         0          |
 |   new                 |    var                          |      int list                |         1            |         0          |
 |   elem                |    var                          |      int                     |         2            |         0          |
-|   i                   |    param                        |      int                     |         2            |         0          |
 |   succ                |    func                         |      float                   |         2            |         1          |
 |   x                   |    param                        |      float                   |         3            |         0          |
 |   leq_10              |    func                         |      int                     |         3            |         1          |
@@ -278,21 +281,13 @@ Integer: '0' at line: 70, column: 10
 ------>varDeclaration
 ------->simpleVarDeclaration
 -------->TYPE ID
---------->int list
---------->IL
 ----->varDeclaration
 ------>simpleVarDeclaration
 ------->TYPE ID
--------->float list
--------->FL
 ---->funcDeclaration
 ----->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
------->int list
------->read_list
 ------>param
 ------->TYPE ID
--------->int
--------->n
 ------>stmtList primitiveStmt
 ------->stmtList primitiveStmt
 -------->stmtList primitiveStmt
@@ -302,14 +297,10 @@ Integer: '0' at line: 70, column: 10
 ------------>varDeclaration
 ------------->simpleVarDeclaration
 -------------->TYPE ID
---------------->int
---------------->i
 ----------->exprStmt
 ------------>expression SEMIC
 ------------->assignExp
 -------------->ID ASSIGN expression
---------------->i
---------------->=
 --------------->simpleExp
 ---------------->binLogicalExp
 ----------------->relationalExp
@@ -320,14 +311,10 @@ Integer: '0' at line: 70, column: 10
 ---------->varDeclaration
 ----------->simpleVarDeclaration
 ------------>TYPE ID
-------------->int list
-------------->new
 --------->exprStmt
 ---------->expression SEMIC
 ----------->assignExp
 ------------>ID ASSIGN expression
-------------->new
-------------->=
 ------------->simpleExp
 -------------->binLogicalExp
 --------------->relationalExp
@@ -336,10 +323,7 @@ Integer: '0' at line: 70, column: 10
 ------------------>factor
 -------->iterStmt
 --------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
----------->for
 ---------->ID ASSIGN expression
------------>i
------------>=
 ----------->simpleExp
 ------------>binLogicalExp
 ------------->relationalExp
@@ -349,19 +333,15 @@ Integer: '0' at line: 70, column: 10
 ~~~~~~~~~~~~~~~~~0
 ---------->binLogicalExp
 ----------->relationalExp
------------->relationalExp relationalOp sumExp
+------------>relationalExp SMALLER sumExp
 ------------->sumExp
 -------------->mulExp
 --------------->factor
 ---------------->ID
-~~~~~~~~~~~~~~~~~------------->SMALLER
---------------><
-------------->mulExp
+~~~~~~~~~~~~~~~~~------------->mulExp
 -------------->factor
 --------------->ID
 ~~~~~~~~~~~~~~~~---------->ID ASSIGN expression
------------>i
------------>=
 ----------->simpleExp
 ------------>binLogicalExp
 ------------->relationalExp
@@ -370,8 +350,7 @@ Integer: '0' at line: 70, column: 10
 ---------------->mulExp
 ----------------->factor
 ------------------>ID
-~~~~~~~~~~~~~~~~~~~---------------->+
----------------->factor
+~~~~~~~~~~~~~~~~~~~---------------->factor
 ~~~~~~~~~~~~~~~~~1
 ---------->compoundStmt
 ----------->compoundStmt
@@ -382,32 +361,22 @@ Integer: '0' at line: 70, column: 10
 ---------------->varDeclaration
 ----------------->simpleVarDeclaration
 ------------------>TYPE ID
-------------------->int
-------------------->elem
 --------------->outOp
 ---------------->WRITELN PARENL outConst PARENR SEMIC
------------------>writeln
 ----------------->STRING
------------------->"Digite o elemento da lista: "
 -------------->inOp
 --------------->READ PARENL ID PARENR SEMIC
----------------->read
----------------->elem
 ------------->exprStmt
 -------------->expression SEMIC
 --------------->assignExp
 ---------------->ID ASSIGN expression
------------------>new
------------------>=
 ----------------->simpleExp
 ------------------>binListExp
 ------------------->factor APPEND factor
 -------------------->ID
-~~~~~~~~~~~~~~~~~~~~~-------------------->:
--------------------->ID
+~~~~~~~~~~~~~~~~~~~~~-------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~------->returnStmt
 -------->RETURN expression SEMIC
---------->return
 --------->simpleExp
 ---------->binLogicalExp
 ----------->relationalExp
@@ -417,16 +386,11 @@ Integer: '0' at line: 70, column: 10
 --------------->ID
 ~~~~~~~~~~~~~~~~--->funcDeclaration
 ---->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
------>float
------>succ
 ----->param
 ------>TYPE ID
-------->int
-------->i
 ----->primitiveStmt
 ------>returnStmt
 ------->RETURN expression SEMIC
--------->return
 -------->simpleExp
 --------->binLogicalExp
 ---------->relationalExp
@@ -434,39 +398,28 @@ Integer: '0' at line: 70, column: 10
 ------------>sumExp add mulExp
 ------------->mulExp
 -------------->factor
---------------->ID
-~~~~~~~~~~~~~~~~------------->+
 ------------->factor
 ~~~~~~~~~~~~~~1
 -->funcDeclaration
 --->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
----->int
----->leq_10
 ---->param
 ----->TYPE ID
------->float
------->x
 ---->primitiveStmt
 ----->returnStmt
 ------>RETURN expression SEMIC
-------->return
 ------->simpleExp
 -------->binLogicalExp
 --------->relationalExp
----------->relationalExp relationalOp sumExp
+---------->relationalExp SMALLEQ sumExp
 ----------->sumExp
 ------------>mulExp
 ------------->factor
 -------------->ID
-~~~~~~~~~~~~~~~----------->SMALLEQ
-------------><=
------------>mulExp
+~~~~~~~~~~~~~~~----------->mulExp
 ------------>factor
 ~~~~~~~~~~~~~10
 ->funcDeclaration
 -->TYPE ID PARENL PARENR stmtList ENDFUNC 
---->int
---->main
 --->stmtList primitiveStmt
 ---->stmtList primitiveStmt
 ----->stmtList primitiveStmt
@@ -478,29 +431,19 @@ Integer: '0' at line: 70, column: 10
 ----------->primitiveStmt
 ------------>outOp
 ------------->WRITELN PARENL outConst PARENR SEMIC
--------------->writeln
 -------------->STRING
---------------->"Digite os número de elementos da lista: "
 ----------->varDeclaration
 ------------>simpleVarDeclaration
 ------------->TYPE ID
--------------->int
--------------->n
 ---------->varDeclaration
 ----------->simpleVarDeclaration
 ------------>TYPE ID
-------------->float list
-------------->FL10
 --------->inOp
 ---------->READ PARENL ID PARENR SEMIC
------------>read
------------>n
 -------->exprStmt
 --------->expression SEMIC
 ---------->assignExp
 ----------->ID ASSIGN expression
------------->IL
------------->=
 ------------>simpleExp
 ------------->binLogicalExp
 -------------->relationalExp
@@ -509,7 +452,6 @@ Integer: '0' at line: 70, column: 10
 ----------------->factor
 ------------------>fCall
 ------------------->ID PARENL callParams PARENR
--------------------->read_list
 -------------------->simpleExp
 --------------------->binLogicalExp
 ---------------------->relationalExp
@@ -521,40 +463,29 @@ Integer: '0' at line: 70, column: 10
 -------->expression SEMIC
 --------->assignExp
 ---------->ID ASSIGN expression
------------>FL
------------>=
 ----------->simpleExp
 ------------>binListExp
 ------------->factor MAP factor
--------------->(null)
--------------->>>
 -------------->ID
 ~~~~~~~~~~~~~~~------>exprStmt
 ------->expression SEMIC
 -------->assignExp
 --------->ID ASSIGN expression
----------->FL10
----------->=
 ---------->simpleExp
 ----------->binListExp
 ------------>factor FILTER factor
-------------->(null)
--------------><<
 ------------->ID
 ~~~~~~~~~~~~~~----->condStmt
 ------>ifStmt primitiveStmt elseStmt
 ------->IF PARENL simpleExp PARENR
--------->if
 -------->binLogicalExp
 --------->relationalExp
----------->relationalExp relationalOp sumExp
+---------->relationalExp DIFFERENT sumExp
 ----------->sumExp
 ------------>mulExp
 ------------->factor
 -------------->ID
-~~~~~~~~~~~~~~~----------->DIFFERENT
------------->!=
------------>mulExp
+~~~~~~~~~~~~~~~----------->mulExp
 ------------>factor
 ------->compoundStmt
 -------->compoundStmt
@@ -569,19 +500,13 @@ Integer: '0' at line: 70, column: 10
 ----------------->varDeclaration
 ------------------>simpleVarDeclaration
 ------------------->TYPE ID
--------------------->float list
--------------------->AUXL
 ---------------->varDeclaration
 ----------------->simpleVarDeclaration
 ------------------>TYPE ID
-------------------->int
-------------------->n
 --------------->exprStmt
 ---------------->expression SEMIC
 ----------------->assignExp
 ------------------>ID ASSIGN expression
-------------------->n
-------------------->=
 ------------------->simpleExp
 -------------------->binLogicalExp
 --------------------->relationalExp
@@ -591,10 +516,7 @@ Integer: '0' at line: 70, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~~0
 -------------->iterStmt
 --------------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
----------------->for
 ---------------->ID ASSIGN expression
------------------>AUXL
------------------>=
 ----------------->simpleExp
 ------------------>binLogicalExp
 ------------------->relationalExp
@@ -604,18 +526,14 @@ Integer: '0' at line: 70, column: 10
 ----------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~~~---------------->binLogicalExp
 ----------------->relationalExp
------------------->relationalExp relationalOp sumExp
+------------------>relationalExp DIFFERENT sumExp
 ------------------->sumExp
 -------------------->mulExp
 --------------------->factor
 ---------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~------------------->DIFFERENT
--------------------->!=
-------------------->mulExp
+~~~~~~~~~~~~~~~~~~~~~~~------------------->mulExp
 -------------------->factor
 ---------------->ID ASSIGN expression
------------------>AUXL
------------------>=
 ----------------->simpleExp
 ------------------>binLogicalExp
 ------------------->relationalExp
@@ -623,7 +541,6 @@ Integer: '0' at line: 70, column: 10
 --------------------->mulExp
 ---------------------->unaryListExp
 ----------------------->! factor
------------------------->!
 ------------------------>ID
 ~~~~~~~~~~~~~~~~~~~~~~~~~---------------->compoundStmt
 ----------------->compoundStmt
@@ -634,8 +551,6 @@ Integer: '0' at line: 70, column: 10
 ---------------------->expression SEMIC
 ----------------------->assignExp
 ------------------------>ID ASSIGN expression
-------------------------->n
-------------------------->=
 ------------------------->simpleExp
 -------------------------->binLogicalExp
 --------------------------->relationalExp
@@ -644,12 +559,10 @@ Integer: '0' at line: 70, column: 10
 ------------------------------>mulExp
 ------------------------------->factor
 -------------------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------------------------>+
------------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------------------------>factor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~1
 -------------------->outOp
 --------------------->WRITE PARENL outConst PARENR SEMIC
----------------------->write
 ---------------------->simpleExp
 ----------------------->binLogicalExp
 ------------------------>relationalExp
@@ -657,26 +570,18 @@ Integer: '0' at line: 70, column: 10
 -------------------------->mulExp
 --------------------------->unaryListExp
 ---------------------------->? factor
------------------------------>?
 ----------------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------------->outOp
 -------------------->WRITE PARENL outConst PARENR SEMIC
---------------------->write
 --------------------->STRING
----------------------->" "
 ------------->outOp
 -------------->WRITELN PARENL outConst PARENR SEMIC
---------------->writeln
 --------------->STRING
----------------->" "
 ------------>outOp
 ------------->WRITE PARENL outConst PARENR SEMIC
--------------->write
 -------------->STRING
---------------->"A nova lista tem "
 ----------->outOp
 ------------>WRITE PARENL outConst PARENR SEMIC
-------------->write
 ------------->simpleExp
 -------------->binLogicalExp
 --------------->relationalExp
@@ -686,19 +591,13 @@ Integer: '0' at line: 70, column: 10
 ------------------->ID
 ~~~~~~~~~~~~~~~~~~~~---------->outOp
 ----------->WRITELN PARENL outConst PARENR SEMIC
------------->writeln
 ------------>STRING
-------------->" elementos."
 ------->ELSE primitiveStmt
--------->else
 -------->outOp
 --------->WRITELN PARENL outConst PARENR SEMIC
----------->writeln
 ---------->STRING
------------>"A nova lista não possui elementos."
 ---->returnStmt
 ----->RETURN expression SEMIC
------->return
 ------>simpleExp
 ------->binLogicalExp
 -------->relationalExp
@@ -708,5 +607,5 @@ Integer: '0' at line: 70, column: 10
 ~~~~~~~~~~~~0
 
 
- There is 6 warnings in the file
+ There is 8 warnings in the file
 

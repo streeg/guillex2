@@ -257,12 +257,12 @@ Integer: '0' at line: 64, column: 10
 |   nota                |    var                          |      float                   |         1            |         0          |
 |   abacaxi             |    var                          |      int                     |         1            |         0          |
 |   pera                |    var                          |      float                   |         2            |         0          |
-|   banana              |    var                          |      int                     |         1            |         0          |
-|   maca                |    var                          |      float                   |         2            |         0          |
-|   soma                |    var                          |      float                   |         0            |         0          |
-|   AUX                 |    var                          |      float list              |         0            |         0          |
-|   media1              |    var                          |      float                   |         0            |         0          |
-|   media2              |    var                          |      float                   |         0            |         0          |
+|   banana              |    var                          |      int                     |         3            |         0          |
+|   maca                |    var                          |      float                   |         4            |         0          |
+|   soma                |    var                          |      float                   |         3            |         0          |
+|   AUX                 |    var                          |      float list              |         3            |         0          |
+|   media1              |    var                          |      float                   |         3            |         0          |
+|   media2              |    var                          |      float                   |         3            |         0          |
 
 
 --------------------------------tree--------------------------------
@@ -270,8 +270,6 @@ Integer: '0' at line: 64, column: 10
 >declaration
 ->funcDeclaration
 -->TYPE ID PARENL PARENR stmtList ENDFUNC 
---->int
---->main
 --->stmtList primitiveStmt
 ---->stmtList primitiveStmt
 ----->stmtList primitiveStmt
@@ -292,33 +290,20 @@ Integer: '0' at line: 64, column: 10
 -------------------->varDeclaration
 --------------------->simpleVarDeclaration
 ---------------------->TYPE ID
------------------------>float list
------------------------>notas
 ------------------->varDeclaration
 -------------------->simpleVarDeclaration
 --------------------->TYPE ID
----------------------->int
----------------------->n
 ------------------>outOp
 ------------------->WRITELN PARENL outConst PARENR SEMIC
--------------------->writeln
 -------------------->STRING
---------------------->"Qual o número de provas?"
 ----------------->inOp
 ------------------>READ PARENL ID PARENR SEMIC
-------------------->read
-------------------->n
 ---------------->varDeclaration
 ----------------->simpleVarDeclaration
 ------------------>TYPE ID
-------------------->int
-------------------->i
 --------------->iterStmt
 ---------------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
------------------>for
 ----------------->ID ASSIGN expression
------------------->i
------------------->=
 ------------------>simpleExp
 ------------------->binLogicalExp
 -------------------->relationalExp
@@ -328,19 +313,15 @@ Integer: '0' at line: 64, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~0
 ----------------->binLogicalExp
 ------------------>relationalExp
-------------------->relationalExp relationalOp sumExp
+------------------->relationalExp SMALLER sumExp
 -------------------->sumExp
 --------------------->mulExp
 ---------------------->factor
 ----------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~~-------------------->SMALLER
----------------------><
--------------------->mulExp
+~~~~~~~~~~~~~~~~~~~~~~~~-------------------->mulExp
 --------------------->factor
 ---------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~~----------------->ID ASSIGN expression
------------------->i
------------------->=
 ------------------>simpleExp
 ------------------->binLogicalExp
 -------------------->relationalExp
@@ -349,8 +330,7 @@ Integer: '0' at line: 64, column: 10
 ----------------------->mulExp
 ------------------------>factor
 ------------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~~~~----------------------->+
------------------------>factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~----------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~~~1
 ----------------->compoundStmt
 ------------------>compoundStmt
@@ -363,16 +343,11 @@ Integer: '0' at line: 64, column: 10
 ------------------------->varDeclaration
 -------------------------->simpleVarDeclaration
 --------------------------->TYPE ID
----------------------------->float
----------------------------->nota
 ------------------------>outOp
 ------------------------->WRITE PARENL outConst PARENR SEMIC
--------------------------->write
 -------------------------->STRING
---------------------------->"Digite a nota da prova "
 ----------------------->outOp
 ------------------------>WRITE PARENL outConst PARENR SEMIC
-------------------------->write
 ------------------------->simpleExp
 -------------------------->binLogicalExp
 --------------------------->relationalExp
@@ -382,38 +357,28 @@ Integer: '0' at line: 64, column: 10
 ------------------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~---------------------->outOp
 ----------------------->WRITELN PARENL outConst PARENR SEMIC
------------------------->writeln
 ------------------------>STRING
-------------------------->":"
 --------------------->inOp
 ---------------------->READ PARENL ID PARENR SEMIC
------------------------>read
------------------------>nota
 -------------------->exprStmt
 --------------------->expression SEMIC
 ---------------------->assignExp
 ----------------------->ID ASSIGN expression
------------------------->notas
------------------------->=
 ------------------------>simpleExp
 ------------------------->binListExp
 -------------------------->factor APPEND factor
 --------------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~--------------------------->:
---------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~--------------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~-------------->condStmt
 --------------->ifStmt primitiveStmt elseStmt
 ---------------->IF PARENL simpleExp PARENR
------------------>if
 ----------------->binLogicalExp
 ------------------>relationalExp
-------------------->relationalExp relationalOp sumExp
+------------------->relationalExp EQUALS sumExp
 -------------------->sumExp
 --------------------->mulExp
 ---------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~~1
--------------------->EQUALS
---------------------->==
 -------------------->mulExp
 --------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~2
@@ -426,14 +391,10 @@ Integer: '0' at line: 64, column: 10
 ---------------------->varDeclaration
 ----------------------->simpleVarDeclaration
 ------------------------>TYPE ID
-------------------------->int
-------------------------->abacaxi
 --------------------->exprStmt
 ---------------------->expression SEMIC
 ----------------------->assignExp
 ------------------------>ID ASSIGN expression
-------------------------->abacaxi
-------------------------->=
 ------------------------->simpleExp
 -------------------------->binLogicalExp
 --------------------------->relationalExp
@@ -443,7 +404,6 @@ Integer: '0' at line: 64, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~0
 -------------------->outOp
 --------------------->WRITELN PARENL outConst PARENR SEMIC
----------------------->writeln
 ---------------------->simpleExp
 ----------------------->binLogicalExp
 ------------------------>relationalExp
@@ -454,16 +414,13 @@ Integer: '0' at line: 64, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------------->condStmt
 -------------------->ifStmt primitiveStmt
 --------------------->IF PARENL simpleExp PARENR
----------------------->if
 ---------------------->binLogicalExp
 ----------------------->relationalExp
------------------------->relationalExp relationalOp sumExp
+------------------------>relationalExp DIFFERENT sumExp
 ------------------------->sumExp
 -------------------------->mulExp
 --------------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~2
-------------------------->DIFFERENT
--------------------------->!=
 ------------------------->mulExp
 -------------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~3
@@ -475,14 +432,10 @@ Integer: '0' at line: 64, column: 10
 -------------------------->varDeclaration
 --------------------------->simpleVarDeclaration
 ---------------------------->TYPE ID
------------------------------>float
------------------------------>pera
 ------------------------->exprStmt
 -------------------------->expression SEMIC
 --------------------------->assignExp
 ---------------------------->ID ASSIGN expression
------------------------------>pera
------------------------------>=
 ----------------------------->simpleExp
 ------------------------------>binLogicalExp
 ------------------------------->relationalExp
@@ -492,7 +445,6 @@ Integer: '0' at line: 64, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~1.100000
 ------------------------>outOp
 ------------------------->WRITELN PARENL outConst PARENR SEMIC
--------------------------->writeln
 -------------------------->simpleExp
 --------------------------->binLogicalExp
 ---------------------------->relationalExp
@@ -501,7 +453,6 @@ Integer: '0' at line: 64, column: 10
 ------------------------------->factor
 -------------------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~---------------->ELSE primitiveStmt
------------------>else
 ----------------->compoundStmt
 ------------------>compoundStmt
 ------------------->stmtList primitiveStmt
@@ -511,14 +462,10 @@ Integer: '0' at line: 64, column: 10
 ----------------------->varDeclaration
 ------------------------>simpleVarDeclaration
 ------------------------->TYPE ID
--------------------------->int
--------------------------->banana
 ---------------------->exprStmt
 ----------------------->expression SEMIC
 ------------------------>assignExp
 ------------------------->ID ASSIGN expression
--------------------------->banana
--------------------------->=
 -------------------------->simpleExp
 --------------------------->binLogicalExp
 ---------------------------->relationalExp
@@ -528,7 +475,6 @@ Integer: '0' at line: 64, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~2
 --------------------->outOp
 ---------------------->WRITELN PARENL outConst PARENR SEMIC
------------------------>writeln
 ----------------------->simpleExp
 ------------------------>binLogicalExp
 ------------------------->relationalExp
@@ -539,16 +485,13 @@ Integer: '0' at line: 64, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-------------------->condStmt
 --------------------->ifStmt primitiveStmt
 ---------------------->IF PARENL simpleExp PARENR
------------------------>if
 ----------------------->binLogicalExp
 ------------------------>relationalExp
-------------------------->relationalExp relationalOp sumExp
+------------------------->relationalExp DIFFERENT sumExp
 -------------------------->sumExp
 --------------------------->mulExp
 ---------------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~2
--------------------------->DIFFERENT
---------------------------->!=
 -------------------------->mulExp
 --------------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~3
@@ -560,14 +503,10 @@ Integer: '0' at line: 64, column: 10
 --------------------------->varDeclaration
 ---------------------------->simpleVarDeclaration
 ----------------------------->TYPE ID
------------------------------->float
------------------------------->maca
 -------------------------->exprStmt
 --------------------------->expression SEMIC
 ---------------------------->assignExp
 ----------------------------->ID ASSIGN expression
------------------------------->maca
------------------------------->=
 ------------------------------>simpleExp
 ------------------------------->binLogicalExp
 -------------------------------->relationalExp
@@ -577,7 +516,6 @@ Integer: '0' at line: 64, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~1.100000
 ------------------------->outOp
 -------------------------->WRITELN PARENL outConst PARENR SEMIC
---------------------------->writeln
 --------------------------->simpleExp
 ---------------------------->binLogicalExp
 ----------------------------->relationalExp
@@ -588,14 +526,10 @@ Integer: '0' at line: 64, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------->varDeclaration
 -------------->simpleVarDeclaration
 --------------->TYPE ID
----------------->float
----------------->soma
 ------------>exprStmt
 ------------->expression SEMIC
 -------------->assignExp
 --------------->ID ASSIGN expression
----------------->soma
----------------->=
 ---------------->simpleExp
 ----------------->binLogicalExp
 ------------------>relationalExp
@@ -606,14 +540,9 @@ Integer: '0' at line: 64, column: 10
 ----------->varDeclaration
 ------------>simpleVarDeclaration
 ------------->TYPE ID
--------------->float list
--------------->AUX
 ---------->iterStmt
 ----------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
------------->for
 ------------>ID ASSIGN expression
-------------->AUX
-------------->=
 ------------->simpleExp
 -------------->binLogicalExp
 --------------->relationalExp
@@ -623,18 +552,14 @@ Integer: '0' at line: 64, column: 10
 ------------------->ID
 ~~~~~~~~~~~~~~~~~~~~------------>binLogicalExp
 ------------->relationalExp
--------------->relationalExp relationalOp sumExp
+-------------->relationalExp DIFFERENT sumExp
 --------------->sumExp
 ---------------->mulExp
 ----------------->factor
 ------------------>ID
-~~~~~~~~~~~~~~~~~~~--------------->DIFFERENT
----------------->!=
---------------->mulExp
+~~~~~~~~~~~~~~~~~~~--------------->mulExp
 ---------------->factor
 ------------>ID ASSIGN expression
-------------->AUX
-------------->=
 ------------->simpleExp
 -------------->binLogicalExp
 --------------->relationalExp
@@ -642,14 +567,11 @@ Integer: '0' at line: 64, column: 10
 ----------------->mulExp
 ------------------>unaryListExp
 ------------------->! factor
--------------------->!
 -------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~------------>exprStmt
 ------------->expression SEMIC
 -------------->assignExp
 --------------->ID ASSIGN expression
----------------->soma
----------------->=
 ---------------->simpleExp
 ----------------->binLogicalExp
 ------------------>relationalExp
@@ -658,27 +580,19 @@ Integer: '0' at line: 64, column: 10
 --------------------->mulExp
 ---------------------->factor
 ----------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~~--------------------->+
---------------------->unaryListExp
+~~~~~~~~~~~~~~~~~~~~~~~~--------------------->unaryListExp
 ---------------------->? factor
------------------------>?
 ----------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~~~--------->varDeclaration
 ---------->simpleVarDeclaration
 ----------->TYPE ID
------------->float
------------->media1
 -------->varDeclaration
 --------->simpleVarDeclaration
 ---------->TYPE ID
------------>float
------------>media2
 ------->exprStmt
 -------->expression SEMIC
 --------->assignExp
 ---------->ID ASSIGN expression
------------>media1
------------>=
 ----------->simpleExp
 ------------>binLogicalExp
 ------------->relationalExp
@@ -688,13 +602,10 @@ Integer: '0' at line: 64, column: 10
 ----------------->mulExp mulOp factor
 ------------------>factor
 ------------------->ID
-~~~~~~~~~~~~~~~~~~~~------------------>/
------------------->ID
-~~~~~~~~~~~~~~~~~~~---------------->-
----------------->mulExp mulOp factor
+~~~~~~~~~~~~~~~~~~~~------------------>ID
+~~~~~~~~~~~~~~~~~~~---------------->mulExp mulOp factor
 ----------------->factor
 ~~~~~~~~~~~~~~~~~~10
------------------>*
 ----------------->PARENL simpleExp PARENR
 ------------------>binLogicalExp
 ------------------->relationalExp
@@ -703,14 +614,11 @@ Integer: '0' at line: 64, column: 10
 ---------------------->mulExp mulOp factor
 ----------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~~~1
------------------------>/
 ~~~~~~~~~~~~~~~~~~~~~~~10
 ------>exprStmt
 ------->expression SEMIC
 -------->assignExp
 --------->ID ASSIGN expression
----------->media2
----------->=
 ---------->simpleExp
 ----------->binLogicalExp
 ------------>relationalExp
@@ -719,68 +627,51 @@ Integer: '0' at line: 64, column: 10
 --------------->mulExp mulOp factor
 ---------------->factor
 ----------------->ID
-~~~~~~~~~~~~~~~~~~---------------->/
----------------->ID
+~~~~~~~~~~~~~~~~~~---------------->ID
 ~~~~~~~~~~~~~~~~~----->condStmt
 ------>ifStmt primitiveStmt elseStmt
 ------->IF PARENL simpleExp PARENR
--------->if
 -------->binLogicalExp
 --------->relationalExp
----------->relationalExp relationalOp sumExp
+---------->relationalExp DIFFERENT sumExp
 ----------->sumExp
 ------------>mulExp
 ------------->factor
 -------------->ID
-~~~~~~~~~~~~~~~----------->DIFFERENT
------------->!=
------------>mulExp
+~~~~~~~~~~~~~~~----------->mulExp
 ------------>factor
 ------------->ID
 ~~~~~~~~~~~~~~------->outOp
 -------->WRITELN PARENL outConst PARENR SEMIC
---------->writeln
 --------->STRING
----------->"Há um problema no cálculo da média"
 ------->ELSE primitiveStmt
--------->else
 -------->condStmt
 --------->ifStmt primitiveStmt
 ---------->IF PARENL simpleExp PARENR
------------>if
 ----------->binLogicalExp
 ------------>binLogicalExp binLogicalOp relationalOp
 ------------->relationalExp
--------------->relationalExp relationalOp sumExp
+-------------->relationalExp EQUALS sumExp
 --------------->sumExp
 ---------------->mulExp
 ----------------->factor
 ------------------>ID
-~~~~~~~~~~~~~~~~~~~--------------->EQUALS
----------------->==
---------------->mulExp
+~~~~~~~~~~~~~~~~~~~--------------->mulExp
 ---------------->factor
 ----------------->ID
-~~~~~~~~~~~~~~~~~~------------->AND
--------------->&&
-------------->relationalExp relationalOp sumExp
+~~~~~~~~~~~~~~~~~~------------->relationalExp GREATEQ sumExp
 -------------->sumExp
 --------------->mulExp
 ---------------->factor
 ----------------->ID
-~~~~~~~~~~~~~~~~~~-------------->GREATEQ
---------------->>=
--------------->mulExp
+~~~~~~~~~~~~~~~~~~-------------->mulExp
 --------------->factor
 ~~~~~~~~~~~~~~~~5
 ---------->outOp
 ----------->WRITELN PARENL outConst PARENR SEMIC
------------->writeln
 ------------>STRING
-------------->"Parabéns!"
 ---->returnStmt
 ----->RETURN expression SEMIC
------->return
 ------>simpleExp
 ------->binLogicalExp
 -------->relationalExp

@@ -3,52 +3,46 @@
 #### beginning ####
 
 ------------------------Semantic analysis---------------------
-Type: 'int list' on line: 1, column: 1
-Id: 'IL' at line: 1, column: 10
-';' at line: 1, column: 12
-Type: 'float list' on line: 2, column: 1
-Id: 'FL' at line: 2, column: 12
-';' at line: 2, column: 14
-Type: 'int list' on line: 4, column: 1
-Id: 'read_list' at line: 4, column: 10
-'(' at line: 4, column: 19
-Type: 'int' on line: 4, column: 20
-Id: 'n' at line: 4, column: 24
-')' at line: 4, column: 25
-'{' on line: 5, column: 1
-Type: 'float' on line: 6, column: 3
-Id: 'i' at line: 6, column: 9
-';' at line: 6, column: 10
-Id: 'i' at line: 7, column: 3
-'=' at line: 7, column: 5
-Decimal: '-435.7' at line: 7, column: 7
-';' at line: 7, column: 13
-Type: 'int list' on line: 8, column: 3
-Id: 'new' at line: 8, column: 12
-';' at line: 8, column: 15
-Id: 'new' at line: 9, column: 3
-'=' at line: 9, column: 7
-Constant: 'NIL' at line: 9, column: 9
-';' at line: 9, column: 12
-Semantic Error
-var new from type int list receiving wrong type value, line 9, column 13
-
-Type: 'int' on line: 10, column: 3
-Id: 'j' at line: 10, column: 7
-';' at line: 10, column: 8
+Type: 'int list' on line: 2, column: 1
+Id: 'IL' at line: 2, column: 10
+';' at line: 2, column: 12
+Type: 'float list' on line: 3, column: 1
+Id: 'FL' at line: 3, column: 12
+';' at line: 3, column: 14
+Type: 'int list' on line: 5, column: 1
+Id: 'read_list' at line: 5, column: 10
+'(' at line: 5, column: 19
+Type: 'int' on line: 5, column: 20
+Id: 'n' at line: 5, column: 24
+')' at line: 5, column: 25
+'{' on line: 6, column: 1
+Type: 'int' on line: 7, column: 3
+Id: 'i' at line: 7, column: 7
+';' at line: 7, column: 8
+Id: 'i' at line: 8, column: 3
+'=' at line: 8, column: 5
+Decimal: '-435.7' at line: 8, column: 7
+';' at line: 8, column: 13
+Type: 'int list' on line: 9, column: 3
+Id: 'new' at line: 9, column: 12
+';' at line: 9, column: 15
+Id: 'new' at line: 10, column: 3
+'=' at line: 10, column: 7
+Constant: 'NIL' at line: 10, column: 9
+';' at line: 10, column: 12
 Keyword [FOR]: 'for' at line: 11, column: 3
 '(' at line: 11, column: 7
-Id: 'j' at line: 11, column: 8
+Id: 'i' at line: 11, column: 8
 '=' at line: 11, column: 10
 Integer: '0' at line: 11, column: 12
 ';' at line: 11, column: 13
-Id: 'j' at line: 11, column: 15
+Id: 'i' at line: 11, column: 15
 OP [SMALLER THAN]: '<' at line: 11, column: 17
 Id: 'n' at line: 11, column: 19
 ';' at line: 11, column: 20
-Id: 'j' at line: 11, column: 22
+Id: 'i' at line: 11, column: 22
 '=' at line: 11, column: 24
-Id: 'j' at line: 11, column: 26
+Id: 'i' at line: 11, column: 26
 '+' at line: 11, column: 28
 Integer: '1' at line: 11, column: 30
 ')' at line: 11, column: 31
@@ -73,176 +67,180 @@ Keyword [APPEND]: ':' at line: 16, column: 16
 Id: 'new' at line: 16, column: 18
 ';' at line: 16, column: 21
 '}' at line: 17, column: 3
-Keyword [RETURN]: 'return' at line: 18, column: 3
-Id: 'new' at line: 18, column: 10
-';' at line: 18, column: 13
-'}' at line: 19, column: 1
-Type: 'float' on line: 21, column: 1
-Id: 'succ' at line: 21, column: 7
-'(' at line: 21, column: 11
-Type: 'int' on line: 21, column: 12
-Id: 'i' at line: 21, column: 16
-')' at line: 21, column: 17
-'{' on line: 22, column: 1
-Keyword [RETURN]: 'return' at line: 23, column: 3
-Id: 'i' at line: 23, column: 10
-'+' at line: 23, column: 12
-Integer: '1' at line: 23, column: 14
-';' at line: 23, column: 15
-'}' at line: 24, column: 1
-Type: 'int' on line: 26, column: 1
+Keyword [RETURN]: 'return' at line: 19, column: 3
+Id: 'new' at line: 19, column: 10
+';' at line: 19, column: 13
+'}' at line: 20, column: 1
+Type: 'float' on line: 22, column: 1
+Id: 'succ' at line: 22, column: 7
+'(' at line: 22, column: 11
+Type: 'int' on line: 22, column: 12
+Id: 'i' at line: 22, column: 16
+')' at line: 22, column: 17
 Semantic Error
-function succ without expected return, line 26, column 4
+'{' on line: 23, column: 1
+Keyword [RETURN]: 'return' at line: 24, column: 3
+Id: 'i' at line: 24, column: 10
+'+' at line: 24, column: 12
+Semantic error
+var i not declared, line 24, column 13
 
-Id: 'leq_10' at line: 26, column: 5
-'(' at line: 26, column: 11
-Type: 'float' on line: 26, column: 12
-Id: 'x' at line: 26, column: 18
-')' at line: 26, column: 19
-'{' on line: 27, column: 1
-Keyword [RETURN]: 'return' at line: 28, column: 3
-Id: 'x' at line: 28, column: 10
-OP [SMALLER THAN OR EQUAL]: '<=' at line: 28, column: 12
-Integer: '10' at line: 28, column: 15
-';' at line: 28, column: 17
-'}' at line: 29, column: 1
-Type: 'int' on line: 31, column: 1
+Integer: '1' at line: 24, column: 14
+';' at line: 24, column: 15
+'}' at line: 25, column: 1
+Type: 'int' on line: 27, column: 1
 Semantic Error
-function leq_10 without expected return, line 31, column 4
+function succ with return with wrong type, line 27, column 4
 
-Id: 'main' at line: 31, column: 5
-'(' at line: 31, column: 9
-')' at line: 31, column: 10
-'{' on line: 32, column: 1
-Keyword [WRITELN]: 'writeln' at line: 34, column: 3
-'(' at line: 34, column: 10
-String: "Digite os número de elementos da lista: " on line: 34, column: 11
-')' at line: 34, column: 54
-';' at line: 34, column: 55
-Type: 'int' on line: 36, column: 3
-Id: 'n' at line: 36, column: 7
-';' at line: 36, column: 8
-Type: 'float list' on line: 37, column: 3
-Id: 'FL10' at line: 37, column: 14
-';' at line: 37, column: 18
-Keyword [READ]: 'read' at line: 38, column: 3
-'(' at line: 38, column: 7
-Id: 'n' at line: 38, column: 8
-')' at line: 38, column: 9
-';' at line: 38, column: 10
-Id: 'IL' at line: 40, column: 3
-'=' at line: 40, column: 6
-Id: 'read_list' at line: 40, column: 8
-'(' at line: 40, column: 17
-Id: 'n' at line: 40, column: 18
-')' at line: 40, column: 19
-';' at line: 40, column: 20
-Id: 'FL' at line: 41, column: 3
+Id: 'leq_10' at line: 27, column: 5
+'(' at line: 27, column: 11
+Type: 'float' on line: 27, column: 12
+Id: 'x' at line: 27, column: 18
+')' at line: 27, column: 19
+'{' on line: 28, column: 1
+Keyword [RETURN]: 'return' at line: 29, column: 3
+Id: 'x' at line: 29, column: 10
+OP [SMALLER THAN OR EQUAL]: '<=' at line: 29, column: 12
+Integer: '10' at line: 29, column: 15
+';' at line: 29, column: 17
+'}' at line: 30, column: 1
+Type: 'int' on line: 32, column: 1
+Semantic Error
+function leq_10 with return with wrong type, line 32, column 4
+
+Id: 'main' at line: 32, column: 5
+'(' at line: 32, column: 9
+')' at line: 32, column: 10
+'{' on line: 33, column: 1
+Keyword [WRITELN]: 'writeln' at line: 35, column: 3
+'(' at line: 35, column: 10
+String: "Digite os número de elementos da lista: " on line: 35, column: 11
+')' at line: 35, column: 54
+';' at line: 35, column: 55
+Type: 'int' on line: 37, column: 3
+Id: 'n' at line: 37, column: 7
+';' at line: 37, column: 8
+Type: 'float list' on line: 38, column: 3
+Id: 'FL10' at line: 38, column: 14
+';' at line: 38, column: 18
+Keyword [READ]: 'read' at line: 39, column: 3
+'(' at line: 39, column: 7
+Id: 'n' at line: 39, column: 8
+')' at line: 39, column: 9
+';' at line: 39, column: 10
+Id: 'IL' at line: 41, column: 3
 '=' at line: 41, column: 6
-Id: 'succ' at line: 41, column: 8
-Keyword [MAP]: '>>' at line: 41, column: 13
+Id: 'read_list' at line: 41, column: 8
+'(' at line: 41, column: 17
+Id: 'n' at line: 41, column: 18
+')' at line: 41, column: 19
+';' at line: 41, column: 20
+Id: 'FL' at line: 42, column: 3
+'=' at line: 42, column: 6
+Id: 'succ' at line: 42, column: 8
+Keyword [MAP]: '>>' at line: 42, column: 13
 Semantic error
-var succ not declared, line 41, column 15
+var succ not declared, line 42, column 15
 
-Id: 'IL' at line: 41, column: 16
-';' at line: 41, column: 18
+Id: 'IL' at line: 42, column: 16
+';' at line: 42, column: 18
 Semantic Error
-var FL from type float list receiving wrong type value, line 41, column 19
+var FL from type float list receiving wrong type value, line 42, column 19
 
-Id: 'FL10' at line: 43, column: 3
-'=' at line: 43, column: 8
-Id: 'leq_10' at line: 43, column: 10
-Keyword [FILTER]: '<<' at line: 43, column: 17
+Id: 'FL10' at line: 44, column: 3
+'=' at line: 44, column: 8
+Id: 'leq_10' at line: 44, column: 10
+Keyword [FILTER]: '<<' at line: 44, column: 17
 Semantic error
-var leq_10 not declared, line 43, column 19
+var leq_10 not declared, line 44, column 19
 
-Id: 'FL' at line: 43, column: 20
-';' at line: 43, column: 22
+Id: 'FL' at line: 44, column: 20
+';' at line: 44, column: 22
 Semantic Error
-var FL10 from type float list receiving wrong type value, line 43, column 23
+var FL10 from type float list receiving wrong type value, line 44, column 23
 
-Keyword [IF]: 'if' at line: 44, column: 3
-'(' at line: 44, column: 6
-Id: 'FL10' at line: 44, column: 7
-OP [IS DIFFERENT]: '!=' at line: 44, column: 12
-Constant: 'NIL' at line: 44, column: 15
-')' at line: 44, column: 18
-'{' on line: 45, column: 3
-Type: 'float list' on line: 46, column: 5
-Id: 'AUXL' at line: 46, column: 16
-';' at line: 46, column: 20
-Type: 'int' on line: 47, column: 5
-Id: 'n' at line: 47, column: 9
-';' at line: 47, column: 10
-Id: 'n' at line: 48, column: 5
-'=' at line: 48, column: 7
-Integer: '0' at line: 48, column: 9
-';' at line: 48, column: 10
-Keyword [FOR]: 'for' at line: 49, column: 5
-'(' at line: 49, column: 9
-Id: 'AUXL' at line: 49, column: 10
-'=' at line: 49, column: 15
-Id: 'FL10' at line: 49, column: 17
-';' at line: 49, column: 21
-Id: 'AUXL' at line: 49, column: 23
-OP [IS DIFFERENT]: '!=' at line: 49, column: 28
-Constant: 'NIL' at line: 49, column: 31
-';' at line: 49, column: 34
-Id: 'AUXL' at line: 49, column: 36
-'=' at line: 49, column: 41
-Keyword [TAILLIST]: '!' at line: 49, column: 43
-Id: 'AUXL' at line: 49, column: 44
-')' at line: 49, column: 48
-'{' on line: 50, column: 5
-Id: 'n' at line: 51, column: 7
-'=' at line: 51, column: 9
-Id: 'n' at line: 51, column: 11
-'+' at line: 51, column: 13
-Integer: '1' at line: 51, column: 15
-';' at line: 51, column: 16
-Keyword [WRITE]: 'write' at line: 52, column: 7
-'(' at line: 52, column: 12
-Keyword [HEADLIST]: '?' at line: 52, column: 13
-Id: 'AUXL' at line: 52, column: 14
-')' at line: 52, column: 18
-';' at line: 52, column: 19
-Keyword [WRITE]: 'write' at line: 53, column: 7
-'(' at line: 53, column: 12
-String: " " on line: 53, column: 13
-')' at line: 53, column: 16
-';' at line: 53, column: 17
-'}' at line: 54, column: 5
-Keyword [WRITELN]: 'writeln' at line: 55, column: 5
-'(' at line: 55, column: 12
-String: " " on line: 55, column: 13
-')' at line: 55, column: 16
-';' at line: 55, column: 17
-Keyword [WRITE]: 'write' at line: 56, column: 5
-'(' at line: 56, column: 10
-String: "A nova lista tem " on line: 56, column: 11
-')' at line: 56, column: 30
-';' at line: 56, column: 31
-Keyword [WRITE]: 'write' at line: 57, column: 5
-'(' at line: 57, column: 10
-Id: 'n' at line: 57, column: 11
-')' at line: 57, column: 12
-';' at line: 57, column: 13
-Keyword [WRITELN]: 'writeln' at line: 58, column: 5
-'(' at line: 58, column: 12
-String: " elementos." on line: 58, column: 13
-')' at line: 58, column: 26
-';' at line: 58, column: 27
-'}' at line: 59, column: 3
-Keyword [ELSE]: 'else' at line: 60, column: 3
+Keyword [IF]: 'if' at line: 46, column: 3
+'(' at line: 46, column: 6
+Id: 'FL10' at line: 46, column: 7
+OP [IS DIFFERENT]: '!=' at line: 46, column: 12
+Constant: 'NIL' at line: 46, column: 15
+')' at line: 46, column: 18
+'{' on line: 47, column: 3
+Type: 'float list' on line: 49, column: 5
+Id: 'AUXL' at line: 49, column: 16
+';' at line: 49, column: 20
+Type: 'int' on line: 50, column: 5
+Id: 'n' at line: 50, column: 9
+';' at line: 50, column: 10
+Id: 'n' at line: 51, column: 5
+'=' at line: 51, column: 7
+Integer: '0' at line: 51, column: 9
+';' at line: 51, column: 10
+Keyword [FOR]: 'for' at line: 53, column: 5
+'(' at line: 53, column: 9
+Id: 'AUXL' at line: 53, column: 10
+'=' at line: 53, column: 15
+Id: 'FL10' at line: 53, column: 17
+';' at line: 53, column: 21
+Id: 'AUXL' at line: 53, column: 23
+OP [IS DIFFERENT]: '!=' at line: 53, column: 28
+Constant: 'NIL' at line: 53, column: 31
+';' at line: 53, column: 34
+Id: 'AUXL' at line: 53, column: 36
+'=' at line: 53, column: 41
+Keyword [TAILLIST]: '!' at line: 53, column: 43
+Id: 'AUXL' at line: 53, column: 44
+')' at line: 53, column: 48
+'{' on line: 54, column: 5
+Id: 'n' at line: 56, column: 7
+'=' at line: 56, column: 9
+Id: 'n' at line: 56, column: 11
+'+' at line: 56, column: 13
+Integer: '1' at line: 56, column: 15
+';' at line: 56, column: 16
+Keyword [WRITE]: 'write' at line: 58, column: 16
+'(' at line: 58, column: 21
+Keyword [HEADLIST]: '?' at line: 58, column: 22
+Id: 'AUXL' at line: 58, column: 23
+')' at line: 58, column: 27
+';' at line: 58, column: 28
+Keyword [WRITE]: 'write' at line: 59, column: 16
+'(' at line: 59, column: 21
+String: " " on line: 59, column: 22
+')' at line: 59, column: 25
+';' at line: 59, column: 26
+'}' at line: 60, column: 5
 Keyword [WRITELN]: 'writeln' at line: 61, column: 5
 '(' at line: 61, column: 12
-String: "A nova lista não possui elementos." on line: 61, column: 13
-')' at line: 61, column: 50
-';' at line: 61, column: 51
-Keyword [RETURN]: 'return' at line: 63, column: 3
-Integer: '0' at line: 63, column: 10
-';' at line: 63, column: 11
-'}' at line: 64, column: 1
+String: " " on line: 61, column: 13
+')' at line: 61, column: 16
+';' at line: 61, column: 17
+Keyword [WRITE]: 'write' at line: 63, column: 5
+'(' at line: 63, column: 10
+String: "A nova lista tem " on line: 63, column: 11
+')' at line: 63, column: 30
+';' at line: 63, column: 31
+Keyword [WRITE]: 'write' at line: 64, column: 5
+'(' at line: 64, column: 10
+Id: 'n' at line: 64, column: 11
+')' at line: 64, column: 12
+';' at line: 64, column: 13
+Keyword [WRITELN]: 'writeln' at line: 65, column: 5
+'(' at line: 65, column: 12
+String: " elementos." on line: 65, column: 13
+')' at line: 65, column: 26
+';' at line: 65, column: 27
+'}' at line: 66, column: 3
+Keyword [ELSE]: 'else' at line: 67, column: 3
+Keyword [WRITELN]: 'writeln' at line: 68, column: 5
+'(' at line: 68, column: 12
+String: "A nova lista não possui elementos." on line: 68, column: 13
+')' at line: 68, column: 50
+';' at line: 68, column: 51
+Keyword [RETURN]: 'return' at line: 70, column: 3
+Integer: '0' at line: 70, column: 10
+';' at line: 70, column: 11
+'}' at line: 71, column: 1
 
 
 #### EOF ####
@@ -259,11 +257,9 @@ Integer: '0' at line: 63, column: 10
 |   FL                  |    var                          |      float list              |         0            |         0          |
 |   n                   |    param                        |      int                     |         1            |         0          |
 |   read_list           |    func                         |      int list                |         1            |         1          |
-|   i                   |    var                          |      float                   |         1            |         0          |
+|   i                   |    var                          |      int                     |         1            |         0          |
 |   new                 |    var                          |      int list                |         1            |         0          |
-|   j                   |    var                          |      int                     |         1            |         0          |
 |   elem                |    var                          |      int                     |         2            |         0          |
-|   i                   |    param                        |      int                     |         2            |         0          |
 |   succ                |    func                         |      float                   |         2            |         1          |
 |   x                   |    param                        |      float                   |         3            |         0          |
 |   leq_10              |    func                         |      int                     |         3            |         1          |
@@ -285,74 +281,49 @@ Integer: '0' at line: 63, column: 10
 ------>varDeclaration
 ------->simpleVarDeclaration
 -------->TYPE ID
---------->int list
---------->IL
 ----->varDeclaration
 ------>simpleVarDeclaration
 ------->TYPE ID
--------->float list
--------->FL
 ---->funcDeclaration
 ----->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
------->int list
------->read_list
 ------>param
 ------->TYPE ID
--------->int
--------->n
 ------>stmtList primitiveStmt
 ------->stmtList primitiveStmt
 -------->stmtList primitiveStmt
 --------->stmtList primitiveStmt
 ---------->stmtList primitiveStmt
------------>stmtList primitiveStmt
------------->primitiveStmt
-------------->varDeclaration
--------------->simpleVarDeclaration
---------------->TYPE ID
----------------->float
----------------->i
------------->exprStmt
-------------->expression SEMIC
--------------->assignExp
---------------->ID ASSIGN expression
----------------->i
----------------->=
----------------->simpleExp
------------------>binLogicalExp
------------------->relationalExp
-------------------->sumExp
--------------------->mulExp
---------------------->factor
-~~~~~~~~~~~~~~~~~~~~~~-435.700012
------------>varDeclaration
------------->simpleVarDeclaration
-------------->TYPE ID
--------------->int list
--------------->new
----------->exprStmt
------------>expression SEMIC
------------->assignExp
-------------->ID ASSIGN expression
--------------->new
--------------->=
--------------->simpleExp
---------------->binLogicalExp
----------------->relationalExp
------------------>sumExp
------------------->mulExp
-------------------->factor
---------->varDeclaration
----------->simpleVarDeclaration
------------>TYPE ID
------------->int
------------->j
+----------->primitiveStmt
+------------>varDeclaration
+------------->simpleVarDeclaration
+-------------->TYPE ID
+----------->exprStmt
+------------>expression SEMIC
+------------->assignExp
+-------------->ID ASSIGN expression
+--------------->simpleExp
+---------------->binLogicalExp
+----------------->relationalExp
+------------------>sumExp
+------------------->mulExp
+-------------------->factor
+~~~~~~~~~~~~~~~~~~~~~-435.700012
+---------->varDeclaration
+----------->simpleVarDeclaration
+------------>TYPE ID
+--------->exprStmt
+---------->expression SEMIC
+----------->assignExp
+------------>ID ASSIGN expression
+------------->simpleExp
+-------------->binLogicalExp
+--------------->relationalExp
+---------------->sumExp
+----------------->mulExp
+------------------>factor
 -------->iterStmt
 --------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
----------->for
 ---------->ID ASSIGN expression
------------>j
------------>=
 ----------->simpleExp
 ------------>binLogicalExp
 ------------->relationalExp
@@ -362,19 +333,15 @@ Integer: '0' at line: 63, column: 10
 ~~~~~~~~~~~~~~~~~0
 ---------->binLogicalExp
 ----------->relationalExp
------------->relationalExp relationalOp sumExp
+------------>relationalExp SMALLER sumExp
 ------------->sumExp
 -------------->mulExp
 --------------->factor
 ---------------->ID
-~~~~~~~~~~~~~~~~~------------->SMALLER
---------------><
-------------->mulExp
+~~~~~~~~~~~~~~~~~------------->mulExp
 -------------->factor
 --------------->ID
 ~~~~~~~~~~~~~~~~---------->ID ASSIGN expression
------------>j
------------>=
 ----------->simpleExp
 ------------>binLogicalExp
 ------------->relationalExp
@@ -383,8 +350,7 @@ Integer: '0' at line: 63, column: 10
 ---------------->mulExp
 ----------------->factor
 ------------------>ID
-~~~~~~~~~~~~~~~~~~~---------------->+
----------------->factor
+~~~~~~~~~~~~~~~~~~~---------------->factor
 ~~~~~~~~~~~~~~~~~1
 ---------->compoundStmt
 ----------->compoundStmt
@@ -395,32 +361,22 @@ Integer: '0' at line: 63, column: 10
 ---------------->varDeclaration
 ----------------->simpleVarDeclaration
 ------------------>TYPE ID
-------------------->int
-------------------->elem
 --------------->outOp
 ---------------->WRITELN PARENL outConst PARENR SEMIC
------------------>writeln
 ----------------->STRING
------------------->"Digite o elemento da lista: "
 -------------->inOp
 --------------->READ PARENL ID PARENR SEMIC
----------------->read
----------------->elem
 ------------->exprStmt
 -------------->expression SEMIC
 --------------->assignExp
 ---------------->ID ASSIGN expression
------------------>new
------------------>=
 ----------------->simpleExp
 ------------------>binListExp
 ------------------->factor APPEND factor
 -------------------->ID
-~~~~~~~~~~~~~~~~~~~~~-------------------->:
--------------------->ID
+~~~~~~~~~~~~~~~~~~~~~-------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~------->returnStmt
 -------->RETURN expression SEMIC
---------->return
 --------->simpleExp
 ---------->binLogicalExp
 ----------->relationalExp
@@ -430,16 +386,11 @@ Integer: '0' at line: 63, column: 10
 --------------->ID
 ~~~~~~~~~~~~~~~~--->funcDeclaration
 ---->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
------>float
------>succ
 ----->param
 ------>TYPE ID
-------->int
-------->i
 ----->primitiveStmt
 ------>returnStmt
 ------->RETURN expression SEMIC
--------->return
 -------->simpleExp
 --------->binLogicalExp
 ---------->relationalExp
@@ -447,39 +398,28 @@ Integer: '0' at line: 63, column: 10
 ------------>sumExp add mulExp
 ------------->mulExp
 -------------->factor
---------------->ID
-~~~~~~~~~~~~~~~~------------->+
 ------------->factor
 ~~~~~~~~~~~~~~1
 -->funcDeclaration
 --->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
----->int
----->leq_10
 ---->param
 ----->TYPE ID
------->float
------->x
 ---->primitiveStmt
 ----->returnStmt
 ------>RETURN expression SEMIC
-------->return
 ------->simpleExp
 -------->binLogicalExp
 --------->relationalExp
----------->relationalExp relationalOp sumExp
+---------->relationalExp SMALLEQ sumExp
 ----------->sumExp
 ------------>mulExp
 ------------->factor
 -------------->ID
-~~~~~~~~~~~~~~~----------->SMALLEQ
-------------><=
------------>mulExp
+~~~~~~~~~~~~~~~----------->mulExp
 ------------>factor
 ~~~~~~~~~~~~~10
 ->funcDeclaration
 -->TYPE ID PARENL PARENR stmtList ENDFUNC 
---->int
---->main
 --->stmtList primitiveStmt
 ---->stmtList primitiveStmt
 ----->stmtList primitiveStmt
@@ -491,29 +431,19 @@ Integer: '0' at line: 63, column: 10
 ----------->primitiveStmt
 ------------>outOp
 ------------->WRITELN PARENL outConst PARENR SEMIC
--------------->writeln
 -------------->STRING
---------------->"Digite os número de elementos da lista: "
 ----------->varDeclaration
 ------------>simpleVarDeclaration
 ------------->TYPE ID
--------------->int
--------------->n
 ---------->varDeclaration
 ----------->simpleVarDeclaration
 ------------>TYPE ID
-------------->float list
-------------->FL10
 --------->inOp
 ---------->READ PARENL ID PARENR SEMIC
------------>read
------------>n
 -------->exprStmt
 --------->expression SEMIC
 ---------->assignExp
 ----------->ID ASSIGN expression
------------->IL
------------->=
 ------------>simpleExp
 ------------->binLogicalExp
 -------------->relationalExp
@@ -522,7 +452,6 @@ Integer: '0' at line: 63, column: 10
 ----------------->factor
 ------------------>fCall
 ------------------->ID PARENL callParams PARENR
--------------------->read_list
 -------------------->simpleExp
 --------------------->binLogicalExp
 ---------------------->relationalExp
@@ -534,40 +463,29 @@ Integer: '0' at line: 63, column: 10
 -------->expression SEMIC
 --------->assignExp
 ---------->ID ASSIGN expression
------------>FL
------------>=
 ----------->simpleExp
 ------------>binListExp
 ------------->factor MAP factor
--------------->(null)
--------------->>>
 -------------->ID
 ~~~~~~~~~~~~~~~------>exprStmt
 ------->expression SEMIC
 -------->assignExp
 --------->ID ASSIGN expression
----------->FL10
----------->=
 ---------->simpleExp
 ----------->binListExp
 ------------>factor FILTER factor
-------------->(null)
--------------><<
 ------------->ID
 ~~~~~~~~~~~~~~----->condStmt
 ------>ifStmt primitiveStmt elseStmt
 ------->IF PARENL simpleExp PARENR
--------->if
 -------->binLogicalExp
 --------->relationalExp
----------->relationalExp relationalOp sumExp
+---------->relationalExp DIFFERENT sumExp
 ----------->sumExp
 ------------>mulExp
 ------------->factor
 -------------->ID
-~~~~~~~~~~~~~~~----------->DIFFERENT
------------->!=
------------>mulExp
+~~~~~~~~~~~~~~~----------->mulExp
 ------------>factor
 ------->compoundStmt
 -------->compoundStmt
@@ -582,19 +500,13 @@ Integer: '0' at line: 63, column: 10
 ----------------->varDeclaration
 ------------------>simpleVarDeclaration
 ------------------->TYPE ID
--------------------->float list
--------------------->AUXL
 ---------------->varDeclaration
 ----------------->simpleVarDeclaration
 ------------------>TYPE ID
-------------------->int
-------------------->n
 --------------->exprStmt
 ---------------->expression SEMIC
 ----------------->assignExp
 ------------------>ID ASSIGN expression
-------------------->n
-------------------->=
 ------------------->simpleExp
 -------------------->binLogicalExp
 --------------------->relationalExp
@@ -604,10 +516,7 @@ Integer: '0' at line: 63, column: 10
 ~~~~~~~~~~~~~~~~~~~~~~~~~0
 -------------->iterStmt
 --------------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
----------------->for
 ---------------->ID ASSIGN expression
------------------>AUXL
------------------>=
 ----------------->simpleExp
 ------------------>binLogicalExp
 ------------------->relationalExp
@@ -617,18 +526,14 @@ Integer: '0' at line: 63, column: 10
 ----------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~~~---------------->binLogicalExp
 ----------------->relationalExp
------------------->relationalExp relationalOp sumExp
+------------------>relationalExp DIFFERENT sumExp
 ------------------->sumExp
 -------------------->mulExp
 --------------------->factor
 ---------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~------------------->DIFFERENT
--------------------->!=
-------------------->mulExp
+~~~~~~~~~~~~~~~~~~~~~~~------------------->mulExp
 -------------------->factor
 ---------------->ID ASSIGN expression
------------------>AUXL
------------------>=
 ----------------->simpleExp
 ------------------>binLogicalExp
 ------------------->relationalExp
@@ -636,7 +541,6 @@ Integer: '0' at line: 63, column: 10
 --------------------->mulExp
 ---------------------->unaryListExp
 ----------------------->! factor
------------------------->!
 ------------------------>ID
 ~~~~~~~~~~~~~~~~~~~~~~~~~---------------->compoundStmt
 ----------------->compoundStmt
@@ -647,8 +551,6 @@ Integer: '0' at line: 63, column: 10
 ---------------------->expression SEMIC
 ----------------------->assignExp
 ------------------------>ID ASSIGN expression
-------------------------->n
-------------------------->=
 ------------------------->simpleExp
 -------------------------->binLogicalExp
 --------------------------->relationalExp
@@ -657,12 +559,10 @@ Integer: '0' at line: 63, column: 10
 ------------------------------>mulExp
 ------------------------------->factor
 -------------------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------------------------>+
------------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------------------------>factor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~1
 -------------------->outOp
 --------------------->WRITE PARENL outConst PARENR SEMIC
----------------------->write
 ---------------------->simpleExp
 ----------------------->binLogicalExp
 ------------------------>relationalExp
@@ -670,26 +570,18 @@ Integer: '0' at line: 63, column: 10
 -------------------------->mulExp
 --------------------------->unaryListExp
 ---------------------------->? factor
------------------------------>?
 ----------------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------------->outOp
 -------------------->WRITE PARENL outConst PARENR SEMIC
---------------------->write
 --------------------->STRING
----------------------->" "
 ------------->outOp
 -------------->WRITELN PARENL outConst PARENR SEMIC
---------------->writeln
 --------------->STRING
----------------->" "
 ------------>outOp
 ------------->WRITE PARENL outConst PARENR SEMIC
--------------->write
 -------------->STRING
---------------->"A nova lista tem "
 ----------->outOp
 ------------>WRITE PARENL outConst PARENR SEMIC
-------------->write
 ------------->simpleExp
 -------------->binLogicalExp
 --------------->relationalExp
@@ -699,19 +591,13 @@ Integer: '0' at line: 63, column: 10
 ------------------->ID
 ~~~~~~~~~~~~~~~~~~~~---------->outOp
 ----------->WRITELN PARENL outConst PARENR SEMIC
------------->writeln
 ------------>STRING
-------------->" elementos."
 ------->ELSE primitiveStmt
--------->else
 -------->outOp
 --------->WRITELN PARENL outConst PARENR SEMIC
----------->writeln
 ---------->STRING
------------>"A nova lista não possui elementos."
 ---->returnStmt
 ----->RETURN expression SEMIC
------->return
 ------>simpleExp
 ------->binLogicalExp
 -------->relationalExp
@@ -721,5 +607,5 @@ Integer: '0' at line: 63, column: 10
 ~~~~~~~~~~~~0
 
 
- There is 7 warnings in the file
+ There is 8 warnings in the file
 

@@ -98,18 +98,13 @@ Integer: '0' at line: 20, column: 12
 -->varDeclaration
 --->simpleVarDeclaration
 ---->TYPE ID
------>int
------>x
 ->funcDeclaration
 -->TYPE ID PARENL PARENR stmtList ENDFUNC 
---->int
---->main
 --->stmtList primitiveStmt
 ---->stmtList primitiveStmt
 ----->primitiveStmt
 ------>iterStmt
 ------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
--------->for
 -------->binLogicalExp
 --------->relationalExp
 ---------->sumExp
@@ -118,19 +113,15 @@ Integer: '0' at line: 20, column: 12
 ------------->ID
 ~~~~~~~~~~~~~~-------->binLogicalExp
 --------->relationalExp
----------->relationalExp relationalOp sumExp
+---------->relationalExp SMALLER sumExp
 ----------->sumExp
 ------------>mulExp
 ------------->factor
 -------------->ID
-~~~~~~~~~~~~~~~----------->SMALLER
-------------><
------------>mulExp
+~~~~~~~~~~~~~~~----------->mulExp
 ------------>factor
 ~~~~~~~~~~~~~5
 -------->ID ASSIGN expression
---------->x
---------->=
 --------->simpleExp
 ---------->binLogicalExp
 ----------->relationalExp
@@ -139,8 +130,7 @@ Integer: '0' at line: 20, column: 12
 -------------->mulExp
 --------------->factor
 ---------------->ID
-~~~~~~~~~~~~~~~~~-------------->+
--------------->factor
+~~~~~~~~~~~~~~~~~-------------->factor
 ~~~~~~~~~~~~~~~1
 -------->compoundStmt
 --------->compoundStmt
@@ -151,8 +141,6 @@ Integer: '0' at line: 20, column: 12
 -------------->expression SEMIC
 --------------->assignExp
 ---------------->ID ASSIGN expression
------------------>x
------------------>=
 ----------------->simpleExp
 ------------------>binLogicalExp
 ------------------->relationalExp
@@ -161,12 +149,10 @@ Integer: '0' at line: 20, column: 12
 ---------------------->mulExp
 ----------------------->factor
 ------------------------>ID
-~~~~~~~~~~~~~~~~~~~~~~~~~---------------------->+
----------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~---------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~~1
 ------------>outOp
 ------------->WRITELN PARENL outConst PARENR SEMIC
--------------->writeln
 -------------->simpleExp
 --------------->binLogicalExp
 ---------------->relationalExp
@@ -184,25 +170,20 @@ Integer: '0' at line: 20, column: 12
 ------------------>mulExp
 ------------------->factor
 ~~~~~~~~~~~~~~~~~~~~2
------------------->+
 ------------------>mulExp mulOp factor
 ------------------->factor
 ~~~~~~~~~~~~~~~~~~~~-2
-------------------->*
 ~~~~~~~~~~~~~~~~~~~3
 ----->condStmt
 ------>ifStmt primitiveStmt elseStmt
 ------->IF PARENL simpleExp PARENR
--------->if
 -------->binLogicalExp
 --------->relationalExp
----------->relationalExp relationalOp sumExp
+---------->relationalExp SMALLER sumExp
 ----------->sumExp
 ------------>mulExp
 ------------->factor
 ~~~~~~~~~~~~~~1
------------>SMALLER
-------------><
 ----------->mulExp
 ------------>factor
 ~~~~~~~~~~~~~2
@@ -211,7 +192,6 @@ Integer: '0' at line: 20, column: 12
 --------->primitiveStmt
 ---------->outOp
 ----------->WRITELN PARENL outConst PARENR SEMIC
------------->writeln
 ------------>simpleExp
 ------------->binLogicalExp
 -------------->relationalExp
@@ -220,29 +200,24 @@ Integer: '0' at line: 20, column: 12
 ----------------->factor
 ------------------>ID
 ~~~~~~~~~~~~~~~~~~~------->ELSE primitiveStmt
--------->else
 -------->compoundStmt
 --------->compoundStmt
 ---------->primitiveStmt
 ----------->condStmt
 ------------>ifStmt primitiveStmt
 ------------->IF PARENL simpleExp PARENR
--------------->if
 -------------->binLogicalExp
 --------------->relationalExp
----------------->relationalExp relationalOp sumExp
+---------------->relationalExp SMALLER sumExp
 ----------------->sumExp
 ------------------>mulExp
 ------------------->factor
 ~~~~~~~~~~~~~~~~~~~~2
------------------>SMALLER
-------------------><
 ----------------->mulExp
 ------------------>factor
 ~~~~~~~~~~~~~~~~~~~1
 ------------->outOp
 -------------->WRITELN PARENL outConst PARENR SEMIC
---------------->writeln
 --------------->simpleExp
 ---------------->binLogicalExp
 ----------------->relationalExp
@@ -252,7 +227,6 @@ Integer: '0' at line: 20, column: 12
 --------------------->ID
 ~~~~~~~~~~~~~~~~~~~~~~---->returnStmt
 ----->RETURN expression SEMIC
------->return
 ------>simpleExp
 ------->binLogicalExp
 -------->relationalExp

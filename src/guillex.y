@@ -515,6 +515,35 @@ void writelnFunc(char *value){
   DL_APPEND(currentLine, code);
 }
 
+void ifFunc(int value, char *reg){
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "brz if_exit_%d, %s\n", value, reg);
+  DL_APPEND(currentLine, code);
+}
+
+void ifFuncExit(int value){
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "if_exit_%d:\n", value);
+  DL_APPEND(currentLine, code);
+}
+
+void ifJump(int value){
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "jump if_jump_%d\n", value);
+  DL_APPEND(currentLine, code);
+  ifFuncExit(value);
+}
+
+void ifJumpExit(int value){
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "if_jump_%d:\n", value);
+  DL_APPEND(currentLine, code);
+}
+
 void notFunc(char *name, char *value){
   Codegen *code = (Codegen *)malloc(sizeof *code);
   utstring_new(code -> line);
@@ -851,11 +880,9 @@ exprStmt:
 condStmt:
     ifStmt primitiveStmt %prec THEN {
       $$ = createNode2("ifStmt primitiveStmt", $1, $2);
+      ifFuncExit(STACK_TOP(stackIfElse) -> value);
+      popStackIf();
       $$ -> nodeType = $2 -> nodeType;
-      popStack();
-      scope--;
-      pushStack(scope);
-      popStack();
     }
   | ifStmt primitiveStmt elseStmt  {
     $$ = createNode3("ifStmt primitiveStmt elseStmt", $1, $2, $3);
@@ -863,10 +890,9 @@ condStmt:
   }
   | ifStmt STFUNC ENDFUNC %prec THEN{
     $$ = createNode1("ifStmt", $1);
-    popStack();
-    scope--;
-    pushStack(scope);
-    popStack();
+    ifFuncExit(STACK_TOP(stackIfElse) -> value);
+    popStackIf();
+
   }
   | ifStmt STFUNC ENDFUNC elseStmt  {
     $$ = createNode2("ifStmt primitiveStmt elseStmt", $1, $4);
@@ -876,6 +902,9 @@ condStmt:
 
 ifStmt:
     IF PARENL simpleExp PARENR{
+      ifId++;
+      pushStackIf(ifId);
+      ifFunc(ifId, $3 -> saved);
       scope++;
       pushStack(scope);
       $$ = createNode2("IF PARENL simpleExp PARENR", createNode0($1), $3);
@@ -884,16 +913,14 @@ ifStmt:
 
 elseStmt:
   ELSE{
-    popStack();
-    scope--;
-    pushStack(scope);
+    ifJump(ifId);
     popStack();
     scope++;
     pushStack(scope);
   } primitiveStmt {
-    popStack();
-    scope--;
-    pushStack(scope);
+    ifJumpExit(STACK_TOP(stackIfElse) -> value);
+    popStackIf();
+    ifId++;
     popStack();
     $$ = createNode2("ELSE primitiveStmt", createNode0($1), $3);
 
@@ -1334,21 +1361,17 @@ int main(int argc, char *argv[]) {
   // yydebug = 1;
   // #endif
   pushStack(0);
-  char s[100] = "";
-  char *file = argv[1];
-  strcat(s, file);
-  strcat(s, ".tac");
+  tacfile = fopen("file.tac", "w");
+  fprintf (tacfile, ".table\n");
+  fprintf (tacfile, ".code\n");
   printf("\n\n#### beginning ####\n\n");
   printf("------------------------Semantic analysis---------------------\n");
   abstractSyntaxTree = NULL;
+  FILE *file;
+  file = fopen(argv[1], "r");
   if(argc > 1){
     if(file){
-      yyin = fopen(file, "r");
-      tacfile = fopen(s, "w");
-      fprintf (tacfile, ".table\n");
-      fprintf (tacfile, ".code\n");
-      writeTacFile(currentLine);
-      fclose(tacfile);
+      yyin = file;
       yyparse();
       printf("\n\n#### EOF ####\n\n");
       semanticErrors += findSymbolMain("main");

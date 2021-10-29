@@ -12,6 +12,13 @@ int fib(int i)
 
 int main()
 {
+  int a;
+  a = 0;
+  if (a >= 0)
+  {
+    return 0;
+  }
+
   int i;
   i = 0;
   int a;

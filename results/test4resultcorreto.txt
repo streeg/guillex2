@@ -24,9 +24,11 @@ Id: 'somadois' at line: 8, column: 5
 Type: 'int' on line: 8, column: 14
 Id: 'a' at line: 8, column: 18
 ',' at line: 8, column: 19
+Semantic Error
 Type: 'int' on line: 8, column: 21
 Id: 'b' at line: 8, column: 25
 ')' at line: 8, column: 26
+Semantic Error
 '{' on line: 9, column: 1
 Id: 'a' at line: 10, column: 5
 '=' at line: 10, column: 7
@@ -108,8 +110,6 @@ Integer: '0' at line: 25, column: 12
 |   c                   |    var                          |      int                     |         0            |         0          |
 |   d                   |    var                          |      float                   |         0            |         0          |
 |   resp                |    var                          |      int                     |         0            |         0          |
-|   a                   |    param                        |      int                     |         1            |         0          |
-|   b                   |    param                        |      int                     |         1            |         0          |
 |   somadois            |    func                         |      int                     |         1            |         2          |
 |   main                |    func                         |      int                     |         1            |         0          |
 
@@ -126,48 +126,30 @@ Integer: '0' at line: 25, column: 12
 ------->varDeclaration
 -------->simpleVarDeclaration
 --------->TYPE ID
----------->int
----------->a
 ------>varDeclaration
 ------->simpleVarDeclaration
 -------->TYPE ID
---------->int
---------->b
 ----->varDeclaration
 ------>simpleVarDeclaration
 ------->TYPE ID
--------->int
--------->c
 ---->varDeclaration
 ----->simpleVarDeclaration
 ------>TYPE ID
-------->float
-------->d
 --->varDeclaration
 ---->simpleVarDeclaration
 ----->TYPE ID
------->int
------->resp
 -->funcDeclaration
 --->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
----->int
----->somadois
 ---->params COMMA param
 ----->param
 ------>TYPE ID
-------->int
-------->a
 ----->TYPE ID
------->int
------->b
 ---->stmtList primitiveStmt
 ----->primitiveStmt
 ------>exprStmt
 ------->expression SEMIC
 -------->assignExp
 --------->ID ASSIGN expression
----------->a
----------->=
 ---------->simpleExp
 ----------->binLogicalExp
 ------------>relationalExp
@@ -176,12 +158,10 @@ Integer: '0' at line: 25, column: 12
 --------------->mulExp
 ---------------->factor
 ----------------->ID
-~~~~~~~~~~~~~~~~~~--------------->+
---------------->factor
+~~~~~~~~~~~~~~~~~~--------------->factor
 ---------------->ID
 ~~~~~~~~~~~~~~~~~----->returnStmt
 ------>RETURN expression SEMIC
-------->return
 ------->simpleExp
 -------->binLogicalExp
 --------->relationalExp
@@ -191,8 +171,6 @@ Integer: '0' at line: 25, column: 12
 ------------->ID
 ~~~~~~~~~~~~~~->funcDeclaration
 -->TYPE ID PARENL PARENR stmtList ENDFUNC 
---->int
---->main
 --->stmtList primitiveStmt
 ---->stmtList primitiveStmt
 ----->stmtList primitiveStmt
@@ -206,8 +184,6 @@ Integer: '0' at line: 25, column: 12
 ------------->expression SEMIC
 -------------->assignExp
 --------------->ID ASSIGN expression
----------------->a
----------------->=
 ---------------->simpleExp
 ----------------->binLogicalExp
 ------------------>relationalExp
@@ -219,8 +195,6 @@ Integer: '0' at line: 25, column: 12
 ------------>expression SEMIC
 ------------->assignExp
 -------------->ID ASSIGN expression
---------------->b
---------------->=
 --------------->simpleExp
 ---------------->binLogicalExp
 ----------------->relationalExp
@@ -230,15 +204,11 @@ Integer: '0' at line: 25, column: 12
 ~~~~~~~~~~~~~~~~~~~~~30
 ---------->outOp
 ----------->WRITE PARENL outConst PARENR SEMIC
------------->write
 ------------>STRING
-------------->"oi"
 --------->exprStmt
 ---------->expression SEMIC
 ----------->assignExp
 ------------>ID ASSIGN expression
-------------->resp
-------------->=
 ------------->simpleExp
 -------------->binLogicalExp
 --------------->relationalExp
@@ -247,7 +217,6 @@ Integer: '0' at line: 25, column: 12
 ------------------>factor
 ------------------->fCall
 -------------------->ID PARENL callParams PARENR
---------------------->somadois
 --------------------->callParams COMMA simpleExp
 ---------------------->simpleExp
 ----------------------->binLogicalExp
@@ -266,8 +235,6 @@ Integer: '0' at line: 25, column: 12
 --------->expression SEMIC
 ---------->assignExp
 ----------->ID ASSIGN expression
------------->c
------------->=
 ------------>simpleExp
 ------------->binLogicalExp
 -------------->relationalExp
@@ -276,15 +243,12 @@ Integer: '0' at line: 25, column: 12
 ----------------->mulExp
 ------------------>factor
 ------------------->ID
-~~~~~~~~~~~~~~~~~~~~----------------->+
------------------>factor
+~~~~~~~~~~~~~~~~~~~~----------------->factor
 ------------------>ID
 ~~~~~~~~~~~~~~~~~~~------->exprStmt
 -------->expression SEMIC
 --------->assignExp
 ---------->ID ASSIGN expression
------------>d
------------>=
 ----------->simpleExp
 ------------>binLogicalExp
 ------------->relationalExp
@@ -293,11 +257,9 @@ Integer: '0' at line: 25, column: 12
 ---------------->mulExp mulOp factor
 ----------------->factor
 ------------------>ID
-~~~~~~~~~~~~~~~~~~~----------------->/
------------------>ID
+~~~~~~~~~~~~~~~~~~~----------------->ID
 ~~~~~~~~~~~~~~~~~~------>outOp
 ------->WRITELN PARENL outConst PARENR SEMIC
--------->writeln
 -------->simpleExp
 --------->binLogicalExp
 ---------->relationalExp
@@ -307,7 +269,6 @@ Integer: '0' at line: 25, column: 12
 -------------->ID
 ~~~~~~~~~~~~~~~----->outOp
 ------>WRITELN PARENL outConst PARENR SEMIC
-------->writeln
 ------->simpleExp
 -------->binLogicalExp
 --------->relationalExp
@@ -317,7 +278,6 @@ Integer: '0' at line: 25, column: 12
 ------------->ID
 ~~~~~~~~~~~~~~---->returnStmt
 ----->RETURN expression SEMIC
------->return
 ------>simpleExp
 ------->binLogicalExp
 -------->relationalExp
@@ -327,5 +287,5 @@ Integer: '0' at line: 25, column: 12
 ~~~~~~~~~~~~0
 
 
- There is 0 errors and 0 warnings in the file
+ There is 2 warnings in the file
 

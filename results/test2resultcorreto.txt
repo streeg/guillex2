@@ -47,12 +47,8 @@ Integer: '1' at line: 7, column: 12
 >declaration
 ->funcDeclaration
 -->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
---->int
---->main
 --->param
 ---->TYPE ID
------>int
------>a
 --->stmtList primitiveStmt
 ---->stmtList primitiveStmt
 ----->stmtList primitiveStmt
@@ -60,14 +56,10 @@ Integer: '1' at line: 7, column: 12
 ------->varDeclaration
 -------->simpleVarDeclaration
 --------->TYPE ID
----------->int
----------->i
 ------>exprStmt
 ------->expression SEMIC
 -------->assignExp
 --------->ID ASSIGN expression
----------->i
----------->=
 ---------->simpleExp
 ----------->binLogicalExp
 ------------>relationalExp
@@ -85,12 +77,10 @@ Integer: '1' at line: 7, column: 12
 ------------>mulExp
 ------------->factor
 ~~~~~~~~~~~~~~1
------------->+
 ------------>factor
 ~~~~~~~~~~~~~1
 ---->returnStmt
 ----->RETURN expression SEMIC
------->return
 ------>simpleExp
 ------->binLogicalExp
 -------->relationalExp

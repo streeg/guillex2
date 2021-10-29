@@ -14,7 +14,7 @@ Type: 'int' on line: 4, column: 5
 Id: 'a' at line: 4, column: 9
 ';' at line: 4, column: 10
 Semantic Error
-Variable or Function already declared in this scope
+Variable a already declared in this scope
 
 Type: 'int' on line: 5, column: 5
 Id: 'c' at line: 5, column: 9
@@ -66,7 +66,7 @@ Type: 'int' on line: 16, column: 5
 Id: 'a' at line: 16, column: 9
 ';' at line: 16, column: 10
 Semantic Error
-Variable or Function already declared in this scope
+Variable a already declared in this scope
 
 Type: 'int' on line: 17, column: 5
 Id: 'b' at line: 17, column: 9
@@ -75,7 +75,7 @@ Type: 'int' on line: 18, column: 5
 Id: 'c' at line: 18, column: 9
 ';' at line: 18, column: 10
 Semantic Error
-Variable or Function already declared in this scope
+Variable c already declared in this scope
 
 Keyword [READ]: 'read' at line: 20, column: 5
 '(' at line: 20, column: 9
@@ -128,12 +128,8 @@ Id: 'c' at line: 26, column: 12
 ->declaration
 -->funcDeclaration
 --->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
----->int
----->n_times_plus_one
 ---->param
 ----->TYPE ID
------->float
------->a
 ---->stmtList primitiveStmt
 ----->stmtList primitiveStmt
 ------>stmtList primitiveStmt
@@ -141,19 +137,12 @@ Id: 'c' at line: 26, column: 12
 -------->varDeclaration
 --------->simpleVarDeclaration
 ---------->TYPE ID
------------>int
------------>a
 ------->varDeclaration
 -------->simpleVarDeclaration
 --------->TYPE ID
----------->int
----------->c
 ------>iterStmt
 ------->FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt
--------->for
 -------->ID ASSIGN expression
---------->c
---------->=
 --------->simpleExp
 ---------->binLogicalExp
 ----------->relationalExp
@@ -163,19 +152,15 @@ Id: 'c' at line: 26, column: 12
 ~~~~~~~~~~~~~~~0
 -------->binLogicalExp
 --------->relationalExp
----------->relationalExp relationalOp sumExp
+---------->relationalExp SMALLER sumExp
 ----------->sumExp
 ------------>mulExp
 ------------->factor
 -------------->ID
-~~~~~~~~~~~~~~~----------->SMALLER
-------------><
------------>mulExp
+~~~~~~~~~~~~~~~----------->mulExp
 ------------>factor
 ------------->ID
 ~~~~~~~~~~~~~~-------->ID ASSIGN expression
---------->c
---------->=
 --------->simpleExp
 ---------->binLogicalExp
 ----------->relationalExp
@@ -184,8 +169,7 @@ Id: 'c' at line: 26, column: 12
 -------------->mulExp
 --------------->factor
 ---------------->ID
-~~~~~~~~~~~~~~~~~-------------->+
--------------->factor
+~~~~~~~~~~~~~~~~~-------------->factor
 ~~~~~~~~~~~~~~~1
 -------->compoundStmt
 --------->compoundStmt
@@ -195,8 +179,6 @@ Id: 'c' at line: 26, column: 12
 ------------->expression SEMIC
 -------------->assignExp
 --------------->ID ASSIGN expression
----------------->a
----------------->=
 ---------------->simpleExp
 ----------------->binLogicalExp
 ------------------>relationalExp
@@ -206,14 +188,11 @@ Id: 'c' at line: 26, column: 12
 ---------------------->mulExp mulOp factor
 ----------------------->factor
 ------------------------>ID
-~~~~~~~~~~~~~~~~~~~~~~~~~----------------------->*
------------------------>ID
-~~~~~~~~~~~~~~~~~~~~~~~~--------------------->+
---------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~----------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~--------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~~1
 ----------->outOp
 ------------>WRITELN PARENL outConst PARENR SEMIC
-------------->writeln
 ------------->simpleExp
 -------------->binLogicalExp
 --------------->relationalExp
@@ -223,7 +202,6 @@ Id: 'c' at line: 26, column: 12
 ------------------->ID
 ~~~~~~~~~~~~~~~~~~~~----->returnStmt
 ------>RETURN expression SEMIC
-------->return
 ------->simpleExp
 -------->binLogicalExp
 --------->relationalExp
@@ -233,8 +211,6 @@ Id: 'c' at line: 26, column: 12
 ------------->ID
 ~~~~~~~~~~~~~~->funcDeclaration
 -->TYPE ID PARENL PARENR stmtList ENDFUNC 
---->int
---->main
 --->stmtList primitiveStmt
 ---->stmtList primitiveStmt
 ----->stmtList primitiveStmt
@@ -246,32 +222,20 @@ Id: 'c' at line: 26, column: 12
 ----------->varDeclaration
 ------------>simpleVarDeclaration
 ------------->TYPE ID
--------------->int
--------------->a
 ---------->varDeclaration
 ----------->simpleVarDeclaration
 ------------>TYPE ID
-------------->int
-------------->b
 --------->varDeclaration
 ---------->simpleVarDeclaration
 ----------->TYPE ID
------------->int
------------->c
 -------->inOp
 --------->READ PARENL ID PARENR SEMIC
----------->read
----------->a
 ------->inOp
 -------->READ PARENL ID PARENR SEMIC
---------->read
---------->b
 ------>exprStmt
 ------->expression SEMIC
 -------->assignExp
 --------->ID ASSIGN expression
----------->c
----------->=
 ---------->simpleExp
 ----------->binLogicalExp
 ------------>relationalExp
@@ -280,7 +244,6 @@ Id: 'c' at line: 26, column: 12
 --------------->factor
 ---------------->fCall
 ----------------->ID PARENL callParams PARENR
------------------->n_times_plus_one
 ------------------>simpleExp
 ------------------->binLogicalExp
 -------------------->relationalExp
@@ -290,7 +253,6 @@ Id: 'c' at line: 26, column: 12
 ------------------------>ID
 ~~~~~~~~~~~~~~~~~~~~~~~~~----->outOp
 ------>WRITELN PARENL outConst PARENR SEMIC
-------->writeln
 ------->simpleExp
 -------->binLogicalExp
 --------->relationalExp
@@ -300,7 +262,6 @@ Id: 'c' at line: 26, column: 12
 ------------->ID
 ~~~~~~~~~~~~~~---->returnStmt
 ----->RETURN expression SEMIC
------->return
 ------>simpleExp
 ------->binLogicalExp
 -------->relationalExp

@@ -55,9 +55,6 @@ Id: 'a' at line: 17, column: 9
 Type: 'int' on line: 18, column: 5
 Id: 'b' at line: 18, column: 9
 ';' at line: 18, column: 10
-Semantic Error
-Variable or Function already declared in this scope
-
 Keyword [READ]: 'read' at line: 20, column: 5
 '(' at line: 20, column: 9
 Id: 'a' at line: 20, column: 10
@@ -110,8 +107,9 @@ Id: 'b' at line: 31, column: 12
 |   a                   |    var                          |      int                     |         0            |         0          |
 |   b                   |    param                        |      int                     |         1            |         0          |
 |   sqr_plus_one        |    func                         |      int                     |         1            |         1          |
-|   main                |    func                         |      int                     |         1            |         0          |
-|   a                   |    var                          |      int                     |         1            |         0          |
+|   main                |    func                         |      int                     |         3            |         0          |
+|   a                   |    var                          |      int                     |         3            |         0          |
+|   b                   |    var                          |      int                     |         3            |         0          |
 
 
 --------------------------------tree--------------------------------
@@ -122,24 +120,16 @@ Id: 'b' at line: 31, column: 12
 --->varDeclaration
 ---->simpleVarDeclaration
 ----->TYPE ID
------->int
------->a
 -->funcDeclaration
 --->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
----->int
----->sqr_plus_one
 ---->param
 ----->TYPE ID
------->int
------->b
 ---->stmtList primitiveStmt
 ----->primitiveStmt
 ------>exprStmt
 ------->expression SEMIC
 -------->assignExp
 --------->ID ASSIGN expression
----------->a
----------->=
 ---------->simpleExp
 ----------->binLogicalExp
 ------------>relationalExp
@@ -150,17 +140,14 @@ Id: 'b' at line: 31, column: 12
 ----->condStmt
 ------>ifStmt primitiveStmt elseStmt
 ------->IF PARENL simpleExp PARENR
--------->if
 -------->binLogicalExp
 --------->relationalExp
----------->relationalExp relationalOp sumExp
+---------->relationalExp GREATER sumExp
 ----------->sumExp
 ------------>mulExp
 ------------->factor
 -------------->ID
-~~~~~~~~~~~~~~~----------->GREATER
------------->>
------------>mulExp
+~~~~~~~~~~~~~~~----------->mulExp
 ------------>factor
 ~~~~~~~~~~~~~0
 ------->compoundStmt
@@ -171,8 +158,6 @@ Id: 'b' at line: 31, column: 12
 ------------>expression SEMIC
 ------------->assignExp
 -------------->ID ASSIGN expression
---------------->b
---------------->=
 --------------->simpleExp
 ---------------->binLogicalExp
 ----------------->relationalExp
@@ -182,14 +167,11 @@ Id: 'b' at line: 31, column: 12
 --------------------->mulExp mulOp factor
 ---------------------->factor
 ----------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~~---------------------->*
----------------------->ID
-~~~~~~~~~~~~~~~~~~~~~~~-------------------->+
--------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~---------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~-------------------->factor
 ~~~~~~~~~~~~~~~~~~~~~1.000000
 ---------->returnStmt
 ----------->RETURN expression SEMIC
------------->return
 ------------>simpleExp
 ------------->binLogicalExp
 -------------->relationalExp
@@ -198,10 +180,8 @@ Id: 'b' at line: 31, column: 12
 ----------------->factor
 ------------------>ID
 ~~~~~~~~~~~~~~~~~~~------->ELSE primitiveStmt
--------->else
 -------->returnStmt
 --------->RETURN expression SEMIC
----------->return
 ---------->simpleExp
 ----------->binLogicalExp
 ------------>relationalExp
@@ -211,8 +191,6 @@ Id: 'b' at line: 31, column: 12
 ~~~~~~~~~~~~~~~~1
 ->funcDeclaration
 -->TYPE ID PARENL PARENR stmtList ENDFUNC 
---->int
---->main
 --->stmtList primitiveStmt
 ---->stmtList primitiveStmt
 ----->stmtList primitiveStmt
@@ -223,31 +201,22 @@ Id: 'b' at line: 31, column: 12
 ---------->varDeclaration
 ----------->simpleVarDeclaration
 ------------>TYPE ID
-------------->int
-------------->a
 --------->varDeclaration
 ---------->simpleVarDeclaration
 ----------->TYPE ID
------------->int
------------->b
 -------->inOp
 --------->READ PARENL ID PARENR SEMIC
----------->read
----------->a
 ------->condStmt
 -------->ifStmt primitiveStmt
 --------->IF PARENL simpleExp PARENR
----------->if
 ---------->binLogicalExp
 ----------->relationalExp
------------->relationalExp relationalOp sumExp
+------------>relationalExp SMALLER sumExp
 ------------->sumExp
 -------------->mulExp
 --------------->factor
 ---------------->ID
-~~~~~~~~~~~~~~~~~------------->SMALLER
---------------><
-------------->mulExp
+~~~~~~~~~~~~~~~~~------------->mulExp
 -------------->factor
 ~~~~~~~~~~~~~~~0
 --------->compoundStmt
@@ -256,12 +225,9 @@ Id: 'b' at line: 31, column: 12
 ------------>primitiveStmt
 ------------->outOp
 -------------->WRITELN PARENL outConst PARENR SEMIC
---------------->writeln
 --------------->STRING
----------------->"0"
 ------------>returnStmt
 ------------->RETURN expression SEMIC
--------------->return
 -------------->simpleExp
 --------------->binLogicalExp
 ---------------->relationalExp
@@ -273,8 +239,6 @@ Id: 'b' at line: 31, column: 12
 ------->expression SEMIC
 -------->assignExp
 --------->ID ASSIGN expression
----------->b
----------->=
 ---------->simpleExp
 ----------->binLogicalExp
 ------------>relationalExp
@@ -283,7 +247,6 @@ Id: 'b' at line: 31, column: 12
 --------------->factor
 ---------------->fCall
 ----------------->ID PARENL callParams PARENR
------------------->sqr_plus_one
 ------------------>simpleExp
 ------------------->binLogicalExp
 -------------------->relationalExp
@@ -293,7 +256,6 @@ Id: 'b' at line: 31, column: 12
 ------------------------>ID
 ~~~~~~~~~~~~~~~~~~~~~~~~~----->outOp
 ------>WRITELN PARENL outConst PARENR SEMIC
-------->writeln
 ------->simpleExp
 -------->binLogicalExp
 --------->relationalExp
@@ -303,7 +265,6 @@ Id: 'b' at line: 31, column: 12
 ------------->ID
 ~~~~~~~~~~~~~~---->returnStmt
 ----->RETURN expression SEMIC
------->return
 ------>simpleExp
 ------->binLogicalExp
 -------->relationalExp
@@ -313,5 +274,5 @@ Id: 'b' at line: 31, column: 12
 ------------>ID
 ~~~~~~~~~~~~~
 
- There is 2 warnings in the file
+ There is 1 warnings in the file
 

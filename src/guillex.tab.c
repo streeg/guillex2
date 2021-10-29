@@ -93,7 +93,8 @@ int semanticErrors = 0;
 int parameters = 0;
 int argsParams = 0;
 int scope = 0;
-int varReg = 1;
+int varReg = 0;
+int ifId = 0;
 
 
 typedef struct node {
@@ -424,7 +425,7 @@ int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int pa
     HASH_ADD_STR(symbolTable, name, s);
     return 0;
   } else {
-     if (s -> scope != scope) {
+     if (s -> scope != scope && symbolType[0] == 'v') {
       s = (Symbol*)malloc(sizeof(Symbol));
       s -> name = name;
       s -> symbolType = symbolType;
@@ -436,8 +437,12 @@ int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int pa
       return 0;
     } else {
       printf("Semantic Error\n");
-      printf("Variable or Function already declared in this scope\n\n");    
-      return 1;}
+      if (symbolType[0] == 'v')
+        printf("Variable %s already declared in this scope\n\n", name);
+      else if (symbolType[0] == 'f')
+        printf("Func %s already declared in this scope\n\n", name);
+      return 1;
+      }
   }
   return 1;
 }
@@ -674,7 +679,7 @@ int checkTypesReturnFunction(char value, char returnType) {
 
 
 
-#line 678 "guillex.tab.c"
+#line 683 "guillex.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -1159,16 +1164,16 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   646,   646,   652,   655,   658,   666,   669,   675,   680,
-     680,   680,   703,   703,   703,   729,   756,   760,   764,   772,
-     783,   790,   797,   801,   807,   811,   815,   819,   823,   827,
-     830,   833,   840,   847,   855,   859,   866,   873,   881,   881,
-     898,   898,   909,   909,   922,   930,   935,   943,   974,   980,
-     989,   993,   999,  1004,  1012,  1017,  1025,  1030,  1036,  1043,
-    1048,  1056,  1065,  1073,  1081,  1090,  1099,  1108,  1117,  1126,
-    1135,  1144,  1152,  1159,  1167,  1175,  1182,  1187,  1191,  1195,
-    1203,  1216,  1221,  1226,  1232,  1238,  1242,  1248,  1270,  1293,
-    1299
+       0,   651,   651,   657,   660,   663,   671,   674,   680,   685,
+     685,   685,   708,   708,   708,   734,   761,   765,   769,   777,
+     788,   795,   802,   806,   812,   816,   820,   824,   828,   832,
+     835,   838,   845,   852,   860,   864,   871,   878,   886,   886,
+     903,   903,   914,   914,   927,   935,   940,   948,   979,   985,
+     994,  1008,  1014,  1019,  1027,  1032,  1040,  1045,  1051,  1058,
+    1063,  1071,  1080,  1088,  1096,  1105,  1114,  1123,  1132,  1141,
+    1150,  1159,  1167,  1174,  1182,  1190,  1197,  1202,  1206,  1210,
+    1218,  1231,  1236,  1241,  1247,  1253,  1257,  1263,  1285,  1308,
+    1314
 };
 #endif
 
@@ -3556,70 +3561,70 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: declarationList  */
-#line 646 "guillex.y"
+#line 651 "guillex.y"
                         {
         abstractSyntaxTree = (yyval.treeNode);
     }
-#line 3564 "guillex.tab.c"
+#line 3569 "guillex.tab.c"
     break;
 
   case 3: /* declarationList: declarationList declaration  */
-#line 652 "guillex.y"
+#line 657 "guillex.y"
                                     {
        (yyval.treeNode) = createNode2("declarationsList declaration", (yyvsp[-1].treeNode), (yyvsp[0].treeNode));
      }
-#line 3572 "guillex.tab.c"
+#line 3577 "guillex.tab.c"
     break;
 
   case 4: /* declarationList: declaration  */
-#line 655 "guillex.y"
+#line 660 "guillex.y"
                       {
     (yyval.treeNode) = createNode1("declaration", (yyvsp[0].treeNode));
   }
-#line 3580 "guillex.tab.c"
+#line 3585 "guillex.tab.c"
     break;
 
   case 5: /* declarationList: error  */
-#line 658 "guillex.y"
+#line 663 "guillex.y"
           {
     (yyval.treeNode) = createNodeE();
     errors++;
     yyerror(yymsg);
   }
-#line 3590 "guillex.tab.c"
+#line 3595 "guillex.tab.c"
     break;
 
   case 6: /* declaration: varDeclaration  */
-#line 666 "guillex.y"
+#line 671 "guillex.y"
                        {
       (yyval.treeNode) = createNode1("varDeclaration", (yyvsp[0].treeNode));
     }
-#line 3598 "guillex.tab.c"
+#line 3603 "guillex.tab.c"
     break;
 
   case 7: /* declaration: funcDeclaration  */
-#line 669 "guillex.y"
+#line 674 "guillex.y"
                        {
       (yyval.treeNode) = createNode1("funcDeclaration", (yyvsp[0].treeNode));
     }
-#line 3606 "guillex.tab.c"
+#line 3611 "guillex.tab.c"
     break;
 
   case 8: /* varDeclaration: simpleVarDeclaration SEMIC  */
-#line 675 "guillex.y"
+#line 680 "guillex.y"
                                {
       (yyval.treeNode) = createNode1("simpleVarDeclaration", (yyvsp[-1].treeNode));}
-#line 3613 "guillex.tab.c"
+#line 3618 "guillex.tab.c"
     break;
 
   case 9: /* $@1: %empty  */
-#line 680 "guillex.y"
+#line 685 "guillex.y"
                    {scope++; pushStack(scope);}
-#line 3619 "guillex.tab.c"
+#line 3624 "guillex.tab.c"
     break;
 
   case 10: /* $@2: %empty  */
-#line 680 "guillex.y"
+#line 685 "guillex.y"
                                                                      {
       UT_string *r;
       utstring_new(r);
@@ -3627,11 +3632,11 @@ yyreduce:
       addFunc((yyvsp[-5].str));
       parameters = 0;
       }
-#line 3631 "guillex.tab.c"
+#line 3636 "guillex.tab.c"
     break;
 
   case 11: /* funcDeclaration: TYPE ID PARENL $@1 params PARENR STFUNC $@2 stmtList ENDFUNC  */
-#line 686 "guillex.y"
+#line 691 "guillex.y"
                          {
       (yyval.treeNode) = createNode4("TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC", createNode0((yyvsp[-9].str)), createNode0((yyvsp[-8].str)), (yyvsp[-5].treeNode), (yyvsp[-1].treeNode));
       popStack();
@@ -3649,17 +3654,17 @@ yyreduce:
         semanticErrors += 1;
       }
   }
-#line 3653 "guillex.tab.c"
+#line 3658 "guillex.tab.c"
     break;
 
   case 12: /* $@3: %empty  */
-#line 703 "guillex.y"
+#line 708 "guillex.y"
                    {pushStack(scope);}
-#line 3659 "guillex.tab.c"
+#line 3664 "guillex.tab.c"
     break;
 
   case 13: /* $@4: %empty  */
-#line 703 "guillex.y"
+#line 708 "guillex.y"
                                                      {
     UT_string *r;
     utstring_new(r);
@@ -3667,11 +3672,11 @@ yyreduce:
     parameters = 0;
     addFunc((yyvsp[-4].str));
     }
-#line 3671 "guillex.tab.c"
+#line 3676 "guillex.tab.c"
     break;
 
   case 14: /* funcDeclaration: TYPE ID PARENL $@3 PARENR STFUNC $@4 stmtList ENDFUNC  */
-#line 709 "guillex.y"
+#line 714 "guillex.y"
                        {
     
       (yyval.treeNode) = createNode3("TYPE ID PARENL PARENR stmtList ENDFUNC ", createNode0((yyvsp[-8].str)), createNode0((yyvsp[-7].str)), (yyvsp[-1].treeNode)); 
@@ -3690,11 +3695,11 @@ yyreduce:
       semanticErrors += 1;
     }                                                                      
   }
-#line 3694 "guillex.tab.c"
+#line 3699 "guillex.tab.c"
     break;
 
   case 15: /* simpleVarDeclaration: TYPE ID  */
-#line 729 "guillex.y"
+#line 734 "guillex.y"
             {
 
       semanticErrors += addSymbol((yyvsp[0].str), "var", (yyvsp[-1].str), STACK_TOP(stackScope) -> value, 0, create_new_reg(varReg));
@@ -3713,44 +3718,44 @@ yyreduce:
         utstring_new(s);
         utstring_printf(s, "$%d", varReg);
 
-        varDecAssign(utstring_body(s), "0");
+        varDecAssign(utstring_body(s), "e");
       }
       varReg++;
       (yyval.treeNode) = createNode2("TYPE ID", createNode0((yyvsp[-1].str)), createNode0((yyvsp[0].str)));
       }
-#line 3722 "guillex.tab.c"
+#line 3727 "guillex.tab.c"
     break;
 
   case 16: /* params: params COMMA param  */
-#line 756 "guillex.y"
+#line 761 "guillex.y"
                        {
       (yyval.treeNode) = createNode2("params COMMA param", (yyvsp[-2].treeNode), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
       }
-#line 3731 "guillex.tab.c"
+#line 3736 "guillex.tab.c"
     break;
 
   case 17: /* params: param  */
-#line 760 "guillex.y"
+#line 765 "guillex.y"
           { 
     (yyval.treeNode) = createNode1("param", (yyvsp[0].treeNode)); 
     (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
     }
-#line 3740 "guillex.tab.c"
+#line 3745 "guillex.tab.c"
     break;
 
   case 18: /* params: error  */
-#line 764 "guillex.y"
+#line 769 "guillex.y"
           {
       (yyval.treeNode) = createNodeE();
       errors++;
       yyerror(yymsg);
     }
-#line 3750 "guillex.tab.c"
+#line 3755 "guillex.tab.c"
     break;
 
   case 19: /* param: TYPE ID  */
-#line 772 "guillex.y"
+#line 777 "guillex.y"
             {
       parameters++;
       pushStack(scope);
@@ -3759,20 +3764,20 @@ yyreduce:
       varReg++;
       popStack();
       }
-#line 3763 "guillex.tab.c"
+#line 3768 "guillex.tab.c"
     break;
 
   case 20: /* compoundStmt: STFUNC stmtList ENDFUNC  */
-#line 783 "guillex.y"
+#line 788 "guillex.y"
                             {
       (yyval.treeNode) = createNode1("compoundStmt", (yyvsp[-1].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-1].treeNode) -> nodeType;
     }
-#line 3772 "guillex.tab.c"
+#line 3777 "guillex.tab.c"
     break;
 
   case 21: /* stmtList: stmtList primitiveStmt  */
-#line 790 "guillex.y"
+#line 795 "guillex.y"
                               {
       (yyval.treeNode) = createNode2("stmtList primitiveStmt", (yyvsp[-1].treeNode), (yyvsp[0].treeNode));
       if((yyvsp[-1].treeNode) -> returnType == 'x')
@@ -3780,107 +3785,107 @@ yyreduce:
       else
         (yyval.treeNode) -> returnType = (yyvsp[-1].treeNode) -> returnType;
     }
-#line 3784 "guillex.tab.c"
+#line 3789 "guillex.tab.c"
     break;
 
   case 22: /* stmtList: primitiveStmt  */
-#line 797 "guillex.y"
+#line 802 "guillex.y"
                   {
     (yyval.treeNode) = createNode1("primitiveStmt", (yyvsp[0].treeNode));
     (yyval.treeNode) -> returnType = (yyvsp[0].treeNode) -> returnType;
   }
-#line 3793 "guillex.tab.c"
+#line 3798 "guillex.tab.c"
     break;
 
   case 23: /* stmtList: error  */
-#line 801 "guillex.y"
+#line 806 "guillex.y"
           {
       (yyval.treeNode) = createNodeE();
     }
-#line 3801 "guillex.tab.c"
+#line 3806 "guillex.tab.c"
     break;
 
   case 24: /* primitiveStmt: exprStmt  */
-#line 807 "guillex.y"
+#line 812 "guillex.y"
              {
       (yyval.treeNode) = createNode1("exprStmt", (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
     }
-#line 3810 "guillex.tab.c"
+#line 3815 "guillex.tab.c"
     break;
 
   case 25: /* primitiveStmt: compoundStmt  */
-#line 811 "guillex.y"
+#line 816 "guillex.y"
                  {
     (yyval.treeNode) = createNode1("compoundStmt", (yyvsp[0].treeNode));
     (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 3819 "guillex.tab.c"
+#line 3824 "guillex.tab.c"
     break;
 
   case 26: /* primitiveStmt: condStmt  */
-#line 815 "guillex.y"
+#line 820 "guillex.y"
              {
     (yyval.treeNode) = createNode1("condStmt", (yyvsp[0].treeNode));
     (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 3828 "guillex.tab.c"
+#line 3833 "guillex.tab.c"
     break;
 
   case 27: /* primitiveStmt: iterStmt  */
-#line 819 "guillex.y"
+#line 824 "guillex.y"
              {
     (yyval.treeNode) = createNode1("iterStmt", (yyvsp[0].treeNode));
     (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 3837 "guillex.tab.c"
+#line 3842 "guillex.tab.c"
     break;
 
   case 28: /* primitiveStmt: returnStmt  */
-#line 823 "guillex.y"
+#line 828 "guillex.y"
                {
     (yyval.treeNode) = createNode1("returnStmt", (yyvsp[0].treeNode));
     (yyval.treeNode) -> returnType = (yyvsp[0].treeNode) -> returnType;
   }
-#line 3846 "guillex.tab.c"
+#line 3851 "guillex.tab.c"
     break;
 
   case 29: /* primitiveStmt: inOp  */
-#line 827 "guillex.y"
+#line 832 "guillex.y"
          {
     (yyval.treeNode) = createNode1("inOp", (yyvsp[0].treeNode));
   }
-#line 3854 "guillex.tab.c"
+#line 3859 "guillex.tab.c"
     break;
 
   case 30: /* primitiveStmt: outOp  */
-#line 830 "guillex.y"
+#line 835 "guillex.y"
           {
     (yyval.treeNode) = createNode1("outOp", (yyvsp[0].treeNode));
   }
-#line 3862 "guillex.tab.c"
+#line 3867 "guillex.tab.c"
     break;
 
   case 31: /* primitiveStmt: varDeclaration  */
-#line 833 "guillex.y"
+#line 838 "guillex.y"
                    {
     (yyval.treeNode) = createNode1("varDeclaration", (yyvsp[0].treeNode));
     (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 3871 "guillex.tab.c"
+#line 3876 "guillex.tab.c"
     break;
 
   case 32: /* exprStmt: expression SEMIC  */
-#line 840 "guillex.y"
+#line 845 "guillex.y"
                      {
       (yyval.treeNode) = createNode1("expression SEMIC", (yyvsp[-1].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-1].treeNode) -> nodeType;
     }
-#line 3880 "guillex.tab.c"
+#line 3885 "guillex.tab.c"
     break;
 
   case 33: /* condStmt: ifStmt primitiveStmt  */
-#line 847 "guillex.y"
+#line 852 "guillex.y"
                                     {
       (yyval.treeNode) = createNode2("ifStmt primitiveStmt", (yyvsp[-1].treeNode), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
@@ -3889,20 +3894,20 @@ yyreduce:
       pushStack(scope);
       popStack();
     }
-#line 3893 "guillex.tab.c"
+#line 3898 "guillex.tab.c"
     break;
 
   case 34: /* condStmt: ifStmt primitiveStmt elseStmt  */
-#line 855 "guillex.y"
+#line 860 "guillex.y"
                                    {
     (yyval.treeNode) = createNode3("ifStmt primitiveStmt elseStmt", (yyvsp[-2].treeNode), (yyvsp[-1].treeNode), (yyvsp[0].treeNode));
     (yyval.treeNode) -> nodeType = (yyvsp[-1].treeNode) -> nodeType;
   }
-#line 3902 "guillex.tab.c"
+#line 3907 "guillex.tab.c"
     break;
 
   case 35: /* condStmt: ifStmt STFUNC ENDFUNC  */
-#line 859 "guillex.y"
+#line 864 "guillex.y"
                                     {
     (yyval.treeNode) = createNode1("ifStmt", (yyvsp[-2].treeNode));
     popStack();
@@ -3910,29 +3915,29 @@ yyreduce:
     pushStack(scope);
     popStack();
   }
-#line 3914 "guillex.tab.c"
+#line 3919 "guillex.tab.c"
     break;
 
   case 36: /* condStmt: ifStmt STFUNC ENDFUNC elseStmt  */
-#line 866 "guillex.y"
+#line 871 "guillex.y"
                                     {
     (yyval.treeNode) = createNode2("ifStmt primitiveStmt elseStmt", (yyvsp[-3].treeNode), (yyvsp[0].treeNode));
   }
-#line 3922 "guillex.tab.c"
+#line 3927 "guillex.tab.c"
     break;
 
   case 37: /* ifStmt: IF PARENL simpleExp PARENR  */
-#line 873 "guillex.y"
+#line 878 "guillex.y"
                               {
       scope++;
       pushStack(scope);
       (yyval.treeNode) = createNode2("IF PARENL simpleExp PARENR", createNode0((yyvsp[-3].str)), (yyvsp[-1].treeNode));
     }
-#line 3932 "guillex.tab.c"
+#line 3937 "guillex.tab.c"
     break;
 
   case 38: /* $@5: %empty  */
-#line 881 "guillex.y"
+#line 886 "guillex.y"
       {
     popStack();
     scope--;
@@ -3941,11 +3946,11 @@ yyreduce:
     scope++;
     pushStack(scope);
   }
-#line 3945 "guillex.tab.c"
+#line 3950 "guillex.tab.c"
     break;
 
   case 39: /* elseStmt: ELSE $@5 primitiveStmt  */
-#line 888 "guillex.y"
+#line 893 "guillex.y"
                   {
     popStack();
     scope--;
@@ -3954,20 +3959,20 @@ yyreduce:
     (yyval.treeNode) = createNode2("ELSE primitiveStmt", createNode0((yyvsp[-2].str)), (yyvsp[0].treeNode));
 
   }
-#line 3958 "guillex.tab.c"
+#line 3963 "guillex.tab.c"
     break;
 
   case 40: /* $@6: %empty  */
-#line 898 "guillex.y"
+#line 903 "guillex.y"
                                                                 {      
       scope++;
       pushStack(scope);
       }
-#line 3967 "guillex.tab.c"
+#line 3972 "guillex.tab.c"
     break;
 
   case 41: /* iterStmt: FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR $@6 primitiveStmt  */
-#line 901 "guillex.y"
+#line 906 "guillex.y"
                       {
 
       (yyval.treeNode) = createNode5("FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt", createNode0((yyvsp[-9].str)), (yyvsp[-7].treeNode), (yyvsp[-5].treeNode), (yyvsp[-3].treeNode), (yyvsp[0].treeNode));
@@ -3976,20 +3981,20 @@ yyreduce:
       pushStack(scope);
       popStack();
     }
-#line 3980 "guillex.tab.c"
+#line 3985 "guillex.tab.c"
     break;
 
   case 42: /* $@7: %empty  */
-#line 909 "guillex.y"
+#line 914 "guillex.y"
                                                                 {
       scope++;
       pushStack(scope);
       }
-#line 3989 "guillex.tab.c"
+#line 3994 "guillex.tab.c"
     break;
 
   case 43: /* iterStmt: FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR $@7 primitiveStmt  */
-#line 912 "guillex.y"
+#line 917 "guillex.y"
                       {
       (yyval.treeNode) = createNode5("FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt", createNode0((yyvsp[-9].str)), (yyvsp[-7].treeNode), (yyvsp[-5].treeNode), (yyvsp[-3].treeNode), (yyvsp[0].treeNode));
       popStack();
@@ -3997,40 +4002,40 @@ yyreduce:
       pushStack(scope);
       popStack();
   }
-#line 4001 "guillex.tab.c"
+#line 4006 "guillex.tab.c"
     break;
 
   case 44: /* returnStmt: RETURN expression SEMIC  */
-#line 922 "guillex.y"
+#line 927 "guillex.y"
                             {
       (yyval.treeNode) = createNode2("RETURN expression SEMIC", createNode0((yyvsp[-2].str)), (yyvsp[-1].treeNode));
       (yyval.treeNode) -> returnType = (yyvsp[-1].treeNode) -> nodeType;
     }
-#line 4010 "guillex.tab.c"
+#line 4015 "guillex.tab.c"
     break;
 
   case 45: /* expression: assignExp  */
-#line 930 "guillex.y"
+#line 935 "guillex.y"
               {
       (yyval.treeNode) = createNode1("assignExp", (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
     }
-#line 4020 "guillex.tab.c"
+#line 4025 "guillex.tab.c"
     break;
 
   case 46: /* expression: simpleExp  */
-#line 935 "guillex.y"
+#line 940 "guillex.y"
               {
       (yyval.treeNode) = createNode1("simpleExp", (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 4030 "guillex.tab.c"
+#line 4035 "guillex.tab.c"
     break;
 
   case 47: /* assignExp: ID ASSIGN expression  */
-#line 943 "guillex.y"
+#line 948 "guillex.y"
                          {
       struct symbol *s = checkIsInScope((yyvsp[-2].str), STACK_TOP(stackScope) -> value);
       if (s != NULL){
@@ -4058,138 +4063,148 @@ yyreduce:
           (yyval.treeNode) = createNodeE();
       }
     }
-#line 4062 "guillex.tab.c"
+#line 4067 "guillex.tab.c"
     break;
 
   case 48: /* simpleExp: binLogicalExp  */
-#line 974 "guillex.y"
+#line 979 "guillex.y"
                   {
       (yyval.treeNode) = createNode1("binLogicalExp", (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
     }
-#line 4072 "guillex.tab.c"
+#line 4077 "guillex.tab.c"
     break;
 
   case 49: /* simpleExp: binListExp  */
-#line 980 "guillex.y"
+#line 985 "guillex.y"
               {
       (yyval.treeNode) = createNode1("binListExp", (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
     }
-#line 4082 "guillex.tab.c"
+#line 4087 "guillex.tab.c"
     break;
 
   case 50: /* inOp: READ PARENL ID PARENR SEMIC  */
-#line 989 "guillex.y"
+#line 994 "guillex.y"
                              {
+    struct symbol *s = checkIsInScope((yyvsp[-2].str), STACK_TOP(stackScope) -> value);
+    if (s != NULL) {
     (yyval.treeNode) = createNode2("READ PARENL ID PARENR SEMIC", createNode0((yyvsp[-4].str)), createNode0((yyvsp[-2].str)));
+    readFunc(utstring_body(s -> varReg), s -> varFuncName[0]);
+    (yyval.treeNode) -> saved = utstring_body(s -> varReg);
+    } else {
+        printf("Semantic error\n");
+        printf("var %s not declared, line %d, column %d\n\n", (yyvsp[-4].str), line, wordPosition);
+        semanticErrors += 1;
+        (yyval.treeNode) = createNodeE();
+      }
   }
-#line 4090 "guillex.tab.c"
+#line 4105 "guillex.tab.c"
     break;
 
   case 51: /* inOp: READ PARENL PARENR SEMIC  */
-#line 993 "guillex.y"
+#line 1008 "guillex.y"
                             {
     (yyval.treeNode) = createNode1("READ PARENL PARENR SEMIC", createNode0((yyvsp[-3].str)));
   }
-#line 4098 "guillex.tab.c"
+#line 4113 "guillex.tab.c"
     break;
 
   case 52: /* outOp: WRITE PARENL outConst PARENR SEMIC  */
-#line 999 "guillex.y"
+#line 1014 "guillex.y"
                                       {
       (yyval.treeNode) = createNode2("WRITE PARENL outConst PARENR SEMIC", createNode0((yyvsp[-4].str)), (yyvsp[-2].treeNode));
       writeFunc((yyvsp[-2].treeNode) -> saved);
       (yyval.treeNode) -> saved = (yyvsp[-2].treeNode) -> saved;
     }
-#line 4108 "guillex.tab.c"
+#line 4123 "guillex.tab.c"
     break;
 
   case 53: /* outOp: WRITELN PARENL outConst PARENR SEMIC  */
-#line 1004 "guillex.y"
+#line 1019 "guillex.y"
                                          {
       (yyval.treeNode) = createNode2("WRITELN PARENL outConst PARENR SEMIC", createNode0((yyvsp[-4].str)), (yyvsp[-2].treeNode));
       writelnFunc((yyvsp[-2].treeNode) -> saved);
       (yyval.treeNode) -> saved = (yyvsp[-2].treeNode) -> saved;
   }
-#line 4118 "guillex.tab.c"
+#line 4133 "guillex.tab.c"
     break;
 
   case 54: /* outConst: STRING  */
-#line 1012 "guillex.y"
+#line 1027 "guillex.y"
            {
       (yyval.treeNode) = createNode1("STRING", createNode0((yyvsp[0].str)));
       (yyval.treeNode) -> nodeType = 't';
       (yyval.treeNode) -> saved = (yyvsp[0].str);
     }
-#line 4128 "guillex.tab.c"
+#line 4143 "guillex.tab.c"
     break;
 
   case 55: /* outConst: simpleExp  */
-#line 1017 "guillex.y"
+#line 1032 "guillex.y"
               {
       (yyval.treeNode) = createNode1("simpleExp", (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 4138 "guillex.tab.c"
+#line 4153 "guillex.tab.c"
     break;
 
   case 56: /* binListExp: factor APPEND factor  */
-#line 1025 "guillex.y"
+#line 1040 "guillex.y"
                              {
 		(yyval.treeNode) = createNode3("factor APPEND factor", (yyvsp[-2].treeNode), createNode0(":"), (yyvsp[0].treeNode));		
     (yyval.treeNode) -> saved = (yyvsp[-2].treeNode) -> saved;
     (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
 	}
-#line 4148 "guillex.tab.c"
+#line 4163 "guillex.tab.c"
     break;
 
   case 57: /* binListExp: factor MAP factor  */
-#line 1030 "guillex.y"
+#line 1045 "guillex.y"
                             {
 		
 		(yyval.treeNode) = createNode3("factor MAP factor", (yyvsp[-2].treeNode), createNode0(">>"), (yyvsp[0].treeNode));		
     (yyval.treeNode) -> saved = (yyvsp[-2].treeNode) -> saved;
     (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
 	}
-#line 4159 "guillex.tab.c"
+#line 4174 "guillex.tab.c"
     break;
 
   case 58: /* binListExp: factor FILTER factor  */
-#line 1036 "guillex.y"
+#line 1051 "guillex.y"
                                {
 		(yyval.treeNode) = createNode3("factor FILTER factor", (yyvsp[-2].treeNode), createNode0("<<"), (yyvsp[0].treeNode));	
     (yyval.treeNode) -> saved = (yyvsp[-2].treeNode) -> saved;	
     (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
 	}
-#line 4169 "guillex.tab.c"
+#line 4184 "guillex.tab.c"
     break;
 
   case 59: /* unaryListExp: HEADLIST factor  */
-#line 1043 "guillex.y"
+#line 1058 "guillex.y"
                         {
 		(yyval.treeNode) = createNode2("? factor", createNode0("?"), (yyvsp[0].treeNode));
     (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
     (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;	
 	}
-#line 4179 "guillex.tab.c"
+#line 4194 "guillex.tab.c"
     break;
 
   case 60: /* unaryListExp: TAILLIST factor  */
-#line 1048 "guillex.y"
+#line 1063 "guillex.y"
                           {
     (yyval.treeNode) = createNode2("! factor", createNode0("!"), (yyvsp[0].treeNode));
     (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
     (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;	
 	}
-#line 4189 "guillex.tab.c"
+#line 4204 "guillex.tab.c"
     break;
 
   case 61: /* binLogicalExp: binLogicalExp OR relationalExp  */
-#line 1056 "guillex.y"
+#line 1071 "guillex.y"
                                   {
       (yyval.treeNode) = createNode3("binLogicalExp binLogicalOp relationalOp", (yyvsp[-2].treeNode), createNode0("||"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
@@ -4198,11 +4213,11 @@ yyreduce:
       (yyval.treeNode) -> saved = (yyvsp[-2].treeNode) -> saved;
       varReg++;
     }
-#line 4202 "guillex.tab.c"
+#line 4217 "guillex.tab.c"
     break;
 
   case 62: /* binLogicalExp: binLogicalExp AND relationalExp  */
-#line 1065 "guillex.y"
+#line 1080 "guillex.y"
                                    {
       (yyval.treeNode) = createNode3("binLogicalExp binLogicalOp relationalOp", (yyvsp[-2].treeNode), createNode0("&&"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
@@ -4211,21 +4226,21 @@ yyreduce:
       (yyval.treeNode) -> saved = (yyvsp[-2].treeNode) -> saved;
       varReg++;
     }
-#line 4215 "guillex.tab.c"
+#line 4230 "guillex.tab.c"
     break;
 
   case 63: /* binLogicalExp: relationalExp  */
-#line 1073 "guillex.y"
+#line 1088 "guillex.y"
                   {
     (yyval.treeNode) = createNode1("relationalExp", (yyvsp[0].treeNode));
     (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
     (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 4225 "guillex.tab.c"
+#line 4240 "guillex.tab.c"
     break;
 
   case 64: /* relationalExp: relationalExp SMALLER sumExp  */
-#line 1081 "guillex.y"
+#line 1096 "guillex.y"
                                  {
       (yyval.treeNode) = createNode3("relationalExp SMALLER sumExp", (yyvsp[-2].treeNode), createNode0("<"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
@@ -4234,11 +4249,11 @@ yyreduce:
       (yyval.treeNode) -> saved = s;
       varReg++;
     }
-#line 4238 "guillex.tab.c"
+#line 4253 "guillex.tab.c"
     break;
 
   case 65: /* relationalExp: relationalExp GREATER sumExp  */
-#line 1090 "guillex.y"
+#line 1105 "guillex.y"
                                  {
       (yyval.treeNode) = createNode3("relationalExp GREATER sumExp", (yyvsp[-2].treeNode), createNode0(">"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
@@ -4247,11 +4262,11 @@ yyreduce:
       (yyval.treeNode) -> saved = s;
       varReg++;
     }
-#line 4251 "guillex.tab.c"
+#line 4266 "guillex.tab.c"
     break;
 
   case 66: /* relationalExp: relationalExp SMALLEQ sumExp  */
-#line 1099 "guillex.y"
+#line 1114 "guillex.y"
                                  {
       (yyval.treeNode) = createNode3("relationalExp SMALLEQ sumExp", (yyvsp[-2].treeNode), createNode0("<="), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
@@ -4260,11 +4275,11 @@ yyreduce:
       (yyval.treeNode) -> saved = s;
       varReg++;
     }
-#line 4264 "guillex.tab.c"
+#line 4279 "guillex.tab.c"
     break;
 
   case 67: /* relationalExp: relationalExp GREATEQ sumExp  */
-#line 1108 "guillex.y"
+#line 1123 "guillex.y"
                                  {
       (yyval.treeNode) = createNode3("relationalExp GREATEQ sumExp", (yyvsp[-2].treeNode), createNode0(">="), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
@@ -4273,11 +4288,11 @@ yyreduce:
       (yyval.treeNode) -> saved = s;
       varReg++;
     }
-#line 4277 "guillex.tab.c"
+#line 4292 "guillex.tab.c"
     break;
 
   case 68: /* relationalExp: relationalExp EQUALS sumExp  */
-#line 1117 "guillex.y"
+#line 1132 "guillex.y"
                                 {
       (yyval.treeNode) = createNode3("relationalExp EQUALS sumExp", (yyvsp[-2].treeNode), createNode0("=="), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
@@ -4286,11 +4301,11 @@ yyreduce:
       (yyval.treeNode) -> saved = s;
       varReg++;
     }
-#line 4290 "guillex.tab.c"
+#line 4305 "guillex.tab.c"
     break;
 
   case 69: /* relationalExp: relationalExp DIFFERENT sumExp  */
-#line 1126 "guillex.y"
+#line 1141 "guillex.y"
                                    {
       (yyval.treeNode) = createNode3("relationalExp DIFFERENT sumExp", (yyvsp[-2].treeNode), createNode0("!="), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-2].treeNode) -> nodeType;
@@ -4300,21 +4315,21 @@ yyreduce:
       (yyval.treeNode) -> saved = s;
       varReg++;
     }
-#line 4304 "guillex.tab.c"
+#line 4319 "guillex.tab.c"
     break;
 
   case 70: /* relationalExp: sumExp  */
-#line 1135 "guillex.y"
+#line 1150 "guillex.y"
            {
       (yyval.treeNode) = createNode1("sumExp", (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 4314 "guillex.tab.c"
+#line 4329 "guillex.tab.c"
     break;
 
   case 71: /* sumExp: sumExp ADD mulExp  */
-#line 1144 "guillex.y"
+#line 1159 "guillex.y"
                       {
       (yyval.treeNode) = createNode3("sumExp add mulExp", (yyvsp[-2].treeNode), createNode0("+"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = checkTypes((yyvsp[-2].treeNode) -> nodeType, (yyvsp[0].treeNode) -> nodeType);
@@ -4322,11 +4337,11 @@ yyreduce:
       mathOpFile("add", utstring_body(s), (yyvsp[-2].treeNode) -> saved, (yyvsp[0].treeNode) -> saved);
       (yyval.treeNode) -> saved = utstring_body(s);
     }
-#line 4326 "guillex.tab.c"
+#line 4341 "guillex.tab.c"
     break;
 
   case 72: /* sumExp: sumExp SUB mulExp  */
-#line 1152 "guillex.y"
+#line 1167 "guillex.y"
                           {
       (yyval.treeNode) = createNode3("sumExp sub mulExp", (yyvsp[-2].treeNode), createNode0("-"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = checkTypes((yyvsp[-2].treeNode) -> nodeType, (yyvsp[0].treeNode) -> nodeType);
@@ -4334,21 +4349,21 @@ yyreduce:
       mathOpFile("sub", utstring_body(s), (yyvsp[-2].treeNode) -> saved, (yyvsp[0].treeNode) -> saved);
       (yyval.treeNode) -> saved = utstring_body(s);
     }
-#line 4338 "guillex.tab.c"
+#line 4353 "guillex.tab.c"
     break;
 
   case 73: /* sumExp: mulExp  */
-#line 1159 "guillex.y"
+#line 1174 "guillex.y"
            {
       (yyval.treeNode) = createNode1("mulExp", (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
   }
-#line 4348 "guillex.tab.c"
+#line 4363 "guillex.tab.c"
     break;
 
   case 74: /* mulExp: mulExp MULT factor  */
-#line 1167 "guillex.y"
+#line 1182 "guillex.y"
                        {
       (yyval.treeNode) = createNode3("mulExp mulOp factor", (yyvsp[-2].treeNode), createNode0("*"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = checkTypes((yyvsp[-2].treeNode) -> nodeType, (yyvsp[0].treeNode) -> nodeType);
@@ -4356,11 +4371,11 @@ yyreduce:
       mathOpFile("mul", utstring_body(s), (yyvsp[-2].treeNode) -> saved, (yyvsp[0].treeNode) -> saved);
       (yyval.treeNode) -> saved = utstring_body(s);
     }
-#line 4360 "guillex.tab.c"
+#line 4375 "guillex.tab.c"
     break;
 
   case 75: /* mulExp: mulExp DIV factor  */
-#line 1175 "guillex.y"
+#line 1190 "guillex.y"
                        {
       (yyval.treeNode) = createNode3("mulExp mulOp factor", (yyvsp[-2].treeNode), createNode0("/"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = checkTypes((yyvsp[-2].treeNode) -> nodeType, (yyvsp[0].treeNode) -> nodeType);
@@ -4368,48 +4383,48 @@ yyreduce:
       mathOpFile("div", utstring_body(s), (yyvsp[-2].treeNode) -> saved, (yyvsp[0].treeNode) -> saved);
       (yyval.treeNode) -> saved = utstring_body(s);
     }
-#line 4372 "guillex.tab.c"
+#line 4387 "guillex.tab.c"
     break;
 
   case 76: /* mulExp: factor  */
-#line 1182 "guillex.y"
+#line 1197 "guillex.y"
            {
       (yyval.treeNode) = createNode1("factor", (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 4382 "guillex.tab.c"
+#line 4397 "guillex.tab.c"
     break;
 
   case 77: /* mulExp: ADD factor  */
-#line 1187 "guillex.y"
+#line 1202 "guillex.y"
                {
       (yyval.treeNode) = createNode2("ADD factor", createNode0("+"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 4391 "guillex.tab.c"
+#line 4406 "guillex.tab.c"
     break;
 
   case 78: /* mulExp: SUB factor  */
-#line 1191 "guillex.y"
+#line 1206 "guillex.y"
                {
       (yyval.treeNode) = createNode2("SUB factor", createNode0("-"), (yyvsp[0].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 4400 "guillex.tab.c"
+#line 4415 "guillex.tab.c"
     break;
 
   case 79: /* mulExp: unaryListExp  */
-#line 1195 "guillex.y"
+#line 1210 "guillex.y"
                  {
 		(yyval.treeNode) = createNode1("unaryListExp", (yyvsp[0].treeNode));
     (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
 	}
-#line 4409 "guillex.tab.c"
+#line 4424 "guillex.tab.c"
     break;
 
   case 80: /* factor: ID  */
-#line 1203 "guillex.y"
+#line 1218 "guillex.y"
        {
       struct symbol *s = checkIsInScope((yyvsp[0].str), STACK_TOP(stackScope) -> value);
       if (s != NULL) {
@@ -4423,70 +4438,70 @@ yyreduce:
         (yyval.treeNode) = createNodeE();
       }
     }
-#line 4427 "guillex.tab.c"
+#line 4442 "guillex.tab.c"
     break;
 
   case 81: /* factor: fCall  */
-#line 1216 "guillex.y"
+#line 1231 "guillex.y"
           {
       (yyval.treeNode) = createNode1("fCall", (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 4437 "guillex.tab.c"
+#line 4452 "guillex.tab.c"
     break;
 
   case 82: /* factor: PARENL simpleExp PARENR  */
-#line 1221 "guillex.y"
+#line 1236 "guillex.y"
                             {
       (yyval.treeNode) = createNode1("PARENL simpleExp PARENR", (yyvsp[-1].treeNode));
       (yyval.treeNode) -> nodeType = (yyvsp[-1].treeNode) -> nodeType;
       (yyval.treeNode) -> saved = (yyvsp[-1].treeNode) -> saved;
   }
-#line 4447 "guillex.tab.c"
+#line 4462 "guillex.tab.c"
     break;
 
   case 83: /* factor: INTEGER  */
-#line 1226 "guillex.y"
+#line 1241 "guillex.y"
             {
       (yyval.treeNode) = createNode0Int((yyvsp[0].integer), 'i');
       (yyval.treeNode) -> nodeType = 'i';
       UT_string *s = int_as_str((yyvsp[0].integer));
       (yyval.treeNode) -> saved = utstring_body(s);
     }
-#line 4458 "guillex.tab.c"
+#line 4473 "guillex.tab.c"
     break;
 
   case 84: /* factor: DECIMAL  */
-#line 1232 "guillex.y"
+#line 1247 "guillex.y"
             {
     (yyval.treeNode) = createNode0Dec((yyvsp[0].dec), 'f');
     (yyval.treeNode) -> nodeType = 'f';
     UT_string *s = float_as_str((yyvsp[0].dec));
     (yyval.treeNode) -> saved = utstring_body(s);
   }
-#line 4469 "guillex.tab.c"
+#line 4484 "guillex.tab.c"
     break;
 
   case 85: /* factor: NIL  */
-#line 1238 "guillex.y"
+#line 1253 "guillex.y"
         {
     (yyval.treeNode) = createNode0Nil((yyvsp[0].str), 'n');
     (yyval.treeNode) -> nodeType = 'n';
   }
-#line 4478 "guillex.tab.c"
+#line 4493 "guillex.tab.c"
     break;
 
   case 86: /* factor: ERRORTOKEN  */
-#line 1242 "guillex.y"
+#line 1257 "guillex.y"
                {
       (yyval.treeNode) = createNodeE();
     }
-#line 4486 "guillex.tab.c"
+#line 4501 "guillex.tab.c"
     break;
 
   case 87: /* fCall: ID PARENL callParams PARENR  */
-#line 1248 "guillex.y"
+#line 1263 "guillex.y"
                                 {
       if (findSymbolFunc((yyvsp[-3].str)) != NULL){
        if (checkNumberOfParams(argsParams, (yyvsp[-3].str))){
@@ -4509,11 +4524,11 @@ yyreduce:
           (yyval.treeNode) = createNodeE();
       }
     }
-#line 4513 "guillex.tab.c"
+#line 4528 "guillex.tab.c"
     break;
 
   case 88: /* fCall: ID PARENL PARENR  */
-#line 1270 "guillex.y"
+#line 1285 "guillex.y"
                      {
     if (findSymbolFunc((yyvsp[-2].str)) != NULL){
       if (checkNumberOfParams(argsParams, (yyvsp[-2].str))){
@@ -4534,33 +4549,33 @@ yyreduce:
       (yyval.treeNode) = createNodeE();
     }
   }
-#line 4538 "guillex.tab.c"
+#line 4553 "guillex.tab.c"
     break;
 
   case 89: /* callParams: callParams COMMA simpleExp  */
-#line 1293 "guillex.y"
+#line 1308 "guillex.y"
                                {
       argsParams++;
       (yyval.treeNode) = createNode2("callParams COMMA simpleExp", (yyvsp[-2].treeNode), (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[-2].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
     }
-#line 4549 "guillex.tab.c"
+#line 4564 "guillex.tab.c"
     break;
 
   case 90: /* callParams: simpleExp  */
-#line 1299 "guillex.y"
+#line 1314 "guillex.y"
               {
       argsParams++;
       (yyval.treeNode) = createNode1("simpleExp", (yyvsp[0].treeNode));
       (yyval.treeNode) -> saved = (yyvsp[0].treeNode) -> saved;
       (yyval.treeNode) -> nodeType = (yyvsp[0].treeNode) -> nodeType;
   }
-#line 4560 "guillex.tab.c"
+#line 4575 "guillex.tab.c"
     break;
 
 
-#line 4564 "guillex.tab.c"
+#line 4579 "guillex.tab.c"
 
       default: break;
     }
@@ -4790,7 +4805,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 1309 "guillex.y"
+#line 1324 "guillex.y"
 
 
 void yyerror(const char* msg) {
@@ -4804,17 +4819,21 @@ int main(int argc, char *argv[]) {
   // yydebug = 1;
   // #endif
   pushStack(0);
-  tacfile = fopen("file.tac", "w");
-  fprintf (tacfile, ".table\n");
-  fprintf (tacfile, ".code\n");
+  char s[100] = "";
+  char *file = argv[1];
+  strcat(s, file);
+  strcat(s, ".tac");
   printf("\n\n#### beginning ####\n\n");
   printf("------------------------Semantic analysis---------------------\n");
   abstractSyntaxTree = NULL;
-  FILE *file;
-  file = fopen(argv[1], "r");
   if(argc > 1){
     if(file){
-      yyin = file;
+      yyin = fopen(file, "r");
+      tacfile = fopen(s, "w");
+      fprintf (tacfile, ".table\n");
+      fprintf (tacfile, ".code\n");
+      writeTacFile(currentLine);
+      fclose(tacfile);
       yyparse();
       printf("\n\n#### EOF ####\n\n");
       semanticErrors += findSymbolMain("main");

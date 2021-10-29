@@ -29,7 +29,8 @@ int semanticErrors = 0;
 int parameters = 0;
 int argsParams = 0;
 int scope = 0;
-int varReg = 1;
+int varReg = 0;
+int ifId = 0;
 
 
 typedef struct node {
@@ -360,7 +361,7 @@ int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int pa
     HASH_ADD_STR(symbolTable, name, s);
     return 0;
   } else {
-     if (s -> scope != scope) {
+     if (s -> scope != scope && symbolType[0] == 'v') {
       s = (Symbol*)malloc(sizeof(Symbol));
       s -> name = name;
       s -> symbolType = symbolType;
@@ -372,8 +373,12 @@ int addSymbol(char *name, char *symbolType, char *varFuncName, int scope, int pa
       return 0;
     } else {
       printf("Semantic Error\n");
-      printf("Variable or Function already declared in this scope\n\n");    
-      return 1;}
+      if (symbolType[0] == 'v')
+        printf("Variable %s already declared in this scope\n\n", name);
+      else if (symbolType[0] == 'f')
+        printf("Func %s already declared in this scope\n\n", name);
+      return 1;
+      }
   }
   return 1;
 }
@@ -744,7 +749,7 @@ simpleVarDeclaration:
         utstring_new(s);
         utstring_printf(s, "$%d", varReg);
 
-        varDecAssign(utstring_body(s), "0");
+        varDecAssign(utstring_body(s), "e");
       }
       varReg++;
       $$ = createNode2("TYPE ID", createNode0($1), createNode0($2));
@@ -987,7 +992,17 @@ simpleExp:
 
 inOp:
   READ PARENL ID PARENR SEMIC{
+    struct symbol *s = checkIsInScope($3, STACK_TOP(stackScope) -> value);
+    if (s != NULL) {
     $$ = createNode2("READ PARENL ID PARENR SEMIC", createNode0($1), createNode0($3));
+    readFunc(utstring_body(s -> varReg), s -> varFuncName[0]);
+    $$ -> saved = utstring_body(s -> varReg);
+    } else {
+        printf("Semantic error\n");
+        printf("var %s not declared, line %d, column %d\n\n", $1, line, wordPosition);
+        semanticErrors += 1;
+        $$ = createNodeE();
+      }
   }
   |
     READ PARENL PARENR SEMIC{
@@ -1319,17 +1334,21 @@ int main(int argc, char *argv[]) {
   // yydebug = 1;
   // #endif
   pushStack(0);
-  tacfile = fopen("file.tac", "w");
-  fprintf (tacfile, ".table\n");
-  fprintf (tacfile, ".code\n");
+  char s[100] = "";
+  char *file = argv[1];
+  strcat(s, file);
+  strcat(s, ".tac");
   printf("\n\n#### beginning ####\n\n");
   printf("------------------------Semantic analysis---------------------\n");
   abstractSyntaxTree = NULL;
-  FILE *file;
-  file = fopen(argv[1], "r");
   if(argc > 1){
     if(file){
-      yyin = file;
+      yyin = fopen(file, "r");
+      tacfile = fopen(s, "w");
+      fprintf (tacfile, ".table\n");
+      fprintf (tacfile, ".code\n");
+      writeTacFile(currentLine);
+      fclose(tacfile);
       yyparse();
       printf("\n\n#### EOF ####\n\n");
       semanticErrors += findSymbolMain("main");

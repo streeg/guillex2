@@ -12,6 +12,7 @@ Id: 'fib' at line: 3, column: 5
 Type: 'int' on line: 3, column: 9
 Id: 'i' at line: 3, column: 13
 ')' at line: 3, column: 14
+Semantic Error
 '{' on line: 4, column: 1
 Keyword [IF]: 'if' at line: 5, column: 3
 '(' at line: 5, column: 6
@@ -60,9 +61,6 @@ Id: 'main' at line: 13, column: 5
 Type: 'int' on line: 15, column: 3
 Id: 'i' at line: 15, column: 7
 ';' at line: 15, column: 8
-Semantic Error
-Variable or Function already declared in this scope
-
 Id: 'i' at line: 16, column: 3
 '=' at line: 16, column: 5
 Integer: '0' at line: 16, column: 7
@@ -124,9 +122,9 @@ Integer: '0' at line: 25, column: 10
 |         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |
 
 |   i                   |    var                          |      int                     |         0            |         0          |
-|   i                   |    param                        |      int                     |         1            |         0          |
 |   fib                 |    func                         |      int                     |         1            |         1          |
 |   main                |    func                         |      int                     |         1            |         0          |
+|   i                   |    var                          |      int                     |         1            |         0          |
 |   a                   |    var                          |      int                     |         1            |         0          |
 |   c                   |    var                          |      int                     |         1            |         0          |
 

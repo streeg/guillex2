@@ -61,8 +61,8 @@ extern int yydebug;
     INTEGER = 262,                 /* INTEGER  */
     DECIMAL = 263,                 /* DECIMAL  */
     ERRORTOKEN = 264,              /* ERRORTOKEN  */
-    ELSE = 265,                    /* ELSE  */
-    THEN = 266,                    /* THEN  */
+    THEN = 265,                    /* THEN  */
+    ELSE = 266,                    /* ELSE  */
     ADD = 267,                     /* ADD  */
     SUB = 268,                     /* SUB  */
     MULT = 269,                    /* MULT  */

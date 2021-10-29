@@ -514,7 +514,7 @@ UT_string *float_as_str(float value) {
 %token<str> ERRORTOKEN
 
 
-%right ELSE THEN
+%right THEN ELSE
 
 %token <str> ADD SUB MULT DIV OR AND SMALLER GREATER SMALLEQ GREATEQ EQUALS DIFFERENT APPEND HEADLIST TAILLIST DESTROYHEAD FILTER 
 %token <str> ASSIGN MAP ELSE THEN
@@ -694,17 +694,23 @@ condStmt:
     ifStmt primitiveStmt %prec THEN {
       $$ = createNode2("ifStmt primitiveStmt", $1, $2);
       popStack();
+      scope--;
+      pushStack(scope);
+      popStack();
     }
   | ifStmt primitiveStmt elseStmt  {
     $$ = createNode3("ifStmt primitiveStmt elseStmt", $1, $2, $3);
   }
   | ifStmt STFUNC ENDFUNC %prec THEN{
-        $$ = createNode1("ifStmt", $1);
+    $$ = createNode1("ifStmt", $1);
+    popStack();
+    scope--;
+    pushStack(scope);
+    popStack();
   }
   | ifStmt STFUNC ENDFUNC elseStmt  {
     $$ = createNode2("ifStmt primitiveStmt elseStmt", $1, $4);
   }
-  
   
   ;
 
@@ -719,24 +725,39 @@ ifStmt:
 elseStmt:
   ELSE{
     popStack();
+    scope--;
+    pushStack(scope);
+    popStack();
     scope++;
     pushStack(scope);
   } primitiveStmt {
+    popStack();
+    scope--;
+    pushStack(scope);
     popStack();
     $$ = createNode2("ELSE primitiveStmt", createNode0($1), $3);
   }
 ;
 iterStmt:
-    FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt {
+    FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR {      
       scope++;
       pushStack(scope);
-      $$ = createNode5("FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt", createNode0($1), $3, $5, $7, $9);
+      } primitiveStmt {
+
+      $$ = createNode5("FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt", createNode0($1), $3, $5, $7, $10);
+      popStack();
+      scope--;
+      pushStack(scope);
       popStack();
     }
-  | FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt {
+  | FOR PARENL simpleExp SEMIC simpleExp SEMIC assignExp PARENR {
       scope++;
       pushStack(scope);
-      $$ = createNode5("FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt", createNode0($1), $3, $5, $7, $9);
+      } primitiveStmt {
+      $$ = createNode5("FOR PARENL assignExp SEMIC simpleExp SEMIC assignExp PARENR primitiveStmt", createNode0($1), $3, $5, $7, $10);
+      popStack();
+      scope--;
+      pushStack(scope);
       popStack();
   }
   ;
@@ -862,7 +883,7 @@ unaryListExp:
 ;  
 
 binLogicalExp:
-    binLogicalExp binLogicalOp relationalOp{
+    binLogicalExp binLogicalOp relationalExp{
       $$ = createNode3("binLogicalExp binLogicalOp relationalOp", $1, $2, $3);
     }
   | relationalExp {

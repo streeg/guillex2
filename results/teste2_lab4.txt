@@ -62,12 +62,18 @@ Id: 'main' at line: 14, column: 5
 Type: 'int' on line: 16, column: 5
 Id: 'a' at line: 16, column: 9
 ';' at line: 16, column: 10
+Semantic Error
+Variable or Function already declared in this scope
+
 Type: 'int' on line: 17, column: 5
 Id: 'b' at line: 17, column: 9
 ';' at line: 17, column: 10
 Type: 'int' on line: 18, column: 5
 Id: 'c' at line: 18, column: 9
 ';' at line: 18, column: 10
+Semantic Error
+Variable or Function already declared in this scope
+
 Keyword [READ]: 'read' at line: 20, column: 5
 '(' at line: 20, column: 9
 Id: 'a' at line: 20, column: 10
@@ -85,8 +91,6 @@ Id: 'n_times_plus_one' at line: 23, column: 9
 Id: 'a' at line: 23, column: 26
 ')' at line: 23, column: 27
 ';' at line: 23, column: 28
-Semantic errorFunction: <n_times_plus_one> has wrong number of parameters, line 23, column 29
-
 Keyword [WRITELN]: 'writeln' at line: 25, column: 5
 '(' at line: 25, column: 12
 Id: 'c' at line: 25, column: 13
@@ -111,10 +115,8 @@ Id: 'c' at line: 26, column: 12
 |   a                   |    param                        |      float                   |         1            |         0          |
 |   n_times_plus_one    |    func                         |      int                     |         1            |         1          |
 |   c                   |    var                          |      int                     |         1            |         0          |
-|   main                |    func                         |      int                     |         2            |         0          |
-|   a                   |    var                          |      int                     |         2            |         0          |
-|   b                   |    var                          |      int                     |         2            |         0          |
-|   c                   |    var                          |      int                     |         2            |         0          |
+|   main                |    func                         |      int                     |         1            |         0          |
+|   b                   |    var                          |      int                     |         1            |         0          |
 
 
 --------------------------------tree--------------------------------
@@ -449,7 +451,26 @@ declarationsList declaration
 
 ----------------------->   fCall
 
-------------------------
+------------------------>   ID PARENL callParams PARENR
+
+------------------------->   n_times_plus_one
+
+-------------------------->   simpleExp
+
+--------------------------->   binLogicalExp
+
+---------------------------->   relationalExp
+
+----------------------------->   sumExp
+
+------------------------------>   mulExp
+
+------------------------------->   factor
+
+-------------------------------->   ID
+
+--------------------------------->   a
+
 ---------->   outOp
 
 ----------->   WRITELN PARENL outConst PARENR SEMIC
@@ -495,5 +516,5 @@ declarationsList declaration
 ------------------->   c
 
 
- There is 2 warnings in the file
+ There is 3 warnings in the file
 

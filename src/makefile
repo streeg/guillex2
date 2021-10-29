@@ -13,10 +13,10 @@ runflex:
 
 
 runbison:
-	bison -vdt -Wconflicts-sr -Wcounterexamples --graph guillex.y
+	bison -vdt -Wconflicts-sr -Wcounterexamples --graph guillex.y -g -Wall
 
 compilefile:
-	gcc-11 lex.yy.c guillex.tab.c -ll -o tradutor
+	gcc-11 lex.yy.c guillex.tab.c -ll -o tradutor -g -Wall
 
 
 moveheader:
@@ -37,9 +37,9 @@ testtac:
 	./tradutor ../tests/testnalon.c > ../results/testnalon.txt
 
 testlab:
-# ./tradutor ../tests/teste1_lab4.c > ../results/teste1_lab4.txt
-# ./tradutor ../tests/teste2_lab4.c > ../results/teste2_lab4.txt
-# ./tradutor ../tests/teste3_lab4.c > ../results/teste3_lab4.txt
-# ./tradutor ../tests/teste1_Nalon.c > ../results/teste1_Nalon.txt
+	./tradutor ../tests/teste1_lab4.c > ../results/teste1_lab4.txt
+	./tradutor ../tests/teste2_lab4.c > ../results/teste2_lab4.txt
+	./tradutor ../tests/teste3_lab4.c > ../results/teste3_lab4.txt
+	./tradutor ../tests/teste1_Nalon.c > ../results/teste1_Nalon.txt
 	./tradutor ../tests/teste2_Nalon.c > ../results/teste2_Nalon.txt
-# ./tradutor ../tests/teste3_Nalon.c > ../results/teste3_Nalon.txt
+	./tradutor ../tests/teste3_Nalon.c > ../results/teste3_Nalon.txt

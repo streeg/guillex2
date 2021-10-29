@@ -20,7 +20,30 @@ int main()
     read(nota);
     notas = nota : notas;
   }
-
+  if (1 == 2)
+  {
+    int abacaxi;
+    abacaxi = 0;
+    writeln(nota);
+    if (2 != 3)
+    {
+      float pera;
+      pera = 1.1;
+      writeln(nota);
+    }
+  }
+  else
+  {
+    int banana;
+    banana = 2;
+    writeln(nota);
+    if (2 != 3)
+    {
+      float maca;
+      maca = 1.1;
+      writeln(nota);
+    }
+  }
   float soma;
   soma = 0;
   float list AUX;

@@ -52,6 +52,9 @@ Id: 'a' at line: 17, column: 9
 Type: 'int' on line: 18, column: 5
 Id: 'b' at line: 18, column: 9
 ';' at line: 18, column: 10
+Semantic Error
+Variable or Function already declared in this scope
+
 Keyword [READ]: 'read' at line: 20, column: 5
 '(' at line: 20, column: 9
 Id: 'a' at line: 20, column: 10
@@ -80,8 +83,6 @@ Id: 'sqr_plus_one' at line: 28, column: 9
 Id: 'a' at line: 28, column: 22
 ')' at line: 28, column: 23
 ';' at line: 28, column: 24
-Semantic errorFunction: <sqr_plus_one> has wrong number of parameters, line 28, column 25
-
 Keyword [WRITELN]: 'writeln' at line: 30, column: 5
 '(' at line: 30, column: 12
 Id: 'b' at line: 30, column: 13
@@ -106,9 +107,8 @@ Id: 'b' at line: 31, column: 12
 |   a                   |    var                          |      int                     |         0            |         0          |
 |   b                   |    param                        |      int                     |         1            |         0          |
 |   sqr_plus_one        |    func                         |      int                     |         1            |         1          |
-|   main                |    func                         |      int                     |         3            |         0          |
-|   a                   |    var                          |      int                     |         3            |         0          |
-|   b                   |    var                          |      int                     |         3            |         0          |
+|   main                |    func                         |      int                     |         1            |         0          |
+|   a                   |    var                          |      int                     |         1            |         0          |
 
 
 --------------------------------tree--------------------------------
@@ -467,7 +467,26 @@ declarationsList declaration
 
 ----------------------->   fCall
 
-------------------------
+------------------------>   ID PARENL callParams PARENR
+
+------------------------->   sqr_plus_one
+
+-------------------------->   simpleExp
+
+--------------------------->   binLogicalExp
+
+---------------------------->   relationalExp
+
+----------------------------->   sumExp
+
+------------------------------>   mulExp
+
+------------------------------->   factor
+
+-------------------------------->   ID
+
+--------------------------------->   a
+
 ---------->   outOp
 
 ----------->   WRITELN PARENL outConst PARENR SEMIC

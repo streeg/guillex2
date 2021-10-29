@@ -56,6 +56,7 @@ Node* createNodeE() {
   node -> nodeValue = NULL;
   node -> nodeType = 'e';
   node -> returnType = 'x';
+  node -> terminal = true;
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -71,6 +72,7 @@ Node* createNode0(char *nodeValue) {
   node -> nodeValue = nodeValue;
   node -> nodeType = '\0';
   node -> returnType = 'x';
+  node -> terminal = true;
   node -> left = NULL;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -152,6 +154,7 @@ Node* createNode1(char *nodeValue, Node* left) {
   node -> nodeValue = nodeValue;
   node -> nodeType = '\0';
   node -> returnType = 'x';
+  node -> terminal = false;
   node -> left = left;
   node -> leftMiddle = NULL;
   node -> middle = NULL;
@@ -167,6 +170,7 @@ Node* createNode2(char *nodeValue, Node* left, Node* leftMiddle) {
   node -> nodeValue = nodeValue;
   node -> nodeType = '\0';
   node -> returnType = 'x';
+  node -> terminal = false;
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = NULL;
@@ -182,6 +186,7 @@ Node* createNode3(char *nodeValue, Node* left, Node* leftMiddle, Node* middle) {
   node -> nodeValue = nodeValue;
   node -> nodeType = '\0';
   node -> returnType = 'x';
+  node -> terminal = false;
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = middle;
@@ -197,6 +202,7 @@ Node* createNode4(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, N
   node -> nodeValue = nodeValue;
   node -> nodeType = '\0';
   node -> returnType = 'x';
+  node -> terminal = false;
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = middle;
@@ -212,6 +218,7 @@ Node* createNode5(char *nodeValue, Node* left, Node* leftMiddle, Node* middle, N
   node -> nodeValue = nodeValue;
   node -> nodeType = '\0';
   node -> returnType = 'x';
+  node -> terminal = false;
   node -> left = left;
   node -> leftMiddle = leftMiddle;
   node -> middle = middle;
@@ -284,11 +291,18 @@ typedef struct scope {
 } Scope;
 
 Scope *stackScope = NULL;
+Scope *stackIfElse = NULL;
 
 void pushStack(int value) {
   Scope *scope = (Scope*)malloc(sizeof(Scope));
   scope -> value = value;
   STACK_PUSH(stackScope, scope);
+}
+
+void pushStackIf(int value) {
+  Scope *scope = (Scope*)malloc(sizeof(Scope));
+  scope -> value = value;
+  STACK_PUSH(stackIfElse, scope);
 }
 
 void popStack() {
@@ -297,8 +311,19 @@ void popStack() {
   free(scope);
 }
 
+void popStackIf() {
+  Scope *scope;
+  STACK_POP(stackIfElse, scope);
+  free(scope);
+}
+
 void freeStack() {
   while(!STACK_EMPTY(stackScope))
+    popStack();
+}
+
+void freeStackIf() {
+  while(!STACK_EMPTY(stackIfElse))
     popStack();
 }
 
@@ -459,6 +484,18 @@ void varDecAssign(char *name, char *value){
   DL_APPEND(currentLine, code);
 }
 
+void readFunc(char *value, char type) {
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  if (type == 'i')
+    utstring_printf(code -> line, "scani %s\n", value);
+  if (type == 'f')
+    utstring_printf(code -> line, "scanf %s\n", value);
+  if (type == 'c')
+    utstring_printf(code -> line, "scanc %s\n", value);
+  DL_APPEND(currentLine, code);
+}
+
 void writeFunc(char *value){
   Codegen *code = (Codegen *)malloc(sizeof *code);
   utstring_new(code -> line);
@@ -470,6 +507,13 @@ void writelnFunc(char *value){
   Codegen *code = (Codegen *)malloc(sizeof *code);
   utstring_new(code -> line);
   utstring_printf(code -> line, "println %s\n", value);
+  DL_APPEND(currentLine, code);
+}
+
+void notFunc(char *name, char *value){
+  Codegen *code = (Codegen *)malloc(sizeof *code);
+  utstring_new(code -> line);
+  utstring_printf(code -> line, "not %s, %s\n", name, value);
   DL_APPEND(currentLine, code);
 }
 
@@ -486,6 +530,23 @@ void writeTacFile(Codegen *originalNode) {
 
   fprintf(tacfile, "%s", utstring_body(originalNode -> line));
   writeTacFile(originalNode -> next);
+}
+
+void freeCodegen() {
+  Codegen *temp, *line;
+
+  DL_FOREACH_SAFE(currentLine,line,temp) {
+    DL_DELETE(currentLine,line);
+    free(line);
+  }
+}
+
+UT_string *create_new_reg_from_string(char *varReg) {
+  UT_string *r;
+  utstring_new(r);
+  utstring_printf(r, "%s", varReg);
+
+  return r;
 }
 
 UT_string *create_new_reg(int varReg) {
@@ -533,15 +594,20 @@ bool checkTypesVar(char varType, char value) {
 }
 
 int checkTypesReturnFunction(char value, char returnType) {
-  printf("-----<>%c, %c<>-------", value, returnType);
-  if (returnType == 'v' && value != 'x')
+  if (returnType == 'v' && value != 'x'){
+    
     return 0;
-  if (returnType != 'v' && value == 'x')
+    }
+  if (returnType != 'v' && value == 'x'){    
     return 1;
-  if (returnType == value || (returnType == 'v' && value == 'x'))
+    }
+  if (returnType == value || (returnType == 'v' && value == 'x')){
+    
     return 2;
+    }
   return 3;
 }
+
 
 %}  
 
@@ -571,7 +637,7 @@ int checkTypesReturnFunction(char value, char returnType) {
 %type<treeNode> program declarationList declaration varDeclaration funcDeclaration simpleVarDeclaration 
 %type<treeNode> params param compoundStmt stmtList primitiveStmt exprStmt condStmt ifStmt elseStmt iterStmt returnStmt 
 %type<treeNode> expression assignExp simpleExp
-%type<treeNode> inOp outOp outConst binLogicalExp binLogicalOp relationalExp relationalOp
+%type<treeNode> inOp outOp outConst binLogicalExp relationalExp
 %type<treeNode> sumExp mulExp factor fCall callParams error
 %type<treeNode> binListExp unaryListExp
 %%
@@ -748,9 +814,11 @@ primitiveStmt:
   }
   | condStmt {
     $$ = createNode1("condStmt", $1);
+    $$ -> nodeType = $1 -> nodeType;
   }
   | iterStmt {
     $$ = createNode1("iterStmt", $1);
+    $$ -> nodeType = $1 -> nodeType;
   }
   | returnStmt {
     $$ = createNode1("returnStmt", $1);
@@ -778,6 +846,7 @@ exprStmt:
 condStmt:
     ifStmt primitiveStmt %prec THEN {
       $$ = createNode2("ifStmt primitiveStmt", $1, $2);
+      $$ -> nodeType = $2 -> nodeType;
       popStack();
       scope--;
       pushStack(scope);
@@ -785,6 +854,7 @@ condStmt:
     }
   | ifStmt primitiveStmt elseStmt  {
     $$ = createNode3("ifStmt primitiveStmt elseStmt", $1, $2, $3);
+    $$ -> nodeType = $2 -> nodeType;
   }
   | ifStmt STFUNC ENDFUNC %prec THEN{
     $$ = createNode1("ifStmt", $1);
@@ -821,6 +891,7 @@ elseStmt:
     pushStack(scope);
     popStack();
     $$ = createNode2("ELSE primitiveStmt", createNode0($1), $3);
+
   }
 ;
 iterStmt:
@@ -876,10 +947,14 @@ assignExp:
         varDecAssign(utstring_body(s -> varReg), $3 -> saved);
         $$ -> saved = $3 -> saved;
         $$ -> nodeType = s -> varFuncName[0];
-      if (s -> varFuncName[0] != 'e')
+      if (s -> varFuncName[0] != 'e'){
+          $$ -> saved = $3 -> saved;
           $$ -> nodeType = s -> varFuncName[0];
-      else
+      }
+      else {
+          $$ -> saved = $3 -> saved;
           $$ -> nodeType = $3 -> nodeType;
+      }
       if(!checkTypesVar(s -> varFuncName[0], $3 -> nodeType)) {
         printf("Semantic Error\n");
         printf("var %s from type %s receiving wrong type value, line %d, column %d\n\n", $1, s -> varFuncName, line, wordPosition);
@@ -978,9 +1053,22 @@ unaryListExp:
 ;  
 
 binLogicalExp:
-    binLogicalExp binLogicalOp relationalExp{
-      $$ = createNode3("binLogicalExp binLogicalOp relationalOp", $1, $2, $3);
+    binLogicalExp OR relationalExp{
+      $$ = createNode3("binLogicalExp binLogicalOp relationalOp", $1, createNode0("||"), $3);
       $$ -> nodeType = $1 -> nodeType;
+      char *s = utstring_body(create_new_reg(varReg));
+      mathOpFile("or", s, $1 -> saved, $3 -> saved);
+      $$ -> saved = $1 -> saved;
+      varReg++;
+    }
+    |
+    binLogicalExp AND relationalExp{
+      $$ = createNode3("binLogicalExp binLogicalOp relationalOp", $1, createNode0("&&"), $3);
+      $$ -> nodeType = $1 -> nodeType;
+      char *s = utstring_body(create_new_reg(varReg));
+      mathOpFile("or", s, $1 -> saved, $3 -> saved);
+      $$ -> saved = $1 -> saved;
+      varReg++;
     }
   | relationalExp {
     $$ = createNode1("relationalExp", $1);
@@ -989,20 +1077,60 @@ binLogicalExp:
   }
   ;
 
-
-binLogicalOp:
-    OR {
-      $$ = createNode1("OR", createNode0("||"));
-    }
-  | AND {
-      $$ = createNode1("AND", createNode0("&&"));
-  }
-  ;
-
 relationalExp:
-    relationalExp relationalOp sumExp {
-      $$ = createNode3("relationalExp relationalOp sumExp", $1, $2, $3);
+    relationalExp SMALLER sumExp {
+      $$ = createNode3("relationalExp SMALLER sumExp", $1, createNode0("<"), $3);
       $$ -> nodeType = $1 -> nodeType;
+      char *s = utstring_body(create_new_reg(varReg));
+      mathOpFile("slt", s, $1 -> saved, $3 -> saved);
+      $$ -> saved = s;
+      varReg++;
+    }
+    |
+    relationalExp GREATER sumExp {
+      $$ = createNode3("relationalExp GREATER sumExp", $1, createNode0(">"), $3);
+      $$ -> nodeType = $1 -> nodeType;
+      char *s = utstring_body(create_new_reg(varReg));
+      mathOpFile("slt", s, $1 -> saved, $3 -> saved);
+      $$ -> saved = s;
+      varReg++;
+    }
+    |
+    relationalExp SMALLEQ sumExp {
+      $$ = createNode3("relationalExp SMALLEQ sumExp", $1, createNode0("<="), $3);
+      $$ -> nodeType = $1 -> nodeType;
+      char *s = utstring_body(create_new_reg(varReg));
+      mathOpFile("sleq", s, $1 -> saved, $3 -> saved);
+      $$ -> saved = s;
+      varReg++;
+    }
+    |
+    relationalExp GREATEQ sumExp {
+      $$ = createNode3("relationalExp GREATEQ sumExp", $1, createNode0(">="), $3);
+      $$ -> nodeType = $1 -> nodeType;
+      char *s = utstring_body(create_new_reg(varReg));
+      mathOpFile("sleq", s, $1 -> saved, $3 -> saved);
+      $$ -> saved = s;
+      varReg++;
+    }
+    |
+    relationalExp EQUALS sumExp {
+      $$ = createNode3("relationalExp EQUALS sumExp", $1, createNode0("=="), $3);
+      $$ -> nodeType = $1 -> nodeType;
+      char *s = utstring_body(create_new_reg(varReg));
+      mathOpFile("seq", s, $1 -> saved, $3 -> saved);
+      $$ -> saved = s;
+      varReg++;
+    }
+    |
+    relationalExp DIFFERENT sumExp {
+      $$ = createNode3("relationalExp DIFFERENT sumExp", $1, createNode0("!="), $3);
+      $$ -> nodeType = $1 -> nodeType;
+      char *s = utstring_body(create_new_reg(varReg));
+      mathOpFile("seq", s, $1 -> saved, $3 -> saved);
+      notFunc(s, s);
+      $$ -> saved = s;
+      varReg++;
     }
   | sumExp {
       $$ = createNode1("sumExp", $1);
@@ -1011,27 +1139,6 @@ relationalExp:
   }
   ;
 
-
-relationalOp:
-    SMALLER {
-      $$ = createNode1("SMALLER", createNode0("<"));
-    }
-  | GREATER {
-      $$ = createNode1("GREATER", createNode0(">"));
-  }
-  | SMALLEQ {
-      $$ = createNode1("SMALLEQ", createNode0("<="));
-  }
-  | GREATEQ {
-      $$ = createNode1("GREATEQ", createNode0(">="));
-  }
-  | EQUALS {
-      $$ = createNode1("EQUALS", createNode0("=="));
-  }
-  | DIFFERENT {
-      $$ = createNode1("DIFFERENT", createNode0("!="));
-  }
-  ;
 
 sumExp:
     sumExp ADD mulExp {
@@ -1241,6 +1348,8 @@ int main(int argc, char *argv[]) {
         freeSymbols();
         freeStack();    
         free(yylval.str);  
+        freeCodegen();
+        fclose(tacfile);
         }else{
           printf("\n\nThere were %d errors in the file", errors);
         }

@@ -102,7 +102,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 548 "guillex.y"
+#line 614 "guillex.y"
 
   int integer;
   char *str;

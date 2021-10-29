@@ -8,14 +8,17 @@ int fib(int i)
     return 1;
   else
     return fib(i - 1) + fib(i - 2);
-  ;
 }
 
 int main()
 {
   int i;
   i = 0;
-
+  int a;
+  a = 0;
+  int c;
+  c = 0;
+  writeln(a == c);
   read(i);
   if (i > 0)
     write(fib(i));

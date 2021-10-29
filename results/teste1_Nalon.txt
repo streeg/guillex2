@@ -48,52 +48,291 @@ Id: 'i' at line: 10, column: 29
 Integer: '2' at line: 10, column: 33
 ')' at line: 10, column: 34
 ';' at line: 10, column: 35
-';' at line: 11, column: 3
-syntax error, unexpected SEMIC
-syntax error, unexpected SEMIC, linha: 11, coluna: 4
-'}' at line: 12, column: 1
-Type: 'int' on line: 14, column: 1
------<>x, i<>------------<>x, i<>-------Semantic Error
-function fib without expected return, line 14, column 4
+'}' at line: 11, column: 1
+Type: 'int' on line: 13, column: 1
+Semantic Error
+function fib without expected return, line 13, column 4
 
-Id: 'main' at line: 14, column: 5
-'(' at line: 14, column: 9
-')' at line: 14, column: 10
-'{' on line: 15, column: 1
-Type: 'int' on line: 16, column: 3
-Id: 'i' at line: 16, column: 7
+Id: 'main' at line: 13, column: 5
+'(' at line: 13, column: 9
+')' at line: 13, column: 10
+'{' on line: 14, column: 1
+Type: 'int' on line: 15, column: 3
+Id: 'i' at line: 15, column: 7
+';' at line: 15, column: 8
+Semantic Error
+Variable or Function already declared in this scope
+
+Id: 'i' at line: 16, column: 3
+'=' at line: 16, column: 5
+Integer: '0' at line: 16, column: 7
 ';' at line: 16, column: 8
-Id: 'i' at line: 17, column: 3
-'=' at line: 17, column: 5
-Integer: '0' at line: 17, column: 7
+Type: 'int' on line: 17, column: 3
+Id: 'a' at line: 17, column: 7
 ';' at line: 17, column: 8
-Keyword [READ]: 'read' at line: 19, column: 3
-'(' at line: 19, column: 7
-Id: 'i' at line: 19, column: 8
-')' at line: 19, column: 9
-';' at line: 19, column: 10
-Keyword [IF]: 'if' at line: 20, column: 3
-'(' at line: 20, column: 6
-Id: 'i' at line: 20, column: 7
-OP [GREATER THAN]: '>' at line: 20, column: 9
-Integer: '0' at line: 20, column: 11
-')' at line: 20, column: 12
-Keyword [WRITE]: 'write' at line: 21, column: 5
+Id: 'a' at line: 18, column: 3
+'=' at line: 18, column: 5
+Integer: '0' at line: 18, column: 7
+';' at line: 18, column: 8
+Type: 'int' on line: 19, column: 3
+Id: 'c' at line: 19, column: 7
+';' at line: 19, column: 8
+Id: 'c' at line: 20, column: 3
+'=' at line: 20, column: 5
+Integer: '0' at line: 20, column: 7
+';' at line: 20, column: 8
+Keyword [WRITELN]: 'writeln' at line: 21, column: 3
 '(' at line: 21, column: 10
-Id: 'fib' at line: 21, column: 11
-'(' at line: 21, column: 14
-Id: 'i' at line: 21, column: 15
-')' at line: 21, column: 16
+Id: 'a' at line: 21, column: 11
+OP [EQUALS]: '==' at line: 21, column: 13
+Id: 'c' at line: 21, column: 16
 ')' at line: 21, column: 17
 ';' at line: 21, column: 18
-Keyword [RETURN]: 'return' at line: 22, column: 3
-Integer: '0' at line: 22, column: 10
-';' at line: 22, column: 11
-'}' at line: 23, column: 1
------<>i, i<>------------<>i, i<>------------<>i, i<>-------
+Keyword [READ]: 'read' at line: 22, column: 3
+'(' at line: 22, column: 7
+Id: 'i' at line: 22, column: 8
+')' at line: 22, column: 9
+';' at line: 22, column: 10
+Keyword [IF]: 'if' at line: 23, column: 3
+'(' at line: 23, column: 6
+Id: 'i' at line: 23, column: 7
+OP [GREATER THAN]: '>' at line: 23, column: 9
+Integer: '0' at line: 23, column: 11
+')' at line: 23, column: 12
+Keyword [WRITE]: 'write' at line: 24, column: 5
+'(' at line: 24, column: 10
+Id: 'fib' at line: 24, column: 11
+'(' at line: 24, column: 14
+Id: 'i' at line: 24, column: 15
+')' at line: 24, column: 16
+')' at line: 24, column: 17
+';' at line: 24, column: 18
+Keyword [RETURN]: 'return' at line: 25, column: 3
+Integer: '0' at line: 25, column: 10
+';' at line: 25, column: 11
+'}' at line: 26, column: 1
+
 
 #### EOF ####
 
 
 
-There were 1 errors in the file
+------------------------------------------------------symbols------------------------------------------------
+
+
+
+|         Value         |         Symbol type             |         Return type           |         Scope       |     Parameters      |
+
+|   i                   |    var                          |      int                     |         0            |         0          |
+|   i                   |    param                        |      int                     |         1            |         0          |
+|   fib                 |    func                         |      int                     |         1            |         1          |
+|   main                |    func                         |      int                     |         1            |         0          |
+|   a                   |    var                          |      int                     |         1            |         0          |
+|   c                   |    var                          |      int                     |         1            |         0          |
+
+
+--------------------------------tree--------------------------------
+
+>declarationsList declaration
+->declarationsList declaration
+-->declaration
+--->varDeclaration
+---->simpleVarDeclaration
+----->TYPE ID
+-->funcDeclaration
+--->TYPE ID PARENL params PARENR STFUNC stmtList ENDFUNC
+---->param
+----->TYPE ID
+---->primitiveStmt
+----->condStmt
+------>ifStmt primitiveStmt elseStmt
+------->IF PARENL simpleExp PARENR
+-------->binLogicalExp
+--------->relationalExp
+---------->relationalExp EQUALS sumExp
+----------->sumExp
+------------>mulExp
+------------->factor
+-------------->ID
+~~~~~~~~~~~~~~~----------->mulExp
+------------>factor
+~~~~~~~~~~~~~1
+------->returnStmt
+-------->RETURN expression SEMIC
+--------->simpleExp
+---------->binLogicalExp
+----------->relationalExp
+------------>sumExp
+------------->mulExp
+-------------->factor
+~~~~~~~~~~~~~~~1
+------->ELSE primitiveStmt
+-------->condStmt
+--------->ifStmt primitiveStmt elseStmt
+---------->IF PARENL simpleExp PARENR
+----------->binLogicalExp
+------------>relationalExp
+------------->relationalExp EQUALS sumExp
+-------------->sumExp
+--------------->mulExp
+---------------->factor
+----------------->ID
+~~~~~~~~~~~~~~~~~~-------------->mulExp
+--------------->factor
+~~~~~~~~~~~~~~~~2
+---------->returnStmt
+----------->RETURN expression SEMIC
+------------>simpleExp
+------------->binLogicalExp
+-------------->relationalExp
+--------------->sumExp
+---------------->mulExp
+----------------->factor
+~~~~~~~~~~~~~~~~~~1
+---------->ELSE primitiveStmt
+----------->returnStmt
+------------>RETURN expression SEMIC
+------------->simpleExp
+-------------->binLogicalExp
+--------------->relationalExp
+---------------->sumExp
+----------------->sumExp add mulExp
+------------------>mulExp
+------------------->factor
+-------------------->fCall
+--------------------->ID PARENL callParams PARENR
+---------------------->simpleExp
+----------------------->binLogicalExp
+------------------------>relationalExp
+------------------------->sumExp
+-------------------------->sumExp sub mulExp
+--------------------------->mulExp
+---------------------------->factor
+----------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~1
+------------------>factor
+------------------->fCall
+-------------------->ID PARENL callParams PARENR
+--------------------->simpleExp
+---------------------->binLogicalExp
+----------------------->relationalExp
+------------------------>sumExp
+------------------------->sumExp sub mulExp
+-------------------------->mulExp
+--------------------------->factor
+---------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~2
+->funcDeclaration
+-->TYPE ID PARENL PARENR stmtList ENDFUNC 
+--->stmtList primitiveStmt
+---->stmtList primitiveStmt
+----->stmtList primitiveStmt
+------>stmtList primitiveStmt
+------->stmtList primitiveStmt
+-------->stmtList primitiveStmt
+--------->stmtList primitiveStmt
+---------->stmtList primitiveStmt
+----------->stmtList primitiveStmt
+------------>primitiveStmt
+------------->varDeclaration
+-------------->simpleVarDeclaration
+--------------->TYPE ID
+------------>exprStmt
+------------->expression SEMIC
+-------------->assignExp
+--------------->ID ASSIGN expression
+---------------->simpleExp
+----------------->binLogicalExp
+------------------>relationalExp
+------------------->sumExp
+-------------------->mulExp
+--------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~0
+----------->varDeclaration
+------------>simpleVarDeclaration
+------------->TYPE ID
+---------->exprStmt
+----------->expression SEMIC
+------------>assignExp
+------------->ID ASSIGN expression
+-------------->simpleExp
+--------------->binLogicalExp
+---------------->relationalExp
+----------------->sumExp
+------------------>mulExp
+------------------->factor
+~~~~~~~~~~~~~~~~~~~~0
+--------->varDeclaration
+---------->simpleVarDeclaration
+----------->TYPE ID
+-------->exprStmt
+--------->expression SEMIC
+---------->assignExp
+----------->ID ASSIGN expression
+------------>simpleExp
+------------->binLogicalExp
+-------------->relationalExp
+--------------->sumExp
+---------------->mulExp
+----------------->factor
+~~~~~~~~~~~~~~~~~~0
+------->outOp
+-------->WRITELN PARENL outConst PARENR SEMIC
+--------->simpleExp
+---------->binLogicalExp
+----------->relationalExp
+------------>relationalExp EQUALS sumExp
+------------->sumExp
+-------------->mulExp
+--------------->factor
+---------------->ID
+~~~~~~~~~~~~~~~~~------------->mulExp
+-------------->factor
+--------------->ID
+~~~~~~~~~~~~~~~~------>inOp
+------->READ PARENL ID PARENR SEMIC
+----->condStmt
+------>ifStmt primitiveStmt
+------->IF PARENL simpleExp PARENR
+-------->binLogicalExp
+--------->relationalExp
+---------->relationalExp GREATER sumExp
+----------->sumExp
+------------>mulExp
+------------->factor
+-------------->ID
+~~~~~~~~~~~~~~~----------->mulExp
+------------>factor
+~~~~~~~~~~~~~0
+------->outOp
+-------->WRITE PARENL outConst PARENR SEMIC
+--------->simpleExp
+---------->binLogicalExp
+----------->relationalExp
+------------>sumExp
+------------->mulExp
+-------------->factor
+--------------->fCall
+---------------->ID PARENL callParams PARENR
+----------------->simpleExp
+------------------>binLogicalExp
+------------------->relationalExp
+-------------------->sumExp
+--------------------->mulExp
+---------------------->factor
+----------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~---->returnStmt
+----->RETURN expression SEMIC
+------>simpleExp
+------->binLogicalExp
+-------->relationalExp
+--------->sumExp
+---------->mulExp
+----------->factor
+~~~~~~~~~~~~0
+
+
+ There is 2 warnings in the file
+

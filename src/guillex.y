@@ -1,3 +1,4 @@
+//Guilherme Andreúce Sobreira Monteiro - 140141961
 %define lr.type canonical-lr
 %define parse.error verbose
 %debug
@@ -488,7 +489,6 @@ void varDecAssign(char *name, char *value){
   utstring_printf(code -> line, "mov %s, %s\n", name, value);
   DL_APPEND(currentLine, code);
 }
-
 void readFunc(char *value, char type) {
   Codegen *code = (Codegen *)malloc(sizeof *code);
   utstring_new(code -> line);
@@ -1375,6 +1375,9 @@ int main(int argc, char *argv[]) {
       yyparse();
       printf("\n\n#### EOF ####\n\n");
       semanticErrors += findSymbolMain("main");
+      tacfile = fopen("file.tac", "w");
+      fprintf (tacfile, ".table\n");
+      fprintf (tacfile, ".code\n");
       writeTacFile(currentLine);
       if(errors == 0){
         printf("\n\n------------------------------------------------------symbols------------------------------------------------\n\n");
@@ -1382,19 +1385,19 @@ int main(int argc, char *argv[]) {
         printSymbols();
         printf("\n\n--------------------------------tree--------------------------------\n\n");
         printAndFreeTree(abstractSyntaxTree);
+        freeSymbols();
+        freeStack();    
         if (semanticErrors > 0) {
           printf("\n\n There is %d warnings in the file\n\n", semanticErrors);
         }else{
           printf("\n\n There is %d errors and %d warnings in the file\n\n", errors, semanticErrors);
         }
-        freeSymbols();
-        freeStack();    
-        free(yylval.str);  
-        freeCodegen();
-        fclose(tacfile);
         }else{
           printf("\n\nThere were %d errors in the file", errors);
         }
+        free(yylval.str);  
+        freeCodegen();
+        fclose(tacfile);
     }else{
       printf("File not found\n");
     }

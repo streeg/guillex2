@@ -48,7 +48,13 @@ int main()
   float list AUX;
 
   for (AUX = notas; AUX != NIL; AUX = !AUX)
+  {
     soma = soma + ? AUX;
+    if (soma > 10)
+    {
+      soma = soma - 10;
+    }
+  }
 
   float media1;
   float media2;

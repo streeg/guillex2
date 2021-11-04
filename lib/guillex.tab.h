@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.7.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -61,27 +61,27 @@ extern int yydebug;
     INTEGER = 262,                 /* INTEGER  */
     DECIMAL = 263,                 /* DECIMAL  */
     ERRORTOKEN = 264,              /* ERRORTOKEN  */
-    THEN = 265,                    /* THEN  */
-    ELSE = 266,                    /* ELSE  */
-    ADD = 267,                     /* ADD  */
-    SUB = 268,                     /* SUB  */
-    MULT = 269,                    /* MULT  */
-    DIV = 270,                     /* DIV  */
-    OR = 271,                      /* OR  */
-    AND = 272,                     /* AND  */
-    SMALLER = 273,                 /* SMALLER  */
-    GREATER = 274,                 /* GREATER  */
-    SMALLEQ = 275,                 /* SMALLEQ  */
-    GREATEQ = 276,                 /* GREATEQ  */
-    EQUALS = 277,                  /* EQUALS  */
-    DIFFERENT = 278,               /* DIFFERENT  */
-    APPEND = 279,                  /* APPEND  */
-    HEADLIST = 280,                /* HEADLIST  */
-    TAILLIST = 281,                /* TAILLIST  */
-    DESTROYHEAD = 282,             /* DESTROYHEAD  */
-    FILTER = 283,                  /* FILTER  */
-    ASSIGN = 284,                  /* ASSIGN  */
-    MAP = 285,                     /* MAP  */
+    ADD = 265,                     /* ADD  */
+    SUB = 266,                     /* SUB  */
+    MULT = 267,                    /* MULT  */
+    DIV = 268,                     /* DIV  */
+    OR = 269,                      /* OR  */
+    AND = 270,                     /* AND  */
+    SMALLER = 271,                 /* SMALLER  */
+    GREATER = 272,                 /* GREATER  */
+    SMALLEQ = 273,                 /* SMALLEQ  */
+    GREATEQ = 274,                 /* GREATEQ  */
+    EQUALS = 275,                  /* EQUALS  */
+    DIFFERENT = 276,               /* DIFFERENT  */
+    APPEND = 277,                  /* APPEND  */
+    HEADLIST = 278,                /* HEADLIST  */
+    TAILLIST = 279,                /* TAILLIST  */
+    DESTROYHEAD = 280,             /* DESTROYHEAD  */
+    FILTER = 281,                  /* FILTER  */
+    ASSIGN = 282,                  /* ASSIGN  */
+    MAP = 283,                     /* MAP  */
+    ELSE = 284,                    /* ELSE  */
+    THEN = 285,                    /* THEN  */
     IF = 286,                      /* IF  */
     FOR = 287,                     /* FOR  */
     READ = 288,                    /* READ  */
@@ -135,6 +135,8 @@ struct YYLTYPE
 
 extern YYSTYPE yylval;
 extern YYLTYPE yylloc;
+
 int yyparse (void);
+
 
 #endif /* !YY_YY_GUILLEX_TAB_H_INCLUDED  */

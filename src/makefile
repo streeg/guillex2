@@ -1,8 +1,9 @@
 
 # Please change test to testtac if you want to test code generation or use test if you want to check the output from bison.
-runtests: all test testtac testlab
+runtests: all test testtac testlab onlytac
 # runtests: all testtac
 # runtests: all testlab
+# runtests: all onlytac
 
 all: compile
 
@@ -43,3 +44,6 @@ testlab:
 	./tradutor ../tests/teste1_Nalon.c > ../results/teste1_Nalon.txt
 	./tradutor ../tests/teste2_Nalon.c > ../results/teste2_Nalon.txt
 	./tradutor ../tests/teste3_Nalon.c > ../results/teste3_Nalon.txt
+
+onlytac: 
+	./tradutor ../tests/teste2_Nalon.c > ../results/teste2_Nalon.txt

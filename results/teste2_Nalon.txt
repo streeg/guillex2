@@ -174,70 +174,86 @@ Id: 'AUX' at line: 50, column: 33
 Keyword [TAILLIST]: '!' at line: 50, column: 39
 Id: 'AUX' at line: 50, column: 40
 ')' at line: 50, column: 43
-Id: 'soma' at line: 51, column: 5
-'=' at line: 51, column: 10
-Id: 'soma' at line: 51, column: 12
-'+' at line: 51, column: 17
-Keyword [HEADLIST]: '?' at line: 51, column: 19
-Id: 'AUX' at line: 51, column: 21
-';' at line: 51, column: 24
-Type: 'float' on line: 53, column: 3
-Id: 'media1' at line: 53, column: 9
-';' at line: 53, column: 15
-Type: 'float' on line: 54, column: 3
-Id: 'media2' at line: 54, column: 9
-';' at line: 54, column: 15
-Id: 'media1' at line: 56, column: 3
-'=' at line: 56, column: 10
-Id: 'soma' at line: 56, column: 12
-'/' at line: 56, column: 17
-Id: 'n' at line: 56, column: 19
-'-' at line: 56, column: 21
-Integer: '10' at line: 56, column: 23
-'*' at line: 56, column: 26
-'(' at line: 56, column: 28
-Integer: '1' at line: 56, column: 29
-'/' at line: 56, column: 31
-Integer: '10' at line: 56, column: 33
-')' at line: 56, column: 35
-';' at line: 56, column: 36
-Id: 'media2' at line: 57, column: 3
-'=' at line: 57, column: 10
-Id: 'soma' at line: 57, column: 12
-'/' at line: 57, column: 17
-Id: 'n' at line: 57, column: 19
-';' at line: 57, column: 20
-Keyword [IF]: 'if' at line: 59, column: 3
-'(' at line: 59, column: 6
-Id: 'media1' at line: 59, column: 7
-OP [IS DIFFERENT]: '!=' at line: 59, column: 14
-Id: 'media2' at line: 59, column: 17
-')' at line: 59, column: 23
-Keyword [WRITELN]: 'writeln' at line: 60, column: 5
-'(' at line: 60, column: 12
-String: "Há um problema no cálculo da média" on line: 60, column: 13
-')' at line: 60, column: 52
-';' at line: 60, column: 53
-Keyword [ELSE]: 'else' at line: 61, column: 3
-Keyword [IF]: 'if' at line: 61, column: 8
-'(' at line: 61, column: 11
-Id: 'media1' at line: 61, column: 12
-OP [EQUALS]: '==' at line: 61, column: 19
-Id: 'media2' at line: 61, column: 22
-OP [AND]: '&&' at line: 61, column: 29
-Id: 'media1' at line: 61, column: 32
-OP [GREATER THAN OR EQUAL]: '>=' at line: 61, column: 39
-Integer: '5' at line: 61, column: 42
-')' at line: 61, column: 43
-Keyword [WRITELN]: 'writeln' at line: 62, column: 5
-'(' at line: 62, column: 12
-String: "Parabéns!" on line: 62, column: 13
-')' at line: 62, column: 25
-';' at line: 62, column: 26
-Keyword [RETURN]: 'return' at line: 64, column: 3
-Integer: '0' at line: 64, column: 10
-';' at line: 64, column: 11
-'}' at line: 65, column: 1
+'{' on line: 51, column: 3
+Id: 'soma' at line: 52, column: 5
+'=' at line: 52, column: 10
+Id: 'soma' at line: 52, column: 12
+'+' at line: 52, column: 17
+Keyword [HEADLIST]: '?' at line: 52, column: 19
+Id: 'AUX' at line: 52, column: 21
+';' at line: 52, column: 24
+Keyword [IF]: 'if' at line: 53, column: 5
+'(' at line: 53, column: 8
+Id: 'soma' at line: 53, column: 9
+OP [GREATER THAN]: '>' at line: 53, column: 14
+Integer: '10' at line: 53, column: 16
+')' at line: 53, column: 18
+'{' on line: 54, column: 5
+Id: 'soma' at line: 55, column: 7
+'=' at line: 55, column: 12
+Id: 'soma' at line: 55, column: 14
+'-' at line: 55, column: 19
+Integer: '10' at line: 55, column: 21
+';' at line: 55, column: 23
+'}' at line: 56, column: 5
+'}' at line: 57, column: 3
+Type: 'float' on line: 59, column: 3
+Id: 'media1' at line: 59, column: 9
+';' at line: 59, column: 15
+Type: 'float' on line: 60, column: 3
+Id: 'media2' at line: 60, column: 9
+';' at line: 60, column: 15
+Id: 'media1' at line: 62, column: 3
+'=' at line: 62, column: 10
+Id: 'soma' at line: 62, column: 12
+'/' at line: 62, column: 17
+Id: 'n' at line: 62, column: 19
+'-' at line: 62, column: 21
+Integer: '10' at line: 62, column: 23
+'*' at line: 62, column: 26
+'(' at line: 62, column: 28
+Integer: '1' at line: 62, column: 29
+'/' at line: 62, column: 31
+Integer: '10' at line: 62, column: 33
+')' at line: 62, column: 35
+';' at line: 62, column: 36
+Id: 'media2' at line: 63, column: 3
+'=' at line: 63, column: 10
+Id: 'soma' at line: 63, column: 12
+'/' at line: 63, column: 17
+Id: 'n' at line: 63, column: 19
+';' at line: 63, column: 20
+Keyword [IF]: 'if' at line: 65, column: 3
+'(' at line: 65, column: 6
+Id: 'media1' at line: 65, column: 7
+OP [IS DIFFERENT]: '!=' at line: 65, column: 14
+Id: 'media2' at line: 65, column: 17
+')' at line: 65, column: 23
+Keyword [WRITELN]: 'writeln' at line: 66, column: 5
+'(' at line: 66, column: 12
+String: "Há um problema no cálculo da média" on line: 66, column: 13
+')' at line: 66, column: 52
+';' at line: 66, column: 53
+Keyword [ELSE]: 'else' at line: 67, column: 3
+Keyword [IF]: 'if' at line: 67, column: 8
+'(' at line: 67, column: 11
+Id: 'media1' at line: 67, column: 12
+OP [EQUALS]: '==' at line: 67, column: 19
+Id: 'media2' at line: 67, column: 22
+OP [AND]: '&&' at line: 67, column: 29
+Id: 'media1' at line: 67, column: 32
+OP [GREATER THAN OR EQUAL]: '>=' at line: 67, column: 39
+Integer: '5' at line: 67, column: 42
+')' at line: 67, column: 43
+Keyword [WRITELN]: 'writeln' at line: 68, column: 5
+'(' at line: 68, column: 12
+String: "Parabéns!" on line: 68, column: 13
+')' at line: 68, column: 25
+';' at line: 68, column: 26
+Keyword [RETURN]: 'return' at line: 70, column: 3
+Integer: '0' at line: 70, column: 10
+';' at line: 70, column: 11
+'}' at line: 71, column: 1
 
 
 #### EOF ####
@@ -261,8 +277,8 @@ Integer: '0' at line: 64, column: 10
 |   maca                |    var                          |      float                   |         4            |         0          |
 |   soma                |    var                          |      float                   |         3            |         0          |
 |   AUX                 |    var                          |      float list              |         3            |         0          |
-|   media1              |    var                          |      float                   |         3            |         0          |
-|   media2              |    var                          |      float                   |         3            |         0          |
+|   media1              |    var                          |      float                   |         5            |         0          |
+|   media2              |    var                          |      float                   |         5            |         0          |
 
 
 --------------------------------tree--------------------------------
@@ -568,22 +584,56 @@ Integer: '0' at line: 64, column: 10
 ------------------>unaryListExp
 ------------------->! factor
 -------------------->ID
-~~~~~~~~~~~~~~~~~~~~~------------>exprStmt
-------------->expression SEMIC
--------------->assignExp
---------------->ID ASSIGN expression
----------------->simpleExp
------------------>binLogicalExp
------------------->relationalExp
-------------------->sumExp
--------------------->sumExp add mulExp
---------------------->mulExp
+~~~~~~~~~~~~~~~~~~~~~------------>compoundStmt
+------------->compoundStmt
+-------------->stmtList primitiveStmt
+--------------->primitiveStmt
+---------------->exprStmt
+----------------->expression SEMIC
+------------------>assignExp
+------------------->ID ASSIGN expression
+-------------------->simpleExp
+--------------------->binLogicalExp
+---------------------->relationalExp
+----------------------->sumExp
+------------------------>sumExp add mulExp
+------------------------->mulExp
+-------------------------->factor
+--------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~------------------------->unaryListExp
+-------------------------->? factor
+--------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~--------------->condStmt
+---------------->ifStmt primitiveStmt
+----------------->IF PARENL simpleExp PARENR
+------------------>binLogicalExp
+------------------->relationalExp
+-------------------->relationalExp GREATER sumExp
+--------------------->sumExp
+---------------------->mulExp
+----------------------->factor
+------------------------>ID
+~~~~~~~~~~~~~~~~~~~~~~~~~--------------------->mulExp
 ---------------------->factor
------------------------>ID
-~~~~~~~~~~~~~~~~~~~~~~~~--------------------->unaryListExp
----------------------->? factor
------------------------>ID
-~~~~~~~~~~~~~~~~~~~~~~~~--------->varDeclaration
+~~~~~~~~~~~~~~~~~~~~~~~10
+----------------->compoundStmt
+------------------>compoundStmt
+------------------->primitiveStmt
+-------------------->exprStmt
+--------------------->expression SEMIC
+---------------------->assignExp
+----------------------->ID ASSIGN expression
+------------------------>simpleExp
+------------------------->binLogicalExp
+-------------------------->relationalExp
+--------------------------->sumExp
+---------------------------->sumExp sub mulExp
+----------------------------->mulExp
+------------------------------>factor
+------------------------------->ID
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~----------------------------->factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~10
+--------->varDeclaration
 ---------->simpleVarDeclaration
 ----------->TYPE ID
 -------->varDeclaration

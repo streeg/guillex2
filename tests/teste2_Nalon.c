@@ -1,3 +1,12 @@
+int func(int x)
+{
+  if (x == 1)
+  {
+    return 1;
+  }
+  return 0;
+}
+
 int main()
 {
 
@@ -46,6 +55,8 @@ int main()
   float soma;
   soma = 0;
   float list AUX;
+  int y;
+  int x;
 
   for (AUX = notas; AUX != NIL; AUX = !AUX)
   {
@@ -54,6 +65,12 @@ int main()
     {
       soma = soma - 10;
     }
+  }
+
+  for (y = 0; y * 2 != x && y * 2 != 0; y = (x * y) / 2)
+  {
+    writeln(func(y));
+    x = func(y);
   }
 
   float media1;

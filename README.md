@@ -1,3 +1,10 @@
+T1: 7,
+T2: 4.5,
+T3: 8,
+T4: 5,5
+(MS)
+Segue os commits e adápta que dá bom.
+
 # Trabalho da Disciplina de Compiladores 2021-1
 
 
